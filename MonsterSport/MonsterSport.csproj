@@ -45,6 +45,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="PayPal, Version=1.9.1.0, Culture=neutral, PublicKeyToken=5b4afc1ccaef40fb, processorArchitecture=MSIL">
+      <HintPath>..\packages\PayPal.1.9.1\lib\net451\PayPal.dll</HintPath>
+    </Reference>
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -204,6 +207,7 @@
       <DependentUpon>About.aspx</DependentUpon>
     </Compile>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Common\LoginCode.cs" />
     <Compile Include="Contact.aspx.cs">
       <DependentUpon>Contact.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -211,6 +215,20 @@
     <Compile Include="Contact.aspx.designer.cs">
       <DependentUpon>Contact.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Controller\CryptoController.cs" />
+    <Compile Include="Controller\LoginController.cs" />
+    <Compile Include="Controller\SessionController.cs" />
+    <Compile Include="DAO\BasicDAO.cs" />
+    <Compile Include="DAO\GameDAO.cs" />
+    <Compile Include="DAO\MovementDAO.cs" />
+    <Compile Include="DAO\PaymentDAO.cs" />
+    <Compile Include="DAO\ResultDAO.cs" />
+    <Compile Include="DAO\TeamDAO.cs" />
+    <Compile Include="DAO\TeamsForGameDAO.cs" />
+    <Compile Include="DAO\TicketDAO.cs" />
+    <Compile Include="DAO\TicketResultDAO.cs" />
+    <Compile Include="DAO\UserDAO.cs" />
+    <Compile Include="DAO\WinnerDAO.cs" />
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -226,6 +244,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Mapping.dbml</DependentUpon>
     </Compile>
+    <Compile Include="Payment\Paypal\Parameter.cs" />
+    <Compile Include="Payment\Paypal\PaymentConfiguration.cs" />
+    <Compile Include="Payment\Paypal\PaymentDetails.cs" />
+    <Compile Include="Payment\Paypal\PaymentPrepare.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>
@@ -236,12 +258,17 @@
     </Compile>
     <Compile Include="Site.Mobile.Master.cs">
       <DependentUpon>Site.Mobile.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Site.Mobile.Master.designer.cs">
       <DependentUpon>Site.Mobile.Master</DependentUpon>
     </Compile>
+    <Compile Include="Util\ControlUtil.cs" />
+    <Compile Include="Util\DateUtil.cs" />
+    <Compile Include="Util\ParseUtil.cs" />
     <Compile Include="ViewSwitcher.ascx.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="ViewSwitcher.ascx.designer.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
@@ -249,6 +276,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\Images\" />
+    <Folder Include="Model\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

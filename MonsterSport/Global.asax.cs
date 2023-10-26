@@ -17,5 +17,23 @@ namespace MonsterSport
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
         }
+        protected void Application_BeginRequest(object sender, EventArgs e)
+        {
+            var context = HttpContext.Current;
+            if (context?.Items.Contains("DBContext") == false)
+            {
+                context.Items["DBContext"] = new MappingDataContext(System.Configuration.ConfigurationManager.ConnectionStrings["TALENTSConnectionString"].ConnectionString);
+            }
+        }
+
+        protected void Application_EndRequest(object sender, EventArgs e)
+        {
+            var context = HttpContext.Current;
+            if (context?.Items.Contains("DBContext") == true)
+            {
+                MappingDataContext dbContext = (MappingDataContext)context.Items["DBContext"];
+                dbContext.Dispose();
+            }
+        }
     }
 }
