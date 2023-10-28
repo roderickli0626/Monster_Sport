@@ -124,7 +124,18 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
+    <Content Include="Content\CSS\all.min.css" />
+    <Content Include="Content\CSS\animate.css" />
+    <Content Include="Content\CSS\bootstrap.min.css" />
+    <Content Include="Content\CSS\line-awesome.min.css" />
+    <Content Include="Content\CSS\main.css" />
+    <Content Include="Content\CSS\slick.css" />
+    <Content Include="Content\fonts\la-brands-400.svg" />
+    <Content Include="Content\fonts\la-regular-400.svg" />
+    <Content Include="Content\fonts\la-solid-900.svg" />
+    <Content Include="Content\Images\bg.png" />
     <Content Include="Content\Site.css" />
+    <Content Include="Dashboard.aspx" />
     <Content Include="Default.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
@@ -161,14 +172,31 @@
       <LastGenOutput>Mapping.designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Content\fonts\la-brands-400.eot" />
+    <Content Include="Content\fonts\la-brands-400.ttf" />
+    <Content Include="Content\fonts\la-brands-400.woff" />
+    <Content Include="Content\fonts\la-brands-400.woff2" />
+    <Content Include="Content\fonts\la-regular-400.eot" />
+    <Content Include="Content\fonts\la-regular-400.ttf" />
+    <Content Include="Content\fonts\la-regular-400.woff" />
+    <Content Include="Content\fonts\la-regular-400.woff2" />
+    <Content Include="Content\fonts\la-solid-900.eot" />
+    <Content Include="Content\fonts\la-solid-900.ttf" />
+    <Content Include="Content\fonts\la-solid-900.woff" />
+    <Content Include="Content\fonts\la-solid-900.woff2" />
     <None Include="Mapping.dbml.layout">
       <DependentUpon>Mapping.dbml</DependentUpon>
     </None>
+    <Content Include="Page.Master" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.js" />
+    <Content Include="Scripts\JS\bootstrap.min.js" />
+    <Content Include="Scripts\JS\jquery-3.6.0.min.js" />
+    <Content Include="Scripts\JS\main.js" />
+    <Content Include="Scripts\JS\slick.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\WebForms\DetailsView.js" />
     <Content Include="Scripts\WebForms\Focus.js" />
@@ -208,6 +236,7 @@
     </Compile>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Common\LoginCode.cs" />
+    <Compile Include="Common\Role.cs" />
     <Compile Include="Contact.aspx.cs">
       <DependentUpon>Contact.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -229,6 +258,13 @@
     <Compile Include="DAO\TicketResultDAO.cs" />
     <Compile Include="DAO\UserDAO.cs" />
     <Compile Include="DAO\WinnerDAO.cs" />
+    <Compile Include="Dashboard.aspx.cs">
+      <DependentUpon>Dashboard.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Dashboard.aspx.designer.cs">
+      <DependentUpon>Dashboard.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -243,6 +279,13 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Mapping.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="Page.Master.cs">
+      <DependentUpon>Page.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Page.Master.designer.cs">
+      <DependentUpon>Page.Master</DependentUpon>
     </Compile>
     <Compile Include="Payment\Paypal\Parameter.cs" />
     <Compile Include="Payment\Paypal\PaymentConfiguration.cs" />
@@ -276,7 +319,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Content\Images\" />
     <Folder Include="Model\" />
   </ItemGroup>
   <ItemGroup>

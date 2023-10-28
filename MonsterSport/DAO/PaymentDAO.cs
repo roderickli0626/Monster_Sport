@@ -6,39 +6,39 @@ using System.Web;
 
 namespace MonsterSport.DAO
 {
-    public class PaymentDAO : BasicDAO
+    public class PaymentResultDAO : BasicDAO
     {
-        public PaymentDAO() { }
-        public List<Payment> FindAll()
+        public PaymentResultDAO() { }
+        public List<PaymentResult> FindAll()
         {
-            Table<Payment> table = GetContext().Payments;
+            Table<PaymentResult> table = GetContext().PaymentResults;
             return table.ToList();
         }
-        public Payment FindByID(int id)
+        public PaymentResult FindByID(int id)
         {
-            return GetContext().Payments.Where(g => g.Id == id).FirstOrDefault();
+            return GetContext().PaymentResults.Where(g => g.Id == id).FirstOrDefault();
         }
-        public List<Payment> FindByUser(int userID)
+        public List<PaymentResult> FindByUser(int userID)
         {
-            return GetContext().Payments.Where(g => g.UserID == userID).ToList();
+            return GetContext().PaymentResults.Where(g => g.UserID == userID).ToList();
         }
-        public bool Insert(Payment payment)
+        public bool Insert(PaymentResult paymentResult)
         {
-            GetContext().Payments.InsertOnSubmit(payment);
+            GetContext().PaymentResults.InsertOnSubmit(paymentResult);
             GetContext().SubmitChanges();
             return true;
         }
 
-        public bool Update(Payment payment)
+        public bool Update(PaymentResult paymentResult)
         {
             GetContext().SubmitChanges();
-            GetContext().Refresh(RefreshMode.OverwriteCurrentValues, payment);
+            GetContext().Refresh(RefreshMode.OverwriteCurrentValues, paymentResult);
             return true;
         }
         public bool Delete(int id)
         {
-            Payment payment = GetContext().Payments.SingleOrDefault(u => u.Id == id);
-            GetContext().Payments.DeleteOnSubmit(payment);
+            PaymentResult paymentResult = GetContext().PaymentResults.SingleOrDefault(u => u.Id == id);
+            GetContext().PaymentResults.DeleteOnSubmit(paymentResult);
             GetContext().SubmitChanges();
             return true;
         }

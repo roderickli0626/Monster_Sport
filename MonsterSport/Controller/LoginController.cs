@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Web;
+using System.Web.WebSockets;
 
 namespace MonsterSport.Controller
 {
@@ -43,9 +44,17 @@ namespace MonsterSport.Controller
             string modelPW = new CryptoController().DecryptStringAES(user.Password);
             if (pass.UnEncrypted.CompareTo(modelPW) == 0)
             {
-                if (user.IsAdmin == true)
+                if (user.Role == (int)Role.ADMIN)
                 {
                     new SessionController().SetAdmin();
+                }
+                else if (user.Role == (int)Role.MASTER)
+                {
+                    new SessionController().SetMaster();
+                }
+                else if (user.Role == (int)Role.AGENCY)
+                {
+                    new SessionController().SetAgency();
                 }
                 else
                 {
@@ -73,6 +82,14 @@ namespace MonsterSport.Controller
         {
             return new SessionController().GetAdmin() == true;
         }
+        public bool IsMasterLoggedIn()
+        {
+            return new SessionController().GetMaster() == true;
+        }
+        public bool IsAgencyLoggedIn()
+        {
+            return new SessionController().GetAgency() == true;
+        }
         public bool IsUserLoggedIn()
         {
             return new SessionController().GetUser() == true;
@@ -87,7 +104,7 @@ namespace MonsterSport.Controller
             return user;
         }
 
-        public bool RegisterModel(string name, string email, EncryptedPass pass)
+        public bool RegisterUser(string name, string surname, string nickname, string email, EncryptedPass pass, string mobile, string note)
         {
             User user = userDao.FindByEmail(email);
             if (user != null)
@@ -96,8 +113,14 @@ namespace MonsterSport.Controller
             }
             user = new User();
             user.Name = name;
+            user.Surname = surname;
+            user.NickName = nickname;
+            user.Mobile = mobile;
+            user.Note = note;
             user.Email = email;
             user.Password = pass.Encrypted;
+            user.Role = (int)Role.USER;
+            user.ParentID = 0;
 
             bool result = userDao.Insert(user);
 

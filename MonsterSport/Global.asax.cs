@@ -22,7 +22,7 @@ namespace MonsterSport
             var context = HttpContext.Current;
             if (context?.Items.Contains("DBContext") == false)
             {
-                context.Items["DBContext"] = new MappingDataContext(System.Configuration.ConfigurationManager.ConnectionStrings["TALENTSConnectionString"].ConnectionString);
+                context.Items["DBContext"] = new MappingDataContext(System.Configuration.ConfigurationManager.ConnectionStrings["MonsterConnectionString"].ConnectionString);
             }
         }
 

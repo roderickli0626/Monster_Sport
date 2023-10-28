@@ -12,6 +12,8 @@ namespace MonsterSport.Controller
         public static string CURRENT_USER_EMAIL = "CurrentUserEmail";
         public static string SUPERADMIN = "SuperAdmin";
         public static string ADMIN = "Admin";
+        public static string MASTER = "Master";
+        public static string AGENCY = "Agency";
         public static string USER = "User";
 
         public void RemoveAll()
@@ -25,6 +27,14 @@ namespace MonsterSport.Controller
         public void SetAdmin()
         {
             HttpContext.Current.Session.Add(ADMIN, "true");
+        }
+        public void SetMaster()
+        {
+            HttpContext.Current.Session.Add(MASTER, "true");
+        }
+        public void SetAgency()
+        {
+            HttpContext.Current.Session.Add(AGENCY, "true");
         }
 
         public void SetUser()
@@ -63,7 +73,20 @@ namespace MonsterSport.Controller
             if (IsAdmin == null) return null;
             return IsAdmin.ToString() == "true";
         }
-
+        public bool? GetMaster()
+        {
+            if (IsInvalidSession()) return null;
+            object IsMaster = HttpContext.Current.Session[MASTER];
+            if (IsMaster == null) return null;
+            return IsMaster.ToString() == "true";
+        }
+        public bool? GetAgency()
+        {
+            if (IsInvalidSession()) return null;
+            object IsAgency = HttpContext.Current.Session[AGENCY];
+            if (IsAgency == null) return null;
+            return IsAgency.ToString() == "true";
+        }
         public bool? GetUser()
         {
             if (IsInvalidSession()) return null;
