@@ -1,5 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Page.Master" AutoEventWireup="true" CodeBehind="Login.aspx.cs" Inherits="MonsterSport.Login" %>
-
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Page.Master" AutoEventWireup="true" CodeBehind="ForgotPassword.aspx.cs" Inherits="MonsterSport.ForgotPassword" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder" runat="server">
@@ -10,7 +9,7 @@
                     <h2 class="title text-white">Sign In</h2>
                     <ul class="breadcrumbs d-flex flex-wrap align-items-center justify-content-center">
                         <li><a href="Dashboard.aspx">Dashboard</a></li>
-                        <li>Log In</li>
+                        <li>Forgot Password</li>
                     </ul>
                 </div>
             </div>
@@ -35,30 +34,19 @@
                         </div>
                         <div class="col-12">
                             <div class="form-group">
-                                <div for="pass" class="input-pre-icon"><i class="las la-lock"></i></div>
-                                <asp:TextBox runat="server" ID="TxtPassword" CssClass="form--control form-control style--two" TextMode="Password" placeholder="Password"></asp:TextBox>
+                                <asp:Button runat="server" ID="BtnSendMsg" CssClass="cmn--btn active w-100 btn--round" Text="Send Message" OnClick="BtnSendMsg_Click" />
                             </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="form-group">
-                                <asp:Button runat="server" ID="BtnLogIn" CssClass="cmn--btn active w-100 btn--round" Text="Log In" OnClick="BtnLogIn_Click" />
-                            </div>
-                        </div>
-                        <div class="d-flex flex-wrap flex-sm-nowrap justify-content-between mt-5">
-                            <a href="ForgotPassword.aspx" class="forgot-pass d-block text--base mx-auto">Forgot Password ?</a>
                         </div>
 
                         <asp:ValidationSummary ID="ValSummary" runat="server" CssClass="mt-lg mb-lg text-left bg-gradient" ClientIDMode="Static" />
                         <asp:RequiredFieldValidator ID="ReqValEmail" runat="server" ErrorMessage="Inserire l'email." CssClass="text-bg-danger" ControlToValidate="TxtEmail" Display="None"></asp:RequiredFieldValidator>
-                        <asp:RequiredFieldValidator ID="ReqValPassword" runat="server" ErrorMessage="Inserire la password." CssClass="text-black" ControlToValidate="TxtPassword" Display="None"></asp:RequiredFieldValidator>
-                        <asp:CustomValidator ID="ServerValidator" runat="server" ErrorMessage="Email o Password errata." Display="None"></asp:CustomValidator>
+                        <asp:CustomValidator ID="ServerValidator" runat="server" ErrorMessage="Email errata." Display="None"></asp:CustomValidator>
                     </form>
                 </div>
                 <div class="account__content__wrapper">
                     <div class="content text-center text-white">
                         <h3 class="title text--base mb-4">Welcome to Monster Sport</h3>
-                        <p class="">Sign in your Account. Atque, fuga sapiente, doloribus qui enim tempora?</p>
-                        <p class="account-switch mt-4">Don't have an Account yet ? <a class="text--base ms-2" href="Register.aspx">Register</a></p>
+                        <p class="">Please send email to reset your password.</p>
                     </div>
                 </div>
             </div>

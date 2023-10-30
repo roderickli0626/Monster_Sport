@@ -11,7 +11,7 @@ namespace MonsterSport
 {
 
 
-    public partial class Login
+    public partial class ResetPassword
     {
 
         /// <summary>
@@ -24,15 +24,6 @@ namespace MonsterSport
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
 
         /// <summary>
-        /// TxtEmail control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TxtEmail;
-
-        /// <summary>
         /// TxtPassword control.
         /// </summary>
         /// <remarks>
@@ -42,13 +33,22 @@ namespace MonsterSport
         protected global::System.Web.UI.WebControls.TextBox TxtPassword;
 
         /// <summary>
-        /// BtnLogIn control.
+        /// TxtRepeatPW control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button BtnLogIn;
+        protected global::System.Web.UI.WebControls.TextBox TxtRepeatPW;
+
+        /// <summary>
+        /// ResetPW control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ResetPW;
 
         /// <summary>
         /// ValSummary control.
@@ -58,15 +58,6 @@ namespace MonsterSport
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ValidationSummary ValSummary;
-
-        /// <summary>
-        /// ReqValEmail control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator ReqValEmail;
 
         /// <summary>
         /// ReqValPassword control.

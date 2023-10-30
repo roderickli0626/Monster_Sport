@@ -11,7 +11,7 @@ namespace MonsterSport
 {
 
 
-    public partial class Login
+    public partial class ForgotPassword
     {
 
         /// <summary>
@@ -33,22 +33,13 @@ namespace MonsterSport
         protected global::System.Web.UI.WebControls.TextBox TxtEmail;
 
         /// <summary>
-        /// TxtPassword control.
+        /// BtnSendMsg control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TxtPassword;
-
-        /// <summary>
-        /// BtnLogIn control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button BtnLogIn;
+        protected global::System.Web.UI.WebControls.Button BtnSendMsg;
 
         /// <summary>
         /// ValSummary control.
@@ -67,15 +58,6 @@ namespace MonsterSport
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator ReqValEmail;
-
-        /// <summary>
-        /// ReqValPassword control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator ReqValPassword;
 
         /// <summary>
         /// ServerValidator control.

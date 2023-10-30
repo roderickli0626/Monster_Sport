@@ -26,60 +26,67 @@
                             <h3 class="pt-3 me-auto"><strong class="text-warning">Monster</strong> Sport</h3>
                         </a>
                     </div>
-                    <form runat="server" id="form1" class="account__form form row g-4">
+                    <form runat="server" id="form1" class="account__form form row g-4" autocomplete="off">
                         <div class="col-xl-6 col-md-6">
                             <div class="form-group">
-                                <div for="fname" class="input-pre-icon"><i class="las la-user"></i></div>
-                                <input id="fname" type="text" class="form--control form-control style--two" placeholder="Name" required>
+                                <div for="TxtName" class="input-pre-icon"><i class="las la-user"></i></div>
+                                <asp:TextBox runat="server" ID="TxtName" CssClass="form--control form-control style--two" placeholder="Name"></asp:TextBox>
                             </div>
                         </div>
                         <div class="col-xl-6 col-md-6">
                             <div class="form-group">
                                 <div for="lname" class="input-pre-icon"><i class="las la-user"></i></div>
-                                <input id="lname" type="text" class="form--control form-control style--two" placeholder="Surname" required>
+                                <asp:TextBox runat="server" ID="TxtSurname" CssClass="form--control form-control style--two" placeholder="Surname"></asp:TextBox>
                             </div>
                         </div>
                         <div class="col-xl-6 col-md-6">
                             <div class="form-group">
                                 <div for="lname" class="input-pre-icon"><i class="las la-user"></i></div>
-                                <input id="Nname" type="text" class="form--control form-control style--two" placeholder="Nickname" required>
+                                <asp:TextBox runat="server" ID="TxtNickname" CssClass="form--control form-control style--two" placeholder="Nickname"></asp:TextBox>
                             </div>
                         </div>
                         <div class="col-xl-6 col-md-6">
-                            <div class="input-group">
-                                <span class="input-group-text text--base style--two">+80</span>
-                                <input type="text" class="form--control form-control style--two" placeholder="Mobile">
+                            <div class="form-group">
+                                <div for="email" class="input-pre-icon"><i class="las la-phone"></i></div>
+                                <asp:TextBox runat="server" ID="TxtMobile" CssClass="form--control form-control style--two" TextMode="Phone" placeholder="Mobile"></asp:TextBox>
                             </div>
                         </div>
                         <div class="col-xl-12 col-md-12">
                             <div class="form-group">
                                 <div for="email" class="input-pre-icon"><i class="las la-envelope"></i></div>
-                                <input id="email" type="email" class="form--control form-control style--two" placeholder="Email" required>
+                                <asp:TextBox runat="server" ID="TxtEmail" CssClass="form--control form-control style--two" TextMode="Email" placeholder="Email"></asp:TextBox>
                             </div>
                         </div>
                         <div class="col-xl-6 col-md-6">
                             <div class="form-group">
                                 <div for="pass" class="input-pre-icon"><i class="las la-lock"></i></div>
-                                <input id="pass" type="password" class="form--control form-control style--two" placeholder="Password" required>
+                                <asp:TextBox runat="server" ID="TxtPassword" CssClass="form--control form-control style--two" TextMode="Password" placeholder="Password"></asp:TextBox>
                             </div>
                         </div>
                         <div class="col-xl-6 col-md-6">
                             <div class="form-group">
                                 <div for="pass" class="input-pre-icon"><i class="las la-lock"></i></div>
-                                <input id="pass" type="password" class="form--control form-control style--two" placeholder="Confirm Password" required>
+                                <asp:TextBox runat="server" ID="TxtPasswordRepeat" CssClass="form--control form-control style--two" TextMode="Password" placeholder="Confirm Password"></asp:TextBox>
                             </div>
                         </div>
                         <div class="col-xl-12 col-md-12">
                             <div class="form-group">
                                 <div for="pass" class="input-pre-icon"><i class="las la-book"></i></div>
-                                <input id="pass" type="password" class="form--control form-control style--two" placeholder="Note" required>
+                                <asp:TextBox runat="server" ID="TxtNote" CssClass="form--control form-control style--two" placeholder="Note"></asp:TextBox>
                             </div>
                         </div>
                         <div class="col-lg-12">
                             <div class="form-group">
-                                <button class="cmn--btn active w-100 btn--round" type="submit">Register</button>
+                                <asp:Button runat="server" ID="BtnRegister" CssClass="cmn--btn active w-100 btn--round" Text="Register" OnClick="BtnRegister_Click" />
                             </div>
                         </div>
+
+                        <asp:ValidationSummary ID="ValSummary" runat="server" CssClass="mt-lg mb-lg text-left bg-gradient" ClientIDMode="Static" />
+                        <asp:RequiredFieldValidator ID="ReqValEmail" runat="server" ErrorMessage="Inserire un indirizzo Email." CssClass="text-bg-danger" ControlToValidate="TxtEmail" Display="None"></asp:RequiredFieldValidator>
+                        <asp:RequiredFieldValidator ID="ReqValPassword" runat="server" ErrorMessage="Inserire una Password." CssClass="text-black" ControlToValidate="TxtPassword" Display="None"></asp:RequiredFieldValidator>
+                        <asp:CustomValidator ID="PasswordValidator" runat="server" ErrorMessage="Le Password non corrispondono." Display="None"></asp:CustomValidator>
+                        <asp:CustomValidator ID="EmailValidator" runat="server" ErrorMessage="Email non è corretta." Display="None"></asp:CustomValidator>
+                        <asp:CustomValidator ID="ServerValidator" runat="server" ErrorMessage="Questo indirizzo Email è già registrato." Display="None"></asp:CustomValidator>
                     </form>
                 </div>
                 <div class="account__content__wrapper" >

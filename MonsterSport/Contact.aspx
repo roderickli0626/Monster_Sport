@@ -24,51 +24,51 @@
                         <div class="contact-info-wrapper">
                             <h3 class="title mb-3 mb-lg-4">Contact Information</h3>
                             <ul class="contact-info-list m-0">
-                                <li><a href="#"></a> <i class="las la-map-marker-alt"></i> <span>12/A Kingfisher Road <br> Medino Washington, NY 10012, USA</span></li>
-                                <li><a href="#"> <i class="las la-phone-volume"></i> <span>+47 8519-9415 1515</span>a</a></li>
-                                <li><a href="#"> <i class="las la-phone-volume"></i> <span>+47 8519-9415 1515</span>a</a></li>
-                                <li><a href="#"> <i class="las la-envelope"></i> <span><span class="__cf_email__" data-cfemail="73071600070600160133141e121a1f5d101c1e">[email&#160;protected]</span></span></a></li>
-                                <li><a href="#"> <i class="las la-envelope"></i> <span><span class="__cf_email__" data-cfemail="bacedfc9cecfc9dfc8faddd7dbd3d694d9d5d7">[email&#160;protected]</span></span></a></li>
+                                <li><a href="#"></a> <i class="las la-map-marker-alt"></i> <span>Piazza Rosario di Palazzo, 19 - 80132 Napoli (NA)</span></li>
+                                <li><a href="#"> <i class="las la-phone-volume"></i> <span>(+39)-081554114523</span></a></li>
+                                <li><a href="#"> <i class="las la-phone-volume"></i> <span>(+39)-3386958521</span></a></li>
+                                <li><a href="#"> <i class="las la-envelope"></i> <span>Monster@gmail.com</span></a></li>
+                                <li><a href="#"> <i class="las la-envelope"></i> <span>MonsterAdmin@gmail.com</span></a></li>
                             </ul>
                         </div>
                     </div>
                     <div class="col-lg-7">
-                        <form class="contact-form">
+                        <form class="contact-form" runat="server" id="form1" autocomplete="off">
                             <h3 class="title mb-3">Get In Touch</h3>
                             <div class="row gy-3">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="fname" class="form-label">First Name <span class="text--danger">*</span></label>
-                                        <input id="fname" type="text" class="form-control form--control"></input>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="lname" class="form-label">Last Name <span class="text--danger">*</span></label>
-                                        <input id="lname" type="text" class="form-control form--control"></input>
+                                        <label for="fname" class="form-label">Name <span class="text--danger">*</span></label>
+                                        <asp:TextBox runat="server" ID="TxtName" CssClass="form-control form--control"></asp:TextBox>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="email" class="form-label">Email Address <span class="text--danger">*</span></label>
-                                        <input id="email" type="text" class="form-control form--control"></input>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="phone" class="form-label">Phone Number <span class="text--danger">*</span></label>
-                                        <input id="phone" type="text" class="form-control form--control"></input>
+                                        <asp:TextBox runat="server" ID="TxtEmail" CssClass="form-control form--control"></asp:TextBox>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <label for="msg" class="form-label">Your Message <span class="text--danger">*</span></label>
-                                        <textarea id="msg" class="form-control form--control"></textarea>
+                                        <label for="phone" class="form-label">Phone Number <span class="text--danger">*</span></label>
+                                        <asp:TextBox runat="server" ID="TxtPhone" CssClass="form-control form--control"></asp:TextBox>
                                     </div>
                                 </div>
-                                <div class="col">
-                                    <button class="cmn--btn active">Send Message</button>
+                                <div class="col-md-12 mb-3">
+                                    <div class="form-group">
+                                        <label for="msg" class="form-label">Your Message <span class="text--danger">*</span></label>
+                                        <asp:TextBox runat="server" ID="TxtMessage" CssClass="form-control form--control" TextMode="MultiLine" Rows="3"></asp:TextBox>
+                                    </div>
                                 </div>
+                                <div class="text-center col-12">
+                                    <asp:Button runat="server" ID="BtnSend" CssClass="cmn--btn active w-100 btn--round" Text="Send Message" OnClick="BtnSend_Click" />
+                                </div>
+
+                                <asp:ValidationSummary ID="ValSummary" runat="server" CssClass="mt-lg mb-lg text-left bg-gradient" ClientIDMode="Static" />
+                                <asp:RequiredFieldValidator ID="ReqValName" runat="server" ErrorMessage="Inserire un indirizzo Name." CssClass="text-bg-danger" ControlToValidate="TxtName" Display="None"></asp:RequiredFieldValidator>
+                                <asp:RequiredFieldValidator ID="ReqValPhone" runat="server" ErrorMessage="Inserire un indirizzo Phone." CssClass="text-bg-danger" ControlToValidate="TxtPhone" Display="None"></asp:RequiredFieldValidator>
+                                <asp:RequiredFieldValidator ID="ReqValEmail" runat="server" ErrorMessage="Inserire un indirizzo Email." CssClass="text-bg-danger" ControlToValidate="TxtEmail" Display="None"></asp:RequiredFieldValidator>
+                                <asp:RequiredFieldValidator ID="ReqValMessage" runat="server" ErrorMessage="Inserire una Message." CssClass="text-black" ControlToValidate="TxtMessage" Display="None"></asp:RequiredFieldValidator>
                             </div>
                         </form>
                     </div>

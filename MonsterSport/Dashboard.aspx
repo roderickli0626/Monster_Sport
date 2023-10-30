@@ -9,9 +9,12 @@
                 <div class="banner-content">
                     <h1 class="banner-content__title">Play <span class="text--base">Monster Sport</span> & Win Money Unlimited</h1>
                     <p class="banner-content__subtitle">PLAY MONSTER AND EARN CRYPTO IN ONLINE. THE ULTIMATE ONLINE CASINO PLATFORM.</p>
-                    <div class="button-wrapper">
-                        <a href="Login.aspx" class="cmn--btn active btn--lg">Log in</a>
+                    <div class="button-wrapper" runat="server" id="InDiv">
+                        <a href="Login.aspx" class="cmn--btn active btn--lg">Log In</a>
                         <a href="Register.aspx" class="cmn--btn btn--lg">Register</a>
+                    </div>
+                    <div class="button-wrapper" runat="server" id="OutDiv">
+                        <a href="Login.aspx" class="cmn--btn active btn--lg">Log Out</a>
                     </div>
                     <img src="Content/Images/thumb.png" alt="" class="shape1">
                 </div>

@@ -54,12 +54,12 @@ namespace MonsterSport
     partial void InsertResult(Result instance);
     partial void UpdateResult(Result instance);
     partial void DeleteResult(Result instance);
-    partial void InsertUser(User instance);
-    partial void UpdateUser(User instance);
-    partial void DeleteUser(User instance);
     partial void InsertPaymentResult(PaymentResult instance);
     partial void UpdatePaymentResult(PaymentResult instance);
     partial void DeletePaymentResult(PaymentResult instance);
+    partial void InsertUser(User instance);
+    partial void UpdateUser(User instance);
+    partial void DeleteUser(User instance);
     #endregion
 		
 		public MappingDataContext(string connection) : 
@@ -150,19 +150,19 @@ namespace MonsterSport
 			}
 		}
 		
-		public System.Data.Linq.Table<User> Users
-		{
-			get
-			{
-				return this.GetTable<User>();
-			}
-		}
-		
 		public System.Data.Linq.Table<PaymentResult> PaymentResults
 		{
 			get
 			{
 				return this.GetTable<PaymentResult>();
+			}
+		}
+		
+		public System.Data.Linq.Table<User> Users
+		{
+			get
+			{
+				return this.GetTable<User>();
 			}
 		}
 	}
@@ -2133,6 +2133,229 @@ namespace MonsterSport
 		}
 	}
 	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.PaymentResults")]
+	public partial class PaymentResult : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id;
+		
+		private System.Nullable<int> _UserID;
+		
+		private System.Nullable<System.DateTime> _DateOfPay;
+		
+		private System.Nullable<double> _Amount;
+		
+		private string _PaypalTransition;
+		
+		private string _Note;
+		
+		private EntityRef<User> _User;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void OnUserIDChanging(System.Nullable<int> value);
+    partial void OnUserIDChanged();
+    partial void OnDateOfPayChanging(System.Nullable<System.DateTime> value);
+    partial void OnDateOfPayChanged();
+    partial void OnAmountChanging(System.Nullable<double> value);
+    partial void OnAmountChanged();
+    partial void OnPaypalTransitionChanging(string value);
+    partial void OnPaypalTransitionChanged();
+    partial void OnNoteChanging(string value);
+    partial void OnNoteChanged();
+    #endregion
+		
+		public PaymentResult()
+		{
+			this._User = default(EntityRef<User>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserID", DbType="Int")]
+		public System.Nullable<int> UserID
+		{
+			get
+			{
+				return this._UserID;
+			}
+			set
+			{
+				if ((this._UserID != value))
+				{
+					if (this._User.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnUserIDChanging(value);
+					this.SendPropertyChanging();
+					this._UserID = value;
+					this.SendPropertyChanged("UserID");
+					this.OnUserIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DateOfPay", DbType="DateTime")]
+		public System.Nullable<System.DateTime> DateOfPay
+		{
+			get
+			{
+				return this._DateOfPay;
+			}
+			set
+			{
+				if ((this._DateOfPay != value))
+				{
+					this.OnDateOfPayChanging(value);
+					this.SendPropertyChanging();
+					this._DateOfPay = value;
+					this.SendPropertyChanged("DateOfPay");
+					this.OnDateOfPayChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Amount", DbType="Float")]
+		public System.Nullable<double> Amount
+		{
+			get
+			{
+				return this._Amount;
+			}
+			set
+			{
+				if ((this._Amount != value))
+				{
+					this.OnAmountChanging(value);
+					this.SendPropertyChanging();
+					this._Amount = value;
+					this.SendPropertyChanged("Amount");
+					this.OnAmountChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PaypalTransition", DbType="VarChar(MAX)")]
+		public string PaypalTransition
+		{
+			get
+			{
+				return this._PaypalTransition;
+			}
+			set
+			{
+				if ((this._PaypalTransition != value))
+				{
+					this.OnPaypalTransitionChanging(value);
+					this.SendPropertyChanging();
+					this._PaypalTransition = value;
+					this.SendPropertyChanged("PaypalTransition");
+					this.OnPaypalTransitionChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Note", DbType="VarChar(MAX)")]
+		public string Note
+		{
+			get
+			{
+				return this._Note;
+			}
+			set
+			{
+				if ((this._Note != value))
+				{
+					this.OnNoteChanging(value);
+					this.SendPropertyChanging();
+					this._Note = value;
+					this.SendPropertyChanged("Note");
+					this.OnNoteChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_PaymentResult", Storage="_User", ThisKey="UserID", OtherKey="Id", IsForeignKey=true, DeleteRule="CASCADE")]
+		public User User
+		{
+			get
+			{
+				return this._User.Entity;
+			}
+			set
+			{
+				User previousValue = this._User.Entity;
+				if (((previousValue != value) 
+							|| (this._User.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._User.Entity = null;
+						previousValue.PaymentResults.Remove(this);
+					}
+					this._User.Entity = value;
+					if ((value != null))
+					{
+						value.PaymentResults.Add(this);
+						this._UserID = value.Id;
+					}
+					else
+					{
+						this._UserID = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("User");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.[User]")]
 	public partial class User : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -2161,15 +2384,19 @@ namespace MonsterSport
 		
 		private System.Nullable<int> _ParentID;
 		
+		private string _ResetToken;
+		
+		private System.Nullable<System.DateTime> _ResetTokenExpiry;
+		
 		private EntitySet<Winner> _Winners;
 		
 		private EntitySet<Movement> _Movements;
 		
 		private EntitySet<Ticket> _Tickets;
 		
-		private EntitySet<User> _Users;
-		
 		private EntitySet<PaymentResult> _PaymentResults;
+		
+		private EntitySet<User> _Users;
 		
 		private EntityRef<User> _User1;
 		
@@ -2199,6 +2426,10 @@ namespace MonsterSport
     partial void OnRoleChanged();
     partial void OnParentIDChanging(System.Nullable<int> value);
     partial void OnParentIDChanged();
+    partial void OnResetTokenChanging(string value);
+    partial void OnResetTokenChanged();
+    partial void OnResetTokenExpiryChanging(System.Nullable<System.DateTime> value);
+    partial void OnResetTokenExpiryChanged();
     #endregion
 		
 		public User()
@@ -2206,8 +2437,8 @@ namespace MonsterSport
 			this._Winners = new EntitySet<Winner>(new Action<Winner>(this.attach_Winners), new Action<Winner>(this.detach_Winners));
 			this._Movements = new EntitySet<Movement>(new Action<Movement>(this.attach_Movements), new Action<Movement>(this.detach_Movements));
 			this._Tickets = new EntitySet<Ticket>(new Action<Ticket>(this.attach_Tickets), new Action<Ticket>(this.detach_Tickets));
-			this._Users = new EntitySet<User>(new Action<User>(this.attach_Users), new Action<User>(this.detach_Users));
 			this._PaymentResults = new EntitySet<PaymentResult>(new Action<PaymentResult>(this.attach_PaymentResults), new Action<PaymentResult>(this.detach_PaymentResults));
+			this._Users = new EntitySet<User>(new Action<User>(this.attach_Users), new Action<User>(this.detach_Users));
 			this._User1 = default(EntityRef<User>);
 			OnCreated();
 		}
@@ -2436,6 +2667,46 @@ namespace MonsterSport
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ResetToken", DbType="VarChar(MAX)")]
+		public string ResetToken
+		{
+			get
+			{
+				return this._ResetToken;
+			}
+			set
+			{
+				if ((this._ResetToken != value))
+				{
+					this.OnResetTokenChanging(value);
+					this.SendPropertyChanging();
+					this._ResetToken = value;
+					this.SendPropertyChanged("ResetToken");
+					this.OnResetTokenChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ResetTokenExpiry", DbType="DateTime")]
+		public System.Nullable<System.DateTime> ResetTokenExpiry
+		{
+			get
+			{
+				return this._ResetTokenExpiry;
+			}
+			set
+			{
+				if ((this._ResetTokenExpiry != value))
+				{
+					this.OnResetTokenExpiryChanging(value);
+					this.SendPropertyChanging();
+					this._ResetTokenExpiry = value;
+					this.SendPropertyChanged("ResetTokenExpiry");
+					this.OnResetTokenExpiryChanged();
+				}
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Winner", Storage="_Winners", ThisKey="Id", OtherKey="UserID")]
 		public EntitySet<Winner> Winners
 		{
@@ -2475,19 +2746,6 @@ namespace MonsterSport
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_User", Storage="_Users", ThisKey="Id", OtherKey="ParentID")]
-		public EntitySet<User> Users
-		{
-			get
-			{
-				return this._Users;
-			}
-			set
-			{
-				this._Users.Assign(value);
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_PaymentResult", Storage="_PaymentResults", ThisKey="Id", OtherKey="UserID")]
 		public EntitySet<PaymentResult> PaymentResults
 		{
@@ -2498,6 +2756,19 @@ namespace MonsterSport
 			set
 			{
 				this._PaymentResults.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_User", Storage="_Users", ThisKey="Id", OtherKey="ParentID")]
+		public EntitySet<User> Users
+		{
+			get
+			{
+				return this._Users;
+			}
+			set
+			{
+				this._Users.Assign(value);
 			}
 		}
 		
@@ -2591,18 +2862,6 @@ namespace MonsterSport
 			entity.User = null;
 		}
 		
-		private void attach_Users(User entity)
-		{
-			this.SendPropertyChanging();
-			entity.User1 = this;
-		}
-		
-		private void detach_Users(User entity)
-		{
-			this.SendPropertyChanging();
-			entity.User1 = null;
-		}
-		
 		private void attach_PaymentResults(PaymentResult entity)
 		{
 			this.SendPropertyChanging();
@@ -2614,228 +2873,17 @@ namespace MonsterSport
 			this.SendPropertyChanging();
 			entity.User = null;
 		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.PaymentResults")]
-	public partial class PaymentResult : INotifyPropertyChanging, INotifyPropertyChanged
-	{
 		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _Id;
-		
-		private System.Nullable<int> _UserID;
-		
-		private System.Nullable<System.DateTime> _DateOfPay;
-		
-		private System.Nullable<double> _Amount;
-		
-		private string _PaypalTransition;
-		
-		private string _Note;
-		
-		private EntityRef<User> _User;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIdChanging(int value);
-    partial void OnIdChanged();
-    partial void OnUserIDChanging(System.Nullable<int> value);
-    partial void OnUserIDChanged();
-    partial void OnDateOfPayChanging(System.Nullable<System.DateTime> value);
-    partial void OnDateOfPayChanged();
-    partial void OnAmountChanging(System.Nullable<double> value);
-    partial void OnAmountChanged();
-    partial void OnPaypalTransitionChanging(string value);
-    partial void OnPaypalTransitionChanged();
-    partial void OnNoteChanging(string value);
-    partial void OnNoteChanged();
-    #endregion
-		
-		public PaymentResult()
+		private void attach_Users(User entity)
 		{
-			this._User = default(EntityRef<User>);
-			OnCreated();
+			this.SendPropertyChanging();
+			entity.User1 = this;
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int Id
+		private void detach_Users(User entity)
 		{
-			get
-			{
-				return this._Id;
-			}
-			set
-			{
-				if ((this._Id != value))
-				{
-					this.OnIdChanging(value);
-					this.SendPropertyChanging();
-					this._Id = value;
-					this.SendPropertyChanged("Id");
-					this.OnIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserID", DbType="Int")]
-		public System.Nullable<int> UserID
-		{
-			get
-			{
-				return this._UserID;
-			}
-			set
-			{
-				if ((this._UserID != value))
-				{
-					if (this._User.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnUserIDChanging(value);
-					this.SendPropertyChanging();
-					this._UserID = value;
-					this.SendPropertyChanged("UserID");
-					this.OnUserIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DateOfPay", DbType="DateTime")]
-		public System.Nullable<System.DateTime> DateOfPay
-		{
-			get
-			{
-				return this._DateOfPay;
-			}
-			set
-			{
-				if ((this._DateOfPay != value))
-				{
-					this.OnDateOfPayChanging(value);
-					this.SendPropertyChanging();
-					this._DateOfPay = value;
-					this.SendPropertyChanged("DateOfPay");
-					this.OnDateOfPayChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Amount", DbType="Float")]
-		public System.Nullable<double> Amount
-		{
-			get
-			{
-				return this._Amount;
-			}
-			set
-			{
-				if ((this._Amount != value))
-				{
-					this.OnAmountChanging(value);
-					this.SendPropertyChanging();
-					this._Amount = value;
-					this.SendPropertyChanged("Amount");
-					this.OnAmountChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PaypalTransition", DbType="VarChar(MAX)")]
-		public string PaypalTransition
-		{
-			get
-			{
-				return this._PaypalTransition;
-			}
-			set
-			{
-				if ((this._PaypalTransition != value))
-				{
-					this.OnPaypalTransitionChanging(value);
-					this.SendPropertyChanging();
-					this._PaypalTransition = value;
-					this.SendPropertyChanged("PaypalTransition");
-					this.OnPaypalTransitionChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Note", DbType="VarChar(MAX)")]
-		public string Note
-		{
-			get
-			{
-				return this._Note;
-			}
-			set
-			{
-				if ((this._Note != value))
-				{
-					this.OnNoteChanging(value);
-					this.SendPropertyChanging();
-					this._Note = value;
-					this.SendPropertyChanged("Note");
-					this.OnNoteChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_PaymentResult", Storage="_User", ThisKey="UserID", OtherKey="Id", IsForeignKey=true, DeleteRule="CASCADE")]
-		public User User
-		{
-			get
-			{
-				return this._User.Entity;
-			}
-			set
-			{
-				User previousValue = this._User.Entity;
-				if (((previousValue != value) 
-							|| (this._User.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._User.Entity = null;
-						previousValue.PaymentResults.Remove(this);
-					}
-					this._User.Entity = value;
-					if ((value != null))
-					{
-						value.PaymentResults.Add(this);
-						this._UserID = value.Id;
-					}
-					else
-					{
-						this._UserID = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("User");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
+			this.SendPropertyChanging();
+			entity.User1 = null;
 		}
 	}
 }

@@ -120,7 +120,6 @@ namespace MonsterSport.Controller
             user.Email = email;
             user.Password = pass.Encrypted;
             user.Role = (int)Role.USER;
-            user.ParentID = 0;
 
             bool result = userDao.Insert(user);
 
