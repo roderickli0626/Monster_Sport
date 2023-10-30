@@ -2911,7 +2911,7 @@ select.form--control option:hover {
     height: 100%;
     left: 0;
     top: 0;
-    background: url(./../images/game/shape.png);
+    background: url(../Images/shape.png);
     border-radius: 10px;
     z-index: -1;
     overflow: hidden;

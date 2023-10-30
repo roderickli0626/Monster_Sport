@@ -7,16 +7,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Monster - Sport</title>
-    <link rel="icon" type="image/png" href="Content/Images/favicon.png" sizes="16x16">
+    <link rel="icon" type="image/png" href="Content/Images/logo.png" sizes="16x16">
     <!-- bootstrap 5  -->
     <link rel="stylesheet" href="Content/CSS/bootstrap.min.css">
     <!-- Icon Link  -->
     <link rel="stylesheet" href="Content/CSS/all.min.css">
     <link rel="stylesheet" href="Content/CSS/line-awesome.min.css">
-    <link rel="stylesheet" href="Content/CSS/lib/animate.css">
+    <link rel="stylesheet" href="Content/CSS/animate.css">
 
     <!-- Plugin Link -->
-    <link rel="stylesheet" href="Content/CSS/lib/slick.css">
+    <link rel="stylesheet" href="Content/CSS/slick.css">
 
     <!-- Main css -->
     <link rel="stylesheet" href="Content/CSS/main.css">
@@ -50,13 +50,19 @@
         <div class="container">
             <div class="header-bottom">
                 <div class="header-bottom-area align-items-center">
-                    <div class="logo"><a href="index.html">
-                        <img src="./assets/images/logo.png" alt="logo"></a></div>
+                    <div class="logo">
+                        <a href="Dashboard.aspx" class="d-flex">
+                            <img src="Content/Images/logo.png" alt="logo">
+                            <h3 class="pt-3"><strong class="text-warning">Monster</strong> Sport</h3>
+                        </a>
+                    </div>
                     <ul class="menu">
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="about.html">About</a></li>
-                        <li><a href="games.html">Games <span class="badge badge--sm badge--base text-dark">NEW</span></a></li>
-                        <li><a href="faq.html">Faq</a></li>
+                        <li><a href="Dashboard.aspx">Home</a></li>
+                        <li><a href="Game.aspx">Games</a></li>
+                        <li><a href="Admin.aspx">Admins</a></li>
+                        <li><a href="Master.aspx">Masters</a></li>
+                        <li><a href="Agency.aspx">Agencies</a></li>
+                        <li><a href="User.aspx">Users</a></li>
                         <li><a href="#0">Pages</a>
                             <ul class="sub-menu">
                                 <li><a href="dashboard.html">User Dashboard</a></li>
@@ -70,13 +76,13 @@
                                 <li><a href="blog-details.html">Blog Details</a></li>
                             </ul>
                         </li>
-                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="Contact.aspx">Contact</a></li>
                     </ul>
                     <div class="header-trigger-wrapper d-flex d-lg-none align-items-center">
                         <div class="header-trigger me-4">
                             <span></span>
                         </div>
-                        <a href="sign-in.html" class="cmn--btn active btn--md d-none d-sm-block">Sign In</a>
+                        <a href="Login.aspx" class="cmn--btn active btn--md d-none d-sm-block">Sign In</a>
                     </div>
                 </div>
             </div>
@@ -85,12 +91,16 @@
     <asp:ContentPlaceHolder ID="ContentPlaceHolder" runat="server">
     </asp:ContentPlaceHolder>
     <!-- Footer Section Starts Here -->
-    <footer class="footer-section bg_img" style="background: url(assets/images/footer/bg.jpg) center;">
+    <footer class="footer-section bg_img" style="background: url(Content/Images/footer.jpg) center;">
         <div class="footer-top">
             <div class="container">
                 <div class="footer-wrapper d-flex flex-wrap align-items-center justify-content-md-between justify-content-center">
-                    <div class="logo mb-3 mb-md-0"><a href="index.html">
-                        <img src="assets/images/logo.png" alt="logo"></a></div>
+                    <div class="logo mb-3 mb-md-0">
+                        <a href="index.html" class="d-flex">
+                            <img src="Content/Images/logo.png" alt="logo">
+                            <h3 class="pt-3"><strong class="text-warning">Monster</strong> Sport</h3>
+                        </a>
+                    </div>
                     <ul class="footer-links d-flex flex-wrap justify-content-center">
                         <li><a href="games.html">Games</a></li>
                         <li><a href="terms-conditions.html">Terms & Conditions</a></li>
@@ -102,12 +112,12 @@
         <div class="footer-bottom">
             <div class="container">
                 <div class="footer-wrapper d-flex flex-wrap justify-content-center align-items-center text-center">
-                    <p class="copyright text-white">Copyrights &copy; 2021 All Rights Reserved by <a href="#0" class=" text--base ms-2">Viserlab</a></p>
+                    <p class="copyright text-white">Copyrights &copy; 2023 All Rights Reserved by <a href="#0" class=" text--base ms-2">Viserlab</a></p>
                 </div>
             </div>
         </div>
         <div class="shapes">
-            <img src="assets/images/footer/shape.png" alt="footer" class="shape1">
+            <img src="Content/Images/footermark.png" alt="footer" class="shape1" style="opacity:0.8;">
         </div>
     </footer>
     <!-- Footer Section Ends Here -->
