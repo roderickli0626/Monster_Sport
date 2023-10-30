@@ -44,144 +44,146 @@
     <!-- Game Section Starts Here -->
     <section class="game-section padding-top padding-bottom bg_img" style="background: url(Content/Images/gamebg.jpeg);">
         <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-6 col-xl-5">
-                    <div class="section-header text-center">
-                        <h2 class="section-header__title">Top Awesome Games</h2>
-                        <p>A monster sport is a game to get cashes from predicting winner in football matches.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="row gy-4 justify-content-center">
-                <div class="col-lg-4 col-xl-3 col-md-6 col-sm-6">
-                    <div class="game-item">
-                        <div class="game-inner">
-                            <div class="game-item__thumb">
-                                <img src="Content/Images/gamemark1.png" alt="game">
-                            </div>
-                            <div class="game-item__content">
-                                <h4 class="title">Game01</h4>
-                                <p class="invest-info">Invest Limit</p>
-                                <p class="invest-amount">$10.49 - $1,000</p>
-                                <a href="#0" class="cmn--btn active btn--md radius-0">Play Now</a>
-                            </div>
+            <form runat="server" id="form1" autocomplete="off">
+                <div class="row justify-content-center">
+                    <div class="col-lg-6 col-xl-5">
+                        <div class="section-header text-center">
+                            <h2 class="section-header__title">Top Awesome Games</h2>
+                            <p>A monster sport is a game to get cashes from predicting winner in football matches.</p>
                         </div>
-                        <div class="ball"></div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-xl-3 col-md-6 col-sm-6">
-                    <div class="game-item">
-                        <div class="game-inner">
-                            <div class="game-item__thumb">
-                                <img src="Content/Images/gamemark2.png" alt="game">
+                <div class="row gy-4 justify-content-center">
+                    <div class="col-lg-4 col-xl-3 col-md-6 col-sm-6">
+                        <div class="game-item">
+                            <div class="game-inner">
+                                <div class="game-item__thumb">
+                                    <img src="Content/Images/gamemark1.png" alt="game">
+                                </div>
+                                <div class="game-item__content">
+                                    <h4 class="title">Game01</h4>
+                                    <p class="invest-info">Invest Limit</p>
+                                    <p class="invest-amount">$10.49 - $1,000</p>
+                                    <a href="#0" class="cmn--btn active btn--md radius-0">Play Now</a>
+                                </div>
                             </div>
-                            <div class="game-item__content">
-                                <h4 class="title">Game02</h4>
-                                <p class="invest-info">Invest Limit</p>
-                                <p class="invest-amount">$10.49 - $1,000</p>
-                                <a href="#0" class="cmn--btn active btn--md radius-0">Play Now</a>
-                            </div>
+                            <div class="ball"></div>
                         </div>
-                        <div class="ball"></div>
                     </div>
-                </div>
-                <div class="col-lg-4 col-xl-3 col-md-6 col-sm-6">
-                    <div class="game-item">
-                        <div class="game-inner">
-                            <div class="game-item__thumb">
-                                <img src="Content/Images/gamemark3.png" alt="game">
+                    <div class="col-lg-4 col-xl-3 col-md-6 col-sm-6">
+                        <div class="game-item">
+                            <div class="game-inner">
+                                <div class="game-item__thumb">
+                                    <img src="Content/Images/gamemark2.png" alt="game">
+                                </div>
+                                <div class="game-item__content">
+                                    <h4 class="title">Game02</h4>
+                                    <p class="invest-info">Invest Limit</p>
+                                    <p class="invest-amount">$10.49 - $1,000</p>
+                                    <a href="#0" class="cmn--btn active btn--md radius-0">Play Now</a>
+                                </div>
                             </div>
-                            <div class="game-item__content">
-                                <h4 class="title">Game03</h4>
-                                <p class="invest-info">Invest Limit</p>
-                                <p class="invest-amount">$10.49 - $1,000</p>
-                                <a href="#0" class="cmn--btn active btn--md radius-0">Play Now</a>
-                            </div>
+                            <div class="ball"></div>
                         </div>
-                        <div class="ball"></div>
                     </div>
-                </div>
-                <div class="col-lg-4 col-xl-3 col-md-6 col-sm-6">
-                    <div class="game-item">
-                        <div class="game-inner">
-                            <div class="game-item__thumb">
-                                <img src="Content/Images/gamemark4.png" alt="game">
+                    <div class="col-lg-4 col-xl-3 col-md-6 col-sm-6">
+                        <div class="game-item">
+                            <div class="game-inner">
+                                <div class="game-item__thumb">
+                                    <img src="Content/Images/gamemark3.png" alt="game">
+                                </div>
+                                <div class="game-item__content">
+                                    <h4 class="title">Game03</h4>
+                                    <p class="invest-info">Invest Limit</p>
+                                    <p class="invest-amount">$10.49 - $1,000</p>
+                                    <a href="#0" class="cmn--btn active btn--md radius-0">Play Now</a>
+                                </div>
                             </div>
-                            <div class="game-item__content">
-                                <h4 class="title">Game04</h4>
-                                <p class="invest-info">Invest Limit</p>
-                                <p class="invest-amount">$10.49 - $1,000</p>
-                                <a href="#0" class="cmn--btn active btn--md radius-0">Play Now</a>
-                            </div>
+                            <div class="ball"></div>
                         </div>
-                        <div class="ball"></div>
                     </div>
-                </div>
-                <div class="col-lg-4 col-xl-3 col-md-6 col-sm-6">
-                    <div class="game-item">
-                        <div class="game-inner">
-                            <div class="game-item__thumb">
-                                <img src="Content/Images/gamemark1.png" alt="game">
+                    <div class="col-lg-4 col-xl-3 col-md-6 col-sm-6">
+                        <div class="game-item">
+                            <div class="game-inner">
+                                <div class="game-item__thumb">
+                                    <img src="Content/Images/gamemark4.png" alt="game">
+                                </div>
+                                <div class="game-item__content">
+                                    <h4 class="title">Game04</h4>
+                                    <p class="invest-info">Invest Limit</p>
+                                    <p class="invest-amount">$10.49 - $1,000</p>
+                                    <a href="#0" class="cmn--btn active btn--md radius-0">Play Now</a>
+                                </div>
                             </div>
-                            <div class="game-item__content">
-                                <h4 class="title">Game05</h4>
-                                <p class="invest-info">Invest Limit</p>
-                                <p class="invest-amount">$10.49 - $1,000</p>
-                                <a href="#0" class="cmn--btn active btn--md radius-0">Play Now</a>
-                            </div>
+                            <div class="ball"></div>
                         </div>
-                        <div class="ball"></div>
                     </div>
-                </div>
-                <div class="col-lg-4 col-xl-3 col-md-6 col-sm-6">
-                    <div class="game-item">
-                        <div class="game-inner">
-                            <div class="game-item__thumb">
-                                <img src="Content/Images/gamemark2.png" alt="game">
+                    <div class="col-lg-4 col-xl-3 col-md-6 col-sm-6">
+                        <div class="game-item">
+                            <div class="game-inner">
+                                <div class="game-item__thumb">
+                                    <img src="Content/Images/gamemark1.png" alt="game">
+                                </div>
+                                <div class="game-item__content">
+                                    <h4 class="title">Game05</h4>
+                                    <p class="invest-info">Invest Limit</p>
+                                    <p class="invest-amount">$10.49 - $1,000</p>
+                                    <a href="#0" class="cmn--btn active btn--md radius-0">Play Now</a>
+                                </div>
                             </div>
-                            <div class="game-item__content">
-                                <h4 class="title">Game06</h4>
-                                <p class="invest-info">Invest Limit</p>
-                                <p class="invest-amount">$10.49 - $1,000</p>
-                                <a href="#0" class="cmn--btn active btn--md radius-0">Play Now</a>
-                            </div>
+                            <div class="ball"></div>
                         </div>
-                        <div class="ball"></div>
                     </div>
-                </div>
-                <div class="col-lg-4 col-xl-3 col-md-6 col-sm-6">
-                    <div class="game-item">
-                        <div class="game-inner">
-                            <div class="game-item__thumb">
-                                <img src="Content/Images/gamemark3.png" alt="game">
+                    <div class="col-lg-4 col-xl-3 col-md-6 col-sm-6">
+                        <div class="game-item">
+                            <div class="game-inner">
+                                <div class="game-item__thumb">
+                                    <img src="Content/Images/gamemark2.png" alt="game">
+                                </div>
+                                <div class="game-item__content">
+                                    <h4 class="title">Game06</h4>
+                                    <p class="invest-info">Invest Limit</p>
+                                    <p class="invest-amount">$10.49 - $1,000</p>
+                                    <a href="#0" class="cmn--btn active btn--md radius-0">Play Now</a>
+                                </div>
                             </div>
-                            <div class="game-item__content">
-                                <h4 class="title">Game07</h4>
-                                <p class="invest-info">Invest Limit</p>
-                                <p class="invest-amount">$10.49 - $1,000</p>
-                                <a href="#0" class="cmn--btn active btn--md radius-0">Play Now</a>
-                            </div>
+                            <div class="ball"></div>
                         </div>
-                        <div class="ball"></div>
                     </div>
-                </div>
-                <div class="col-lg-4 col-xl-3 col-md-6 col-sm-6">
-                    <div class="game-item">
-                        <div class="game-inner">
-                            <div class="game-item__thumb">
-                                <img src="Content/Images/gamemark4.png" alt="game">
+                    <div class="col-lg-4 col-xl-3 col-md-6 col-sm-6">
+                        <div class="game-item">
+                            <div class="game-inner">
+                                <div class="game-item__thumb">
+                                    <img src="Content/Images/gamemark3.png" alt="game">
+                                </div>
+                                <div class="game-item__content">
+                                    <h4 class="title">Game07</h4>
+                                    <p class="invest-info">Invest Limit</p>
+                                    <p class="invest-amount">$10.49 - $1,000</p>
+                                    <a href="#0" class="cmn--btn active btn--md radius-0">Play Now</a>
+                                </div>
                             </div>
-                            <div class="game-item__content">
-                                <h4 class="title">Game08</h4>
-                                <p class="invest-info">Invest Limit</p>
-                                <p class="invest-amount">$10.49 - $1,000</p>
-                                <a href="#0" class="cmn--btn active btn--md radius-0">Play Now</a>
-                            </div>
+                            <div class="ball"></div>
                         </div>
-                        <div class="ball"></div>
+                    </div>
+                    <div class="col-lg-4 col-xl-3 col-md-6 col-sm-6">
+                        <div class="game-item">
+                            <div class="game-inner">
+                                <div class="game-item__thumb">
+                                    <img src="Content/Images/gamemark4.png" alt="game">
+                                </div>
+                                <div class="game-item__content">
+                                    <h4 class="title">Game08</h4>
+                                    <p class="invest-info">Invest Limit</p>
+                                    <p class="invest-amount">$10.49 - $1,000</p>
+                                    <a href="#0" class="cmn--btn active btn--md radius-0">Play Now</a>
+                                </div>
+                            </div>
+                            <div class="ball"></div>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </form>
         </div>
     </section>
     <!-- Game Section Ends Here -->
