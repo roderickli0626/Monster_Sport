@@ -35,7 +35,7 @@ namespace MonsterGame
         private void LoadGames()
         {
             GameController gameController = new GameController();
-            List<GameCheck> list = gameController.FindAll();
+            List<GameCheck> list = gameController.FindOpenGames();
             RepeaterGame.DataSource = list;
             RepeaterGame.DataBind();
         }

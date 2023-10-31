@@ -16,6 +16,7 @@ namespace MonsterGame.Model
             Id = game.Id;
             NumberOfTeams = game.NumberOfTeams ?? 0;
             MinPlayers = game.MinPlayers ?? 0;
+            RealPlayers = game.RealPlayers ?? 0;
             Fee = game.Fee ?? 0;
             Tax = game.Tax ?? 0;
             Status = game.Status ?? 0;
@@ -33,6 +34,10 @@ namespace MonsterGame.Model
             get; set;
         }
         public int MinPlayers
+        {
+            get; set;
+        }
+        public int RealPlayers
         {
             get; set;
         }

@@ -1,8 +1,10 @@
-﻿using MonsterGame.DAO;
+﻿using MonsterGame.Common;
+using MonsterGame.DAO;
 using MonsterGame.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Policy;
 using System.Web;
 
 namespace MonsterGame.Controller
@@ -55,6 +57,64 @@ namespace MonsterGame.Controller
                             check.Image = "gamemark6.png";
                             check.Mark = "<div class=\"ribbon\"><span>COMPLETED</span></div>";
                         }break;
+                }
+                result.Add(check);
+            }
+            return result;
+        }
+
+        public List<GameCheck> FindOpenGames()
+        {
+            List<Game> gameList = gameDao.FindAll().Where(g => g.Status == (int)GameStatus.OPEN).ToList();
+            List<GameCheck> result = new List<GameCheck>();
+            int index = 0;
+            foreach (Game game in gameList)
+            {
+                index++;
+                GameCheck check = new GameCheck(game);
+                check.Mark = "<div class=\"ribbon blue\"><span>OPENED</span></div>";
+                switch (index % 8)
+                {
+                    case 1:
+                        {
+                            check.Image = "gamemark1.jpg";
+                        }
+                        break;
+                    case 2:
+                        {
+                            check.Image = "gamemark2.jpg";
+                        }
+                        break;
+                    case 3:
+                        {
+                            check.Image = "gamemark3.jpg";
+                        }
+                        break;
+                    case 4:
+                        {
+                            check.Image = "gamemark4.jpg";
+                        }
+                        break;
+                    case 5:
+                        {
+                            check.Image = "gamemark5.jpg";
+                        }
+                        break;
+                    case 6:
+                        {
+                            check.Image = "gamemark6.png";
+                        }
+                        break;
+                    case 7:
+                        {
+                            check.Image = "gamemark7.jpg";
+                        }
+                        break;
+                    case 0:
+                        {
+                            check.Image = "gamebg.jpeg";
+                        }
+                        break;
                 }
                 result.Add(check);
             }

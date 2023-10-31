@@ -1620,7 +1620,7 @@ i {
 }
 
 .inner-banner {
-    padding: 170px 0 110px;
+    padding: 100px 0 20px;
     position: relative;
 }
 
@@ -2170,8 +2170,8 @@ i {
 
 .account__main__wrapper {
     display: flex;
-    padding-top: 50px;
-    padding-bottom: 50px;
+    padding-top: 0px;
+    padding-bottom: 0px;
 }
 
 @media (max-width: 991px) {

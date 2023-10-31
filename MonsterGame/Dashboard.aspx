@@ -120,10 +120,31 @@
             left: 1000px;
         }
     </style>
+    <style>
+        div.left-control .section-link {
+            margin: 6px 0;
+            content: url(Content/Images/left-icon.png)
+        }
+
+        div.left-control .section-link:hover {
+            margin: 6px 0;
+            content: url(Content/Images/left-icon-selected.png)
+        }
+
+        div.left-control .section-link:active {
+            margin: 6px 0;
+            content: url(Content/Images/left-icon-selected.png)
+        }
+
+        div.left-control .section-link.active {
+            margin: 6px 0;
+            content: url(Content/Images/left-icon-selected.png)
+        }
+    </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder" runat="server">
     <!-- Banner Section Starts Here -->
-    <section class="banner-section bg_img overflow-hidden" style="background:url(Content/Images/stadium1.jpg) center">
+    <section class="banner-section bg_img overflow-hidden" id="section1" style="background:url(Content/Images/stadium1.jpg) center">
         <div class="container">
             <div class="banner-wrapper d-flex flex-wrap align-items-center">
                 <div class="banner-content">
@@ -135,6 +156,13 @@
                     </div>
                     <div class="button-wrapper" runat="server" id="OutDiv">
                         <a href="Login.aspx" class="cmn--btn active btn--lg">Log Out</a>
+                    </div>
+                    <div class="position-fixed top-50 translate-middle-y align-self-center start-0 ps-4 ps-sm-5 flex flex-column left-control">
+                        <div class="list-group" id="list-example">
+                            <a class="section-link" href="#section1"></a>
+                            <a class="section-link" href="#section2"></a>
+                            <a class="section-link" href="#section3"></a>
+                        </div>
                     </div>
                     <img src="Content/Images/thumb.png" alt="" class="shape1">
                 </div>
@@ -162,7 +190,7 @@
     <!-- Banner Section Ends Here -->
 
     <!-- Game Section Starts Here -->
-    <section class="game-section padding-top padding-bottom bg_img" style="background: url(Content/Images/gamebg.jpeg);">
+    <section class="game-section padding-top padding-bottom bg_img" id="section2" style="background: url(Content/Images/gamebg.jpeg);">
         <div class="container">
             <form runat="server" id="form1" autocomplete="off">
                 <div class="row justify-content-center">
@@ -187,7 +215,8 @@
                                             <h4 class="title"><%# Eval("Title") %></h4>
                                             <p class="invest-info">Invest Limit</p>
                                             <p class="invest-amount">$<%# Eval("Fee") %></p>
-                                            <a href="DashboardDetails.aspx?gameId=<%# Eval("Id") %>" class="cmn--btn active btn--md radius-1">Details</a>
+                                            <button class="BtnDetails cmn--btn active btn--md radius-1" data-id="<%# Eval("Id") %>" 
+                                                data-title="<%# Eval("Title") %>" data-fee="<%# Eval("Fee") %>" data-players="<%# Eval("RealPlayers") %>">Details</button>
                                         </div>
                                     </div>
                                     <div class="ball"></div>
@@ -202,7 +231,7 @@
     <!-- Game Section Ends Here -->
 
     <!-- How Section Starts Here -->
-    <section class="how-section padding-top padding-bottom bg_img" style="background: url(Content/Images/playbg.png);">
+    <section class="how-section padding-top padding-bottom bg_img" id="section3" style="background: url(Content/Images/playbg.png);">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-6">
@@ -250,7 +279,39 @@
         </div>
     </section>
     <!-- How Section Ends Here -->
-
+    <div class=" modal custom--modal fade show" id="gameDetailModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-modal="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content section-bg border-0">
+                <div class="modal-header modal--header bg--base">
+                    <h4 class="modal-title text-dark" id="modalTitle">Game Details</h4>
+                </div>
+                <div class="modal-body modal--body">
+                    <h3 class="title mb-2">Before Game Start: </h3>
+                    <p>It is need to log in this site and register to this game. To register, it is necessary to check balance and purchase credits for game tickets. 
+                        Every user can get maximum 10 tickets in a game. </p>
+                    <h3 class="title mb-2 mt-3">How To Play: </h3>
+                    <p>Registered user, by the end of the weekly game, will choose a TEAM, from the list of teams decided by the organization. 
+                        On Friday (generally at 8.00 pm), the game ends and it is no longer possible to participate in the round.
+                        Every players will be promoted or failed to the next round according to the results of the teams.
+                    </p>
+                    <h3 class="title mb-2 mt-3">Information: </h3>
+                    <p>The credits for this game is <strong id="fee"></strong> and there are <strong id="players"></strong> registered palyers now. </p>
+                </div>
+                <div class="modal-footer modal--footer">
+                    <button type="button" class="btn btn--danger btn--md" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="FooterPlaceHolder" runat="server">
+    <script>
+        $(".BtnDetails").click(function () {
+            $("#modalTitle").text($(this)[0].dataset.title);
+            $("#fee").text("$" + $(this)[0].dataset.fee);
+            $("#players").text($(this)[0].dataset.players);
+            $("#gameDetailModal").modal('show');
+            return false;
+        })
+    </script>
 </asp:Content>
