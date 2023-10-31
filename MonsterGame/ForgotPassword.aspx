@@ -45,7 +45,7 @@
                 </div>
                 <div class="account__content__wrapper">
                     <div class="content text-center text-white">
-                        <h3 class="title text--base mb-4">Welcome to Monster Sport</h3>
+                        <h3 class="title text--base mb-4">Welcome to Monster Game</h3>
                         <p class="">Please send email to reset your password.</p>
                     </div>
                 </div>

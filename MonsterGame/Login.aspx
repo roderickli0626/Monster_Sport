@@ -23,7 +23,7 @@
                     <div class="logo">
                         <a href="Dashboard.aspx" class="d-flex">
                             <img src="Content/Images/Logo.png" alt="logo" class="ms-auto">
-                            <h3 class="pt-3 me-auto"><strong class="text-warning">Monster</strong> Sport</h3>
+                            <h3 class="pt-3 me-auto"><strong class="text-warning">Monster</strong> Game</h3>
                         </a>
                     </div>
                     <form class="account__form form row g-4" runat="server" id="form1" autocomplete="off">
@@ -56,7 +56,7 @@
                 </div>
                 <div class="account__content__wrapper">
                     <div class="content text-center text-white">
-                        <h3 class="title text--base mb-4">Welcome to Monster Sport</h3>
+                        <h3 class="title text--base mb-4">Welcome to Monster Game</h3>
                         <p class="">Sign in your Account. Atque, fuga sapiente, doloribus qui enim tempora?</p>
                         <p class="account-switch mt-4">Don't have an Account yet ? <a class="text--base ms-2" href="Register.aspx">Register</a></p>
                     </div>
