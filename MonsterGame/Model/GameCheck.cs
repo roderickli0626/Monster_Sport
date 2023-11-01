@@ -69,6 +69,10 @@ namespace MonsterGame.Model
         {
             get; set;
         }
+        public string ButtonTitle
+        {
+            get; set;
+        }
         public string StartDate { get; set; }
         public string EndDate { get; set; }
 

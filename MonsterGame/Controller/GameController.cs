@@ -18,9 +18,12 @@ namespace MonsterGame.Controller
             gameDao = new GameDAO();
         }
 
-        public List<GameCheck> FindAll()
+        public List<GameCheck> FindAll(int status, string search)
         {
             List<Game> gameList = gameDao.FindAll();
+            if (status != 0) gameList = gameList.Where(x => x.Status == status).ToList();
+            if (!string.IsNullOrEmpty(search)) gameList = gameList.Where(x => x.Title.Contains(search)).ToList();
+
             List<GameCheck> result = new List<GameCheck>();
             foreach (Game game in gameList)
             {
@@ -31,32 +34,43 @@ namespace MonsterGame.Controller
                         {
                             check.Image = "gamemark1.jpg";
                             check.Mark = "<div class=\"ribbon blue\"><span>OPENED</span></div>";
+                            check.ButtonTitle = "Play Now";
                         }break;
                     case 2:
                         {
                             check.Image = "gamemark2.jpg";
                             check.Mark = "<div class=\"ribbon red\"><span>STARTED</span></div>";
-                        }break;
+                            check.ButtonTitle = "Detail";
+                        }
+                        break;
                     case 3:
                         {
                             check.Image = "gamemark3.jpg";
                             check.Mark = "<div class=\"ribbon red\"><span>TEAMCHOICE</span></div>";
-                        }break;
+                            check.ButtonTitle = "Detail";
+                        }
+                        break;
                     case 4:
                         {
                             check.Image = "gamemark4.jpg";
                             check.Mark = "<div class=\"ribbon red\"><span>SUSPENDED</span></div>";
-                        }break; 
+                            check.ButtonTitle = "Detail";
+                        }
+                        break; 
                     case 5:
                         {
                             check.Image = "gamemark5.jpg";
                             check.Mark = "<div class=\"ribbon red\"><span>CLOSED</span></div>";
-                        }break;
+                            check.ButtonTitle = "Detail";
+                        }
+                        break;
                     case 6:
                         {
                             check.Image = "gamemark6.png";
                             check.Mark = "<div class=\"ribbon\"><span>COMPLETED</span></div>";
-                        }break;
+                            check.ButtonTitle = "Detail";
+                        }
+                        break;
                 }
                 result.Add(check);
             }
