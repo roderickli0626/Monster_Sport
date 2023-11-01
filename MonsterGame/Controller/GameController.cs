@@ -1,6 +1,8 @@
 ﻿using MonsterGame.Common;
 using MonsterGame.DAO;
 using MonsterGame.Model;
+using MonsterGame.Models;
+using PayPal.Api;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,6 +20,28 @@ namespace MonsterGame.Controller
             gameDao = new GameDAO();
         }
 
+        public SearchResult Search(int start, int length, string searchVal, int status)
+        {
+            SearchResult result = new SearchResult();
+            IEnumerable<Game> gameList = gameDao.FindAll();
+            if (status != 0) gameList = gameList.Where(x => x.Status == status).ToList();
+            if (!string.IsNullOrEmpty(searchVal)) gameList = gameList.Where(x => x.Title.Contains(searchVal)).ToList();
+
+            result.TotalCount = gameList.Count();
+            gameList = gameList.Skip(start).Take(length);
+
+            List<object> checks = new List<object>();
+            foreach (Game game in gameList)
+            {
+                GameCheck gameCheck = AddData(game);
+                List<TeamsForGame> teamList = new TeamsForGameDAO().FindByGame(game.Id).ToList();
+                gameCheck.TeamList = teamList.Select(t => t.TeamID ?? 0).ToList();
+                checks.Add(gameCheck);
+            }
+            result.ResultList = checks;
+
+            return result;
+        }
         public List<GameCheck> FindAll(int status, string search)
         {
             List<Game> gameList = gameDao.FindAll();
@@ -27,54 +51,60 @@ namespace MonsterGame.Controller
             List<GameCheck> result = new List<GameCheck>();
             foreach (Game game in gameList)
             {
-                GameCheck check = new GameCheck(game);
-                switch (game.Status)
-                {
-                    case 1:
-                        {
-                            check.Image = "gamemark1.jpg";
-                            check.Mark = "<div class=\"ribbon blue\"><span>OPENED</span></div>";
-                            check.ButtonTitle = "Play Now";
-                        }break;
-                    case 2:
-                        {
-                            check.Image = "gamemark2.jpg";
-                            check.Mark = "<div class=\"ribbon red\"><span>STARTED</span></div>";
-                            check.ButtonTitle = "Detail";
-                        }
-                        break;
-                    case 3:
-                        {
-                            check.Image = "gamemark3.jpg";
-                            check.Mark = "<div class=\"ribbon red\"><span>TEAMCHOICE</span></div>";
-                            check.ButtonTitle = "Detail";
-                        }
-                        break;
-                    case 4:
-                        {
-                            check.Image = "gamemark4.jpg";
-                            check.Mark = "<div class=\"ribbon red\"><span>SUSPENDED</span></div>";
-                            check.ButtonTitle = "Detail";
-                        }
-                        break; 
-                    case 5:
-                        {
-                            check.Image = "gamemark5.jpg";
-                            check.Mark = "<div class=\"ribbon red\"><span>CLOSED</span></div>";
-                            check.ButtonTitle = "Detail";
-                        }
-                        break;
-                    case 6:
-                        {
-                            check.Image = "gamemark6.png";
-                            check.Mark = "<div class=\"ribbon\"><span>COMPLETED</span></div>";
-                            check.ButtonTitle = "Detail";
-                        }
-                        break;
-                }
+                GameCheck check = AddData(game);
                 result.Add(check);
             }
             return result;
+        }
+        private GameCheck AddData(Game game)
+        {
+            GameCheck check = new GameCheck(game);
+            switch (game.Status)
+            {
+                case 1:
+                    {
+                        check.Image = "gamemark1.jpg";
+                        check.Mark = "<div class=\"ribbon blue\"><span>OPENED</span></div>";
+                        check.ButtonTitle = "Play Now";
+                    }
+                    break;
+                case 2:
+                    {
+                        check.Image = "gamemark2.jpg";
+                        check.Mark = "<div class=\"ribbon red\"><span>STARTED</span></div>";
+                        check.ButtonTitle = "Detail";
+                    }
+                    break;
+                case 3:
+                    {
+                        check.Image = "gamemark3.jpg";
+                        check.Mark = "<div class=\"ribbon red\"><span>TEAMCHOICE</span></div>";
+                        check.ButtonTitle = "Detail";
+                    }
+                    break;
+                case 4:
+                    {
+                        check.Image = "gamemark4.jpg";
+                        check.Mark = "<div class=\"ribbon red\"><span>SUSPENDED</span></div>";
+                        check.ButtonTitle = "Detail";
+                    }
+                    break;
+                case 5:
+                    {
+                        check.Image = "gamemark5.jpg";
+                        check.Mark = "<div class=\"ribbon red\"><span>CLOSED</span></div>";
+                        check.ButtonTitle = "Detail";
+                    }
+                    break;
+                case 6:
+                    {
+                        check.Image = "gamemark6.png";
+                        check.Mark = "<div class=\"ribbon\"><span>COMPLETED</span></div>";
+                        check.ButtonTitle = "Detail";
+                    }
+                    break;
+            }
+            return check;
         }
 
         public List<GameCheck> FindOpenGames()
@@ -133,6 +163,60 @@ namespace MonsterGame.Controller
                 result.Add(check);
             }
             return result;
+        }
+
+        public bool DeleteGame(int id)
+        {
+            Game item = gameDao.FindByID(id);
+            if (item == null) return false;
+
+            return gameDao.Delete(id);
+        }
+
+        public bool SaveGame(int? gameID, string title, DateTime? sdate, DateTime? edate, double fee, double tax, 
+            int status, int minPlayers, int teamNum, string note, double percent1, double percent2, double percent3, 
+            double percent4, double percent5, double percent6)
+        {
+            Game game = gameDao.FindByID(gameID ?? 0);
+            if (game == null)
+            {
+                game = new Game();
+                game.Title = title;
+                game.Note = note;
+                game.Fee = fee; 
+                game.Tax = tax;
+                game.MinPlayers = minPlayers; 
+                game.NumberOfTeams = teamNum;
+                game.StartDate = sdate;
+                game.EndDate = edate;
+                game.Status = status;
+                game.PercentForFirst = percent1;
+                game.PercentForSecond = percent2;
+                game.PercentForThird = percent3;
+                game.PercentForForth = percent4;
+                game.PercentForFifth = percent5;
+
+                return gameDao.Insert(game);
+            }
+            else
+            {
+                game.Title = title;
+                game.Note = note;
+                game.Fee = fee;
+                game.Tax = tax;
+                game.MinPlayers = minPlayers;
+                game.NumberOfTeams = teamNum;
+                game.StartDate = sdate;
+                game.EndDate = edate;
+                game.Status = status;
+                game.PercentForFirst = percent1;
+                game.PercentForSecond = percent2;
+                game.PercentForThird = percent3;
+                game.PercentForForth = percent4;
+                game.PercentForFifth = percent5;
+
+                return gameDao.Update(game);
+            }
         }
     }
 }

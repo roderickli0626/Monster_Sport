@@ -128,6 +128,8 @@
     <Content Include="Content\CSS\all.min.css" />
     <Content Include="Content\CSS\animate.css" />
     <Content Include="Content\CSS\bootstrap.min.css" />
+    <Content Include="Content\CSS\datatables.css" />
+    <Content Include="Content\CSS\gijgo.min.css" />
     <Content Include="Content\CSS\line-awesome.min.css" />
     <Content Include="Content\CSS\main.css" />
     <Content Include="Content\CSS\slick.css" />
@@ -162,6 +164,7 @@
     <Content Include="Content\Images\shape.png" />
     <Content Include="Content\Site.css" />
     <Content Include="Dashboard.aspx" />
+    <Content Include="DataService.asmx" />
     <Content Include="Default.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="ForgotPassword.aspx" />
@@ -225,17 +228,22 @@
     <Content Include="Content\fonts\fa-v4compatibility.woff2" />
     <Content Include="Content\fonts\memvYaGs126MiZpBA-UvWbX2vVnXBbObj2OVTS-muw.woff2" />
     <Content Include="Content\fonts\Qw3aZQNVED7rKGKxtqIqX5EUDXx4.woff2" />
+    <Content Include="Content\fonts\gijgo-material.ttf" />
+    <Content Include="Content\fonts\gijgo-material.woff" />
     <None Include="Mapping.dbml.layout">
       <DependentUpon>Mapping.dbml</DependentUpon>
     </None>
     <Content Include="Page.Master" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
+    <Content Include="Scripts\gijgo.min.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.js" />
     <Content Include="Scripts\JS\bootstrap.min.js" />
+    <Content Include="Scripts\JS\datatables.js" />
     <Content Include="Scripts\JS\jquery-3.6.0.min.js" />
+    <Content Include="Scripts\JS\jquery.dataTables.js" />
     <Content Include="Scripts\JS\main.js" />
     <Content Include="Scripts\JS\slick.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
@@ -317,6 +325,10 @@
     <Compile Include="Dashboard.aspx.designer.cs">
       <DependentUpon>Dashboard.aspx</DependentUpon>
     </Compile>
+    <Compile Include="DataService.asmx.cs">
+      <DependentUpon>DataService.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -347,6 +359,9 @@
       <DependentUpon>Mapping.dbml</DependentUpon>
     </Compile>
     <Compile Include="Model\GameCheck.cs" />
+    <Compile Include="Model\JSDataTable.cs" />
+    <Compile Include="Model\ProcResult.cs" />
+    <Compile Include="Model\SearchResult.cs" />
     <Compile Include="Page.Master.cs">
       <DependentUpon>Page.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

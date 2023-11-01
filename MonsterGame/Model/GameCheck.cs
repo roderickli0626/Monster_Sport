@@ -24,6 +24,11 @@ namespace MonsterGame.Model
             Note = game.Note;
             StartDate = game.StartDate?.ToString("dd/MM/yyyy HH.mm");
             EndDate = game.EndDate?.ToString("dd/MM/yyyy HH.mm");
+            Percent1 = game.PercentForFirst ?? 0;
+            Percent2 = game.PercentForSecond ?? 0;
+            Percent3 = game.PercentForThird ?? 0;
+            Percent4 = game.PercentForForth ?? 0;
+            Percent5 = game.PercentForFifth ?? 0;
         }
         public int Id
         {
@@ -49,6 +54,26 @@ namespace MonsterGame.Model
         {
             get; set;
         }
+        public double Percent1
+        {
+            get; set;
+        }
+        public double Percent2
+        {
+            get; set;
+        }
+        public double Percent3
+        {
+            get; set;
+        }
+        public double Percent4
+        {
+            get; set;
+        }
+        public double Percent5
+        {
+            get; set;
+        }
         public int Status
         {
             get; set;
@@ -70,6 +95,10 @@ namespace MonsterGame.Model
             get; set;
         }
         public string ButtonTitle
+        {
+            get; set;
+        }
+        public List<int> TeamList
         {
             get; set;
         }

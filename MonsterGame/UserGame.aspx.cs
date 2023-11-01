@@ -10,7 +10,7 @@ using System.Web.UI.WebControls;
 using MonsterGame.Common;
 using MonsterGame.Util;
 
-namespace MonsterSport
+namespace MonsterGame
 {
     public partial class UserGame : System.Web.UI.Page
     {
