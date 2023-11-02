@@ -1,6 +1,7 @@
 ﻿using MonsterGame.Controller;
 using MonsterGame.DAO;
 using MonsterGame.Models;
+using MonsterSport.Controller;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -10,6 +11,7 @@ using System.Web;
 using System.Web.Script.Serialization;
 using System.Web.Script.Services;
 using System.Web.Services;
+using System.Web.UI;
 
 namespace MonsterGame
 {
@@ -54,6 +56,37 @@ namespace MonsterGame
 
             GameController gameController = new GameController();
             bool success = gameController.DeleteGame(id);
+
+            ResponseProc(success, "");
+        }
+
+        [WebMethod(EnableSession = true)]
+        [ScriptMethod(UseHttpGet = true, ResponseFormat = ResponseFormat.Json)]
+        public void FindAdmins(int draw, int start, int length, string searchVal)
+        {
+            if (!loginSystem.IsSuperAdminLoggedIn()) return;
+
+            UserController userController = new UserController();
+            SearchResult searchResult = userController.Search(start, length, searchVal);
+
+            JSDataTable result = new JSDataTable();
+            result.data = (IEnumerable<object>)searchResult.ResultList;
+            result.draw = draw;
+            result.recordsTotal = searchResult.TotalCount;
+            result.recordsFiltered = searchResult.TotalCount;
+
+            ResponseJson(result);
+        }
+
+        [WebMethod(EnableSession = true)]
+        [ScriptMethod(UseHttpGet = true, ResponseFormat = ResponseFormat.Json)]
+        public void DeleteAdmin(int id)
+        {
+            //Is Logged in?
+            if (!loginSystem.IsSuperAdminLoggedIn()) return;
+
+            UserController userController = new UserController();
+            bool success = userController.DeleteAdmin(id);
 
             ResponseProc(success, "");
         }

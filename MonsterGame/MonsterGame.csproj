@@ -106,6 +106,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Admin.aspx" />
     <Content Include="AdminGame.aspx" />
     <Content Include="Conditions.aspx" />
     <Content Include="Contact.aspx" />
@@ -281,6 +282,13 @@
     <Content Include="Site.Mobile.Master" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Admin.aspx.cs">
+      <DependentUpon>Admin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin.aspx.designer.cs">
+      <DependentUpon>Admin.aspx</DependentUpon>
+    </Compile>
     <Compile Include="AdminGame.aspx.cs">
       <DependentUpon>AdminGame.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -312,6 +320,7 @@
     <Compile Include="Controller\GameController.cs" />
     <Compile Include="Controller\LoginController.cs" />
     <Compile Include="Controller\SessionController.cs" />
+    <Compile Include="Controller\UserController.cs" />
     <Compile Include="DAO\BasicDAO.cs" />
     <Compile Include="DAO\GameDAO.cs" />
     <Compile Include="DAO\MovementDAO.cs" />
@@ -367,6 +376,7 @@
     <Compile Include="Model\JSDataTable.cs" />
     <Compile Include="Model\ProcResult.cs" />
     <Compile Include="Model\SearchResult.cs" />
+    <Compile Include="Model\UserCheck.cs" />
     <Compile Include="Page.Master.cs">
       <DependentUpon>Page.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
