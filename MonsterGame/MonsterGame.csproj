@@ -127,11 +127,14 @@
     <Content Include="Content\bootstrap.rtl.min.css" />
     <Content Include="Content\CSS\all.min.css" />
     <Content Include="Content\CSS\animate.css" />
+    <Content Include="Content\CSS\bootstrap-multiselect.min.css" />
     <Content Include="Content\CSS\bootstrap.min.css" />
     <Content Include="Content\CSS\datatables.css" />
-    <Content Include="Content\CSS\gijgo.min.css" />
+    <Content Include="Content\CSS\jquery.datetimepicker.min.css" />
     <Content Include="Content\CSS\line-awesome.min.css" />
     <Content Include="Content\CSS\main.css" />
+    <Content Include="Content\CSS\select2-bootstrap.css" />
+    <Content Include="Content\CSS\select2.css" />
     <Content Include="Content\CSS\slick.css" />
     <Content Include="Content\fonts\la-brands-400.svg" />
     <Content Include="Content\fonts\la-regular-400.svg" />
@@ -235,16 +238,18 @@
     </None>
     <Content Include="Page.Master" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
-    <Content Include="Scripts\gijgo.min.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.js" />
+    <Content Include="Scripts\JS\bootstrap-multiselect.min.js" />
     <Content Include="Scripts\JS\bootstrap.min.js" />
     <Content Include="Scripts\JS\datatables.js" />
     <Content Include="Scripts\JS\jquery-3.6.0.min.js" />
     <Content Include="Scripts\JS\jquery.dataTables.js" />
+    <Content Include="Scripts\JS\jquery.datetimepicker.full.min.js" />
     <Content Include="Scripts\JS\main.js" />
+    <Content Include="Scripts\JS\select2.js" />
     <Content Include="Scripts\JS\slick.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\WebForms\DetailsView.js" />

@@ -19,11 +19,11 @@ namespace MonsterGame.DAO
         {
             return GetContext().Games.Where(g => g.Id == id).FirstOrDefault();
         }
-        public bool Insert(Game game)
+        public int Insert(Game game)
         {
             GetContext().Games.InsertOnSubmit(game);
             GetContext().SubmitChanges();
-            return true;
+            return game.Id;
         }
 
         public bool Update(Game game)

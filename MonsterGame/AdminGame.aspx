@@ -1,7 +1,9 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Page.Master" AutoEventWireup="true" CodeBehind="AdminGame.aspx.cs" Inherits="MonsterGame.AdminGame" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link rel="stylesheet" href="Content/CSS/datatables.css" />
-    <link rel="stylesheet" href="Content/CSS/gijgo.min.css" />
+    <link rel="stylesheet" href="Content/CSS/jquery.datetimepicker.min.css" />
+    <link rel="stylesheet" href="Content/CSS/select2.css" />
+    <link rel="stylesheet" href="Content/CSS/select2-bootstrap.css" />
     <style>
         .box {
             position: relative;
@@ -143,6 +145,28 @@
         .gj-icon {
             padding:12px;
             color:white;
+        }
+        .select2-selection.select2-selection--multiple {
+            box-shadow: none !important;
+            border: 1px solid rgba(255, 255, 255, 0.17);
+            background-color: transparent;
+            width:100%;
+        }
+        .select2-container--default.select2-container, .selection {
+            width:100% !important;
+        }
+        .select2-container--default.select2-container--focus .select2-selection--multiple {
+            border: 1px solid rgba(255, 255, 255, 0.17);
+            width:100%;
+        }
+        .select2-selection__choice {
+            background-color:#2e0327 !important;
+        }
+        .select2-dropdown.select2-dropdown--above {
+            background-color:#2e0327;
+        }
+        #select2-ComboTeams-container {
+            text-align: center
         }
     </style>
 </asp:Content>
@@ -301,7 +325,12 @@
                                                 <asp:TextBox runat="server" ID="TxtPercent6" ClientIDMode="Static" CssClass="form-control form--control style-two"></asp:TextBox>
                                             </div>
                                         </div>
-
+                                        <div class="col-md-12">
+                                            <label for="ComboModalStatus" class="form-label">Teams</label>
+                                            <div>
+                                                <asp:DropDownList runat="server" ID="ComboTeams" CssClass="form-select form--control style-two" ClientIDMode="Static" Multiple="true"></asp:DropDownList>
+                                            </div>
+                                        </div>
                                     </ContentTemplate>
                                     <Triggers>
                                         <asp:AsyncPostBackTrigger ControlID="BtnSave" />
@@ -323,20 +352,21 @@
     <script src="Scripts/JS/jquery.dataTables.js"></script>
     <script src="Scripts/JS/datatables.js"></script>
     <script src="Scripts/bootstrap.bundle.min.js"></script>
-    <script src="Scripts/gijgo.min.js"></script>
+    <script src="Scripts/JS/jquery.datetimepicker.full.min.js"></script>
+    <script src="Scripts/JS/select2.js"></script>
     <script>
+        $("#ComboTeams").select2({
+            dropdownParent: $(".modal-body")
+        });
+
+        $.datetimepicker.setLocale('it');
+
         $("#TxtStartDate").datetimepicker({
-            uiLibrary: 'bootstrap5',
-            format: "dd/mm/yyyy HH.MM",
-            modal: false,
-            footer: true,
+            format: "d/m/Y H.i",
         });
 
         $("#TxtEndDate").datetimepicker({
-            uiLibrary: 'bootstrap5',
-            format: "dd/mm/yyyy HH.MM",
-            modal: false,
-            footer: true,
+            format: "d/m/Y H.i",
         });
 
         $(".btn-add").click(function () {
@@ -353,6 +383,7 @@
             $("#TxtMinPlayers").val("");
             $("#TxtTeamNum").val("");
             $("#TxtNote").val("");
+            $("#ComboTeams").val([]).trigger('change');
             $("#TxtPercent1").val("");
             $("#TxtPercent2").val("");
             $("#TxtPercent3").val("");
@@ -444,6 +475,8 @@
                 $("#TxtMinPlayers").val(row.MinPlayers);
                 $("#TxtTeamNum").val(row.NumberOfTeams);
                 $("#TxtNote").val(row.Note);
+                selectedValues = row.TeamList;
+                $('#ComboTeams').val(selectedValues).trigger('change');
                 $("#TxtPercent1").val(row.Percent1);
                 $("#TxtPercent2").val(row.Percent2);
                 $("#TxtPercent3").val(row.Percent3);

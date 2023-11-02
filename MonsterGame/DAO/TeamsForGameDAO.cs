@@ -42,5 +42,13 @@ namespace MonsterGame.DAO
             GetContext().SubmitChanges();
             return true;
         }
+
+        public bool DeleteByGame(int gameID)
+        {
+            List<TeamsForGame> teams = GetContext().TeamsForGames.Where(t => t.GameID == gameID).ToList();
+            GetContext().TeamsForGames.DeleteAllOnSubmit(teams);
+            GetContext().SubmitChanges();
+            return true;
+        }
     }
 }

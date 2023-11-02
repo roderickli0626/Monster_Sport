@@ -9,6 +9,8 @@ using System.Web.UI.WebControls;
 using MonsterGame.Model;
 using MonsterGame.Common;
 using MonsterGame.Util;
+using MonsterGame.DAO;
+using PayPal.Api;
 
 namespace MonsterGame
 {
@@ -28,7 +30,13 @@ namespace MonsterGame
             {
                 //LoadGames();
                 LoadStatus();
+                LoadTeams();
             }
+        }
+        private void LoadTeams()
+        {
+            List<Team> teams = new TeamDAO().FindAll();
+            ControlUtil.DataBind(ComboTeams, teams, "Id", "Description");
         }
 
         private void LoadStatus()
@@ -69,8 +77,16 @@ namespace MonsterGame
             double percent5 = ParseUtil.TryParseDouble(TxtPercent5.Text) ?? 0;
             double percent6 = ParseUtil.TryParseDouble(TxtPercent6.Text) ?? 0;
 
+            string[] selectedValues = Request.Form.GetValues(ComboTeams.UniqueID);
+            List<int> teamList = new List<int>();
+            foreach (string itemID in selectedValues)
+            {
+                int selectedValue = ParseUtil.TryParseInt(itemID) ?? 0;
+                teamList.Add(selectedValue);
+            }
+
             int? gameID = ParseUtil.TryParseInt(HfGameID.Value);
-            bool success = gameController.SaveGame(gameID, title, sdate, edate, fee, tax, status, minPlayers, teamNum, note, percent1, percent2, percent3, percent4, percent5, percent6);
+            bool success = gameController.SaveGame(gameID, title, sdate, edate, fee, tax, status, minPlayers, teamNum, note, percent1, percent2, percent3, percent4, percent5, percent6, teamList);
             if (!success)
             {
                 ServerValidator.IsValid = false;
