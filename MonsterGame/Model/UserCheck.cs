@@ -6,7 +6,7 @@ using System.Linq;
 using System.Security.Policy;
 using System.Web;
 
-namespace MonsterSport.Model
+namespace MonsterGame.Model
 {
     public class UserCheck
     {

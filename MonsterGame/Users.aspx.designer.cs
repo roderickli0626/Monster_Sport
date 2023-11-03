@@ -11,7 +11,7 @@ namespace MonsterGame
 {
 
 
-    public partial class Master
+    public partial class Users
     {
 
         /// <summary>
@@ -24,13 +24,31 @@ namespace MonsterGame
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
 
         /// <summary>
-        /// HfMasterID control.
+        /// HfUserID control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField HfMasterID;
+        protected global::System.Web.UI.WebControls.HiddenField HfUserID;
+
+        /// <summary>
+        /// HfManage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField HfManage;
+
+        /// <summary>
+        /// BtnAddAgency control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlButton BtnAddAgency;
 
         /// <summary>
         /// TxtSearch control.

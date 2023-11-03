@@ -6,11 +6,10 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using MonsterSport.Controller;
 using System.Text.RegularExpressions;
 using MonsterGame.Util;
 
-namespace MonsterSport
+namespace MonsterGame
 {
     public partial class Admin : System.Web.UI.Page
     {

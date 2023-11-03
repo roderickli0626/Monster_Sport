@@ -5,7 +5,6 @@ using MonsterGame.Controller;
 using MonsterGame.DAO;
 using MonsterGame.Model;
 using MonsterGame.Models;
-using MonsterSport.Model;
 using PayPal.Api;
 using System;
 using System.Collections.Generic;
@@ -13,7 +12,7 @@ using System.Linq;
 using System.Web;
 using System.Web.ModelBinding;
 
-namespace MonsterSport.Controller
+namespace MonsterGame.Controller
 {
     public class UserController
     {
@@ -89,6 +88,34 @@ namespace MonsterSport.Controller
 
             return result;
         }
+        public SearchResult SearchUsers(int start, int length, string searchVal, int adminID, int role)
+        {
+            SearchResult result = new SearchResult();
+            IEnumerable<User> userList = userDao.FindAll().Where(u => u.Role == (int)Role.USER);
+            if (adminID != 0)
+            {
+                if (role == (int)Role.AGENCY) userList = userList.Where(m => m.ParentID == adminID).ToList();
+                else if (role == (int)Role.MASTER) userList = userList.Where(m => (m.User1?.ParentID ?? 0) == adminID).ToList();
+                else userList = userList.Where(m => (m.User1?.User1?.ParentID ?? 0) == adminID).ToList();
+            }
+            if (!string.IsNullOrEmpty(searchVal)) userList = userList.Where(x => x.Name.Contains(searchVal)).ToList();
+
+            result.TotalCount = userList.Count();
+            userList = userList.Skip(start).Take(length);
+
+            List<object> checks = new List<object>();
+            foreach (User user in userList)
+            {
+                UserCheck usercheck = new UserCheck(user);
+                usercheck.agency = user.User1?.Name ?? "Super Admin";
+                usercheck.master = user.User1?.User1?.Name ?? "Super Admin";
+                usercheck.admin = user.User1?.User1?.User1?.Name ?? "Super Admin";
+                checks.Add(usercheck);
+            }
+            result.ResultList = checks;
+
+            return result;
+        }
         public bool DeleteAdmin(int id)
         {
             User user = userDao.FindByID(id);
@@ -150,6 +177,36 @@ namespace MonsterSport.Controller
                     movement.Type = (int)MovementType.WITHDRAWAL;
                 }
                 movement.Note = "Agency " + agency.Name + " Deleted. Transfered agency's balance to master's balance.";
+                new MovementDAO().Insert(movement);
+            }
+            return userDao.Delete(id);
+        }
+        public bool DeleteUser(int id, User agency)
+        {
+            User user = userDao.FindByID(id);
+            if (user == null) return false;
+
+            if (agency != null)
+            {
+                if (agency.Role == (int)Role.ADMIN || agency.Role == (int)Role.MASTER) return false;
+                double amount = user.Balance ?? 0;
+                agency.Balance = (agency.Balance ?? 0) + amount;
+                bool success = userDao.Update(agency);
+                if (amount == 0) return success;
+                Movement movement = new Movement();
+                movement.UserID = agency.Id;
+                movement.Amount = user.Balance ?? 0;
+                movement.MoveDate = DateTime.Now;
+
+                if (amount > 0)
+                {
+                    movement.Type = (int)MovementType.DEPOSIT;
+                }
+                else
+                {
+                    movement.Type = (int)MovementType.WITHDRAWAL;
+                }
+                movement.Note = "User " + user.Name + " Deleted. Transfered user's balance to agency's balance.";
                 new MovementDAO().Insert(movement);
             }
             return userDao.Delete(id);
@@ -258,6 +315,41 @@ namespace MonsterSport.Controller
                 return userDao.Update(agency);
             }
         }
+        public bool SaveUser(int? userID, int adminID, string name, string surname, string nickname, string email, EncryptedPass pass, string mobile, string note)
+        {
+            User user = userDao.FindByID(userID ?? 0);
+            if (user == null)
+            {
+                User existUser = userDao.FindByEmail(email);
+                if (existUser != null) return false;
+                user = new User();
+                user.Name = name;
+                user.Surname = surname;
+                user.NickName = nickname;
+                user.Email = email;
+                user.Mobile = mobile;
+                user.Note = note;
+                user.Password = pass?.Encrypted ?? "";
+                user.Role = (int)Role.USER;
+                if (adminID != 0) user.ParentID = adminID;
+
+                return userDao.Insert(user);
+            }
+            else
+            {
+                user.Name = name;
+                user.Surname = surname;
+                user.NickName = nickname;
+                user.Email = email;
+                user.Mobile = mobile;
+                user.Note = note;
+                if (pass != null)
+                {
+                    user.Password = pass.Encrypted;
+                }
+                return userDao.Update(user);
+            }
+        }
         public bool UpdateBalance(int? adminID, double amount, string note)
         {
             User admin = userDao.FindByID(adminID ?? 0);
@@ -327,6 +419,36 @@ namespace MonsterSport.Controller
             Movement movement = new Movement();
             movement.Amount = amount;
             movement.UserID = agencyID;
+            movement.MoveDate = DateTime.Now;
+            movement.Note = note;
+            if (adminID != 0) movement.SenderID = adminID;
+
+            if (amount > 0)
+            {
+                movement.Type = (int)MovementType.DEPOSIT;
+            }
+            else
+            {
+                movement.Type = (int)MovementType.WITHDRAWAL;
+            }
+            return new MovementDAO().Insert(movement);
+        }
+        public bool UpdateUserBalance(int? userID, int adminID, double amount, string note)
+        {
+            User user = userDao.FindByID(userID ?? 0);
+            User admin = userDao.FindByID(adminID);
+            if (user == null) { return false; }
+            user.Balance = (user.Balance ?? 0) + amount;
+            if (admin != null)
+            {
+                admin.Balance = (admin.Balance ?? 0) - amount;
+                userDao.Update(admin);
+            }
+            bool success = userDao.Update(user);
+            if (amount == 0) return success;
+            Movement movement = new Movement();
+            movement.Amount = amount;
+            movement.UserID = userID;
             movement.MoveDate = DateTime.Now;
             movement.Note = note;
             if (adminID != 0) movement.SenderID = adminID;

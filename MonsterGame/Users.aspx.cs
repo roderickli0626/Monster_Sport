@@ -1,17 +1,17 @@
-﻿using MonsterGame.Controller;
-using MonsterGame;
+﻿using MonsterGame.Common;
+using MonsterGame.Controller;
+using MonsterGame.Util;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using MonsterGame.Util;
-using System.Text.RegularExpressions;
 
 namespace MonsterGame
 {
-    public partial class Master : System.Web.UI.Page
+    public partial class Users : System.Web.UI.Page
     {
         private User admin;
         private LoginController loginSystem = new LoginController();
@@ -19,10 +19,24 @@ namespace MonsterGame
         protected void Page_Load(object sender, EventArgs e)
         {
             admin = loginSystem.GetCurrentUserAccount();
-            if (!loginSystem.IsSuperAdminLoggedIn() && (admin == null || !loginSystem.IsAdminLoggedIn()))
+            if (!loginSystem.IsSuperAdminLoggedIn() && (admin == null || !loginSystem.IsAdminLoggedIn()) && (admin == null || !loginSystem.IsMasterLoggedIn()) && (admin == null || !loginSystem.IsAgencyLoggedIn()))
             {
                 Response.Redirect("~/Login.aspx");
                 return;
+            }
+
+            if (!IsPostBack)
+            {
+                if (loginSystem.IsSuperAdminLoggedIn() || admin.Role == (int)Role.AGENCY)
+                {
+                    HfManage.Value = "true";
+                }
+                else
+                {
+                    HfManage.Value = "false";
+                    BtnSave.Visible = false;
+                    BtnAddAgency.Visible = false;
+                }
             }
         }
 
@@ -54,9 +68,15 @@ namespace MonsterGame
             {
                 pass = new EncryptedPass() { Encrypted = new CryptoController().EncryptStringAES(password), UnEncrypted = password };
             }
-            int? masterID = ParseUtil.TryParseInt(HfMasterID.Value);
+            int? userID = ParseUtil.TryParseInt(HfUserID.Value);
 
-            bool success = userController.SaveMaster(masterID, admin?.Id ?? 0, name, surname, nickname, email, pass, mobile, note);
+            if (admin != null && (admin.Role == (int)Role.ADMIN || admin.Role == (int)Role.MASTER))
+            {
+                ServerValidator.IsValid = false;
+                return;
+            }
+
+            bool success = userController.SaveUser(userID, admin?.Id ?? 0, name, surname, nickname, email, pass, mobile, note);
             if (success)
             {
                 Page.Response.Redirect(Page.Request.Url.ToString(), true);
@@ -70,10 +90,15 @@ namespace MonsterGame
 
         protected void BtnSavePurchase_Click(object sender, EventArgs e)
         {
-            int? masterID = ParseUtil.TryParseInt(HfMasterID.Value);
+            int? userID = ParseUtil.TryParseInt(HfUserID.Value);
             double amount = ParseUtil.TryParseDouble(TxtBalance.Text) ?? 0;
             string balanceNote = TxtBalanceNote.Text;
-            bool success = userController.UpdateMasterBalance(masterID, admin?.Id ?? 0, amount, balanceNote);
+            if (admin != null && (admin.Role == (int)Role.ADMIN || admin.Role == (int)Role.MASTER))
+            {
+                ServerValidator1.IsValid = false;
+                return;
+            }
+            bool success = userController.UpdateUserBalance(userID, admin?.Id ?? 0, amount, balanceNote);
             if (success)
             {
                 Page.Response.Redirect(Page.Request.Url.ToString(), true);

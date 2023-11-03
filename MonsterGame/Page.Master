@@ -47,7 +47,7 @@
                         <li runat="server" id="liAdmin"><a href="Admin.aspx">Admins</a></li>
                         <li runat="server" id="liMaster"><a href="Master.aspx">Masters</a></li>
                         <li runat="server" id="liAgency"><a href="Agency.aspx">Agencies</a></li>
-                        <li runat="server" id="liUser"><a href="User.aspx">Users</a></li>
+                        <li runat="server" id="liUser"><a href="Users.aspx">Users</a></li>
                         <li runat="server" id="liMovement"><a href="Movement.aspx">Movements</a></li>
                         <li><a href="Contact.aspx">Contact</a></li>
                         <li runat="server" id="liLogin"><a href="Login.aspx">Log In</a></li>

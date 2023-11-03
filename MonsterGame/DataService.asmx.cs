@@ -1,8 +1,7 @@
 ﻿using MonsterGame.Controller;
 using MonsterGame.DAO;
 using MonsterGame.Models;
-using MonsterSport;
-using MonsterSport.Controller;
+using MonsterGame;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -155,7 +154,38 @@ namespace MonsterGame
 
             ResponseProc(success, "");
         }
+        [WebMethod(EnableSession = true)]
+        [ScriptMethod(UseHttpGet = true, ResponseFormat = ResponseFormat.Json)]
+        public void FindUsers(int draw, int start, int length, string searchVal)
+        {
+            User admin = loginSystem.GetCurrentUserAccount();
+            if (!loginSystem.IsSuperAdminLoggedIn() && (admin == null || !loginSystem.IsAdminLoggedIn()) && (admin == null || !loginSystem.IsMasterLoggedIn()) && (admin == null || !loginSystem.IsAgencyLoggedIn())) return;
 
+            UserController userController = new UserController();
+            SearchResult searchResult = userController.SearchUsers(start, length, searchVal, admin?.Id ?? 0, admin?.Role ?? 0);
+
+            JSDataTable result = new JSDataTable();
+            result.data = (IEnumerable<object>)searchResult.ResultList;
+            result.draw = draw;
+            result.recordsTotal = searchResult.TotalCount;
+            result.recordsFiltered = searchResult.TotalCount;
+
+            ResponseJson(result);
+        }
+
+        [WebMethod(EnableSession = true)]
+        [ScriptMethod(UseHttpGet = true, ResponseFormat = ResponseFormat.Json)]
+        public void DeleteUser(int id)
+        {
+            //Is Logged in?
+            User admin = loginSystem.GetCurrentUserAccount();
+            if (!loginSystem.IsSuperAdminLoggedIn() && (admin == null || !loginSystem.IsAgencyLoggedIn())) return;
+
+            UserController userController = new UserController();
+            bool success = userController.DeleteUser(id, admin);
+
+            ResponseProc(success, "");
+        }
         protected void ResponseJson(Object result)
         {
             HttpResponse Response = Context.Response;

@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Page.Master" AutoEventWireup="true" CodeBehind="Agency.aspx.cs" Inherits="MonsterSport.Agency" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Page.Master" AutoEventWireup="true" CodeBehind="Agency.aspx.cs" Inherits="MonsterGame.Agency" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link rel="stylesheet" href="Content/CSS/datatables.css" />
     <link rel="stylesheet" href="Content/CSS/jquery.datetimepicker.min.css" />
@@ -277,7 +277,7 @@
                 var row = datatable.fnGetData($(this).closest('tr'));
 
                 $("#AgencyModal").modal('show');
-                $(".modal-title").text("UPDATE AGENCY");
+                $(".modal-title").text("VIEW AGENCY");
                 $("#HfAgencyID").val(row.Id);
                 $("#ValSummary").addClass("d-none");
                 $("#TxtName").val(row.Name);

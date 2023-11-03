@@ -1,6 +1,5 @@
 ﻿using MonsterGame.Controller;
 using MonsterGame;
-using MonsterSport.Controller;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +10,7 @@ using MonsterGame.Common;
 using MonsterGame.Util;
 using System.Text.RegularExpressions;
 
-namespace MonsterSport
+namespace MonsterGame
 {
     public partial class Agency : System.Web.UI.Page
     {

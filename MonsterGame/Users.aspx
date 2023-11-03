@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Page.Master" AutoEventWireup="true" CodeBehind="Admin.aspx.cs" Inherits="MonsterGame.Admin" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Page.Master" AutoEventWireup="true" CodeBehind="Users.aspx.cs" Inherits="MonsterGame.Users" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link rel="stylesheet" href="Content/CSS/datatables.css" />
     <link rel="stylesheet" href="Content/CSS/jquery.datetimepicker.min.css" />
@@ -8,10 +8,10 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-7 col-xl-6 text-center">
-                    <h2 class="title text-white">Admins</h2>
+                    <h2 class="title text-white">Users</h2>
                     <ul class="breadcrumbs d-flex flex-wrap align-items-center justify-content-center">
                         <li><a href="Dashboard.aspx">Dashboard</a></li>
-                        <li>Admins</li>
+                        <li>Users</li>
                     </ul>
                 </div>
             </div>
@@ -20,17 +20,18 @@
     <section class="game-section padding-top padding-bottom bg_img" style="background: url(Content/Images/gamebg.jpeg);">
         <div class="container">
             <form runat="server" id="form1" autocomplete="off">
-                <asp:HiddenField ID="HfAdminID" runat="server" ClientIDMode="Static" />
+                <asp:HiddenField ID="HfUserID" runat="server" ClientIDMode="Static" />
+                <asp:HiddenField ID="HfManage" runat="server" ClientIDMode="Static" />
                 <div class="row justify-content-center mb-5">
                     <div class="col-lg-4 col-xl-4 me-auto">
-                        <button class="cmn--btn active radius-1 w-100 btn-add">ADD ADMIN</button>
+                        <button class="cmn--btn active radius-1 w-100 btn-add" runat="server" id="BtnAddAgency">ADD USER</button>
                     </div>
                     <div class="col-lg-4 col-xl-4 pt-1 ms-auto">
                         <asp:TextBox runat="server" ID="TxtSearch" CssClass="form--control form-control" ClientIDMode="Static" placeholder="SEARCH"></asp:TextBox>
                     </div>
                 </div>
                 <div class="row gy-4 justify-content-center">
-                    <table class="table text-center" id="admin-table">
+                    <table class="table text-center" id="user-table">
                         <thead>
                             <tr>
                                 <th>Name</th>
@@ -38,6 +39,9 @@
                                 <th>Email</th>
                                 <th>Mobile</th>
                                 <th>Balance</th>
+                                <th>Admin</th>
+                                <th>Master</th>
+                                <th>Agency</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -45,11 +49,11 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="modal custom--modal fade show" id="AdminModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" data-bs-backdrop="static" aria-modal="true">
+                <div class="modal custom--modal fade show" id="UserModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" data-bs-backdrop="static" aria-modal="true">
                     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                         <div class="modal-content section-bg border-0">
                             <div class="modal-header modal--header bg--base">
-                                <h4 class="modal-title text-dark" id="modalTitle">Admin</h4>
+                                <h4 class="modal-title text-dark" id="modalTitle">User</h4>
                             </div>
                             <div class="modal-body modal--body">
                                 <asp:ScriptManager ID="ScriptManager" runat="server"></asp:ScriptManager>
@@ -152,12 +156,12 @@
                                         </div>
                                     </ContentTemplate>
                                     <Triggers>
-                                        <asp:AsyncPostBackTrigger ControlID="BtnSave1" />
+                                        <asp:AsyncPostBackTrigger ControlID="BtnSavePurchase" />
                                     </Triggers>
                                 </asp:UpdatePanel>
                             </div>
                             <div class="modal-footer modal--footer">
-                                <asp:Button runat="server" ID="BtnSave1" CssClass="btn btn--warning btn--md" Text="Deposita/Preleva" CausesValidation="false" OnClick="BtnSave1_Click"/>
+                                <asp:Button runat="server" ID="BtnSavePurchase" CssClass="btn btn--warning btn--md" Text="Deposita/Preleva" CausesValidation="false" OnClick="BtnSavePurchase_Click"/>
                                 <button type="button" class="btn btn--danger btn--md" data-bs-dismiss="modal">Close</button>
                             </div>
                         </div>
@@ -172,9 +176,9 @@
     <script src="Scripts/JS/datatables.js"></script>
     <script>
         $(".btn-add").click(function () {
-            $("#AdminModal").modal('show');
-            $(".modal-title").text("ADD ADMIN");
-            $("#HfAdminID").val("");
+            $("#UserModal").modal('show');
+            $(".modal-title").text("ADD USER");
+            $("#HfUserID").val("");
             $("#ValSummary").addClass("d-none");
             $("#TxtName").val("");
             $("#TxtSurname").val("");
@@ -189,9 +193,9 @@
     </script>
     <script>
         $(function () {
-            var datatable = $('#admin-table').dataTable({
+            var datatable = $('#user-table').dataTable({
                 "serverSide": true,
-                "ajax": 'DataService.asmx/FindAdmins',
+                "ajax": 'DataService.asmx/FindUsers',
                 "dom": '<"table-responsive"t>pr',
                 "autoWidth": false,
                 "pageLength": 20,
@@ -208,14 +212,28 @@
                 }, {
                     "data": "Balance",
                 }, {
+                    "data": "admin",
+                }, {
+                    "data": "master",
+                }, {
+                    "data": "agency",
+                }, {
                     "width": "25%",
                     "data": null,
                     "render": function (data, type, row, meta) {
-                        return '<div class="justify-content-center">' +
-                            '<button class="cmn--btn active btn--md radius-1 btn--success btn-edit float-start">Edit</button>' +
-                            '<button class="cmn--btn active btn--md radius-1 btn--danger btn-delete float-end">Delete</button>' +
-                            '<button class="cmn--btn active btn--md radius-1 btn-purchase w-100 mt-1">Purchase</button>' +
-                            '</div > ';
+                        var manage = $("#HfManage").val();
+                        if (manage == "true") {
+                            return '<div class="justify-content-center">' +
+                                '<button class="cmn--btn active btn--md radius-1 btn--success btn-edit float-start">Edit</button>' +
+                                '<button class="cmn--btn active btn--md radius-1 btn--danger btn-delete float-end">Delete</button>' +
+                                '<button class="cmn--btn active btn--md radius-1 btn-purchase w-100 mt-1">Purchase</button>' +
+                                '</div > ';
+                        }
+                        else {
+                            return '<div class="justify-content-center">' +
+                                '<button class="cmn--btn active btn--md radius-1 btn-view">View</button></div>';
+                        }
+                        
                     }
                 }],
 
@@ -225,7 +243,7 @@
 
                 "rowCallback": function (row, data, index) {
                     $(row).find('td').css({ 'vertical-align': 'middle' });
-                    $("#admin-table_wrapper").css('width', '100%');
+                    $("#user-table_wrapper").css('width', '100%');
                 },
 
                 "drawCallback": function () {
@@ -242,9 +260,28 @@
 
                 var row = datatable.fnGetData($(this).closest('tr'));
 
-                $("#AdminModal").modal('show');
-                $(".modal-title").text("UPDATE ADMIN");
-                $("#HfAdminID").val(row.Id);
+                $("#UserModal").modal('show');
+                $(".modal-title").text("UPDATE USER");
+                $("#HfUserID").val(row.Id);
+                $("#ValSummary").addClass("d-none");
+                $("#TxtName").val(row.Name);
+                $("#TxtSurname").val(row.Surname);
+                $("#TxtNickName").val(row.NickName);
+                $("#TxtMobile").val(row.Mobile);
+                $("#TxtEmail").val(row.Email);
+                $("#TxtNote").val(row.Note);
+                $("#TxtPassword").val("");
+                $("#TxtPasswordRepeat").val("");
+            });
+
+            datatable.on('click', '.btn-view', function (e) {
+                e.preventDefault();
+
+                var row = datatable.fnGetData($(this).closest('tr'));
+
+                $("#UserModal").modal('show');
+                $(".modal-title").text("VIEW USER");
+                $("#HfUserID").val(row.Id);
                 $("#ValSummary").addClass("d-none");
                 $("#TxtName").val(row.Name);
                 $("#TxtSurname").val(row.Surname);
@@ -263,7 +300,7 @@
 
                 $("#PurchaseModal").modal('show');
                 $(".modal-title").text("PURCHASE");
-                $("#HfAdminID").val(row.Id);
+                $("#HfUserID").val(row.Id);
                 $("#TxtCurrentBalance").val(row.Balance);
                 $("#TxtBalance").val("");
                 $("#TxtBalanceNote").val("");
@@ -280,7 +317,7 @@
 
                 $.ajax({
                     type: "POST",
-                    url: 'DataService.asmx/DeleteAdmin',
+                    url: 'DataService.asmx/DeleteUser',
                     data: {
                         id: row.Id
                     },
