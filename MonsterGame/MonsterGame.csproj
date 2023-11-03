@@ -176,6 +176,7 @@
     <Content Include="Global.asax" />
     <Content Include="Login.aspx" />
     <Content Include="Master.aspx" />
+    <Content Include="Movements.aspx" />
     <Content Include="Policy.aspx" />
     <Content Include="Register.aspx" />
     <Content Include="ResetPassword.aspx" />
@@ -329,6 +330,7 @@
     <Compile Include="Controller\CryptoController.cs" />
     <Compile Include="Controller\GameController.cs" />
     <Compile Include="Controller\LoginController.cs" />
+    <Compile Include="Controller\MovementController.cs" />
     <Compile Include="Controller\SessionController.cs" />
     <Compile Include="Controller\UserController.cs" />
     <Compile Include="DAO\BasicDAO.cs" />
@@ -391,9 +393,17 @@
     </Compile>
     <Compile Include="Model\GameCheck.cs" />
     <Compile Include="Model\JSDataTable.cs" />
+    <Compile Include="Model\MovementCheck.cs" />
     <Compile Include="Model\ProcResult.cs" />
     <Compile Include="Model\SearchResult.cs" />
     <Compile Include="Model\UserCheck.cs" />
+    <Compile Include="Movements.aspx.cs">
+      <DependentUpon>Movements.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Movements.aspx.designer.cs">
+      <DependentUpon>Movements.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Page.Master.cs">
       <DependentUpon>Page.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

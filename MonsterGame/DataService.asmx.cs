@@ -12,6 +12,8 @@ using System.Web.Script.Serialization;
 using System.Web.Script.Services;
 using System.Web.Services;
 using System.Web.UI;
+using MonsterSport.Controller;
+using System.Globalization;
 
 namespace MonsterGame
 {
@@ -183,6 +185,45 @@ namespace MonsterGame
 
             UserController userController = new UserController();
             bool success = userController.DeleteUser(id, admin);
+
+            ResponseProc(success, "");
+        }
+        [WebMethod(EnableSession = true)]
+        [ScriptMethod(UseHttpGet = true, ResponseFormat = ResponseFormat.Json)]
+        public void FindMovements(int draw, int start, int length, string searchReceiver, string searchSender, string searchFrom, string searchTo)
+        {
+            if (!loginSystem.IsSuperAdminLoggedIn()) return;
+
+            DateTime? from = null;
+            DateTime? to = null;
+
+            if (!string.IsNullOrEmpty(searchFrom))
+                from = DateTime.ParseExact(searchFrom, "dd/MM/yyyy HH.mm", CultureInfo.InvariantCulture);
+
+            if (!string.IsNullOrEmpty(searchTo))
+                to = DateTime.ParseExact(searchTo, "dd/MM/yyyy HH.mm", CultureInfo.InvariantCulture);
+
+            MovementController movementController = new MovementController();
+            SearchResult searchResult = movementController.Search(start, length, searchReceiver, searchSender, from, to);
+
+            JSDataTable result = new JSDataTable();
+            result.data = (IEnumerable<object>)searchResult.ResultList;
+            result.draw = draw;
+            result.recordsTotal = searchResult.TotalCount;
+            result.recordsFiltered = searchResult.TotalCount;
+
+            ResponseJson(result);
+        }
+
+        [WebMethod(EnableSession = true)]
+        [ScriptMethod(UseHttpGet = true, ResponseFormat = ResponseFormat.Json)]
+        public void DeleteMovement(int id)
+        {
+            //Is Logged in?
+            if (!loginSystem.IsSuperAdminLoggedIn()) return;
+
+            MovementController movementController = new MovementController();
+            bool success = movementController.DeleteMovement(id);
 
             ResponseProc(success, "");
         }
