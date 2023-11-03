@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Page.Master" AutoEventWireup="true" CodeBehind="Admin.aspx.cs" Inherits="MonsterSport.Admin" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Page.Master" AutoEventWireup="true" CodeBehind="Master.aspx.cs" Inherits="MonsterSport.Master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link rel="stylesheet" href="Content/CSS/datatables.css" />
     <link rel="stylesheet" href="Content/CSS/jquery.datetimepicker.min.css" />
@@ -8,10 +8,10 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-7 col-xl-6 text-center">
-                    <h2 class="title text-white">Admins</h2>
+                    <h2 class="title text-white">Masters</h2>
                     <ul class="breadcrumbs d-flex flex-wrap align-items-center justify-content-center">
                         <li><a href="Dashboard.aspx">Dashboard</a></li>
-                        <li>Admins</li>
+                        <li>Masters</li>
                     </ul>
                 </div>
             </div>
@@ -20,17 +20,17 @@
     <section class="game-section padding-top padding-bottom bg_img" style="background: url(Content/Images/gamebg.jpeg);">
         <div class="container">
             <form runat="server" id="form1" autocomplete="off">
-                <asp:HiddenField ID="HfAdminID" runat="server" ClientIDMode="Static" />
+                <asp:HiddenField ID="HfMasterID" runat="server" ClientIDMode="Static" />
                 <div class="row justify-content-center mb-5">
                     <div class="col-lg-4 col-xl-4 me-auto">
-                        <button class="cmn--btn active radius-1 w-100 btn-add">ADD ADMIN</button>
+                        <button class="cmn--btn active radius-1 w-100 btn-add">ADD MASTER</button>
                     </div>
                     <div class="col-lg-4 col-xl-4 pt-1 ms-auto">
                         <asp:TextBox runat="server" ID="TxtSearch" CssClass="form--control form-control" ClientIDMode="Static" placeholder="SEARCH"></asp:TextBox>
                     </div>
                 </div>
                 <div class="row gy-4 justify-content-center">
-                    <table class="table text-center" id="admin-table">
+                    <table class="table text-center" id="master-table">
                         <thead>
                             <tr>
                                 <th>Name</th>
@@ -38,6 +38,7 @@
                                 <th>Email</th>
                                 <th>Mobile</th>
                                 <th>Balance</th>
+                                <th>Admin</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -45,11 +46,11 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="modal custom--modal fade show" id="AdminModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" data-bs-backdrop="static" aria-modal="true">
+                <div class="modal custom--modal fade show" id="MasterModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" data-bs-backdrop="static" aria-modal="true">
                     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                         <div class="modal-content section-bg border-0">
                             <div class="modal-header modal--header bg--base">
-                                <h4 class="modal-title text-dark" id="modalTitle">Admin</h4>
+                                <h4 class="modal-title text-dark" id="modalTitle">Master</h4>
                             </div>
                             <div class="modal-body modal--body">
                                 <asp:ScriptManager ID="ScriptManager" runat="server"></asp:ScriptManager>
@@ -152,12 +153,12 @@
                                         </div>
                                     </ContentTemplate>
                                     <Triggers>
-                                        <asp:AsyncPostBackTrigger ControlID="BtnSave1" />
+                                        <asp:AsyncPostBackTrigger ControlID="BtnSavePurchase" />
                                     </Triggers>
                                 </asp:UpdatePanel>
                             </div>
                             <div class="modal-footer modal--footer">
-                                <asp:Button runat="server" ID="BtnSave1" CssClass="btn btn--warning btn--md" Text="Deposita/Preleva" CausesValidation="false" OnClick="BtnSave1_Click"/>
+                                <asp:Button runat="server" ID="BtnSavePurchase" CssClass="btn btn--warning btn--md" Text="Deposita/Preleva" CausesValidation="false" OnClick="BtnSavePurchase_Click"/>
                                 <button type="button" class="btn btn--danger btn--md" data-bs-dismiss="modal">Close</button>
                             </div>
                         </div>
@@ -172,9 +173,9 @@
     <script src="Scripts/JS/datatables.js"></script>
     <script>
         $(".btn-add").click(function () {
-            $("#AdminModal").modal('show');
-            $(".modal-title").text("ADD ADMIN");
-            $("#HfAdminID").val("");
+            $("#MasterModal").modal('show');
+            $(".modal-title").text("ADD MASTER");
+            $("#HfMasterID").val("");
             $("#ValSummary").addClass("d-none");
             $("#TxtName").val("");
             $("#TxtSurname").val("");
@@ -189,9 +190,9 @@
     </script>
     <script>
         $(function () {
-            var datatable = $('#admin-table').dataTable({
+            var datatable = $('#master-table').dataTable({
                 "serverSide": true,
-                "ajax": 'DataService.asmx/FindAdmins',
+                "ajax": 'DataService.asmx/FindMasters',
                 "dom": '<"table-responsive"t>pr',
                 "autoWidth": false,
                 "pageLength": 20,
@@ -207,6 +208,8 @@
                     "data": "Mobile",
                 }, {
                     "data": "Balance",
+                }, {
+                    "data": "admin",
                 }, {
                     "width": "25%",
                     "data": null,
@@ -225,7 +228,7 @@
 
                 "rowCallback": function (row, data, index) {
                     $(row).find('td').css({ 'vertical-align': 'middle' });
-                    $("#admin-table_wrapper").css('width', '100%');
+                    $("#master-table_wrapper").css('width', '100%');
                 },
 
                 "drawCallback": function () {
@@ -242,9 +245,9 @@
 
                 var row = datatable.fnGetData($(this).closest('tr'));
 
-                $("#AdminModal").modal('show');
-                $(".modal-title").text("UPDATE ADMIN");
-                $("#HfAdminID").val(row.Id);
+                $("#MasterModal").modal('show');
+                $(".modal-title").text("UPDATE MASTER");
+                $("#HfMasterID").val(row.Id);
                 $("#ValSummary").addClass("d-none");
                 $("#TxtName").val(row.Name);
                 $("#TxtSurname").val(row.Surname);
@@ -263,7 +266,7 @@
 
                 $("#PurchaseModal").modal('show');
                 $(".modal-title").text("PURCHASE");
-                $("#HfAdminID").val(row.Id);
+                $("#HfMasterID").val(row.Id);
                 $("#TxtCurrentBalance").val(row.Balance);
                 $("#TxtBalance").val("");
                 $("#TxtBalanceNote").val("");
@@ -280,7 +283,7 @@
 
                 $.ajax({
                     type: "POST",
-                    url: 'DataService.asmx/DeleteAdmin',
+                    url: 'DataService.asmx/DeleteMaster',
                     data: {
                         id: row.Id
                     },

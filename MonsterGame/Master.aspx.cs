@@ -1,25 +1,26 @@
 ﻿using MonsterGame.Controller;
 using MonsterGame;
+using MonsterSport.Controller;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using MonsterSport.Controller;
-using System.Text.RegularExpressions;
 using MonsterGame.Util;
+using System.Text.RegularExpressions;
 
 namespace MonsterSport
 {
-    public partial class Admin : System.Web.UI.Page
+    public partial class Master : System.Web.UI.Page
     {
-        private User user;
+        private User admin;
         private LoginController loginSystem = new LoginController();
         private UserController userController = new UserController();
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!loginSystem.IsSuperAdminLoggedIn())
+            admin = loginSystem.GetCurrentUserAccount();
+            if (!loginSystem.IsSuperAdminLoggedIn() && (admin == null || !loginSystem.IsAdminLoggedIn()))
             {
                 Response.Redirect("~/Login.aspx");
                 return;
@@ -54,9 +55,9 @@ namespace MonsterSport
             {
                 pass = new EncryptedPass() { Encrypted = new CryptoController().EncryptStringAES(password), UnEncrypted = password };
             }
-            int? adminID = ParseUtil.TryParseInt(HfAdminID.Value);
+            int? masterID = ParseUtil.TryParseInt(HfMasterID.Value);
 
-            bool success = userController.SaveAdmin(adminID, name, surname, nickname, email, pass, mobile, note);
+            bool success = userController.SaveMaster(masterID, admin?.Id ?? 0, name, surname, nickname, email, pass, mobile, note);
             if (success)
             {
                 Page.Response.Redirect(Page.Request.Url.ToString(), true);
@@ -68,12 +69,12 @@ namespace MonsterSport
             }
         }
 
-        protected void BtnSave1_Click(object sender, EventArgs e)
+        protected void BtnSavePurchase_Click(object sender, EventArgs e)
         {
-            int? adminID = ParseUtil.TryParseInt(HfAdminID.Value);
+            int? masterID = ParseUtil.TryParseInt(HfMasterID.Value);
             double amount = ParseUtil.TryParseDouble(TxtBalance.Text) ?? 0;
             string balanceNote = TxtBalanceNote.Text;
-            bool success = userController.UpdateBalance(adminID, amount, balanceNote);
+            bool success = userController.UpdateMasterBalance(masterID, admin?.Id ?? 0, amount, balanceNote);
             if (success)
             {
                 Page.Response.Redirect(Page.Request.Url.ToString(), true);

@@ -1,6 +1,7 @@
 ﻿using MonsterGame.Controller;
 using MonsterGame.DAO;
 using MonsterGame.Models;
+using MonsterSport;
 using MonsterSport.Controller;
 using System;
 using System.Collections.Generic;
@@ -87,6 +88,38 @@ namespace MonsterGame
 
             UserController userController = new UserController();
             bool success = userController.DeleteAdmin(id);
+
+            ResponseProc(success, "");
+        }
+        [WebMethod(EnableSession = true)]
+        [ScriptMethod(UseHttpGet = true, ResponseFormat = ResponseFormat.Json)]
+        public void FindMasters(int draw, int start, int length, string searchVal)
+        {
+            User admin = loginSystem.GetCurrentUserAccount();
+            if (!loginSystem.IsSuperAdminLoggedIn() && (admin == null || !loginSystem.IsAdminLoggedIn())) return;
+
+            UserController userController = new UserController();
+            SearchResult searchResult = userController.SearchMaster(start, length, searchVal, admin?.Id ?? 0);
+
+            JSDataTable result = new JSDataTable();
+            result.data = (IEnumerable<object>)searchResult.ResultList;
+            result.draw = draw;
+            result.recordsTotal = searchResult.TotalCount;
+            result.recordsFiltered = searchResult.TotalCount;
+
+            ResponseJson(result);
+        }
+
+        [WebMethod(EnableSession = true)]
+        [ScriptMethod(UseHttpGet = true, ResponseFormat = ResponseFormat.Json)]
+        public void DeleteMaster(int id)
+        {
+            //Is Logged in?
+            User admin = loginSystem.GetCurrentUserAccount();
+            if (!loginSystem.IsSuperAdminLoggedIn() && (admin == null || !loginSystem.IsAdminLoggedIn())) return;
+
+            UserController userController = new UserController();
+            bool success = userController.DeleteMaster(id, admin);
 
             ResponseProc(success, "");
         }

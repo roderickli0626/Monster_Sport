@@ -67,5 +67,17 @@ namespace MonsterSport.Model
         {
             get; set;
         }
+        public string admin
+        {
+            get; set;
+        }
+        public string master
+        {
+            get; set;
+        }
+        public string agency
+        {
+            get; set;
+        }
     }
 }

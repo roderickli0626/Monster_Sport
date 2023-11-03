@@ -11,7 +11,7 @@ namespace MonsterSport
 {
 
 
-    public partial class Admin
+    public partial class Master
     {
 
         /// <summary>
@@ -24,13 +24,13 @@ namespace MonsterSport
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
 
         /// <summary>
-        /// HfAdminID control.
+        /// HfMasterID control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField HfAdminID;
+        protected global::System.Web.UI.WebControls.HiddenField HfMasterID;
 
         /// <summary>
         /// TxtSearch control.
@@ -240,12 +240,12 @@ namespace MonsterSport
         protected global::System.Web.UI.WebControls.TextBox TxtBalanceNote;
 
         /// <summary>
-        /// BtnSave1 control.
+        /// BtnSavePurchase control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button BtnSave1;
+        protected global::System.Web.UI.WebControls.Button BtnSavePurchase;
     }
 }
