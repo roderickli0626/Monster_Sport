@@ -92,7 +92,8 @@
                 }, {
                     "data": "Type",
                     "render": function (data, type, row, meta) {
-                        return "";
+                        if (data == 1) return "<p class='text-white bg-success'>DEPOSIT</p>";
+                        else return "<p class='text-white bg-danger'>WITHDRAWAL</p>";
                     }
                 }, {
                     "width": "20%",
