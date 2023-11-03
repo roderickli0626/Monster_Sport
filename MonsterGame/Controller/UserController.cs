@@ -63,6 +63,32 @@ namespace MonsterSport.Controller
 
             return result;
         }
+        public SearchResult SearchAgencies(int start, int length, string searchVal, int adminID, int role)
+        {
+            SearchResult result = new SearchResult();
+            IEnumerable<User> agencyList = userDao.FindAll().Where(u => u.Role == (int)Role.AGENCY);
+            if (adminID != 0)
+            {
+                if (role == (int)Role.MASTER) agencyList = agencyList.Where(m => m.ParentID == adminID).ToList();
+                else agencyList = agencyList.Where(m => (m.User1?.ParentID ?? 0) == adminID).ToList();
+            }
+            if (!string.IsNullOrEmpty(searchVal)) agencyList = agencyList.Where(x => x.Name.Contains(searchVal)).ToList();
+
+            result.TotalCount = agencyList.Count();
+            agencyList = agencyList.Skip(start).Take(length);
+
+            List<object> checks = new List<object>();
+            foreach (User user in agencyList)
+            {
+                UserCheck usercheck = new UserCheck(user);
+                usercheck.master = user.User1?.Name ?? "Super Admin";
+                usercheck.admin = user.User1?.User1?.Name ?? "Super Admin";
+                checks.Add(usercheck);
+            }
+            result.ResultList = checks;
+
+            return result;
+        }
         public bool DeleteAdmin(int id)
         {
             User user = userDao.FindByID(id);
@@ -94,6 +120,36 @@ namespace MonsterSport.Controller
                     movement.Type = (int)MovementType.WITHDRAWAL;
                 }
                 movement.Note = "Master " + master.Name + " Deleted. Transfered master's balance to admin's balance.";
+                new MovementDAO().Insert(movement);
+            }
+            return userDao.Delete(id);
+        }
+        public bool DeleteAgency(int id, User master)
+        {
+            User agency = userDao.FindByID(id);
+            if (agency == null) return false;
+            
+            if (master != null)
+            {
+                if (master.Role == (int)Role.ADMIN) return false;
+                double amount = agency.Balance ?? 0;
+                master.Balance = (master.Balance ?? 0) + amount;
+                bool success = userDao.Update(master);
+                if (amount == 0) return success;
+                Movement movement = new Movement();
+                movement.UserID = master.Id;
+                movement.Amount = agency.Balance ?? 0;
+                movement.MoveDate = DateTime.Now;
+
+                if (amount > 0)
+                {
+                    movement.Type = (int)MovementType.DEPOSIT;
+                }
+                else
+                {
+                    movement.Type = (int)MovementType.WITHDRAWAL;
+                }
+                movement.Note = "Agency " + agency.Name + " Deleted. Transfered agency's balance to master's balance.";
                 new MovementDAO().Insert(movement);
             }
             return userDao.Delete(id);
@@ -167,6 +223,41 @@ namespace MonsterSport.Controller
                 return userDao.Update(master);
             }
         }
+        public bool SaveAgency(int? agencyID, int adminID, string name, string surname, string nickname, string email, EncryptedPass pass, string mobile, string note)
+        {
+            User agency = userDao.FindByID(agencyID ?? 0);
+            if (agency == null)
+            {
+                User existAgency = userDao.FindByEmail(email);
+                if (existAgency != null) return false;
+                agency = new User();
+                agency.Name = name;
+                agency.Surname = surname;
+                agency.NickName = nickname;
+                agency.Email = email;
+                agency.Mobile = mobile;
+                agency.Note = note;
+                agency.Password = pass?.Encrypted ?? "";
+                agency.Role = (int)Role.AGENCY;
+                if (adminID != 0) agency.ParentID = adminID;
+
+                return userDao.Insert(agency);
+            }
+            else
+            {
+                agency.Name = name;
+                agency.Surname = surname;
+                agency.NickName = nickname;
+                agency.Email = email;
+                agency.Mobile = mobile;
+                agency.Note = note;
+                if (pass != null)
+                {
+                    agency.Password = pass.Encrypted;
+                }
+                return userDao.Update(agency);
+            }
+        }
         public bool UpdateBalance(int? adminID, double amount, string note)
         {
             User admin = userDao.FindByID(adminID ?? 0);
@@ -206,6 +297,36 @@ namespace MonsterSport.Controller
             Movement movement = new Movement();
             movement.Amount = amount;
             movement.UserID = masterID;
+            movement.MoveDate = DateTime.Now;
+            movement.Note = note;
+            if (adminID != 0) movement.SenderID = adminID;
+
+            if (amount > 0)
+            {
+                movement.Type = (int)MovementType.DEPOSIT;
+            }
+            else
+            {
+                movement.Type = (int)MovementType.WITHDRAWAL;
+            }
+            return new MovementDAO().Insert(movement);
+        }
+        public bool UpdateAgencyBalance(int? agencyID, int adminID, double amount, string note)
+        {
+            User agency = userDao.FindByID(agencyID ?? 0);
+            User admin = userDao.FindByID(adminID);
+            if (agency == null) { return false; }
+            agency.Balance = (agency.Balance ?? 0) + amount;
+            if (admin != null)
+            {
+                admin.Balance = (admin.Balance ?? 0) - amount;
+                userDao.Update(admin);
+            }
+            bool success = userDao.Update(agency);
+            if (amount == 0) return success;
+            Movement movement = new Movement();
+            movement.Amount = amount;
+            movement.UserID = agencyID;
             movement.MoveDate = DateTime.Now;
             movement.Note = note;
             if (adminID != 0) movement.SenderID = adminID;
