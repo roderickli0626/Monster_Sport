@@ -66,5 +66,9 @@ namespace MonsterSport.Model
         {
             get; set;
         }
+        public string Transfer
+        {
+            get; set;
+        }
     }
 }

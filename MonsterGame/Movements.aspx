@@ -43,6 +43,7 @@
                                 <th>Sender</th>
                                 <th>Move Date</th>
                                 <th>Amount</th>
+                                <th>Note</th>
                                 <th>Type</th>
                                 <th>Action</th>
                             </tr>
@@ -90,13 +91,20 @@
                 }, {
                     "data": "Amount",
                 }, {
+                    "width": "25%",
+                    "data": "Note",
+                    "render": function (data, type, row, meta) {
+                        var note = (data != null && data.length > 20) ? data.substring(0, 20) : data;
+                        return '<p class="text-white" title="' + row.Note + '">' + (note == null ? "" : note) + '</p>';
+                    }
+                }, {
                     "data": "Type",
                     "render": function (data, type, row, meta) {
                         if (data == 1) return "<p class='text-white bg-success'>DEPOSIT</p>";
                         else return "<p class='text-white bg-danger'>WITHDRAWAL</p>";
                     }
                 }, {
-                    "width": "20%",
+                    "width": "15%",
                     "data": null,
                     "render": function (data, type, row, meta) {
                         return '<div class="justify-content-center">' +

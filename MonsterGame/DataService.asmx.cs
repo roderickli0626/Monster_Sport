@@ -217,6 +217,34 @@ namespace MonsterGame
 
         [WebMethod(EnableSession = true)]
         [ScriptMethod(UseHttpGet = true, ResponseFormat = ResponseFormat.Json)]
+        public void FindUserMovements(int draw, int start, int length, string searchTransfer, string searchFrom, string searchTo)
+        {
+            User user = loginSystem.GetCurrentUserAccount();
+            if (user == null) return;
+
+            DateTime? from = null;
+            DateTime? to = null;
+
+            if (!string.IsNullOrEmpty(searchFrom))
+                from = DateTime.ParseExact(searchFrom, "dd/MM/yyyy HH.mm", CultureInfo.InvariantCulture);
+
+            if (!string.IsNullOrEmpty(searchTo))
+                to = DateTime.ParseExact(searchTo, "dd/MM/yyyy HH.mm", CultureInfo.InvariantCulture);
+
+            MovementController movementController = new MovementController();
+            SearchResult searchResult = movementController.SearchUserMovement(start, length, searchTransfer, from, to, user.Id);
+
+            JSDataTable result = new JSDataTable();
+            result.data = (IEnumerable<object>)searchResult.ResultList;
+            result.draw = draw;
+            result.recordsTotal = searchResult.TotalCount;
+            result.recordsFiltered = searchResult.TotalCount;
+
+            ResponseJson(result);
+        }
+
+        [WebMethod(EnableSession = true)]
+        [ScriptMethod(UseHttpGet = true, ResponseFormat = ResponseFormat.Json)]
         public void DeleteMovement(int id)
         {
             //Is Logged in?
@@ -226,6 +254,25 @@ namespace MonsterGame
             bool success = movementController.DeleteMovement(id);
 
             ResponseProc(success, "");
+        }
+
+        [WebMethod(EnableSession = true)]
+        [ScriptMethod(UseHttpGet = true, ResponseFormat = ResponseFormat.Json)]
+        public void FindPayments(int draw, int start, int length, string searchVal)
+        {
+            User user = loginSystem.GetCurrentUserAccount();
+            if (user == null) return;
+
+            PaymentController paymentController = new PaymentController();
+            SearchResult searchResult = paymentController.Search(start, length, searchVal, user.Id);
+
+            JSDataTable result = new JSDataTable();
+            result.data = (IEnumerable<object>)searchResult.ResultList;
+            result.draw = draw;
+            result.recordsTotal = searchResult.TotalCount;
+            result.recordsFiltered = searchResult.TotalCount;
+
+            ResponseJson(result);
         }
         protected void ResponseJson(Object result)
         {

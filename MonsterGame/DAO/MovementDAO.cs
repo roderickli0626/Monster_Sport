@@ -20,7 +20,7 @@ namespace MonsterGame.DAO
         }
         public List<Movement> FindByUser(int userID)
         {
-            return GetContext().Movements.Where(g => g.UserID == userID).ToList();
+            return GetContext().Movements.Where(g => g.UserID == userID || g.SenderID == userID).ToList();
         }
         public bool Insert(Movement movement)
         {

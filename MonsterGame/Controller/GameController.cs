@@ -58,6 +58,19 @@ namespace MonsterGame.Controller
             }
             return result;
         }
+        public List<GameCheck> FindUserGames(int userID)
+        {
+            List<int> gameIDs = new TicketDAO().FindByUser(userID).Select(t => t.GameID ?? 0).ToList();
+            List<Game> gameList = gameDao.FindAll().Where(g => gameIDs.Contains(g.Id)).ToList();
+
+            List<GameCheck> result = new List<GameCheck>();
+            foreach (Game game in gameList)
+            {
+                GameCheck check = AddData(game);
+                result.Add(check);
+            }
+            return result;
+        }
         private GameCheck AddData(Game game)
         {
             GameCheck check = new GameCheck(game);
