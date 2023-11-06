@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace MonsterSport
+namespace MonsterGame
 {
     public partial class PaymentCancel : System.Web.UI.Page
     {

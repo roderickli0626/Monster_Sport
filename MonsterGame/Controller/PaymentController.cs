@@ -2,13 +2,13 @@
 using MonsterGame.DAO;
 using MonsterGame.Model;
 using MonsterGame.Models;
-using MonsterSport.Model;
+using MonsterGame.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace MonsterSport.Controller
+namespace MonsterGame.Controller
 {
     public class PaymentController
     {

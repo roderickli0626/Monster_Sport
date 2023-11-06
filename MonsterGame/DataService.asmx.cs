@@ -12,7 +12,7 @@ using System.Web.Script.Serialization;
 using System.Web.Script.Services;
 using System.Web.Services;
 using System.Web.UI;
-using MonsterSport.Controller;
+using MonsterGame.Controller;
 using System.Globalization;
 
 namespace MonsterGame
@@ -273,6 +273,34 @@ namespace MonsterGame
             result.recordsFiltered = searchResult.TotalCount;
 
             ResponseJson(result);
+        }
+
+        [WebMethod(EnableSession = true)]
+        [ScriptMethod(UseHttpGet = true, ResponseFormat = ResponseFormat.Json)]
+        public void FindTickets(int gameID)
+        {
+            HttpResponse Response = Context.Response;
+            ProcResult result = new ProcResult();
+            Response.ContentType = "application/json; charset=utf-8";
+
+            if (!loginSystem.IsSuperAdminLoggedIn())
+            {
+                Response.Write(serializer.Serialize(result));
+                return;
+            }
+
+            try
+            {
+                TicketController ticketController = new TicketController();
+                result.data = ticketController.FindTickets(gameID);
+                result.success = true;
+                Response.Write(serializer.Serialize(result));
+            }
+            catch(Exception ex)
+            {
+                result.success = false;
+                Response.Write(serializer.Serialize(result));
+            }
         }
         protected void ResponseJson(Object result)
         {

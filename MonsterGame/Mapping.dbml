@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?><Database Name="Monster_Sport" Class="MappingDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="Monster_Game" Class="MappingDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
   <Table Name="dbo.Winner" Member="Winners">
     <Type Name="Winner">
       <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -41,28 +41,6 @@
       <Association Name="Ticket_TicketResult" Member="TicketResults" ThisKey="Id" OtherKey="TicketID" Type="TicketResult" />
       <Association Name="User_Ticket" Member="User" ThisKey="UserID" OtherKey="Id" Type="User" IsForeignKey="true" DeleteRule="CASCADE" />
       <Association Name="Game_Ticket" Member="Game" ThisKey="GameID" OtherKey="Id" Type="Game" IsForeignKey="true" DeleteRule="CASCADE" />
-    </Type>
-  </Table>
-  <Table Name="dbo.TicketResult" Member="TicketResults">
-    <Type Name="TicketResult">
-      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="TicketID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="RoundNo" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="TeamID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="Result" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="Note" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
-      <Association Name="Team_TicketResult" Member="Team" ThisKey="TeamID" OtherKey="Id" Type="Team" IsForeignKey="true" DeleteRule="CASCADE" />
-      <Association Name="Ticket_TicketResult" Member="Ticket" ThisKey="TicketID" OtherKey="Id" Type="Ticket" IsForeignKey="true" DeleteRule="CASCADE" />
-    </Type>
-  </Table>
-  <Table Name="dbo.Result" Member="Results">
-    <Type Name="Result">
-      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="TeamForGameID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="RoundNo" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="Result" Member="Result1" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="Note" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
-      <Association Name="TeamsForGame_Result" Member="TeamsForGame" ThisKey="TeamForGameID" OtherKey="Id" Type="TeamsForGame" IsForeignKey="true" DeleteRule="CASCADE" />
     </Type>
   </Table>
   <Table Name="dbo.PaymentResults" Member="PaymentResults">
@@ -136,6 +114,28 @@
       <Association Name="Game_Winner" Member="Winners" ThisKey="Id" OtherKey="GameID" Type="Winner" />
       <Association Name="Game_TeamsForGame" Member="TeamsForGames" ThisKey="Id" OtherKey="GameID" Type="TeamsForGame" />
       <Association Name="Game_Ticket" Member="Tickets" ThisKey="Id" OtherKey="GameID" Type="Ticket" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TicketResult" Member="TicketResults">
+    <Type Name="TicketResult">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="TicketID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="RoundNo" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TeamID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="RoundResult" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Note" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Association Name="Team_TicketResult" Member="Team" ThisKey="TeamID" OtherKey="Id" Type="Team" IsForeignKey="true" DeleteRule="CASCADE" />
+      <Association Name="Ticket_TicketResult" Member="Ticket" ThisKey="TicketID" OtherKey="Id" Type="Ticket" IsForeignKey="true" DeleteRule="CASCADE" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Result" Member="Results">
+    <Type Name="Result">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="TeamForGameID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="RoundNo" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="RoundResult" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Note" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Association Name="TeamsForGame_Result" Member="TeamsForGame" ThisKey="TeamForGameID" OtherKey="Id" Type="TeamsForGame" IsForeignKey="true" DeleteRule="CASCADE" />
     </Type>
   </Table>
 </Database>

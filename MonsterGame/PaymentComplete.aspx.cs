@@ -2,7 +2,7 @@
 using MonsterGame.Controller;
 using MonsterGame.Payment.Paypal;
 using MonsterGame.Util;
-using MonsterSport.Controller;
+using MonsterGame.Controller;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +10,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace MonsterSport
+namespace MonsterGame
 {
     public partial class PaymentComplete : System.Web.UI.Page
     {

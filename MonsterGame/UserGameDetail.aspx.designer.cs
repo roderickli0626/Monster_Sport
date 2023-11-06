@@ -11,7 +11,7 @@ namespace MonsterGame
 {
 
 
-    public partial class PaymentCancel
+    public partial class UserGameDetail
     {
 
         /// <summary>

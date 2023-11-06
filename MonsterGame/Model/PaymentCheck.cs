@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace MonsterSport.Model
+namespace MonsterGame.Model
 {
     public class PaymentCheck
     {
