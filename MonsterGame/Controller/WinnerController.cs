@@ -7,7 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace MonsterSport.Controller
+namespace MonsterGame.Controller
 {
     public class WinnerController
     {
