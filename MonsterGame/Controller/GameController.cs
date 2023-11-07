@@ -2,6 +2,8 @@
 using MonsterGame.DAO;
 using MonsterGame.Model;
 using MonsterGame.Models;
+using MonsterGame.Common;
+using MonsterGame.Model;
 using PayPal.Api;
 using System;
 using System.Collections.Generic;
@@ -15,11 +17,13 @@ namespace MonsterGame.Controller
     {
         private GameDAO gameDao;
         private TeamsForGameDAO teamForGameDao;
+        private ResultDAO resultDao;
 
         public GameController()
         {
             gameDao = new GameDAO();
             teamForGameDao = new TeamsForGameDAO();
+            resultDao = new ResultDAO();
         }
 
         public SearchResult Search(int start, int length, string searchVal, int status)
@@ -249,6 +253,42 @@ namespace MonsterGame.Controller
 
                 return gameDao.Update(game);
             }
+        }
+
+        public List<TeamsForGameCheck> FindResults(int gameID)
+        {
+            List<TeamsForGame> teamList = teamForGameDao.FindByGame(gameID);
+            List<TeamsForGameCheck> result = new List<TeamsForGameCheck>();
+            foreach (TeamsForGame team in teamList)
+            {
+                TeamsForGameCheck teamForGameCheck = new TeamsForGameCheck(team);
+                List<Result> resultList = resultDao.FindByTeamsForGame(team.Id);
+                List<ResultCheck> resutlCheckList = new List<ResultCheck>();
+                foreach (Result resultResult in resultList)
+                {
+                    ResultCheck resultCheck = new ResultCheck(resultResult);
+                    resutlCheckList.Add(resultCheck);
+                }
+                teamForGameCheck.Results = resutlCheckList;
+                result.Add(teamForGameCheck);
+            }
+            return result;
+        }
+
+        public bool AddNewRound(int gameID, int? Round)
+        {
+            List<TeamsForGame> teamList = teamForGameDao.FindByGame(gameID);
+            bool success = true;
+            foreach (TeamsForGame team in teamList)
+            {
+                Result result = new Result();
+                result.TeamForGameID = team.Id;
+                result.RoundNo = Round;
+                result.RoundResult = (int)RoundResult.N;
+                success = resultDao.Insert(result);
+            }
+
+            return success;
         }
     }
 }

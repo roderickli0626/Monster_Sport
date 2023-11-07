@@ -92,30 +92,6 @@
       <Association Name="User_Movement1" Member="User1" ThisKey="SenderID" OtherKey="Id" Type="User" IsForeignKey="true" />
     </Type>
   </Table>
-  <Table Name="dbo.Game" Member="Games">
-    <Type Name="Game">
-      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="StartDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="EndDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="NumberOfTeams" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="MinPlayers" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="Fee" Type="System.Double" DbType="Float" CanBeNull="true" />
-      <Column Name="Tax" Type="System.Double" DbType="Float" CanBeNull="true" />
-      <Column Name="Status" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="Note" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
-      <Column Name="Title" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
-      <Column Name="RealPlayers" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="Prize" Type="System.Double" DbType="Float" CanBeNull="true" />
-      <Column Name="PercentForFirst" Type="System.Double" DbType="Float" CanBeNull="true" />
-      <Column Name="PercentForSecond" Type="System.Double" DbType="Float" CanBeNull="true" />
-      <Column Name="PercentForThird" Type="System.Double" DbType="Float" CanBeNull="true" />
-      <Column Name="PercentForForth" Type="System.Double" DbType="Float" CanBeNull="true" />
-      <Column Name="PercentForFifth" Type="System.Double" DbType="Float" CanBeNull="true" />
-      <Association Name="Game_Winner" Member="Winners" ThisKey="Id" OtherKey="GameID" Type="Winner" />
-      <Association Name="Game_TeamsForGame" Member="TeamsForGames" ThisKey="Id" OtherKey="GameID" Type="TeamsForGame" />
-      <Association Name="Game_Ticket" Member="Tickets" ThisKey="Id" OtherKey="GameID" Type="Ticket" />
-    </Type>
-  </Table>
   <Table Name="dbo.TicketResult" Member="TicketResults">
     <Type Name="TicketResult">
       <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -136,6 +112,31 @@
       <Column Name="RoundResult" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="Note" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
       <Association Name="TeamsForGame_Result" Member="TeamsForGame" ThisKey="TeamForGameID" OtherKey="Id" Type="TeamsForGame" IsForeignKey="true" DeleteRule="CASCADE" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Game" Member="Games">
+    <Type Name="Game">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="StartDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="EndDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="NumberOfTeams" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="MinPlayers" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Fee" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="Tax" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="Status" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Note" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="Title" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="RealPlayers" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Prize" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="PercentForFirst" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="PercentForSecond" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="PercentForThird" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="PercentForForth" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="PercentForFifth" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="NumOfWinners" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Game_Winner" Member="Winners" ThisKey="Id" OtherKey="GameID" Type="Winner" />
+      <Association Name="Game_TeamsForGame" Member="TeamsForGames" ThisKey="Id" OtherKey="GameID" Type="TeamsForGame" />
+      <Association Name="Game_Ticket" Member="Tickets" ThisKey="Id" OtherKey="GameID" Type="Ticket" />
     </Type>
   </Table>
 </Database>

@@ -19,7 +19,7 @@ namespace MonsterGame.Model
             RoundNo = ticketResult.RoundNo ?? 0;
             TeamID = ticketResult.TeamID ?? 0;
             TeamName = ticketResult.Team?.Description ?? "";
-            RoundResult = ticketResult.RoundResult ?? 0;
+            RoundResult = ticketResult.RoundResult;
             Note = ticketResult.Note;
         }
 
@@ -43,7 +43,7 @@ namespace MonsterGame.Model
         {
             get; set;
         }
-        public int RoundResult
+        public int? RoundResult
         {
             get; set;
         }

@@ -18,13 +18,17 @@ namespace MonsterGame.DAO
         {
             return GetContext().TicketResults.Where(g => g.Id == id).FirstOrDefault();
         }
-        public TicketResult FindByGameAndTeamAndRound(int gameID, int teamID, int round)
+        public List<TicketResult> FindByGameAndTeamAndRound(int gameID, int teamID, int round)
         {
-            return GetContext().TicketResults.Where(g => g.Ticket.Game.Id == gameID && g.TeamID == teamID && g.RoundNo == round).FirstOrDefault();
+            return GetContext().TicketResults.Where(g => g.Ticket.Game.Id == gameID && g.TeamID == teamID && g.RoundNo == round).ToList();
         }
         public List<TicketResult> FindByTicket(int ticketID)
         {
             return GetContext().TicketResults.Where(g => g.TicketID == ticketID).ToList();
+        }
+        public List<TicketResult> FindGameAndRound(int gameID, int? round)
+        {
+            return GetContext().TicketResults.Where(g => g.Ticket.GameID == gameID && g.RoundNo == round).ToList();
         }
         public bool Insert(TicketResult ticketResult)
         {

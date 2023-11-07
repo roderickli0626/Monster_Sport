@@ -1,6 +1,8 @@
-﻿using MonsterGame;
+﻿using Antlr.Runtime.Tree;
+using MonsterGame;
 using MonsterGame.DAO;
 using MonsterGame.Model;
+using MonsterGame.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -38,5 +40,39 @@ namespace MonsterGame.Controller
             return result;
         }
 
+        public bool AddNewRound(int gameID, int? Round)
+        {
+            bool success = true;
+            List<Ticket> ticketList = ticketDAO.FindByGame(gameID);
+            foreach(Ticket ticket in ticketList)
+            {
+                TicketResult ticketResult = new TicketResult();
+                ticketResult.TicketID = ticket.Id;
+                ticketResult.RoundNo = Round;
+
+                List<int?> roundResultList = ticketResultDAO.FindByTicket(ticket.Id).Select(t => t.RoundResult).ToList();
+                if (roundResultList.Contains((int)RoundResult.L) || roundResultList.Count(i => i == (int)RoundResult.P) > 1 || roundResultList.Contains(null))
+                {
+                    ticketResult.RoundResult = null;
+                }
+                else
+                {
+                    ticketResult.RoundResult = (int)RoundResult.N;
+                }
+
+                success = ticketResultDAO.Insert(ticketResult);
+            }
+
+            return success;
+        }
+
+        public int GetRemainedTickets(int gameID, int? currentRound)
+        {
+            List<int?> currentRoundResult = ticketResultDAO.FindGameAndRound(gameID, currentRound).Select(t => t.RoundResult).ToList();
+
+            int num = currentRoundResult.Count(i => i.HasValue);
+
+            return num;
+        }
     }
 }

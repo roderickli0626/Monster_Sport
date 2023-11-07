@@ -55,7 +55,5 @@ namespace MonsterGame.Model
         {
             get; set;
         }
-
-
     }
 }

@@ -51,15 +51,15 @@ namespace MonsterGame
     partial void InsertMovement(Movement instance);
     partial void UpdateMovement(Movement instance);
     partial void DeleteMovement(Movement instance);
-    partial void InsertGame(Game instance);
-    partial void UpdateGame(Game instance);
-    partial void DeleteGame(Game instance);
     partial void InsertTicketResult(TicketResult instance);
     partial void UpdateTicketResult(TicketResult instance);
     partial void DeleteTicketResult(TicketResult instance);
     partial void InsertResult(Result instance);
     partial void UpdateResult(Result instance);
     partial void DeleteResult(Result instance);
+    partial void InsertGame(Game instance);
+    partial void UpdateGame(Game instance);
+    partial void DeleteGame(Game instance);
     #endregion
 		
 		public MappingDataContext(string connection) : 
@@ -142,14 +142,6 @@ namespace MonsterGame
 			}
 		}
 		
-		public System.Data.Linq.Table<Game> Games
-		{
-			get
-			{
-				return this.GetTable<Game>();
-			}
-		}
-		
 		public System.Data.Linq.Table<TicketResult> TicketResults
 		{
 			get
@@ -163,6 +155,14 @@ namespace MonsterGame
 			get
 			{
 				return this.GetTable<Result>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Game> Games
+		{
+			get
+			{
+				return this.GetTable<Game>();
 			}
 		}
 	}
@@ -2203,536 +2203,6 @@ namespace MonsterGame
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Game")]
-	public partial class Game : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _Id;
-		
-		private System.Nullable<System.DateTime> _StartDate;
-		
-		private System.Nullable<System.DateTime> _EndDate;
-		
-		private System.Nullable<int> _NumberOfTeams;
-		
-		private System.Nullable<int> _MinPlayers;
-		
-		private System.Nullable<double> _Fee;
-		
-		private System.Nullable<double> _Tax;
-		
-		private System.Nullable<int> _Status;
-		
-		private string _Note;
-		
-		private string _Title;
-		
-		private System.Nullable<int> _RealPlayers;
-		
-		private System.Nullable<double> _Prize;
-		
-		private System.Nullable<double> _PercentForFirst;
-		
-		private System.Nullable<double> _PercentForSecond;
-		
-		private System.Nullable<double> _PercentForThird;
-		
-		private System.Nullable<double> _PercentForForth;
-		
-		private System.Nullable<double> _PercentForFifth;
-		
-		private EntitySet<Winner> _Winners;
-		
-		private EntitySet<TeamsForGame> _TeamsForGames;
-		
-		private EntitySet<Ticket> _Tickets;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIdChanging(int value);
-    partial void OnIdChanged();
-    partial void OnStartDateChanging(System.Nullable<System.DateTime> value);
-    partial void OnStartDateChanged();
-    partial void OnEndDateChanging(System.Nullable<System.DateTime> value);
-    partial void OnEndDateChanged();
-    partial void OnNumberOfTeamsChanging(System.Nullable<int> value);
-    partial void OnNumberOfTeamsChanged();
-    partial void OnMinPlayersChanging(System.Nullable<int> value);
-    partial void OnMinPlayersChanged();
-    partial void OnFeeChanging(System.Nullable<double> value);
-    partial void OnFeeChanged();
-    partial void OnTaxChanging(System.Nullable<double> value);
-    partial void OnTaxChanged();
-    partial void OnStatusChanging(System.Nullable<int> value);
-    partial void OnStatusChanged();
-    partial void OnNoteChanging(string value);
-    partial void OnNoteChanged();
-    partial void OnTitleChanging(string value);
-    partial void OnTitleChanged();
-    partial void OnRealPlayersChanging(System.Nullable<int> value);
-    partial void OnRealPlayersChanged();
-    partial void OnPrizeChanging(System.Nullable<double> value);
-    partial void OnPrizeChanged();
-    partial void OnPercentForFirstChanging(System.Nullable<double> value);
-    partial void OnPercentForFirstChanged();
-    partial void OnPercentForSecondChanging(System.Nullable<double> value);
-    partial void OnPercentForSecondChanged();
-    partial void OnPercentForThirdChanging(System.Nullable<double> value);
-    partial void OnPercentForThirdChanged();
-    partial void OnPercentForForthChanging(System.Nullable<double> value);
-    partial void OnPercentForForthChanged();
-    partial void OnPercentForFifthChanging(System.Nullable<double> value);
-    partial void OnPercentForFifthChanged();
-    #endregion
-		
-		public Game()
-		{
-			this._Winners = new EntitySet<Winner>(new Action<Winner>(this.attach_Winners), new Action<Winner>(this.detach_Winners));
-			this._TeamsForGames = new EntitySet<TeamsForGame>(new Action<TeamsForGame>(this.attach_TeamsForGames), new Action<TeamsForGame>(this.detach_TeamsForGames));
-			this._Tickets = new EntitySet<Ticket>(new Action<Ticket>(this.attach_Tickets), new Action<Ticket>(this.detach_Tickets));
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int Id
-		{
-			get
-			{
-				return this._Id;
-			}
-			set
-			{
-				if ((this._Id != value))
-				{
-					this.OnIdChanging(value);
-					this.SendPropertyChanging();
-					this._Id = value;
-					this.SendPropertyChanged("Id");
-					this.OnIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StartDate", DbType="DateTime")]
-		public System.Nullable<System.DateTime> StartDate
-		{
-			get
-			{
-				return this._StartDate;
-			}
-			set
-			{
-				if ((this._StartDate != value))
-				{
-					this.OnStartDateChanging(value);
-					this.SendPropertyChanging();
-					this._StartDate = value;
-					this.SendPropertyChanged("StartDate");
-					this.OnStartDateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EndDate", DbType="DateTime")]
-		public System.Nullable<System.DateTime> EndDate
-		{
-			get
-			{
-				return this._EndDate;
-			}
-			set
-			{
-				if ((this._EndDate != value))
-				{
-					this.OnEndDateChanging(value);
-					this.SendPropertyChanging();
-					this._EndDate = value;
-					this.SendPropertyChanged("EndDate");
-					this.OnEndDateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NumberOfTeams", DbType="Int")]
-		public System.Nullable<int> NumberOfTeams
-		{
-			get
-			{
-				return this._NumberOfTeams;
-			}
-			set
-			{
-				if ((this._NumberOfTeams != value))
-				{
-					this.OnNumberOfTeamsChanging(value);
-					this.SendPropertyChanging();
-					this._NumberOfTeams = value;
-					this.SendPropertyChanged("NumberOfTeams");
-					this.OnNumberOfTeamsChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MinPlayers", DbType="Int")]
-		public System.Nullable<int> MinPlayers
-		{
-			get
-			{
-				return this._MinPlayers;
-			}
-			set
-			{
-				if ((this._MinPlayers != value))
-				{
-					this.OnMinPlayersChanging(value);
-					this.SendPropertyChanging();
-					this._MinPlayers = value;
-					this.SendPropertyChanged("MinPlayers");
-					this.OnMinPlayersChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Fee", DbType="Float")]
-		public System.Nullable<double> Fee
-		{
-			get
-			{
-				return this._Fee;
-			}
-			set
-			{
-				if ((this._Fee != value))
-				{
-					this.OnFeeChanging(value);
-					this.SendPropertyChanging();
-					this._Fee = value;
-					this.SendPropertyChanged("Fee");
-					this.OnFeeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Tax", DbType="Float")]
-		public System.Nullable<double> Tax
-		{
-			get
-			{
-				return this._Tax;
-			}
-			set
-			{
-				if ((this._Tax != value))
-				{
-					this.OnTaxChanging(value);
-					this.SendPropertyChanging();
-					this._Tax = value;
-					this.SendPropertyChanged("Tax");
-					this.OnTaxChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Status", DbType="Int")]
-		public System.Nullable<int> Status
-		{
-			get
-			{
-				return this._Status;
-			}
-			set
-			{
-				if ((this._Status != value))
-				{
-					this.OnStatusChanging(value);
-					this.SendPropertyChanging();
-					this._Status = value;
-					this.SendPropertyChanged("Status");
-					this.OnStatusChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Note", DbType="VarChar(MAX)")]
-		public string Note
-		{
-			get
-			{
-				return this._Note;
-			}
-			set
-			{
-				if ((this._Note != value))
-				{
-					this.OnNoteChanging(value);
-					this.SendPropertyChanging();
-					this._Note = value;
-					this.SendPropertyChanged("Note");
-					this.OnNoteChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Title", DbType="VarChar(MAX)")]
-		public string Title
-		{
-			get
-			{
-				return this._Title;
-			}
-			set
-			{
-				if ((this._Title != value))
-				{
-					this.OnTitleChanging(value);
-					this.SendPropertyChanging();
-					this._Title = value;
-					this.SendPropertyChanged("Title");
-					this.OnTitleChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RealPlayers", DbType="Int")]
-		public System.Nullable<int> RealPlayers
-		{
-			get
-			{
-				return this._RealPlayers;
-			}
-			set
-			{
-				if ((this._RealPlayers != value))
-				{
-					this.OnRealPlayersChanging(value);
-					this.SendPropertyChanging();
-					this._RealPlayers = value;
-					this.SendPropertyChanged("RealPlayers");
-					this.OnRealPlayersChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Prize", DbType="Float")]
-		public System.Nullable<double> Prize
-		{
-			get
-			{
-				return this._Prize;
-			}
-			set
-			{
-				if ((this._Prize != value))
-				{
-					this.OnPrizeChanging(value);
-					this.SendPropertyChanging();
-					this._Prize = value;
-					this.SendPropertyChanged("Prize");
-					this.OnPrizeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PercentForFirst", DbType="Float")]
-		public System.Nullable<double> PercentForFirst
-		{
-			get
-			{
-				return this._PercentForFirst;
-			}
-			set
-			{
-				if ((this._PercentForFirst != value))
-				{
-					this.OnPercentForFirstChanging(value);
-					this.SendPropertyChanging();
-					this._PercentForFirst = value;
-					this.SendPropertyChanged("PercentForFirst");
-					this.OnPercentForFirstChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PercentForSecond", DbType="Float")]
-		public System.Nullable<double> PercentForSecond
-		{
-			get
-			{
-				return this._PercentForSecond;
-			}
-			set
-			{
-				if ((this._PercentForSecond != value))
-				{
-					this.OnPercentForSecondChanging(value);
-					this.SendPropertyChanging();
-					this._PercentForSecond = value;
-					this.SendPropertyChanged("PercentForSecond");
-					this.OnPercentForSecondChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PercentForThird", DbType="Float")]
-		public System.Nullable<double> PercentForThird
-		{
-			get
-			{
-				return this._PercentForThird;
-			}
-			set
-			{
-				if ((this._PercentForThird != value))
-				{
-					this.OnPercentForThirdChanging(value);
-					this.SendPropertyChanging();
-					this._PercentForThird = value;
-					this.SendPropertyChanged("PercentForThird");
-					this.OnPercentForThirdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PercentForForth", DbType="Float")]
-		public System.Nullable<double> PercentForForth
-		{
-			get
-			{
-				return this._PercentForForth;
-			}
-			set
-			{
-				if ((this._PercentForForth != value))
-				{
-					this.OnPercentForForthChanging(value);
-					this.SendPropertyChanging();
-					this._PercentForForth = value;
-					this.SendPropertyChanged("PercentForForth");
-					this.OnPercentForForthChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PercentForFifth", DbType="Float")]
-		public System.Nullable<double> PercentForFifth
-		{
-			get
-			{
-				return this._PercentForFifth;
-			}
-			set
-			{
-				if ((this._PercentForFifth != value))
-				{
-					this.OnPercentForFifthChanging(value);
-					this.SendPropertyChanging();
-					this._PercentForFifth = value;
-					this.SendPropertyChanged("PercentForFifth");
-					this.OnPercentForFifthChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Game_Winner", Storage="_Winners", ThisKey="Id", OtherKey="GameID")]
-		public EntitySet<Winner> Winners
-		{
-			get
-			{
-				return this._Winners;
-			}
-			set
-			{
-				this._Winners.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Game_TeamsForGame", Storage="_TeamsForGames", ThisKey="Id", OtherKey="GameID")]
-		public EntitySet<TeamsForGame> TeamsForGames
-		{
-			get
-			{
-				return this._TeamsForGames;
-			}
-			set
-			{
-				this._TeamsForGames.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Game_Ticket", Storage="_Tickets", ThisKey="Id", OtherKey="GameID")]
-		public EntitySet<Ticket> Tickets
-		{
-			get
-			{
-				return this._Tickets;
-			}
-			set
-			{
-				this._Tickets.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_Winners(Winner entity)
-		{
-			this.SendPropertyChanging();
-			entity.Game = this;
-		}
-		
-		private void detach_Winners(Winner entity)
-		{
-			this.SendPropertyChanging();
-			entity.Game = null;
-		}
-		
-		private void attach_TeamsForGames(TeamsForGame entity)
-		{
-			this.SendPropertyChanging();
-			entity.Game = this;
-		}
-		
-		private void detach_TeamsForGames(TeamsForGame entity)
-		{
-			this.SendPropertyChanging();
-			entity.Game = null;
-		}
-		
-		private void attach_Tickets(Ticket entity)
-		{
-			this.SendPropertyChanging();
-			entity.Game = this;
-		}
-		
-		private void detach_Tickets(Ticket entity)
-		{
-			this.SendPropertyChanging();
-			entity.Game = null;
-		}
-	}
-	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.TicketResult")]
 	public partial class TicketResult : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -3193,6 +2663,560 @@ namespace MonsterGame
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Game")]
+	public partial class Game : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id;
+		
+		private System.Nullable<System.DateTime> _StartDate;
+		
+		private System.Nullable<System.DateTime> _EndDate;
+		
+		private System.Nullable<int> _NumberOfTeams;
+		
+		private System.Nullable<int> _MinPlayers;
+		
+		private System.Nullable<double> _Fee;
+		
+		private System.Nullable<double> _Tax;
+		
+		private System.Nullable<int> _Status;
+		
+		private string _Note;
+		
+		private string _Title;
+		
+		private System.Nullable<int> _RealPlayers;
+		
+		private System.Nullable<double> _Prize;
+		
+		private System.Nullable<double> _PercentForFirst;
+		
+		private System.Nullable<double> _PercentForSecond;
+		
+		private System.Nullable<double> _PercentForThird;
+		
+		private System.Nullable<double> _PercentForForth;
+		
+		private System.Nullable<double> _PercentForFifth;
+		
+		private System.Nullable<int> _NumOfWinners;
+		
+		private EntitySet<Winner> _Winners;
+		
+		private EntitySet<TeamsForGame> _TeamsForGames;
+		
+		private EntitySet<Ticket> _Tickets;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void OnStartDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnStartDateChanged();
+    partial void OnEndDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnEndDateChanged();
+    partial void OnNumberOfTeamsChanging(System.Nullable<int> value);
+    partial void OnNumberOfTeamsChanged();
+    partial void OnMinPlayersChanging(System.Nullable<int> value);
+    partial void OnMinPlayersChanged();
+    partial void OnFeeChanging(System.Nullable<double> value);
+    partial void OnFeeChanged();
+    partial void OnTaxChanging(System.Nullable<double> value);
+    partial void OnTaxChanged();
+    partial void OnStatusChanging(System.Nullable<int> value);
+    partial void OnStatusChanged();
+    partial void OnNoteChanging(string value);
+    partial void OnNoteChanged();
+    partial void OnTitleChanging(string value);
+    partial void OnTitleChanged();
+    partial void OnRealPlayersChanging(System.Nullable<int> value);
+    partial void OnRealPlayersChanged();
+    partial void OnPrizeChanging(System.Nullable<double> value);
+    partial void OnPrizeChanged();
+    partial void OnPercentForFirstChanging(System.Nullable<double> value);
+    partial void OnPercentForFirstChanged();
+    partial void OnPercentForSecondChanging(System.Nullable<double> value);
+    partial void OnPercentForSecondChanged();
+    partial void OnPercentForThirdChanging(System.Nullable<double> value);
+    partial void OnPercentForThirdChanged();
+    partial void OnPercentForForthChanging(System.Nullable<double> value);
+    partial void OnPercentForForthChanged();
+    partial void OnPercentForFifthChanging(System.Nullable<double> value);
+    partial void OnPercentForFifthChanged();
+    partial void OnNumOfWinnersChanging(System.Nullable<int> value);
+    partial void OnNumOfWinnersChanged();
+    #endregion
+		
+		public Game()
+		{
+			this._Winners = new EntitySet<Winner>(new Action<Winner>(this.attach_Winners), new Action<Winner>(this.detach_Winners));
+			this._TeamsForGames = new EntitySet<TeamsForGame>(new Action<TeamsForGame>(this.attach_TeamsForGames), new Action<TeamsForGame>(this.detach_TeamsForGames));
+			this._Tickets = new EntitySet<Ticket>(new Action<Ticket>(this.attach_Tickets), new Action<Ticket>(this.detach_Tickets));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StartDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> StartDate
+		{
+			get
+			{
+				return this._StartDate;
+			}
+			set
+			{
+				if ((this._StartDate != value))
+				{
+					this.OnStartDateChanging(value);
+					this.SendPropertyChanging();
+					this._StartDate = value;
+					this.SendPropertyChanged("StartDate");
+					this.OnStartDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EndDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> EndDate
+		{
+			get
+			{
+				return this._EndDate;
+			}
+			set
+			{
+				if ((this._EndDate != value))
+				{
+					this.OnEndDateChanging(value);
+					this.SendPropertyChanging();
+					this._EndDate = value;
+					this.SendPropertyChanged("EndDate");
+					this.OnEndDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NumberOfTeams", DbType="Int")]
+		public System.Nullable<int> NumberOfTeams
+		{
+			get
+			{
+				return this._NumberOfTeams;
+			}
+			set
+			{
+				if ((this._NumberOfTeams != value))
+				{
+					this.OnNumberOfTeamsChanging(value);
+					this.SendPropertyChanging();
+					this._NumberOfTeams = value;
+					this.SendPropertyChanged("NumberOfTeams");
+					this.OnNumberOfTeamsChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MinPlayers", DbType="Int")]
+		public System.Nullable<int> MinPlayers
+		{
+			get
+			{
+				return this._MinPlayers;
+			}
+			set
+			{
+				if ((this._MinPlayers != value))
+				{
+					this.OnMinPlayersChanging(value);
+					this.SendPropertyChanging();
+					this._MinPlayers = value;
+					this.SendPropertyChanged("MinPlayers");
+					this.OnMinPlayersChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Fee", DbType="Float")]
+		public System.Nullable<double> Fee
+		{
+			get
+			{
+				return this._Fee;
+			}
+			set
+			{
+				if ((this._Fee != value))
+				{
+					this.OnFeeChanging(value);
+					this.SendPropertyChanging();
+					this._Fee = value;
+					this.SendPropertyChanged("Fee");
+					this.OnFeeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Tax", DbType="Float")]
+		public System.Nullable<double> Tax
+		{
+			get
+			{
+				return this._Tax;
+			}
+			set
+			{
+				if ((this._Tax != value))
+				{
+					this.OnTaxChanging(value);
+					this.SendPropertyChanging();
+					this._Tax = value;
+					this.SendPropertyChanged("Tax");
+					this.OnTaxChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Status", DbType="Int")]
+		public System.Nullable<int> Status
+		{
+			get
+			{
+				return this._Status;
+			}
+			set
+			{
+				if ((this._Status != value))
+				{
+					this.OnStatusChanging(value);
+					this.SendPropertyChanging();
+					this._Status = value;
+					this.SendPropertyChanged("Status");
+					this.OnStatusChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Note", DbType="VarChar(MAX)")]
+		public string Note
+		{
+			get
+			{
+				return this._Note;
+			}
+			set
+			{
+				if ((this._Note != value))
+				{
+					this.OnNoteChanging(value);
+					this.SendPropertyChanging();
+					this._Note = value;
+					this.SendPropertyChanged("Note");
+					this.OnNoteChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Title", DbType="VarChar(MAX)")]
+		public string Title
+		{
+			get
+			{
+				return this._Title;
+			}
+			set
+			{
+				if ((this._Title != value))
+				{
+					this.OnTitleChanging(value);
+					this.SendPropertyChanging();
+					this._Title = value;
+					this.SendPropertyChanged("Title");
+					this.OnTitleChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RealPlayers", DbType="Int")]
+		public System.Nullable<int> RealPlayers
+		{
+			get
+			{
+				return this._RealPlayers;
+			}
+			set
+			{
+				if ((this._RealPlayers != value))
+				{
+					this.OnRealPlayersChanging(value);
+					this.SendPropertyChanging();
+					this._RealPlayers = value;
+					this.SendPropertyChanged("RealPlayers");
+					this.OnRealPlayersChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Prize", DbType="Float")]
+		public System.Nullable<double> Prize
+		{
+			get
+			{
+				return this._Prize;
+			}
+			set
+			{
+				if ((this._Prize != value))
+				{
+					this.OnPrizeChanging(value);
+					this.SendPropertyChanging();
+					this._Prize = value;
+					this.SendPropertyChanged("Prize");
+					this.OnPrizeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PercentForFirst", DbType="Float")]
+		public System.Nullable<double> PercentForFirst
+		{
+			get
+			{
+				return this._PercentForFirst;
+			}
+			set
+			{
+				if ((this._PercentForFirst != value))
+				{
+					this.OnPercentForFirstChanging(value);
+					this.SendPropertyChanging();
+					this._PercentForFirst = value;
+					this.SendPropertyChanged("PercentForFirst");
+					this.OnPercentForFirstChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PercentForSecond", DbType="Float")]
+		public System.Nullable<double> PercentForSecond
+		{
+			get
+			{
+				return this._PercentForSecond;
+			}
+			set
+			{
+				if ((this._PercentForSecond != value))
+				{
+					this.OnPercentForSecondChanging(value);
+					this.SendPropertyChanging();
+					this._PercentForSecond = value;
+					this.SendPropertyChanged("PercentForSecond");
+					this.OnPercentForSecondChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PercentForThird", DbType="Float")]
+		public System.Nullable<double> PercentForThird
+		{
+			get
+			{
+				return this._PercentForThird;
+			}
+			set
+			{
+				if ((this._PercentForThird != value))
+				{
+					this.OnPercentForThirdChanging(value);
+					this.SendPropertyChanging();
+					this._PercentForThird = value;
+					this.SendPropertyChanged("PercentForThird");
+					this.OnPercentForThirdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PercentForForth", DbType="Float")]
+		public System.Nullable<double> PercentForForth
+		{
+			get
+			{
+				return this._PercentForForth;
+			}
+			set
+			{
+				if ((this._PercentForForth != value))
+				{
+					this.OnPercentForForthChanging(value);
+					this.SendPropertyChanging();
+					this._PercentForForth = value;
+					this.SendPropertyChanged("PercentForForth");
+					this.OnPercentForForthChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PercentForFifth", DbType="Float")]
+		public System.Nullable<double> PercentForFifth
+		{
+			get
+			{
+				return this._PercentForFifth;
+			}
+			set
+			{
+				if ((this._PercentForFifth != value))
+				{
+					this.OnPercentForFifthChanging(value);
+					this.SendPropertyChanging();
+					this._PercentForFifth = value;
+					this.SendPropertyChanged("PercentForFifth");
+					this.OnPercentForFifthChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NumOfWinners", DbType="Int")]
+		public System.Nullable<int> NumOfWinners
+		{
+			get
+			{
+				return this._NumOfWinners;
+			}
+			set
+			{
+				if ((this._NumOfWinners != value))
+				{
+					this.OnNumOfWinnersChanging(value);
+					this.SendPropertyChanging();
+					this._NumOfWinners = value;
+					this.SendPropertyChanged("NumOfWinners");
+					this.OnNumOfWinnersChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Game_Winner", Storage="_Winners", ThisKey="Id", OtherKey="GameID")]
+		public EntitySet<Winner> Winners
+		{
+			get
+			{
+				return this._Winners;
+			}
+			set
+			{
+				this._Winners.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Game_TeamsForGame", Storage="_TeamsForGames", ThisKey="Id", OtherKey="GameID")]
+		public EntitySet<TeamsForGame> TeamsForGames
+		{
+			get
+			{
+				return this._TeamsForGames;
+			}
+			set
+			{
+				this._TeamsForGames.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Game_Ticket", Storage="_Tickets", ThisKey="Id", OtherKey="GameID")]
+		public EntitySet<Ticket> Tickets
+		{
+			get
+			{
+				return this._Tickets;
+			}
+			set
+			{
+				this._Tickets.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Winners(Winner entity)
+		{
+			this.SendPropertyChanging();
+			entity.Game = this;
+		}
+		
+		private void detach_Winners(Winner entity)
+		{
+			this.SendPropertyChanging();
+			entity.Game = null;
+		}
+		
+		private void attach_TeamsForGames(TeamsForGame entity)
+		{
+			this.SendPropertyChanging();
+			entity.Game = this;
+		}
+		
+		private void detach_TeamsForGames(TeamsForGame entity)
+		{
+			this.SendPropertyChanging();
+			entity.Game = null;
+		}
+		
+		private void attach_Tickets(Ticket entity)
+		{
+			this.SendPropertyChanging();
+			entity.Game = this;
+		}
+		
+		private void detach_Tickets(Ticket entity)
+		{
+			this.SendPropertyChanging();
+			entity.Game = null;
 		}
 	}
 }

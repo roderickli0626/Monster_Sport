@@ -325,6 +325,7 @@
     <Compile Include="Common\LoginCode.cs" />
     <Compile Include="Common\MovementType.cs" />
     <Compile Include="Common\Role.cs" />
+    <Compile Include="Common\RoundResult.cs" />
     <Compile Include="Conditions.aspx.cs">
       <DependentUpon>Conditions.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -410,7 +411,9 @@
     <Compile Include="Model\MovementCheck.cs" />
     <Compile Include="Model\PaymentCheck.cs" />
     <Compile Include="Model\ProcResult.cs" />
+    <Compile Include="Model\ResultCheck.cs" />
     <Compile Include="Model\SearchResult.cs" />
+    <Compile Include="Model\TeamsForGameCheck.cs" />
     <Compile Include="Model\TicketCheck.cs" />
     <Compile Include="Model\TicketResultCheck.cs" />
     <Compile Include="Model\UserCheck.cs" />

@@ -302,6 +302,34 @@ namespace MonsterGame
                 Response.Write(serializer.Serialize(result));
             }
         }
+
+        [WebMethod(EnableSession = true)]
+        [ScriptMethod(UseHttpGet = true, ResponseFormat = ResponseFormat.Json)]
+        public void FindResults(int gameID)
+        {
+            HttpResponse Response = Context.Response;
+            ProcResult result = new ProcResult();
+            Response.ContentType = "application/json; charset=utf-8";
+
+            if (!loginSystem.IsSuperAdminLoggedIn())
+            {
+                Response.Write(serializer.Serialize(result));
+                return;
+            }
+
+            try
+            {
+                GameController gameController = new GameController();
+                result.data = gameController.FindResults(gameID);
+                result.success = true;
+                Response.Write(serializer.Serialize(result));
+            }
+            catch (Exception ex)
+            {
+                result.success = false;
+                Response.Write(serializer.Serialize(result));
+            }
+        }
         protected void ResponseJson(Object result)
         {
             HttpResponse Response = Context.Response;

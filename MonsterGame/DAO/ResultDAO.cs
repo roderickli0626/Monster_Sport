@@ -26,6 +26,10 @@ namespace MonsterGame.DAO
         {
             return GetContext().Results.Where(g => g.TeamsForGame.Game.Id == gameID).ToList();
         }
+        public List<Result> FindByTeamsForGame(int teamsForGameID)
+        {
+            return GetContext().Results.Where(g => g.TeamForGameID == teamsForGameID).ToList();
+        }
         public bool Insert(Result result)
         {
             GetContext().Results.InsertOnSubmit(result);
