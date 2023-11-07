@@ -25,6 +25,7 @@
                 <asp:HiddenField ID="HfTicketResultID" runat="server" ClientIDMode="Static" />
                 <asp:HiddenField ID="HfResultID" runat="server" ClientIDMode="Static" />
                 <asp:HiddenField ID="HfCurrentRound" runat="server" ClientIDMode="Static" />
+                <asp:HiddenField ID="HfWinnerID" runat="server" ClientIDMode="Static" />
                 <div class="row">
                     <div class="col-3">
                         <ul class="privacy-policy-sidebar-menu" style="padding-top:120px;">
@@ -62,8 +63,19 @@
                             </div>
                             <div runat="server" id="DivWinners" class="content-item mb-0">
                                 <h3 class="title" id="winners" style="padding-top: 120px;">WINNERS</h3>
-                                <div class="row justify-content-center ">
-                                    <div class="col-lg-4 col-xl-4 ms-auto">
+                                <div class="row justify-content-center pb-3">
+                                    <div class="col-lg-8 col-xl-8 col-md-8 col-sm-8">
+                                        <div class="dashboard__card" style="border: 2px solid #ffdd2d;">
+                                            <div class="dashboard__card-content">
+                                                <h2 runat="server" id="Prize" class="price">$0</h2>
+                                                <p class="info">GAME PRIZE</p>
+                                            </div>
+                                            <div class="dashboard__card-icon">
+                                                <i class="las la-wallet"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-xl-4 d-flex flex-column justify-content-end">
                                          <asp:Button runat="server" ID="BtnPrize" ClientIDMode="Static" CssClass="cmn--btn active radius-1 w-100" Text="DIVIDE PRIZE" OnClick="BtnPrize_Click"></asp:Button>
                                     </div>
                                 </div>
@@ -140,6 +152,35 @@
                             </div>
                             <div class="modal-footer modal--footer">
                                 <asp:Button runat="server" ID="BtnResult" CssClass="btn btn--warning btn--md" Text="Save" CausesValidation="false" OnClick="BtnResult_Click"/>
+                                <button type="button" class="btn btn--danger btn--md" data-bs-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal custom--modal fade show" id="PercentModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" data-bs-backdrop="static" aria-modal="true">
+                    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                        <div class="modal-content section-bg border-0">
+                            <div class="modal-header modal--header bg--base">
+                                <h4 class="modal-title text-dark" id="modalTitle2">Percent</h4>
+                            </div>
+                            <div class="modal-body modal--body">
+                                <asp:UpdatePanel runat="server" ID="UpdatePanel2" ClientIDMode="Static" class="row gy-3">
+                                    <ContentTemplate>
+                                        <asp:ValidationSummary ID="ValSummary2" runat="server" CssClass="mt-lg mb-lg text-left bg-gradient" ClientIDMode="Static" />
+                                        <asp:CustomValidator ID="ServerValidator2" runat="server" ErrorMessage="Save Failed." Display="None"></asp:CustomValidator>
+                                        <div class="col-md-8 mx-auto">
+                                            <div class="form-group">
+                                                <asp:TextBox runat="server" ID="TxtPercent" ClientIDMode="Static" CssClass="form-control form--control style-two"></asp:TextBox>
+                                            </div>
+                                        </div>
+                                    </ContentTemplate>
+                                    <Triggers>
+                                        <asp:AsyncPostBackTrigger ControlID="BtnPercent" />
+                                    </Triggers>
+                                </asp:UpdatePanel>
+                            </div>
+                            <div class="modal-footer modal--footer">
+                                <asp:Button runat="server" ID="BtnPercent" CssClass="btn btn--warning btn--md" Text="Save" CausesValidation="false" OnClick="BtnPercent_Click"/>
                                 <button type="button" class="btn btn--danger btn--md" data-bs-dismiss="modal">Close</button>
                             </div>
                         </div>
@@ -395,6 +436,64 @@
                 var currentRound = datatableForResult.fnGetData(0).Results.length + 1;
                 $("#HfCurrentRound").val(currentRound);
                 if (confirm("Create A New Round?")) return true;
+                else return false;
+            });
+
+            // Winner Table
+            var datatableForWinner = $('#winner-table').dataTable({
+                "serverSide": true,
+                "ajax": 'DataService.asmx/FindWinners',
+                "dom": '<"table-responsive"t>pr',
+                "autoWidth": false,
+                "pageLength": 20,
+                "processing": true,
+                "ordering": false,
+                "columns": [{
+                    "render": function (data, type, row, meta) {
+                        return meta.row + meta.settings._iDisplayStart + 1;
+                    }
+                }, {
+                    "data": "Winner",
+                }, {
+                    "data": "Percent",
+                }, {
+                    "data": "Prize",
+                }, {
+                    "data": null,
+                    "render": function (data, type, row, meta) {
+                        if (row.Prize == null) return '<a href="#" class="btn-edit mr-4"><i class="fa fa-edit" style="font-size:25px"></i></a>';
+                        else return "";
+                    }
+                }],
+
+                "fnServerParams": function (aoData) {
+                    aoData.gameID = $("#HfGameID").val();
+                },
+
+                "rowCallback": function (row, data, index) {
+                    $(row).find('td').css({ 'vertical-align': 'middle' });
+                    $("#winner-table_wrapper").css('width', '100%');
+                },
+
+                "drawCallback": function () {
+                    $(".pagination").children('li').addClass("page-item");
+                }
+            });
+
+            datatableForWinner.on('click', '.btn-edit', function (e) {
+                e.preventDefault();
+
+                var row = datatableForWinner.fnGetData($(this).closest('tr'));
+
+                $("#PercentModal").modal('show');
+                $(".modal-title").text("SET PERCENT");
+                $("#HfWinnerID").val(row.Id);
+                $("#ValSummary2").addClass("d-none");
+                $("#TxtPercent").val(row.Percent);
+            });
+
+            $("#BtnPrize").click(function () {
+                if (confirm("Divide Prize to Winners?")) return true;
                 else return false;
             });
         })

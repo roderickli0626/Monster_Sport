@@ -29,6 +29,7 @@ namespace MonsterGame.Model
             Percent3 = game.PercentForThird ?? 0;
             Percent4 = game.PercentForForth ?? 0;
             Percent5 = game.PercentForFifth ?? 0;
+            Winners = game.NumOfWinners ?? 0;
         }
         public int Id
         {
@@ -71,6 +72,10 @@ namespace MonsterGame.Model
             get; set;
         }
         public double Percent5
+        {
+            get; set;
+        }
+        public int Winners
         {
             get; set;
         }

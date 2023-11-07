@@ -14,6 +14,7 @@ using System.Web.Services;
 using System.Web.UI;
 using MonsterGame.Controller;
 using System.Globalization;
+using MonsterSport.Controller;
 
 namespace MonsterGame
 {
@@ -329,6 +330,24 @@ namespace MonsterGame
                 result.success = false;
                 Response.Write(serializer.Serialize(result));
             }
+        }
+
+        [WebMethod(EnableSession = true)]
+        [ScriptMethod(UseHttpGet = true, ResponseFormat = ResponseFormat.Json)]
+        public void FindWinners(int draw, int start, int length, int gameID)
+        {
+            if (!loginSystem.IsSuperAdminLoggedIn()) return;
+
+            WinnerController winnerController = new WinnerController();
+            SearchResult searchResult = winnerController.Search(start, length, gameID);
+
+            JSDataTable result = new JSDataTable();
+            result.data = (IEnumerable<object>)searchResult.ResultList;
+            result.draw = draw;
+            result.recordsTotal = searchResult.TotalCount;
+            result.recordsFiltered = searchResult.TotalCount;
+
+            ResponseJson(result);
         }
         protected void ResponseJson(Object result)
         {

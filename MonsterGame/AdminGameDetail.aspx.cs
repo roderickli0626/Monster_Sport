@@ -10,7 +10,7 @@ using MonsterGame.Util;
 using MonsterGame.DAO;
 using PayPal.Api;
 using MonsterGame.Common;
-using MonsterGame.Common;
+using MonsterSport.Controller;
 
 namespace MonsterGame
 {
@@ -40,10 +40,20 @@ namespace MonsterGame
             if (!IsPostBack)
             {
                 LoadInfo();
-                SetVisible();
+                
                 // If Game status is Completed or Closed, but there is no Winner in the game, then add Winners to the game.
                 // This case can occur when SA changed game status as Completed or Closed Manually in AdminGames.aspx page.
-                // TODO
+                if (game.Status == (int)GameStatus.COMPLETED || game.Status == (int)GameStatus.CLOSED)
+                {
+                    List<Winner> winners = new WinnerDAO().FindByGame(game.Id);
+                    if (winners.Count() == 0)
+                    {
+                        SaveWinners();
+                        Page.Response.Redirect(Page.Request.Url.ToString(), true);
+                    }
+                }
+
+                SetVisible();
             }
         }
         private void LoadInfo()
@@ -58,6 +68,8 @@ namespace MonsterGame
             ComboResults.Items.Add(new ListItem("WIN", ((int)RoundResult.W).ToString()));
             ComboResults.Items.Add(new ListItem("DRAW", ((int)RoundResult.P).ToString()));
             ComboResults.Items.Add(new ListItem("LOSE", ((int)RoundResult.L).ToString()));
+
+            Prize.InnerText = "$" + game.Prize;
         }
 
         private void SetVisible()
@@ -69,6 +81,9 @@ namespace MonsterGame
             {
                 liWinner.Visible = true;
                 DivWinners.Visible = true;
+                List<double?> prizeList = new WinnerDAO().FindByGame(game.Id).Select(w => w.Prize).ToList();
+                if (prizeList.Contains(null)) BtnPrize.Visible = true;
+                else BtnPrize.Visible = false;
             }
             else
             {
@@ -90,11 +105,9 @@ namespace MonsterGame
             {
                 game.Status = (int)GameStatus.COMPLETED;
                 bool success = new GameDAO().Update(game);
-                // Add Winners to Winner table and then Page Redirect? Refresh? or SetVisible?
-                
-
-                SetVisible();
-                return;
+                // Add Winners to Winner table and then Page Refresh
+                if (success) SaveWinners();
+                Page.Response.Redirect(Page.Request.Url.ToString(), true);
             }
             else if (game.Status == (int)GameStatus.STARTED)
             {
@@ -105,9 +118,43 @@ namespace MonsterGame
             }
         }
 
+        private void SaveWinners()
+        {
+            WinnerController winnerController = new WinnerController();
+            bool success = winnerController.AddWinners(game.Id);
+        }
+
         protected void BtnPrize_Click(object sender, EventArgs e)
         {
+            WinnerDAO winnerDAO = new WinnerDAO();
+            UserDAO userDAO = new UserDAO();
+            MovementDAO movementDAO = new MovementDAO();
+            List<Winner> winners = winnerDAO.FindByGame(game.Id);
+            double prize = game.Prize ?? 0;
 
+            foreach (Winner winner in winners)
+            {
+                winner.Prize = prize * (winner.Rate / 100);
+                winnerDAO.Update(winner);
+                User user = userDAO.FindByID(winner.UserID ?? 0);
+                if (user != null)
+                {
+                    // Add Balance of User
+                    user.Balance = (user.Balance ?? 0) + winner.Prize;
+                    userDAO.Update(user);
+
+                    // Add A Movement
+                    if (winner.Prize == 0) continue;
+                    Movement movement = new Movement();
+                    movement.UserID = user.Id;
+                    movement.Amount = winner.Prize;
+                    movement.Note = "Winner Prize";
+                    movement.Type = (int)MovementType.DEPOSIT;
+                    movement.MoveDate = DateTime.Now;
+                    movementDAO.Insert(movement);
+                }
+            }
+            SetVisible();
         }
 
         protected void BtnChangeTeam_Click(object sender, EventArgs e)
@@ -173,6 +220,21 @@ namespace MonsterGame
                 ServerValidator1.IsValid = false;
                 return;
             }
+        }
+
+        protected void BtnPercent_Click(object sender, EventArgs e)
+        {
+            double percent = ParseUtil.TryParseDouble(TxtPercent.Text) ?? 0;
+            int winnerID = ParseUtil.TryParseInt(HfWinnerID.Value) ?? 0;
+
+            bool success = new WinnerController().UpdateWinnerPercent(winnerID, percent);
+            if (!success)
+            {
+                ServerValidator2.IsValid = false;
+                return;
+            }
+
+            Page.Response.Redirect(Page.Request.Url.ToString(), true);
         }
     }
 }

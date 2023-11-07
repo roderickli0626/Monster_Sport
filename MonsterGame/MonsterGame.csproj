@@ -348,6 +348,7 @@
     <Compile Include="Controller\SessionController.cs" />
     <Compile Include="Controller\TicketController.cs" />
     <Compile Include="Controller\UserController.cs" />
+    <Compile Include="Controller\WinnerController.cs" />
     <Compile Include="DAO\BasicDAO.cs" />
     <Compile Include="DAO\GameDAO.cs" />
     <Compile Include="DAO\MovementDAO.cs" />
@@ -417,6 +418,7 @@
     <Compile Include="Model\TicketCheck.cs" />
     <Compile Include="Model\TicketResultCheck.cs" />
     <Compile Include="Model\UserCheck.cs" />
+    <Compile Include="Model\WinnerCheck.cs" />
     <Compile Include="Movements.aspx.cs">
       <DependentUpon>Movements.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

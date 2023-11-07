@@ -194,7 +194,7 @@ namespace MonsterGame.Controller
 
         public bool SaveGame(int? gameID, string title, DateTime? sdate, DateTime? edate, double fee, double tax, 
             int status, int minPlayers, int teamNum, string note, double percent1, double percent2, double percent3, 
-            double percent4, double percent5, double percent6, List<int> teamList)
+            double percent4, double percent5, int numOfWinners, List<int> teamList)
         {
             Game game = gameDao.FindByID(gameID ?? 0);
             if (game == null)
@@ -214,6 +214,7 @@ namespace MonsterGame.Controller
                 game.PercentForThird = percent3;
                 game.PercentForForth = percent4;
                 game.PercentForFifth = percent5;
+                game.NumOfWinners = numOfWinners;
 
                 int savedGameID =  gameDao.Insert(game);
                 foreach (int teamID in teamList)
@@ -241,6 +242,7 @@ namespace MonsterGame.Controller
                 game.PercentForThird = percent3;
                 game.PercentForForth = percent4;
                 game.PercentForFifth = percent5;
+                game.NumOfWinners = numOfWinners;
 
                 teamForGameDao.DeleteByGame(game.Id);
                 foreach (int teamID in teamList)

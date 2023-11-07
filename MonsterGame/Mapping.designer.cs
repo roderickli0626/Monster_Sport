@@ -30,9 +30,6 @@ namespace MonsterGame
 		
     #region Extensibility Method Definitions
     partial void OnCreated();
-    partial void InsertWinner(Winner instance);
-    partial void UpdateWinner(Winner instance);
-    partial void DeleteWinner(Winner instance);
     partial void InsertTeam(Team instance);
     partial void UpdateTeam(Team instance);
     partial void DeleteTeam(Team instance);
@@ -60,6 +57,9 @@ namespace MonsterGame
     partial void InsertGame(Game instance);
     partial void UpdateGame(Game instance);
     partial void DeleteGame(Game instance);
+    partial void InsertWinner(Winner instance);
+    partial void UpdateWinner(Winner instance);
+    partial void DeleteWinner(Winner instance);
     #endregion
 		
 		public MappingDataContext(string connection) : 
@@ -84,14 +84,6 @@ namespace MonsterGame
 				base(connection, mappingSource)
 		{
 			OnCreated();
-		}
-		
-		public System.Data.Linq.Table<Winner> Winners
-		{
-			get
-			{
-				return this.GetTable<Winner>();
-			}
 		}
 		
 		public System.Data.Linq.Table<Team> Teams
@@ -165,268 +157,12 @@ namespace MonsterGame
 				return this.GetTable<Game>();
 			}
 		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Winner")]
-	public partial class Winner : INotifyPropertyChanging, INotifyPropertyChanged
-	{
 		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _Id;
-		
-		private System.Nullable<int> _GameID;
-		
-		private System.Nullable<int> _UserID;
-		
-		private System.Nullable<double> _Prize;
-		
-		private string _Note;
-		
-		private System.Nullable<System.DateTime> _WinDate;
-		
-		private EntityRef<User> _User;
-		
-		private EntityRef<Game> _Game;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIdChanging(int value);
-    partial void OnIdChanged();
-    partial void OnGameIDChanging(System.Nullable<int> value);
-    partial void OnGameIDChanged();
-    partial void OnUserIDChanging(System.Nullable<int> value);
-    partial void OnUserIDChanged();
-    partial void OnPrizeChanging(System.Nullable<double> value);
-    partial void OnPrizeChanged();
-    partial void OnNoteChanging(string value);
-    partial void OnNoteChanged();
-    partial void OnWinDateChanging(System.Nullable<System.DateTime> value);
-    partial void OnWinDateChanged();
-    #endregion
-		
-		public Winner()
-		{
-			this._User = default(EntityRef<User>);
-			this._Game = default(EntityRef<Game>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int Id
+		public System.Data.Linq.Table<Winner> Winners
 		{
 			get
 			{
-				return this._Id;
-			}
-			set
-			{
-				if ((this._Id != value))
-				{
-					this.OnIdChanging(value);
-					this.SendPropertyChanging();
-					this._Id = value;
-					this.SendPropertyChanged("Id");
-					this.OnIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GameID", DbType="Int")]
-		public System.Nullable<int> GameID
-		{
-			get
-			{
-				return this._GameID;
-			}
-			set
-			{
-				if ((this._GameID != value))
-				{
-					if (this._Game.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnGameIDChanging(value);
-					this.SendPropertyChanging();
-					this._GameID = value;
-					this.SendPropertyChanged("GameID");
-					this.OnGameIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserID", DbType="Int")]
-		public System.Nullable<int> UserID
-		{
-			get
-			{
-				return this._UserID;
-			}
-			set
-			{
-				if ((this._UserID != value))
-				{
-					if (this._User.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnUserIDChanging(value);
-					this.SendPropertyChanging();
-					this._UserID = value;
-					this.SendPropertyChanged("UserID");
-					this.OnUserIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Prize", DbType="Float")]
-		public System.Nullable<double> Prize
-		{
-			get
-			{
-				return this._Prize;
-			}
-			set
-			{
-				if ((this._Prize != value))
-				{
-					this.OnPrizeChanging(value);
-					this.SendPropertyChanging();
-					this._Prize = value;
-					this.SendPropertyChanged("Prize");
-					this.OnPrizeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Note", DbType="VarChar(MAX)")]
-		public string Note
-		{
-			get
-			{
-				return this._Note;
-			}
-			set
-			{
-				if ((this._Note != value))
-				{
-					this.OnNoteChanging(value);
-					this.SendPropertyChanging();
-					this._Note = value;
-					this.SendPropertyChanged("Note");
-					this.OnNoteChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_WinDate", DbType="DateTime")]
-		public System.Nullable<System.DateTime> WinDate
-		{
-			get
-			{
-				return this._WinDate;
-			}
-			set
-			{
-				if ((this._WinDate != value))
-				{
-					this.OnWinDateChanging(value);
-					this.SendPropertyChanging();
-					this._WinDate = value;
-					this.SendPropertyChanged("WinDate");
-					this.OnWinDateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Winner", Storage="_User", ThisKey="UserID", OtherKey="Id", IsForeignKey=true, DeleteRule="CASCADE")]
-		public User User
-		{
-			get
-			{
-				return this._User.Entity;
-			}
-			set
-			{
-				User previousValue = this._User.Entity;
-				if (((previousValue != value) 
-							|| (this._User.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._User.Entity = null;
-						previousValue.Winners.Remove(this);
-					}
-					this._User.Entity = value;
-					if ((value != null))
-					{
-						value.Winners.Add(this);
-						this._UserID = value.Id;
-					}
-					else
-					{
-						this._UserID = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("User");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Game_Winner", Storage="_Game", ThisKey="GameID", OtherKey="Id", IsForeignKey=true, DeleteRule="CASCADE")]
-		public Game Game
-		{
-			get
-			{
-				return this._Game.Entity;
-			}
-			set
-			{
-				Game previousValue = this._Game.Entity;
-				if (((previousValue != value) 
-							|| (this._Game.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Game.Entity = null;
-						previousValue.Winners.Remove(this);
-					}
-					this._Game.Entity = value;
-					if ((value != null))
-					{
-						value.Winners.Add(this);
-						this._GameID = value.Id;
-					}
-					else
-					{
-						this._GameID = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("Game");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+				return this.GetTable<Winner>();
 			}
 		}
 	}
@@ -1364,8 +1100,6 @@ namespace MonsterGame
 		
 		private System.Nullable<System.DateTime> _ResetTokenExpiry;
 		
-		private EntitySet<Winner> _Winners;
-		
 		private EntitySet<Ticket> _Tickets;
 		
 		private EntitySet<PaymentResult> _PaymentResults;
@@ -1375,6 +1109,8 @@ namespace MonsterGame
 		private EntitySet<Movement> _Movements;
 		
 		private EntitySet<Movement> _Movements1;
+		
+		private EntitySet<Winner> _Winners;
 		
 		private EntityRef<User> _User1;
 		
@@ -1412,12 +1148,12 @@ namespace MonsterGame
 		
 		public User()
 		{
-			this._Winners = new EntitySet<Winner>(new Action<Winner>(this.attach_Winners), new Action<Winner>(this.detach_Winners));
 			this._Tickets = new EntitySet<Ticket>(new Action<Ticket>(this.attach_Tickets), new Action<Ticket>(this.detach_Tickets));
 			this._PaymentResults = new EntitySet<PaymentResult>(new Action<PaymentResult>(this.attach_PaymentResults), new Action<PaymentResult>(this.detach_PaymentResults));
 			this._Users = new EntitySet<User>(new Action<User>(this.attach_Users), new Action<User>(this.detach_Users));
 			this._Movements = new EntitySet<Movement>(new Action<Movement>(this.attach_Movements), new Action<Movement>(this.detach_Movements));
 			this._Movements1 = new EntitySet<Movement>(new Action<Movement>(this.attach_Movements1), new Action<Movement>(this.detach_Movements1));
+			this._Winners = new EntitySet<Winner>(new Action<Winner>(this.attach_Winners), new Action<Winner>(this.detach_Winners));
 			this._User1 = default(EntityRef<User>);
 			OnCreated();
 		}
@@ -1686,19 +1422,6 @@ namespace MonsterGame
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Winner", Storage="_Winners", ThisKey="Id", OtherKey="UserID")]
-		public EntitySet<Winner> Winners
-		{
-			get
-			{
-				return this._Winners;
-			}
-			set
-			{
-				this._Winners.Assign(value);
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Ticket", Storage="_Tickets", ThisKey="Id", OtherKey="UserID")]
 		public EntitySet<Ticket> Tickets
 		{
@@ -1764,6 +1487,19 @@ namespace MonsterGame
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Winner", Storage="_Winners", ThisKey="Id", OtherKey="UserID")]
+		public EntitySet<Winner> Winners
+		{
+			get
+			{
+				return this._Winners;
+			}
+			set
+			{
+				this._Winners.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_User", Storage="_User1", ThisKey="ParentID", OtherKey="Id", IsForeignKey=true)]
 		public User User1
 		{
@@ -1816,18 +1552,6 @@ namespace MonsterGame
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
-		}
-		
-		private void attach_Winners(Winner entity)
-		{
-			this.SendPropertyChanging();
-			entity.User = this;
-		}
-		
-		private void detach_Winners(Winner entity)
-		{
-			this.SendPropertyChanging();
-			entity.User = null;
 		}
 		
 		private void attach_Tickets(Ticket entity)
@@ -1888,6 +1612,18 @@ namespace MonsterGame
 		{
 			this.SendPropertyChanging();
 			entity.User1 = null;
+		}
+		
+		private void attach_Winners(Winner entity)
+		{
+			this.SendPropertyChanging();
+			entity.User = this;
+		}
+		
+		private void detach_Winners(Winner entity)
+		{
+			this.SendPropertyChanging();
+			entity.User = null;
 		}
 	}
 	
@@ -2708,11 +2444,11 @@ namespace MonsterGame
 		
 		private System.Nullable<int> _NumOfWinners;
 		
-		private EntitySet<Winner> _Winners;
-		
 		private EntitySet<TeamsForGame> _TeamsForGames;
 		
 		private EntitySet<Ticket> _Tickets;
+		
+		private EntitySet<Winner> _Winners;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -2758,9 +2494,9 @@ namespace MonsterGame
 		
 		public Game()
 		{
-			this._Winners = new EntitySet<Winner>(new Action<Winner>(this.attach_Winners), new Action<Winner>(this.detach_Winners));
 			this._TeamsForGames = new EntitySet<TeamsForGame>(new Action<TeamsForGame>(this.attach_TeamsForGames), new Action<TeamsForGame>(this.detach_TeamsForGames));
 			this._Tickets = new EntitySet<Ticket>(new Action<Ticket>(this.attach_Tickets), new Action<Ticket>(this.detach_Tickets));
+			this._Winners = new EntitySet<Winner>(new Action<Winner>(this.attach_Winners), new Action<Winner>(this.detach_Winners));
 			OnCreated();
 		}
 		
@@ -3124,19 +2860,6 @@ namespace MonsterGame
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Game_Winner", Storage="_Winners", ThisKey="Id", OtherKey="GameID")]
-		public EntitySet<Winner> Winners
-		{
-			get
-			{
-				return this._Winners;
-			}
-			set
-			{
-				this._Winners.Assign(value);
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Game_TeamsForGame", Storage="_TeamsForGames", ThisKey="Id", OtherKey="GameID")]
 		public EntitySet<TeamsForGame> TeamsForGames
 		{
@@ -3163,6 +2886,19 @@ namespace MonsterGame
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Game_Winner", Storage="_Winners", ThisKey="Id", OtherKey="GameID")]
+		public EntitySet<Winner> Winners
+		{
+			get
+			{
+				return this._Winners;
+			}
+			set
+			{
+				this._Winners.Assign(value);
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -3181,18 +2917,6 @@ namespace MonsterGame
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
-		}
-		
-		private void attach_Winners(Winner entity)
-		{
-			this.SendPropertyChanging();
-			entity.Game = this;
-		}
-		
-		private void detach_Winners(Winner entity)
-		{
-			this.SendPropertyChanging();
-			entity.Game = null;
 		}
 		
 		private void attach_TeamsForGames(TeamsForGame entity)
@@ -3217,6 +2941,306 @@ namespace MonsterGame
 		{
 			this.SendPropertyChanging();
 			entity.Game = null;
+		}
+		
+		private void attach_Winners(Winner entity)
+		{
+			this.SendPropertyChanging();
+			entity.Game = this;
+		}
+		
+		private void detach_Winners(Winner entity)
+		{
+			this.SendPropertyChanging();
+			entity.Game = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Winner")]
+	public partial class Winner : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id;
+		
+		private System.Nullable<int> _GameID;
+		
+		private System.Nullable<int> _UserID;
+		
+		private System.Nullable<double> _Prize;
+		
+		private string _Note;
+		
+		private System.Nullable<System.DateTime> _WinDate;
+		
+		private System.Nullable<double> _Rate;
+		
+		private EntityRef<Game> _Game;
+		
+		private EntityRef<User> _User;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void OnGameIDChanging(System.Nullable<int> value);
+    partial void OnGameIDChanged();
+    partial void OnUserIDChanging(System.Nullable<int> value);
+    partial void OnUserIDChanged();
+    partial void OnPrizeChanging(System.Nullable<double> value);
+    partial void OnPrizeChanged();
+    partial void OnNoteChanging(string value);
+    partial void OnNoteChanged();
+    partial void OnWinDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnWinDateChanged();
+    partial void OnRateChanging(System.Nullable<double> value);
+    partial void OnRateChanged();
+    #endregion
+		
+		public Winner()
+		{
+			this._Game = default(EntityRef<Game>);
+			this._User = default(EntityRef<User>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GameID", DbType="Int")]
+		public System.Nullable<int> GameID
+		{
+			get
+			{
+				return this._GameID;
+			}
+			set
+			{
+				if ((this._GameID != value))
+				{
+					if (this._Game.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnGameIDChanging(value);
+					this.SendPropertyChanging();
+					this._GameID = value;
+					this.SendPropertyChanged("GameID");
+					this.OnGameIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserID", DbType="Int")]
+		public System.Nullable<int> UserID
+		{
+			get
+			{
+				return this._UserID;
+			}
+			set
+			{
+				if ((this._UserID != value))
+				{
+					if (this._User.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnUserIDChanging(value);
+					this.SendPropertyChanging();
+					this._UserID = value;
+					this.SendPropertyChanged("UserID");
+					this.OnUserIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Prize", DbType="Float")]
+		public System.Nullable<double> Prize
+		{
+			get
+			{
+				return this._Prize;
+			}
+			set
+			{
+				if ((this._Prize != value))
+				{
+					this.OnPrizeChanging(value);
+					this.SendPropertyChanging();
+					this._Prize = value;
+					this.SendPropertyChanged("Prize");
+					this.OnPrizeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Note", DbType="VarChar(MAX)")]
+		public string Note
+		{
+			get
+			{
+				return this._Note;
+			}
+			set
+			{
+				if ((this._Note != value))
+				{
+					this.OnNoteChanging(value);
+					this.SendPropertyChanging();
+					this._Note = value;
+					this.SendPropertyChanged("Note");
+					this.OnNoteChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_WinDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> WinDate
+		{
+			get
+			{
+				return this._WinDate;
+			}
+			set
+			{
+				if ((this._WinDate != value))
+				{
+					this.OnWinDateChanging(value);
+					this.SendPropertyChanging();
+					this._WinDate = value;
+					this.SendPropertyChanged("WinDate");
+					this.OnWinDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Rate", DbType="Float")]
+		public System.Nullable<double> Rate
+		{
+			get
+			{
+				return this._Rate;
+			}
+			set
+			{
+				if ((this._Rate != value))
+				{
+					this.OnRateChanging(value);
+					this.SendPropertyChanging();
+					this._Rate = value;
+					this.SendPropertyChanged("Rate");
+					this.OnRateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Game_Winner", Storage="_Game", ThisKey="GameID", OtherKey="Id", IsForeignKey=true, DeleteRule="CASCADE")]
+		public Game Game
+		{
+			get
+			{
+				return this._Game.Entity;
+			}
+			set
+			{
+				Game previousValue = this._Game.Entity;
+				if (((previousValue != value) 
+							|| (this._Game.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Game.Entity = null;
+						previousValue.Winners.Remove(this);
+					}
+					this._Game.Entity = value;
+					if ((value != null))
+					{
+						value.Winners.Add(this);
+						this._GameID = value.Id;
+					}
+					else
+					{
+						this._GameID = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Game");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Winner", Storage="_User", ThisKey="UserID", OtherKey="Id", IsForeignKey=true, DeleteRule="CASCADE")]
+		public User User
+		{
+			get
+			{
+				return this._User.Entity;
+			}
+			set
+			{
+				User previousValue = this._User.Entity;
+				if (((previousValue != value) 
+							|| (this._User.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._User.Entity = null;
+						previousValue.Winners.Remove(this);
+					}
+					this._User.Entity = value;
+					if ((value != null))
+					{
+						value.Winners.Add(this);
+						this._UserID = value.Id;
+					}
+					else
+					{
+						this._UserID = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("User");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
 		}
 	}
 }

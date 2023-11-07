@@ -75,7 +75,7 @@ namespace MonsterGame
             double percent3 = ParseUtil.TryParseDouble(TxtPercent3.Text) ?? 0;
             double percent4 = ParseUtil.TryParseDouble(TxtPercent4.Text) ?? 0;
             double percent5 = ParseUtil.TryParseDouble(TxtPercent5.Text) ?? 0;
-            double percent6 = ParseUtil.TryParseDouble(TxtPercent6.Text) ?? 0;
+            int NumOfWinners = ParseUtil.TryParseInt(TxtWinners.Text) ?? 0;
 
             string[] selectedValues = Request.Form.GetValues(ComboTeams.UniqueID);
             List<int> teamList = new List<int>();
@@ -86,7 +86,7 @@ namespace MonsterGame
             }
 
             int? gameID = ParseUtil.TryParseInt(HfGameID.Value);
-            bool success = gameController.SaveGame(gameID, title, sdate, edate, fee, tax, status, minPlayers, teamNum, note, percent1, percent2, percent3, percent4, percent5, percent6, teamList);
+            bool success = gameController.SaveGame(gameID, title, sdate, edate, fee, tax, status, minPlayers, teamNum, note, percent1, percent2, percent3, percent4, percent5, NumOfWinners, teamList);
             if (!success)
             {
                 ServerValidator.IsValid = false;

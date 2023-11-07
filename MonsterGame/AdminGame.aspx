@@ -321,8 +321,8 @@
                                         </div>
                                         <div class="col-md-2">
                                             <div class="form-group">
-                                                <label for="TxtPercent6" class="form-label">Percent 6</label>
-                                                <asp:TextBox runat="server" ID="TxtPercent6" ClientIDMode="Static" CssClass="form-control form--control style-two"></asp:TextBox>
+                                                <label for="TxtPercent6" class="form-label">Winners</label>
+                                                <asp:TextBox runat="server" ID="TxtWinners" ClientIDMode="Static" CssClass="form-control form--control style-two"></asp:TextBox>
                                             </div>
                                         </div>
                                         <div class="col-md-12">
@@ -389,7 +389,7 @@
             $("#TxtPercent3").val("");
             $("#TxtPercent4").val("");
             $("#TxtPercent5").val("");
-            $("#TxtPercent6").val("");
+            $("#TxtWinners").val("");
 
             return false;
         });
@@ -482,6 +482,7 @@
                 $("#TxtPercent3").val(row.Percent3);
                 $("#TxtPercent4").val(row.Percent4);
                 $("#TxtPercent5").val(row.Percent5);
+                $("#TxtWinners").val(row.Winners);
             });
 
             datatable.on('click', '.btn-delete', function (e) {
