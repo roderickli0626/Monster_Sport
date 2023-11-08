@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Policy;
 using System.Web;
+using System.Collections;
 
 namespace MonsterGame.Controller
 {
@@ -208,7 +209,8 @@ namespace MonsterGame.Controller
                 game.NumberOfTeams = teamNum;
                 game.StartDate = sdate;
                 game.EndDate = edate;
-                game.Status = status;
+                //game.Status = status;
+                game.Status = (int)GameStatus.OPEN;
                 game.PercentForFirst = percent1;
                 game.PercentForSecond = percent2;
                 game.PercentForThird = percent3;
@@ -244,16 +246,61 @@ namespace MonsterGame.Controller
                 game.PercentForFifth = percent5;
                 game.NumOfWinners = numOfWinners;
 
-                teamForGameDao.DeleteByGame(game.Id);
-                foreach (int teamID in teamList)
+                List<int> existedTeamList = teamForGameDao.FindByGame(game.Id).Select(t => t.TeamID ?? 0).ToList();
+                bool areEqual = existedTeamList.OrderBy(x => x).SequenceEqual(teamList.OrderBy(x => x));
+                if (!areEqual)
                 {
-                    TeamsForGame teamsForGame = new TeamsForGame();
-                    teamsForGame.TeamID = teamID;
-                    teamsForGame.GameID = gameID;
-                    teamForGameDao.Insert(teamsForGame);
+                    teamForGameDao.DeleteByGame(game.Id);
+                    foreach (int teamID in teamList)
+                    {
+                        TeamsForGame teamsForGame = new TeamsForGame();
+                        teamsForGame.TeamID = teamID;
+                        teamsForGame.GameID = gameID;
+                        teamForGameDao.Insert(teamsForGame);
+                    }
+                }
+                bool success = gameDao.Update(game);
+
+                //////////////////////////
+                // If Game status is changed to Completed or Closed by SA manually, add Winners to the game.
+                if (game.Status == (int)GameStatus.COMPLETED || game.Status == (int)GameStatus.CLOSED)
+                {
+                    List<Winner> winners = new WinnerDAO().FindByGame(game.Id);
+                    if (winners.Count() == 0)
+                    {
+                        WinnerController winnerController = new WinnerController();
+                        success = winnerController.AddWinners(game.Id);
+                    }
                 }
 
-                return gameDao.Update(game);
+                // AUTO OPERATION WHEN Friday 18:00
+                // Game Status change from OPEN/TEAM CHOICE to STARTED
+                // Add Game prize if game status change from OPEN to STARTED
+                // Assign teams to tickets without Team in current round
+                // TO REMOVE 
+                if (game.Status == (int)GameStatus.STARTED)
+                {
+                    game.Prize = (game.Fee ?? 0) * (game.RealPlayers ?? 0) * (100 - (game.Tax ?? 0)) / 100;
+                    gameDao.Update(game);
+
+                    List<Ticket> ticketList = new TicketDAO().FindByGame(game.Id);
+                    TicketResultDAO ticketResultDAO = new TicketResultDAO();
+                    List<int> allteamList = new TeamsForGameDAO().FindByGame(game.Id).Select(t => t.TeamID ?? 0).ToList();
+                    foreach (Ticket ticket in ticketList)
+                    {
+                        List<TicketResult> ticketResults = ticketResultDAO.FindByTicket(ticket.Id);
+                        List<int> assignedTeamList = ticketResults.Select(t => t.TeamID ?? 0).ToList();
+                        if (ticketResults.Count() == 0) continue;
+                        TicketResult lastticketResult = ticketResults[ticketResults.Count() - 1];
+                        if (lastticketResult.RoundResult != null && lastticketResult.TeamID == null)
+                        {
+                            lastticketResult.TeamID = allteamList.Where(i => !assignedTeamList.Contains(i)).FirstOrDefault();
+                            ticketResultDAO.Update(lastticketResult);
+                        }
+                    }
+                }
+                ///////////////////////
+                return success;
             }
         }
 

@@ -66,7 +66,7 @@ namespace MonsterGame
             DateTime? edate = ParseUtil.TryParseDate(TxtEndDate.Text, "dd/MM/yyyy HH.mm");
             double fee = ParseUtil.TryParseDouble(TxtFee.Text) ?? 0;
             double tax = ParseUtil.TryParseDouble(TxtTax.Text) ?? 0;
-            int status = ControlUtil.GetSelectedValue(ComboStatus) ?? (int)GameStatus.OPEN;
+            int status = ControlUtil.GetSelectedValue(ComboModalStatus) ?? (int)GameStatus.OPEN;
             int minPlayers = ParseUtil.TryParseInt(TxtMinPlayers.Text) ?? 0;
             int teamNum = ParseUtil.TryParseInt(TxtTeamNum.Text) ?? 0;
             string note = TxtNote.Text;
@@ -79,10 +79,13 @@ namespace MonsterGame
 
             string[] selectedValues = Request.Form.GetValues(ComboTeams.UniqueID);
             List<int> teamList = new List<int>();
-            foreach (string itemID in selectedValues)
+            if (selectedValues != null)
             {
-                int selectedValue = ParseUtil.TryParseInt(itemID) ?? 0;
-                teamList.Add(selectedValue);
+                foreach (string itemID in selectedValues)
+                {
+                    int selectedValue = ParseUtil.TryParseInt(itemID) ?? 0;
+                    teamList.Add(selectedValue);
+                }
             }
 
             int? gameID = ParseUtil.TryParseInt(HfGameID.Value);

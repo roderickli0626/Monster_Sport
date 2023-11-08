@@ -135,7 +135,7 @@
                                 <div class="row gy-4 justify-content-center">
                                     <asp:Repeater runat="server" ID="RepeaterGame">
                                         <ItemTemplate>
-                                            <div class="col-lg-4 col-xl-3 col-md-6 col-sm-6">
+                                            <div class="col-lg-4 col-xl-4 col-md-6 col-sm-6">
                                                 <div class="game-item">
                                                     <div class="game-inner">
                                                         <div class="game-item__thumb">

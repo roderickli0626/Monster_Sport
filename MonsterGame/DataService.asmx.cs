@@ -283,7 +283,8 @@ namespace MonsterGame
             ProcResult result = new ProcResult();
             Response.ContentType = "application/json; charset=utf-8";
 
-            if (!loginSystem.IsSuperAdminLoggedIn())
+            User user = loginSystem.GetCurrentUserAccount();
+            if (!loginSystem.IsSuperAdminLoggedIn() && (user == null || !loginSystem.IsUserLoggedIn()))
             {
                 Response.Write(serializer.Serialize(result));
                 return;
@@ -311,7 +312,8 @@ namespace MonsterGame
             ProcResult result = new ProcResult();
             Response.ContentType = "application/json; charset=utf-8";
 
-            if (!loginSystem.IsSuperAdminLoggedIn())
+            User user = loginSystem.GetCurrentUserAccount();
+            if (!loginSystem.IsSuperAdminLoggedIn() && (user == null || !loginSystem.IsUserLoggedIn()))
             {
                 Response.Write(serializer.Serialize(result));
                 return;
@@ -335,7 +337,8 @@ namespace MonsterGame
         [ScriptMethod(UseHttpGet = true, ResponseFormat = ResponseFormat.Json)]
         public void FindWinners(int draw, int start, int length, int gameID)
         {
-            if (!loginSystem.IsSuperAdminLoggedIn()) return;
+            User user = loginSystem.GetCurrentUserAccount();
+            if (!loginSystem.IsSuperAdminLoggedIn() && (user == null || !loginSystem.IsUserLoggedIn())) return;
 
             WinnerController winnerController = new WinnerController();
             SearchResult searchResult = winnerController.Search(start, length, gameID);
@@ -347,6 +350,35 @@ namespace MonsterGame
             result.recordsFiltered = searchResult.TotalCount;
 
             ResponseJson(result);
+        }
+
+        [WebMethod(EnableSession = true)]
+        [ScriptMethod(UseHttpGet = true, ResponseFormat = ResponseFormat.Json)]
+        public void FindMyTickets(int gameID, int userID)
+        {
+            HttpResponse Response = Context.Response;
+            ProcResult result = new ProcResult();
+            Response.ContentType = "application/json; charset=utf-8";
+
+            User user = loginSystem.GetCurrentUserAccount();
+            if (!loginSystem.IsSuperAdminLoggedIn() && (user == null || !loginSystem.IsUserLoggedIn()))
+            {
+                Response.Write(serializer.Serialize(result));
+                return;
+            }
+
+            try
+            {
+                TicketController ticketController = new TicketController();
+                result.data = ticketController.FindMyTickets(gameID, userID);
+                result.success = true;
+                Response.Write(serializer.Serialize(result));
+            }
+            catch (Exception ex)
+            {
+                result.success = false;
+                Response.Write(serializer.Serialize(result));
+            }
         }
         protected void ResponseJson(Object result)
         {

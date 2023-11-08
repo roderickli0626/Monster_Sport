@@ -27,11 +27,15 @@ namespace MonsterGame.DAO
         {
             return GetContext().Tickets.Where(g => g.UserID == userID).ToList();
         }
-        public bool Insert(Ticket ticket)
+        public List<Ticket> FindByGameAndUser(int gameID, int userID)
+        {
+            return GetContext().Tickets.Where(g => g.UserID == userID && g.GameID == gameID).ToList();
+        }
+        public int Insert(Ticket ticket)
         {
             GetContext().Tickets.InsertOnSubmit(ticket);
             GetContext().SubmitChanges();
-            return true;
+            return ticket.Id;
         }
 
         public bool Update(Ticket ticket)

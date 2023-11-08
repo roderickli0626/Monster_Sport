@@ -39,26 +39,14 @@ namespace MonsterGame
             if (!IsPostBack)
             {
                 LoadInfo();
-                
-                // If Game status is Completed or Closed, but there is no Winner in the game, then add Winners to the game.
-                // This case can occur when SA changed game status as Completed or Closed Manually in AdminGames.aspx page.
-                if (game.Status == (int)GameStatus.COMPLETED || game.Status == (int)GameStatus.CLOSED)
-                {
-                    List<Winner> winners = new WinnerDAO().FindByGame(game.Id);
-                    if (winners.Count() == 0)
-                    {
-                        SaveWinners();
-                        Page.Response.Redirect(Page.Request.Url.ToString(), true);
-                    }
-                }
-
                 SetVisible();
             }
         }
         private void LoadInfo()
         {
             // Load Teams
-            List<Team> teamList = new TeamDAO().FindAll();
+            List<Team> teamList = new TeamsForGameDAO().FindByGame(game.Id).Select(t => t.Team).ToList();
+            //List<Team> teamList = new TeamDAO().FindAll();
             ControlUtil.DataBind(ComboTeams, teamList, "Id", "Description", "0", "");
 
             // Load Results
@@ -73,7 +61,12 @@ namespace MonsterGame
 
         private void SetVisible()
         {
-            if (game.Status == (int)GameStatus.OPEN || game.Status == (int)GameStatus.STARTED) BtnRound.Visible = true;
+            if (game.Status == (int)GameStatus.OPEN || game.Status == (int)GameStatus.STARTED)
+            {
+                List<Ticket> ticketList = new TicketDAO().FindByGame(game.Id);
+                if (ticketList.Count() == 0) BtnRound.Visible = false;
+                else BtnRound.Visible = true;
+            }
             else BtnRound.Visible = false;
 
             if (game.Status == (int)GameStatus.COMPLETED || game.Status == (int)GameStatus.CLOSED)
@@ -100,7 +93,7 @@ namespace MonsterGame
             bool success2 = ticketController.AddNewRound(game.Id, currentRound);
 
             int remainedTickets = ticketController.GetRemainedTickets(game.Id, currentRound);
-            if (remainedTickets <= game.NumOfWinners)
+            if (remainedTickets <= game.NumOfWinners && game.Status != (int)GameStatus.OPEN)
             {
                 game.Status = (int)GameStatus.COMPLETED;
                 bool success = new GameDAO().Update(game);
