@@ -635,6 +635,11 @@
                 datatableForWinner.fnDraw();
             };
 
+            proxy.client.receiveStartGameNotification = function (message) {
+                alert(message);
+                window.location.reload();
+            };
+            
             $.connection.hub.start();
         })
     </script>

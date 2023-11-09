@@ -36,5 +36,9 @@ namespace MonsterGame
         {
             Clients.All.receivePrizeNotification(message);
         }
+        public void SendStartGameNotifications(string message)
+        {
+            Clients.All.receiveStartGameNotification(message);
+        }
     }
 }

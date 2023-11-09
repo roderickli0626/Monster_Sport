@@ -266,6 +266,7 @@
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
+    <Content Include="Scripts\jquery-3.4.1.sec.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.js" />
     <Content Include="Scripts\jquery.signalR-2.4.3.js" />
@@ -302,6 +303,7 @@
     <Content Include="Scripts\WebForms\WebParts.js" />
     <Content Include="Scripts\WebForms\WebUIValidation.js" />
     <Content Include="Site.Master" />
+    <Content Include="TaskRunner.aspx" />
     <Content Include="UserGameDetail.aspx" />
     <Content Include="UserInfo.aspx" />
     <Content Include="Users.aspx" />
@@ -410,7 +412,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="GlobalTimerModule.cs" />
     <Compile Include="Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -510,6 +511,13 @@
     </Compile>
     <Compile Include="Site.Mobile.Master.designer.cs">
       <DependentUpon>Site.Mobile.Master</DependentUpon>
+    </Compile>
+    <Compile Include="TaskRunner.aspx.cs">
+      <DependentUpon>TaskRunner.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TaskRunner.aspx.designer.cs">
+      <DependentUpon>TaskRunner.aspx</DependentUpon>
     </Compile>
     <Compile Include="UserGameDetail.aspx.cs">
       <DependentUpon>UserGameDetail.aspx</DependentUpon>

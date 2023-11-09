@@ -151,7 +151,7 @@
                                 </asp:UpdatePanel>
                             </div>
                             <div class="modal-footer modal--footer">
-                                <asp:Button runat="server" ID="BtnResult" CssClass="btn btn--warning btn--md" Text="Save" CausesValidation="false" OnClick="BtnResult_Click"/>
+                                <asp:Button runat="server" ID="BtnResult" CssClass="btn btn--warning btn--md" ClientIDMode="Static" Text="Save" CausesValidation="false" OnClick="BtnResult_Click"/>
                                 <button type="button" class="btn btn--danger btn--md" data-bs-dismiss="modal">Close</button>
                             </div>
                         </div>
@@ -193,6 +193,7 @@
 <asp:Content ID="Content3" ContentPlaceHolderID="FooterPlaceHolder" runat="server">
     <script src="Scripts/JS/jquery.dataTables.js"></script>
     <script src="Scripts/JS/datatables.js"></script>
+    <script src="Scripts/jquery-3.4.1.sec.js"></script>
     <script src="Scripts/jquery.signalR-2.4.3.js"></script>
     <script src="signalr/hubs"></script>
     <script>
@@ -501,8 +502,6 @@
                 else return false;
             });
 
-            // TODO
-
             // Real Time Notification
             var proxy = $.connection.notificationHub;
 
@@ -513,6 +512,11 @@
 
             proxy.client.receiveTeamChoiceNotificationA = function (message) {
                 drawTable();
+            };
+
+            proxy.client.receiveStartGameNotification = function (message) {
+                alert(message);
+                window.location.reload();
             };
 
             $.connection.hub.start();

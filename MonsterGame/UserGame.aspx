@@ -185,4 +185,16 @@
     </section>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="FooterPlaceHolder" runat="server">
+    <script src="Scripts/jquery.signalR-2.4.3.js"></script>
+    <script src="signalr/hubs"></script>
+    <script>
+        var proxy = $.connection.notificationHub;
+
+        proxy.client.receiveStartGameNotification = function (message) {
+            alert(message);
+            window.location.reload();
+        };
+
+        $.connection.hub.start();
+    </script>
 </asp:Content>

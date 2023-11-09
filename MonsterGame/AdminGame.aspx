@@ -354,7 +354,18 @@
     <script src="Scripts/bootstrap.bundle.min.js"></script>
     <script src="Scripts/JS/jquery.datetimepicker.full.min.js"></script>
     <script src="Scripts/JS/select2.js"></script>
+    <script src="Scripts/jquery.signalR-2.4.3.js"></script>
+    <script src="signalr/hubs"></script>
     <script>
+        var proxy = $.connection.notificationHub;
+
+        proxy.client.receiveStartGameNotification = function (message) {
+            alert(message);
+            window.location.reload();
+        };
+
+        $.connection.hub.start();
+
         $("#ComboTeams").select2({
             dropdownParent: $(".modal-body")
         });

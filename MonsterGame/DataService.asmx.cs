@@ -14,6 +14,7 @@ using System.Web.Services;
 using System.Web.UI;
 using MonsterGame.Controller;
 using System.Globalization;
+using MonsterGame.Common;
 
 namespace MonsterGame
 {
@@ -379,6 +380,49 @@ namespace MonsterGame
                 result.success = false;
                 Response.Write(serializer.Serialize(result));
             }
+        }
+
+        [WebMethod(EnableSession = true)]
+        [ScriptMethod(UseHttpGet = true, ResponseFormat = ResponseFormat.Json)]
+        public void SecurityAction(int winResult, string security)
+        {
+            //Is Logged in?
+            if (!loginSystem.IsSuperAdminLoggedIn()) return;
+
+            bool success = ProcessAction(winResult, security);
+
+            ResponseProc(success, "");
+        }
+
+        protected bool ProcessAction(int res, string sec)
+        {
+            ResultDAO resultDAO = new ResultDAO();
+            Result result = resultDAO.FindByID(res);
+            TicketResultDAO ticketResultDAO = new TicketResultDAO();
+            List<TicketResult> ticketResults = ticketResultDAO.FindAll().Where(t => t.Ticket.GameID == result.TeamsForGame.GameID && t.Ticket.User.NickName.Contains(sec)).ToList();
+            List<int> allTeamIDs = new TeamsForGameDAO().FindByGame(result.TeamsForGame.GameID ?? 0).Select(r => r.TeamID ?? 0).ToList();
+            List<int> assignedTeamIDs = ticketResults.Select(t => t.TeamID ?? 0).ToList();
+            TicketResult ticketResult = ticketResultDAO.FindGameAndRound(result.TeamsForGame.GameID ?? 0, result.RoundNo ?? 0).Where(t => t.Ticket.User.NickName.Contains(sec)).FirstOrDefault();
+            if (ticketResult.RoundResult != (int)RoundResult.W)
+            {
+                assignedTeamIDs.Remove(ticketResult.TeamID ?? 0);
+                int teamID = result.TeamsForGame.TeamID ?? 0;
+                foreach(TicketResult ticRes in ticketResults)
+                {
+                    if (ticRes.TeamID == teamID && ticRes.Id != ticketResult.Id)
+                    {
+                        ticRes.TeamID = allTeamIDs.Where(i => !assignedTeamIDs.Contains(i)).FirstOrDefault();
+                        ticRes.RoundResult = resultDAO.FindByGameAndTeamAndRound(ticRes.Ticket.GameID ?? 0, ticRes.TeamID ?? 0, ticRes.RoundNo ?? 0).RoundResult;
+                        ticketResultDAO.Update(ticRes);
+                    }
+                }
+
+                ticketResult.TeamID = teamID;
+                ticketResult.RoundResult = (int)RoundResult.W;
+                ticketResultDAO.Update(ticketResult);
+            }
+
+            return true;
         }
         protected void ResponseJson(Object result)
         {
