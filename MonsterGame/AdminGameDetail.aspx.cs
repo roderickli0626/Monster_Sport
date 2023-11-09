@@ -10,6 +10,7 @@ using MonsterGame.Util;
 using MonsterGame.DAO;
 using PayPal.Api;
 using MonsterGame.Common;
+using Microsoft.AspNet.SignalR;
 
 namespace MonsterGame
 {
@@ -99,15 +100,28 @@ namespace MonsterGame
                 bool success = new GameDAO().Update(game);
                 // Add Winners to Winner table and then Page Refresh
                 if (success) SaveWinners();
+
+                // Send Notification to All Users
+                var hubContext = GlobalHost.ConnectionManager.GetHubContext<NotificationHub>();
+                hubContext.Clients.All.receiveRoundNotification("Game Completed!");
+
                 Page.Response.Redirect(Page.Request.Url.ToString(), true);
             }
             else if (game.Status == (int)GameStatus.STARTED)
             {
                 game.Status = (int)GameStatus.TEAMCHOICE;
                 bool success = new GameDAO().Update(game);
-                SetVisible();
-                return;
+
+                // Send Notification to All Users
+                var hubContext = GlobalHost.ConnectionManager.GetHubContext<NotificationHub>();
+                hubContext.Clients.All.receiveRoundNotification("New Round Started!");
+
+                Page.Response.Redirect(Page.Request.Url.ToString(), true);
             }
+
+            // Send Notification to All Users
+            var hubContext1 = GlobalHost.ConnectionManager.GetHubContext<NotificationHub>();
+            hubContext1.Clients.All.receiveRoundNotification("New Round Started!");
         }
 
         private void SaveWinners()
@@ -146,6 +160,11 @@ namespace MonsterGame
                     movementDAO.Insert(movement);
                 }
             }
+
+            // Send Notification to All Users
+            var hubContext = GlobalHost.ConnectionManager.GetHubContext<NotificationHub>();
+            hubContext.Clients.All.receivePrizeNotification("Awarded Prize!");
+
             SetVisible();
         }
 
@@ -171,6 +190,10 @@ namespace MonsterGame
 
             if (success)
             {
+                // Send Notification to All Users
+                var hubContext = GlobalHost.ConnectionManager.GetHubContext<NotificationHub>();
+                hubContext.Clients.All.receiveTeamChoiceNotification("Team Selected!");
+
                 Page.Response.Redirect(Page.Request.Url.ToString(), true);
             }
             else
@@ -205,6 +228,10 @@ namespace MonsterGame
 
             if (success)
             {
+                // Send Notification to All Users
+                var hubContext = GlobalHost.ConnectionManager.GetHubContext<NotificationHub>();
+                hubContext.Clients.All.receiveResultNotification("Result Added!");
+
                 Page.Response.Redirect(Page.Request.Url.ToString(), true);
             }
             else

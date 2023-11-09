@@ -8,9 +8,33 @@ namespace MonsterGame
 {
     public class NotificationHub : Hub
     {
-        public void SendNotifications(string message)
+        public void SendTicketNotifications(string message)
         {
-            Clients.All.receiveNotification(message);
+            Clients.All.receiveTicketNotification(message);
+        }
+        public void SendTeamChoiceNotifications(string message)
+        {
+            Clients.All.receiveTeamChoiceNotification(message);
+        }
+        public void SendTicketNotificationsA(string message)
+        {
+            Clients.All.receiveTicketNotificationA(message);
+        }
+        public void SendTeamChoiceNotificationsA(string message)
+        {
+            Clients.All.receiveTeamChoiceNotificationA(message);
+        }
+        public void SendResultNotifications(string message)
+        {
+            Clients.All.receiveResultNotification(message);
+        }
+        public void SendRoundNotifications(string message)
+        {
+            Clients.All.receiveRoundNotification(message);
+        }
+        public void SendPrizeNotifications(string message)
+        {
+            Clients.All.receivePrizeNotification(message);
         }
     }
 }

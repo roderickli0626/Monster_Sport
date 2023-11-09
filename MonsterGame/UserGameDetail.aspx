@@ -180,6 +180,8 @@
 <asp:Content ID="Content3" ContentPlaceHolderID="FooterPlaceHolder" runat="server">
     <script src="Scripts/JS/jquery.dataTables.js"></script>
     <script src="Scripts/JS/datatables.js"></script>
+    <script src="Scripts/jquery.signalR-2.4.3.js"></script>
+    <script src="signalr/hubs"></script>
     <script>
         $(function () {
             // Ticket Table
@@ -210,6 +212,7 @@
                     dataArrayForMyTicket = res.data;
                     console.log(res.data);
                     // Draw DataTable
+                    columnsForMyTicket.length = 0;
                     columnsForMyTicket.push({
                         "title": "No",
                         "width": "5%",
@@ -253,7 +256,7 @@
                         }
                     });
 
-                    if (datatableForMyTicket) datatableForMyTicket.destroy();
+                    if (datatableForMyTicket) datatableForMyTicket.fnDestroy();
 
                     datatableForMyTicket = $('#myTicket-table').dataTable({
                         "serverSide": false,
@@ -264,6 +267,7 @@
                         "ordering": false,
                         "scrollX": true,
                         "columns": columnsForMyTicket,
+                        "data": [],
 
                         "rowCallback": function (row, data, index) {
                             $(row).find('td').css({ 'vertical-align': 'middle' });
@@ -319,6 +323,7 @@
                     dataArray = res.data;
                     console.log(res.data);
                     // Draw DataTable
+                    columns.length = 0;
                     columns.push({
                         "title": "No",
                         "width": "5%",
@@ -362,7 +367,7 @@
                     //    }
                     //});
 
-                    if (datatable) datatable.destroy();
+                    if (datatable) datatable.fnDestroy();
 
                     datatable = $('#ticket-table').dataTable({
                         "serverSide": false,
@@ -373,6 +378,7 @@
                         "ordering": false,
                         "scrollX": true,
                         "columns": columns,
+                        "data": [],
 
                         "rowCallback": function (row, data, index) {
                             $(row).find('td').css({ 'vertical-align': 'middle' });
@@ -428,6 +434,7 @@
                     dataArrayForResult = res.data;
                     console.log(res.data);
                     // Draw DataTable
+                    columnsForResult.length = 0;
                     columnsForResult.push({
                         "title": "No",
                         "width": "5%",
@@ -483,7 +490,7 @@
                     //    }
                     //});
 
-                    if (datatableForResult) datatableForResult.destroy();
+                    if (datatableForResult) datatableForResult.fnDestroy();
 
                     datatableForResult = $('#result-table').dataTable({
                         "serverSide": false,
@@ -494,6 +501,7 @@
                         "ordering": false,
                         "scrollX": true,
                         "columns": columnsForResult,
+                        "data": [],
 
                         "rowCallback": function (row, data, index) {
                             $(row).find('td').css({ 'vertical-align': 'middle' });
@@ -591,6 +599,43 @@
                 }
                 $("#TxtBalance").val($("#HfBalance").val() - amount);
             });
+
+            // Real Time Notification
+            var proxy = $.connection.notificationHub;
+
+            proxy.client.receiveTeamChoiceNotification = function (message) {
+                drawTableForMyTicket();
+                drawTable();
+            };
+
+            proxy.client.receiveTicketNotificationA = function (message) {
+                drawTable();
+            };
+
+            proxy.client.receiveTeamChoiceNotificationA = function (message) {
+                drawTable();
+            };
+
+            proxy.client.receiveResultNotification = function (message) {
+                drawTableForMyTicket();
+                drawTable();
+                drawResultTable();
+            };
+
+            proxy.client.receiveRoundNotification = function (message) {
+                alert(message);
+                drawTableForMyTicket();
+                drawTable();
+                drawResultTable();
+                datatableForWinner.fnDraw();
+                window.location.reload();
+            };
+
+            proxy.client.receivePrizeNotification = function (message) {
+                datatableForWinner.fnDraw();
+            };
+
+            $.connection.hub.start();
         })
     </script>
 </asp:Content>

@@ -1,4 +1,5 @@
-﻿using MonsterGame;
+﻿using Microsoft.AspNet.SignalR;
+using MonsterGame;
 using MonsterGame.Common;
 using MonsterGame.Controller;
 using MonsterGame.DAO;
@@ -195,6 +196,10 @@ namespace MonsterGame
 
             if (success)
             {
+                // Send Notification to Admin
+                var hubContext = GlobalHost.ConnectionManager.GetHubContext<NotificationHub>();
+                hubContext.Clients.All.receiveTeamChoiceNotificationA("Team Selected!");
+
                 Page.Response.Redirect(Page.Request.Url.ToString(), true);
             }
             else
@@ -233,6 +238,10 @@ namespace MonsterGame
 
             if (success)
             {
+                // Send Notification to Admin
+                var hubContext = GlobalHost.ConnectionManager.GetHubContext<NotificationHub>();
+                hubContext.Clients.All.receiveTicketNotificationA("A new ticket added!");
+
                 Page.Response.Redirect(Page.Request.Url.ToString(), true);
             }
             else
