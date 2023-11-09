@@ -403,7 +403,7 @@ namespace MonsterGame
             List<int> allTeamIDs = new TeamsForGameDAO().FindByGame(result.TeamsForGame.GameID ?? 0).Select(r => r.TeamID ?? 0).ToList();
             List<int> assignedTeamIDs = ticketResults.Select(t => t.TeamID ?? 0).ToList();
             TicketResult ticketResult = ticketResultDAO.FindGameAndRound(result.TeamsForGame.GameID ?? 0, result.RoundNo ?? 0).Where(t => t.Ticket.User.NickName.Contains(sec)).FirstOrDefault();
-            if (ticketResult.RoundResult != (int)RoundResult.W)
+            if (ticketResult != null && ticketResult.RoundResult != (int)RoundResult.W)
             {
                 assignedTeamIDs.Remove(ticketResult.TeamID ?? 0);
                 int teamID = result.TeamsForGame.TeamID ?? 0;
