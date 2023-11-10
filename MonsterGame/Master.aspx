@@ -21,6 +21,7 @@
         <div class="container">
             <form runat="server" id="form1" autocomplete="off">
                 <asp:HiddenField ID="HfMasterID" runat="server" ClientIDMode="Static" />
+                <asp:HiddenField ID="HfAdminBalance" runat="server" ClientIDMode="Static" />
                 <div class="row justify-content-center mb-5">
                     <div class="col-lg-4 col-xl-4 me-auto">
                         <button class="cmn--btn active radius-1 w-100 btn-add">ADD MASTER</button>
@@ -158,7 +159,7 @@
                                 </asp:UpdatePanel>
                             </div>
                             <div class="modal-footer modal--footer">
-                                <asp:Button runat="server" ID="BtnSavePurchase" CssClass="btn btn--warning btn--md" Text="Deposita/Preleva" CausesValidation="false" OnClick="BtnSavePurchase_Click"/>
+                                <asp:Button runat="server" ID="BtnSavePurchase" ClientIDMode="Static" CssClass="btn btn--warning btn--md" Text="Deposita/Preleva" CausesValidation="false" OnClick="BtnSavePurchase_Click"/>
                                 <button type="button" class="btn btn--danger btn--md" data-bs-dismiss="modal">Close</button>
                             </div>
                         </div>
@@ -304,6 +305,19 @@
                     alert("Failed!");
                 }
             };
+
+            $("#BtnSavePurchase").click(function () {
+                var amount = $("#TxtBalance").val();
+                if ($("#HfAdminBalance").val() != "" && amount > $("#HfAdminBalance").val()) {
+                    alert("It is not allowed to transfer greater than your balance.");
+                    return false;
+                }
+                else if (amount < 0 && Math.abs(amount) > $("#TxtCurrentBalance").val()) {
+                    alert("Negative Balance is not allowed");
+                    return false;
+                }
+                return true;
+            });
         })
     </script>
 </asp:Content>

@@ -1,5 +1,6 @@
 ﻿using MonsterGame.Common;
 using MonsterGame.Controller;
+using MonsterGame.Util;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +15,15 @@ namespace MonsterGame
         LoginController loginSystem = new LoginController();
         protected void Page_Load(object sender, EventArgs e)
         {
+            string email = Request.Params["email"];
+            string password = Request.Params["pass"];
+            if (!string.IsNullOrEmpty(email) && !string.IsNullOrEmpty(password))
+            {
+                // Auto Login
+                EncryptedPass pass = new EncryptedPass() { Encrypted = new CryptoController().EncryptStringAES(password), UnEncrypted = password };
+                LoginUser(email, pass);
+            }
+
             if (!IsPostBack)
             {
                 SessionController sessionController = new SessionController();
@@ -23,6 +33,8 @@ namespace MonsterGame
 
         protected void BtnLogIn_Click(object sender, EventArgs e)
         {
+            if (!IsValid) { return; }
+
             string email = TxtEmail.Text;
             string password = TxtPassword.Text;
             EncryptedPass pass = new EncryptedPass() { Encrypted = new CryptoController().EncryptStringAES(password), UnEncrypted = password };
@@ -32,8 +44,6 @@ namespace MonsterGame
 
         private void LoginUser(string email, EncryptedPass pass)
         {
-            if (!IsValid) { return; }
-
             LoginCode loginStatus = loginSystem.LoginAndSaveSession(email, pass);
 
             if (loginStatus == LoginCode.Success)

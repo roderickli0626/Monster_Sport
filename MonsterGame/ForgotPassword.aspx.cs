@@ -69,7 +69,7 @@ namespace MonsterGame
         private bool IsEmailExists(string email)
         {
             string connectionString = ConfigurationManager.ConnectionStrings["MonsterConnectionString"].ConnectionString;
-            string query = "SELECT COUNT(*) FROM User WHERE Email = @Email";
+            string query = "SELECT COUNT(*) FROM [dbo].[User] WHERE Email = @Email";
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
@@ -86,7 +86,7 @@ namespace MonsterGame
         private void StoreResetToken(string email, string resetToken)
         {
             string connectionString = ConfigurationManager.ConnectionStrings["MonsterConnectionString"].ConnectionString;
-            string query = "UPDATE User SET ResetToken = @ResetToken, ResetTokenExpiry = DATEADD(HOUR, @ExpiryHours, GETDATE()) WHERE Email = @Email";
+            string query = "UPDATE [dbo].[User] SET ResetToken = @ResetToken, ResetTokenExpiry = DATEADD(HOUR, @ExpiryHours, GETDATE()) WHERE Email = @Email";
 
             int expiryHours = 1; // Set the desired expiration time in hours
 

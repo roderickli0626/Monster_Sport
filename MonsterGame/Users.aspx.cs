@@ -30,6 +30,7 @@ namespace MonsterGame
                 if (loginSystem.IsSuperAdminLoggedIn() || admin.Role == (int)Role.AGENCY)
                 {
                     HfManage.Value = "true";
+                    HfAgencyBalance.Value = admin == null ? "" : admin.Balance.ToString();
                 }
                 else
                 {

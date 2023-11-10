@@ -24,6 +24,7 @@ namespace MonsterGame
                 Response.Redirect("~/Login.aspx");
                 return;
             }
+            HfAdminBalance.Value = admin == null ? "" : admin.Balance.ToString();
         }
 
         protected void BtnSave_Click(object sender, EventArgs e)

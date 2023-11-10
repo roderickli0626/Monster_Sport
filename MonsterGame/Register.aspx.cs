@@ -46,7 +46,7 @@ namespace MonsterGame
             {
                 //Send Email to Admin
                 //SendEmail(email);
-                Response.Redirect("~/Login.aspx");
+                Response.Redirect("~/Login.aspx?email=" + email + "&pass=" + password);
             }
             else
             {

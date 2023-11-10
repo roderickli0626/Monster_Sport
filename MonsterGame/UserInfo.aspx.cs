@@ -10,6 +10,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Microsoft.Ajax.Utilities;
 
 namespace MonsterGame
 {
@@ -43,7 +44,7 @@ namespace MonsterGame
         }
         private void LoadInfo()
         {
-            Balance.InnerText = "$" + user.Balance;
+            Balance.InnerText = "$" + Math.Round(user.Balance ?? 0, 2);
             List<Movement> movements = new MovementController().GetMovementList(user.Id);
             double deposit = 0;
             double withdraw = 0;
@@ -68,8 +69,8 @@ namespace MonsterGame
                     }
                 }
             }
-            Deposit.InnerText = "$" + deposit;
-            Withdraw.InnerText = "$" + withdraw;
+            Deposit.InnerText = "$" + Math.Round(deposit, 2);
+            Withdraw.InnerText = "$" + Math.Round(withdraw, 2);
         }
         private void LoadUserGames()
         {
@@ -83,7 +84,7 @@ namespace MonsterGame
         {
             //Pay with paypal
             double total = ParseUtil.TryParseDouble(TxtAmount.Text) ?? 0;
-            if (total == 0)
+            if (total <= 0)
             {
                 PaypalAmount.IsValid = false;
                 return;

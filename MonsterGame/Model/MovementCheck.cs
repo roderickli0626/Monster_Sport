@@ -21,7 +21,7 @@ namespace MonsterGame.Model
             SenderID = movement.SenderID;
             Sender = movement.User1?.Name ?? "";
             MoveDate = movement.MoveDate?.ToString("dd/MM/yyyy HH.mm");
-            Amount = movement.Amount ?? 0;
+            Amount = Math.Round(movement.Amount ?? 0, 2);
             Description = movement.Description;
             Note = movement.Note;
             Type = movement.Type;

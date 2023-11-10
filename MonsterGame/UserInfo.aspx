@@ -39,7 +39,7 @@
                             <div class="content-item mb-0">
                                 <h3 class="title" id="purchase" style="padding-top:120px;">PURCHASE</h3>
                                 <asp:ValidationSummary ID="ValSummary" runat="server" CssClass="mt-lg mb-lg text-left bg-gradient" ClientIDMode="Static" />
-                                <asp:CustomValidator ID="PaypalAmount" runat="server" ErrorMessage="Please insert amount." Display="None"></asp:CustomValidator>
+                                <asp:CustomValidator ID="PaypalAmount" runat="server" ErrorMessage="Please insert valid amount." Display="None"></asp:CustomValidator>
                                 <div class="pt-5">
                                     <div class="col-lg-12 col-xl-12 col-md-12 col-sm-10">
                                         <div class="dashboard__card" style="border: 2px solid #ffdd2d;">

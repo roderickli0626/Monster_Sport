@@ -16,7 +16,7 @@ namespace MonsterGame.Model
             if (paymentResult == null) { return; }
             Id = paymentResult.Id;
             PayDate = paymentResult.DateOfPay?.ToString("dd/MM/yyyy HH.mm");
-            Amount = paymentResult.Amount ?? 0;
+            Amount = Math.Round(paymentResult.Amount ?? 0, 2);
             Transition = paymentResult.PaypalTransition;
             Note = paymentResult.Note;
         }

@@ -57,7 +57,7 @@ namespace MonsterGame
             ComboResults.Items.Add(new ListItem("DRAW", ((int)RoundResult.P).ToString()));
             ComboResults.Items.Add(new ListItem("LOSE", ((int)RoundResult.L).ToString()));
 
-            Prize.InnerText = "$" + game.Prize;
+            Prize.InnerText = "$" + Math.Round(game.Prize ?? 0, 2);
         }
 
         private void SetVisible()

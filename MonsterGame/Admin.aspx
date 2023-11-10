@@ -157,7 +157,7 @@
                                 </asp:UpdatePanel>
                             </div>
                             <div class="modal-footer modal--footer">
-                                <asp:Button runat="server" ID="BtnSave1" CssClass="btn btn--warning btn--md" Text="Deposita/Preleva" CausesValidation="false" OnClick="BtnSave1_Click"/>
+                                <asp:Button runat="server" ID="BtnSave1" ClientIDMode="Static" CssClass="btn btn--warning btn--md" Text="Deposita/Preleva" CausesValidation="false" OnClick="BtnSave1_Click"/>
                                 <button type="button" class="btn btn--danger btn--md" data-bs-dismiss="modal">Close</button>
                             </div>
                         </div>
@@ -301,6 +301,15 @@
                     alert("Failed!");
                 }
             };
+
+            $("#BtnSave1").click(function () {
+                var amount = $("#TxtBalance").val();
+                if (amount < 0 && Math.abs(amount) > $("#TxtCurrentBalance").val()) {
+                    alert("Negative Balance is not allowed");
+                    return false;
+                }
+                return true;
+            });
         })
     </script>
 </asp:Content>

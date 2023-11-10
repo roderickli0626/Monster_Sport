@@ -20,7 +20,7 @@ namespace MonsterGame.Model
             Winner = winner.User.Name;
             GameId = winner.GameID ?? 0;
             GameTitle = winner.Game.Title;
-            Prize = winner.Prize;
+            Prize = Math.Round(winner.Prize ?? 0, 2);
             Percent = winner.Rate ?? 0;
             WinDate = winner.WinDate?.ToString("dd/MM/yyyy HH.mm");
             Note = winner.Note;

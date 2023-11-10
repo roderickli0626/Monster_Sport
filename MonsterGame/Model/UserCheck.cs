@@ -22,7 +22,7 @@ namespace MonsterGame.Model
             Surname = user.Surname;
             Mobile = user.Mobile;
             Note = user.Note;
-            Balance = user.Balance ?? 0;
+            Balance = Math.Round(user.Balance ?? 0, 2);
             Email = user.Email;
             ParentID = user.ParentID ?? 0;
             Role = user.Role;
