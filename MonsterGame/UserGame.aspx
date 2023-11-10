@@ -20,6 +20,9 @@
             left: 0;
             top: 0;
         }
+        .my-card {
+            background-color: greenyellow;
+        }
     </style>
     <style>
         .box {
@@ -191,7 +194,7 @@
                                                 <a class="cmn--btn active btn--md radius-1" href="UserGameDetail.aspx?gameId=<%# Eval("Id") %>"><%# Eval("ButtonTitle") %></a>
                                             </div>
                                         </div>
-                                        <div class="ball"></div>
+                                        <div class="ball <%# Eval("MyMark") %>"></div>
                                     </div>
                                 </div>
                             </ItemTemplate>

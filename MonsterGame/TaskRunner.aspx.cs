@@ -31,7 +31,7 @@ namespace MonsterGame
                     // Auto Team Choice For Each Tickets with Alphabetical Order in TicketResult
                     List<Ticket> ticketList = new TicketDAO().FindByGame(game.Id);
                     TicketResultDAO ticketResultDAO = new TicketResultDAO();
-                    List<int> teamList = new TeamsForGameDAO().FindByGame(game.Id).Select(t => t.TeamID ?? 0).ToList();
+                    List<int> teamList = new TeamsForGameDAO().FindByGame(game.Id).OrderBy(t => t.Team.Description).Select(t => t.TeamID ?? 0).ToList();
                     foreach (Ticket ticket in ticketList)
                     {
                         List<TicketResult> ticketResults = ticketResultDAO.FindByTicket(ticket.Id);

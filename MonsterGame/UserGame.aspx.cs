@@ -36,7 +36,7 @@ namespace MonsterGame
             int status = ControlUtil.GetSelectedValue(ComboStatus) ?? 0;
             string search = TxtSearch.Text;
             GameController gameController = new GameController();
-            List<GameCheck> list = gameController.FindAll(status, search);
+            List<GameCheck> list = gameController.FindAll(status, search, user.Id);
             RepeaterGame.DataSource = list;
             RepeaterGame.DataBind();
         }

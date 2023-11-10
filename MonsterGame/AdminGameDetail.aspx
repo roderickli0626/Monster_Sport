@@ -7,7 +7,7 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-7 col-xl-6 text-center">
-                    <h2 class="title text-white">Game Details</h2>
+                    <h2 runat="server" id="GameTitle" class="title text-white">Game Details</h2>
                     <ul class="breadcrumbs d-flex flex-wrap align-items-center justify-content-center">
                         <li><a href="AdminGame.aspx">Games</a></li>
                         <li>Game Details</li>
@@ -30,10 +30,10 @@
                     <div class="col-3">
                         <ul class="privacy-policy-sidebar-menu" style="padding-top:120px;">
                             <li style="padding-left:30px;">
-                                <a href="#tickets" class="nav-link">TICKETS</a>
+                                <a href="#results" class="nav-link">RESULTS</a>
                             </li>
                             <li style="padding-left:30px;">
-                                <a href="#results" class="nav-link">RESULTS</a>
+                                <a href="#tickets" class="nav-link">TICKETS</a>
                             </li>
                             <li runat="server" id="liWinner" style="padding-left:30px;">
                                 <a href="#winners" class="nav-link">WINNERS</a>
@@ -43,13 +43,6 @@
                     <div class="col-9">
                         <div class="privacy-policy-content">
                             <div class="content-item mb-0">
-                                <h3 class="title" id="tickets" style="padding-top:120px;">TICKETS</h3>
-                                <div class="pt-3 justify-content-center">
-                                    <table class="table text-center" id="ticket-table">
-                                    </table>
-                                </div>
-                            </div>
-                            <div class="content-item mb-0">
                                 <h3 class="title" id="results" style="padding-top:120px;">RESULTS</h3>
                                 <div class="row justify-content-center pt-5">
                                     <div class="col-lg-4 col-xl-4 ms-auto">
@@ -58,6 +51,13 @@
                                 </div>
                                 <div class="pt-3 justify-content-center">
                                     <table class="table text-center" id="result-table">
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="content-item mb-0">
+                                <h3 class="title" id="tickets" style="padding-top:120px;">TICKETS</h3>
+                                <div class="pt-3 justify-content-center">
+                                    <table class="table text-center" id="ticket-table">
                                     </table>
                                 </div>
                             </div>
@@ -254,6 +254,18 @@
                             }
                         });
                     }
+
+                    columns.push({
+                        "title": "Status",
+                        "width": "5%",
+                        "render": function (data, type, row, meta) {
+                            if (row.TicketResults.length == 0) return "PLAYING";
+                            else if (row.TicketResults[row.TicketResults.length - 1].RoundResult == null) return "LOST";
+                            else if (gameStatus == "6") return "WIN";
+                            else return "PLAYING";
+                        }
+                    });
+
                     columns.push({
                         "title": "Action",
                         "class": modifyTeam,

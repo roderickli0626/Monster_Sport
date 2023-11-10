@@ -104,6 +104,10 @@ namespace MonsterGame.Model
         {
             get; set;
         }
+        public string MyMark
+        {
+            get; set;
+        }
         public string Image
         {
             get; set;

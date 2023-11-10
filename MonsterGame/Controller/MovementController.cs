@@ -47,7 +47,7 @@ namespace MonsterGame.Controller
         public SearchResult SearchUserMovement(int start, int length, string transfer, DateTime? from, DateTime? to, int userID)
         {
             SearchResult result = new SearchResult();
-            IEnumerable<Movement> movementList = movementDAO.FindByUser(userID);
+            IEnumerable<Movement> movementList = movementDAO.FindByUser(userID).OrderByDescending(m => m.MoveDate);
             movementList = movementList.Where(m => m.User.Name.Contains(transfer) || ((m.User1?.Name ?? "").Contains(transfer)));
 
             if (from != null)

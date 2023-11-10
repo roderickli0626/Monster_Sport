@@ -168,6 +168,9 @@
         #select2-ComboTeams-container {
             text-align: center
         }
+        .select2-container--default .select2-results__option[aria-selected="true"] {
+            background-color: dimgray;
+        }
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder" runat="server">

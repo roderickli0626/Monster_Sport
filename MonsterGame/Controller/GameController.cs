@@ -54,8 +54,9 @@ namespace MonsterGame.Controller
 
             return result;
         }
-        public List<GameCheck> FindAll(int status, string search)
+        public List<GameCheck> FindAll(int status, string search, int userID)
         {
+            List<int> myGameIDs = new TicketDAO().FindByUser(userID).Select(t => t.GameID ?? 0).ToList();
             List<Game> gameList = gameDao.FindAll();
             if (status != 0) gameList = gameList.Where(x => x.Status == status).ToList();
             if (!string.IsNullOrEmpty(search)) gameList = gameList.Where(x => x.Title.ToLower().Contains(search.ToLower())).ToList();
@@ -64,6 +65,10 @@ namespace MonsterGame.Controller
             foreach (Game game in gameList)
             {
                 GameCheck check = AddData(game);
+                if (myGameIDs.Contains(game.Id))
+                {
+                    check.MyMark = "my-card";
+                }
                 result.Add(check);
             }
             return result;
@@ -290,7 +295,7 @@ namespace MonsterGame.Controller
 
                     List<Ticket> ticketList = new TicketDAO().FindByGame(game.Id);
                     TicketResultDAO ticketResultDAO = new TicketResultDAO();
-                    List<int> allteamList = new TeamsForGameDAO().FindByGame(game.Id).Select(t => t.TeamID ?? 0).ToList();
+                    List<int> allteamList = new TeamsForGameDAO().FindByGame(game.Id).OrderBy(t => t.Team.Description).Select(t => t.TeamID ?? 0).ToList();
                     foreach (Ticket ticket in ticketList)
                     {
                         List<TicketResult> ticketResults = ticketResultDAO.FindByTicket(ticket.Id);

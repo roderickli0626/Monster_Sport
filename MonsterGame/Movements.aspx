@@ -143,14 +143,14 @@
                     "width": "25%",
                     "data": "Note",
                     "render": function (data, type, row, meta) {
-                        var note = (data != null && data.length > 20) ? data.substring(0, 20) : data;
+                        var note = (data != null && data.length > 40) ? data.substring(0, 40) : data;
                         return '<p class="text-white" title="' + row.Note + '">' + (note == null ? "" : note) + '</p>';
                     }
                 }, {
                     "data": "Type",
                     "render": function (data, type, row, meta) {
-                        if (data == 1) return "<p class='text-white bg-success'>DEPOSIT</p>";
-                        else return "<p class='text-white bg-danger'>WITHDRAWAL</p>";
+                        if (data == 1) return "<p class='text-white bg-success' style='border-radius: 8px;'>DEPOSIT</p>";
+                        else return "<p class='text-white bg-danger' style='border-radius: 8px;'>WITHDRAWAL</p>";
                     }
                 }, {
                     "width": "15%",

@@ -46,7 +46,7 @@ namespace MonsterGame
         private void LoadInfo()
         {
             // Load Teams
-            List<Team> teamList = new TeamsForGameDAO().FindByGame(game.Id).Select(t => t.Team).ToList();
+            List<Team> teamList = new TeamsForGameDAO().FindByGame(game.Id).OrderBy(t => t.Team.Description).Select(t => t.Team).ToList();
             //List<Team> teamList = new TeamDAO().FindAll();
             ControlUtil.DataBind(ComboTeams, teamList, "Id", "Description", "0", "");
 
@@ -58,6 +58,7 @@ namespace MonsterGame
             ComboResults.Items.Add(new ListItem("LOSE", ((int)RoundResult.L).ToString()));
 
             Prize.InnerText = "$" + Math.Round(game.Prize ?? 0, 2);
+            GameTitle.InnerText = "Game" + game.Id + " Details";
         }
 
         private void SetVisible()
@@ -154,7 +155,7 @@ namespace MonsterGame
                     Movement movement = new Movement();
                     movement.UserID = user.Id;
                     movement.Amount = winner.Prize;
-                    movement.Note = "Winner Prize";
+                    movement.Note = "Winner Prize Of Game" + game.Id + " '" + game.Title + "'";
                     movement.Type = (int)MovementType.DEPOSIT;
                     movement.MoveDate = DateTime.Now;
                     movementDAO.Insert(movement);
