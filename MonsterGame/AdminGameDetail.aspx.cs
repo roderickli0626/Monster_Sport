@@ -103,7 +103,7 @@ namespace MonsterGame
 
                 // Send Notification to All Users
                 var hubContext = GlobalHost.ConnectionManager.GetHubContext<NotificationHub>();
-                hubContext.Clients.All.receiveRoundNotification("Game Completed!");
+                hubContext.Clients.All.receiveRoundNotification("Game" + game.Id + " '" + game.Title + "' is Completed At Round" + currentRound + "!");
 
                 Page.Response.Redirect(Page.Request.Url.ToString(), true);
             }
@@ -114,14 +114,14 @@ namespace MonsterGame
 
                 // Send Notification to All Users
                 var hubContext = GlobalHost.ConnectionManager.GetHubContext<NotificationHub>();
-                hubContext.Clients.All.receiveRoundNotification("New Round Started!");
+                hubContext.Clients.All.receiveRoundNotification("New Round" + currentRound + " is Started!");
 
                 Page.Response.Redirect(Page.Request.Url.ToString(), true);
             }
 
             // Send Notification to All Users
             var hubContext1 = GlobalHost.ConnectionManager.GetHubContext<NotificationHub>();
-            hubContext1.Clients.All.receiveRoundNotification("New Round Started!");
+            hubContext1.Clients.All.receiveRoundNotification("New Round" + currentRound + " is Started!");
         }
 
         private void SaveWinners()

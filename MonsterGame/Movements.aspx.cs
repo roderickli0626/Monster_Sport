@@ -1,4 +1,6 @@
 ﻿using MonsterGame.Controller;
+using MonsterGame.DAO;
+using MonsterGame.Util;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,6 +21,18 @@ namespace MonsterGame
                 Response.Redirect("~/Login.aspx");
                 return;
             }
+
+            if (!IsPostBack)
+            {
+                LoadTransfers();
+            }
+        }
+
+        private void LoadTransfers()
+        {
+            List<User> users = new UserDAO().FindAll();
+            ControlUtil.DataBind(ComboReceiver, users, "Name", "Name", "", "RECEIVER");
+            ControlUtil.DataBind(ComboSender, users, "Name", "Name", "", "SENDER");
         }
     }
 }

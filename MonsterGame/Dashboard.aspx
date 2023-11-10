@@ -1,5 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Page.Master" AutoEventWireup="true" CodeBehind="Dashboard.aspx.cs" Inherits="MonsterGame.Dashboard" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <link rel="stylesheet" href="Content/CSS/datatables.css" />
     <style>
         .box {
             position: relative;
@@ -121,6 +122,24 @@
         }
     </style>
     <style>
+        .game-table-item {
+            text-align: center;
+            padding: 0px;
+            border-radius: 10px;
+            background: #350b2d;
+            position: relative;
+            transition: all ease .3s;
+            z-index: 1;
+        }
+        .game-table-item::before {
+            position: absolute;
+            content: "";
+            width: 100%;
+            height: 100%;
+            left: 0;
+            top: 0;
+        }
+
         div.left-control .section-link {
             margin: 6px 0;
             content: url(Content/Images/left-icon.png)
@@ -201,7 +220,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="row gy-4 justify-content-center">
+                <div class="row gy-4 justify-content-center mb-5">
                     <asp:Repeater runat="server" ID="RepeaterGame">
                         <ItemTemplate>
                             <div class="col-lg-4 col-xl-3 col-md-6 col-sm-6">
@@ -213,8 +232,10 @@
                                         </div>
                                         <div class="game-item__content">
                                             <h4 class="title"><%# Eval("Title") %></h4>
-                                            <p class="invest-info">Invest Limit</p>
-                                            <p class="invest-amount">$<%# Eval("Fee") %></p>
+                                            <p class="invest-info">Invest Limit: <span class="invest-amount">$<%# Eval("Fee") %></span></p>
+                                            <p class="invest-info">Min Players: <span class="invest-amount"><%# Eval("MinPlayers") %></span></p>
+                                            <p class="invest-info">Reached Players: <span class="invest-amount"><%# Eval("RealPlayers") %></span></p>
+                                            <p class="invest-info">Prize Pool: <span class="invest-amount"><%# Eval("Prize") %></span></p>
                                             <button class="BtnDetails cmn--btn active btn--md radius-1" data-id="<%# Eval("Id") %>" 
                                                 data-title="<%# Eval("Title") %>" data-fee="<%# Eval("Fee") %>" data-players="<%# Eval("RealPlayers") %>">Details</button>
                                         </div>
@@ -224,6 +245,31 @@
                             </div>
                         </ItemTemplate>
                     </asp:Repeater>
+                </div>
+                <div class="row justify-content-center mb-5 mt-5" runat="server" id="AllGameSearchDiv">
+                    <div class="col-lg-6 col-xl-6 pt-1">
+                        <asp:DropDownList runat="server" ID="ComboStatus" CssClass="form-select form--control" ClientIDMode="Static"></asp:DropDownList>
+                    </div>
+                    <div class="col-lg-6 col-xl-6 pt-1">
+                        <asp:TextBox runat="server" ID="TxtSearch" CssClass="form--control form-control" ClientIDMode="Static" placeholder="SEARCH"></asp:TextBox>
+                    </div>
+                </div>
+                <div class="row gy-4 justify-content-center" runat="server" id="AllGameDiv">
+                    <table class="table text-center" id="game-table">
+                        <thead>
+                            <tr>
+                                <th>Game</th>
+                                <th>Title</th>
+                                <th>Start Date</th>
+                                <th>End Date</th>
+                                <th>Teams</th>
+                                <th>Fee</th>
+                                <th>Players</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
                 </div>
             </form>
         </div>
@@ -305,6 +351,8 @@
     </div>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="FooterPlaceHolder" runat="server">
+    <script src="Scripts/JS/jquery.dataTables.js"></script>
+    <script src="Scripts/JS/datatables.js"></script>
     <script>
         $(".BtnDetails").click(function () {
             $("#modalTitle").text($(this)[0].dataset.title);
@@ -312,6 +360,56 @@
             $("#players").text($(this)[0].dataset.players);
             $("#gameDetailModal").modal('show');
             return false;
-        })
+        });
+
+        var datatable = $('#game-table').dataTable({
+            "serverSide": true,
+            "ajax": 'DataService.asmx/FindGames',
+            "dom": '<"table-responsive"t>pr',
+            "autoWidth": false,
+            "pageLength": 20,
+            "processing": true,
+            "ordering": false,
+            "columns": [{
+                "render": function (data, type, row, meta) {
+                    return '<div class="game-table-item"><div class="game-item__thumb mb-0">' + row.Mark +
+                        '<img src="Content/Images/' + row.Image + '" alt = "game"></div></div>';
+                }
+            }, {
+                "data": "Title",
+            }, {
+                "data": "StartDate",
+            }, {
+                "data": "EndDate",
+            }, {
+                "data": "NumberOfTeams",
+            }, {
+                "data": "Fee",
+            }, {
+                "data": "RealPlayers",
+            }],
+
+            "fnServerParams": function (aoData) {
+                aoData.searchVal = $('#TxtSearch').val();
+                aoData.status = $('#ComboStatus').val();
+            },
+
+            "rowCallback": function (row, data, index) {
+                $(row).find('td').css({ 'vertical-align': 'middle' });
+                $("#game-table_wrapper").css('width', '100%');
+            },
+
+            "drawCallback": function () {
+                $(".pagination").children('li').addClass("page-item");
+            }
+        });
+
+        $('#ComboStatus').change(function () {
+            datatable.fnDraw();
+        });
+
+        $('#TxtSearch').on('input', function () {
+            datatable.fnDraw();
+        });
     </script>
 </asp:Content>

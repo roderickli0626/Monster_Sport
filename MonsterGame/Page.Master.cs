@@ -22,6 +22,10 @@ namespace MonsterGame
                 liUserGame.Visible = false;
                 liLogin.Visible = false;
                 liInfo.Visible = false;
+                liName1.Visible = false;
+                liName2.Visible = false;
+                liEye.Visible = false;
+                liName0.InnerText = "Super Admin";
                 liName.InnerText = "Super Admin";
             }
             else if (loginSystem.IsAdminLoggedIn())
@@ -76,6 +80,9 @@ namespace MonsterGame
 
             if (user != null)
             {
+                liName0.InnerText = user.Name;
+                liName1.InnerText = "|| balance:";
+                liName2.InnerText = "$" + Math.Round(user.Balance ?? 0, 2).ToString();
                 liName.InnerText = user.Name;
             }
         }

@@ -21,7 +21,7 @@ namespace MonsterGame.Controller
         public SearchResult Search(int start, int length, string receiver, string sender, DateTime? from, DateTime? to)
         {
             SearchResult result = new SearchResult();
-            IEnumerable<Movement> movementList = movementDAO.FindAll();
+            IEnumerable<Movement> movementList = movementDAO.FindAll().OrderByDescending(m => m.MoveDate);
             movementList = movementList.Where(m => m.User.Name.Contains(receiver) && ((m.User1?.Name ?? "").Contains(sender)));
 
             if (from != null)

@@ -51,7 +51,15 @@
                         <li runat="server" id="liMovement"><a href="Movements.aspx">Movements</a></li>
                         <li><a href="Contact.aspx">Contact</a></li>
                         <li runat="server" id="liLogin"><a href="Login.aspx">Log In</a></li>
-                        <li runat="server" id="liUserInfo"><a href="#0"><i class="fa fa-user-circle" style="font-size:20px;"></i></a>
+                        <li runat="server" id="liUserInfo">
+                            <a href="#0">
+                                <i class="fa fa-user-circle" style="font-size:20px;">
+                                    <span runat="server" id="liName0" style="font-size: 12px; padding-right:10px;"></span>
+                                    <span runat="server" id="liName1" style="font-size: 10px;"></span>
+                                    <span runat="server" id="liName2" clientIDMode="static" class="bg-danger" style="font-size: 10px; border-radius:2px;"></span>
+                                    <i class="fa fa-eye-slash" runat="server" id="liEye" clientIDMode="static" style="font-size:13px;"></i>
+                                </i>
+                            </a>
                             <ul class="sub-menu">
                                 <li><a href="#" runat="server" id="liName">User Name</a></li>
                                 <li runat="server" id="liInfo"><a href="UserInfo.aspx">Information</a></li>
@@ -112,6 +120,21 @@
 
     <!-- main js -->
     <script src="Scripts/JS/main.js"></script>
+
+    <script>
+        $("#liEye").click(function () {
+            if ($(this).hasClass("fa-eye-slash")) {
+                $(this).removeClass("fa-eye-slash");
+                $(this).addClass("fa-eye");
+                $("#liName2").addClass("d-none");
+            }
+            else {
+                $(this).addClass("fa-eye-slash");
+                $(this).removeClass("fa-eye");
+                $("#liName2").removeClass("d-none");
+            }
+        });
+    </script>
 
     <asp:ContentPlaceHolder ID="FooterPlaceHolder" runat="server">
     </asp:ContentPlaceHolder>

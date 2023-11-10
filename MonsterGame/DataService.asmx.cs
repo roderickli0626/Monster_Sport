@@ -12,7 +12,6 @@ using System.Web.Script.Serialization;
 using System.Web.Script.Services;
 using System.Web.Services;
 using System.Web.UI;
-using MonsterGame.Controller;
 using System.Globalization;
 using MonsterGame.Common;
 
@@ -36,7 +35,8 @@ namespace MonsterGame
         [ScriptMethod(UseHttpGet = true, ResponseFormat = ResponseFormat.Json)]
         public void FindGames(int draw, int start, int length, string searchVal, int status)
         {
-            if (!loginSystem.IsSuperAdminLoggedIn()) return;
+            User user = loginSystem.GetCurrentUserAccount();
+            if (!loginSystem.IsSuperAdminLoggedIn() && user == null) return;
 
             GameController gameController = new GameController();
             SearchResult searchResult = gameController.Search(start, length, searchVal, status);

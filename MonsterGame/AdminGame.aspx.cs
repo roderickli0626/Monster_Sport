@@ -79,6 +79,13 @@ namespace MonsterGame
 
             string[] selectedValues = Request.Form.GetValues(ComboTeams.UniqueID);
             List<int> teamList = new List<int>();
+
+            if (selectedValues == null || teamNum != selectedValues.Count())
+            {
+                ServerValidator0.IsValid = false;
+                return;
+            }
+
             if (selectedValues != null)
             {
                 foreach (string itemID in selectedValues)

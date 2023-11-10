@@ -211,6 +211,8 @@
                                 <th>Fee</th>
                                 <th>Tax</th>
                                 <th>Players</th>
+                                <th>Prize</th>
+                                <th>Round</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -234,6 +236,7 @@
                                         <asp:RequiredFieldValidator ID="ReqValTax" runat="server" ErrorMessage="Insert Tax." CssClass="text-black" ControlToValidate="TxtTax" Display="None"></asp:RequiredFieldValidator>
                                         <asp:RequiredFieldValidator ID="ReqValMinPlayers" runat="server" ErrorMessage="Insert Min Players." CssClass="text-black" ControlToValidate="TxtMinPlayers" Display="None"></asp:RequiredFieldValidator>
                                         <asp:RequiredFieldValidator ID="ReqValTeamNum" runat="server" ErrorMessage="Insert Number Of Teams." CssClass="text-black" ControlToValidate="TxtTeamNum" Display="None"></asp:RequiredFieldValidator>
+                                        <asp:CustomValidator ID="ServerValidator0" runat="server" ErrorMessage="Please Select Valid Teams." Display="None"></asp:CustomValidator>
                                         <asp:CustomValidator ID="ServerValidator" runat="server" ErrorMessage="Save Failed." Display="None"></asp:CustomValidator>
                                         <div class="col-md-6">
                                             <div class="form-group">
@@ -357,6 +360,22 @@
     <script src="Scripts/jquery.signalR-2.4.3.js"></script>
     <script src="signalr/hubs"></script>
     <script>
+        Sys.WebForms.PageRequestManager.getInstance().add_pageLoaded(pageLoadedHandler);
+
+        function pageLoadedHandler(sender, args) {
+            // This function will be called after each UpdatePanel postback
+            var updatedPanels = args.get_panelsUpdated();
+
+            for (var i = 0; i < updatedPanels.length; i++) {
+                var updatePanelID = updatedPanels[i].id;
+
+                if (updatePanelID === "UpdatePanel") {
+                    SelectSetting();
+                }
+            }
+        };
+    </script>
+    <script>
         var proxy = $.connection.notificationHub;
 
         proxy.client.receiveStartGameNotification = function (message) {
@@ -366,19 +385,22 @@
 
         $.connection.hub.start();
 
-        $("#ComboTeams").select2({
-            dropdownParent: $(".modal-body")
-        });
+        SelectSetting();
+        function SelectSetting() {
+            $("#ComboTeams").select2({
+                dropdownParent: $(".modal-body")
+            });
 
-        $.datetimepicker.setLocale('it');
+            $.datetimepicker.setLocale('it');
 
-        $("#TxtStartDate").datetimepicker({
-            format: "d/m/Y H.i",
-        });
+            $("#TxtStartDate").datetimepicker({
+                format: "d/m/Y H.i",
+            });
 
-        $("#TxtEndDate").datetimepicker({
-            format: "d/m/Y H.i",
-        });
+            $("#TxtEndDate").datetimepicker({
+                format: "d/m/Y H.i",
+            });
+        }
 
         $(".btn-add").click(function () {
             $("#gameDetailModal").modal('show');
@@ -434,6 +456,10 @@
                     "data": "Tax",
                 }, {
                     "data": "RealPlayers",
+                }, {
+                    "data": "Prize",
+                }, {
+                    "data": "Round",
                 }, {
                     "data": null,
                     "render": function (data, type, row, meta) {

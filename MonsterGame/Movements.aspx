@@ -2,6 +2,48 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link rel="stylesheet" href="Content/CSS/datatables.css" />
     <link rel="stylesheet" href="Content/CSS/jquery.datetimepicker.min.css" />
+    <link rel="stylesheet" href="Content/CSS/select2.css" />
+    <link rel="stylesheet" href="Content/CSS/select2-bootstrap.css" />
+    <style>
+        .select2-selection.select2-selection--single {
+            box-shadow: none !important;
+            border: 1px solid rgba(255, 255, 255, 0.17);
+            background-color: #350b2d;
+            width:100%;
+            height: 100%;
+        }
+        .select2-container--default.select2-container, .selection {
+            width:100% !important;
+            height: 100% !important;
+        }
+        .select2-container--default.select2-container--focus .select2-selection--single {
+            border: 1px solid rgba(255, 255, 255, 0.17);
+            width:100%;
+            height: 100% !important;
+        }
+        .select2-selection__choice {
+            background-color:#2e0327 !important;
+        }
+        .select2-dropdown.select2-dropdown--above {
+            background-color:#2e0327;
+        }
+        #select2-ComboReceiver-results {
+            background-color: #350b2d;
+        }
+        #select2-ComboSender-results {
+            background-color: #350b2d;
+        }
+        #select2-ComboReceiver-container {
+            padding-top: 10px;
+            padding-left: 12px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+        #select2-ComboSender-container {
+            padding-top: 10px;
+            padding-left: 12px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+    </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder" runat="server">
     <section class="inner-banner bg_img" style="background: url('Content/Images/stadium2.jpg') center;">
@@ -29,10 +71,12 @@
                         <asp:TextBox runat="server" ID="TxtTo" CssClass="form--control form-control" ClientIDMode="Static" placeholder="TO"></asp:TextBox>
                     </div>
                     <div class="col-lg-3 col-xl-3 ">
-                        <asp:TextBox runat="server" ID="TxtReceiver" CssClass="form--control form-control" ClientIDMode="Static" placeholder="SEARCH RECEIVER"></asp:TextBox>
+                        <asp:DropDownList runat="server" ID="ComboReceiver" CssClass="form-select form--control style-two" ClientIDMode="Static"></asp:DropDownList>
+                        <%--<asp:TextBox runat="server" ID="TxtReceiver" CssClass="form--control form-control" ClientIDMode="Static" placeholder="SEARCH RECEIVER"></asp:TextBox>--%>
                     </div>
                     <div class="col-lg-3 col-xl-3 ">
-                        <asp:TextBox runat="server" ID="TxtSender" CssClass="form--control form-control" ClientIDMode="Static" placeholder="SEARCH SENDER"></asp:TextBox>
+                        <asp:DropDownList runat="server" ID="ComboSender" CssClass="form-select form--control style-two" ClientIDMode="Static"></asp:DropDownList>
+                        <%--<asp:TextBox runat="server" ID="TxtSender" CssClass="form--control form-control" ClientIDMode="Static" placeholder="SEARCH SENDER"></asp:TextBox>--%>
                     </div>
                 </div>
                 <div class="row gy-4 justify-content-center">
@@ -61,6 +105,7 @@
     <script src="Scripts/JS/datatables.js"></script>
     <script src="Scripts/bootstrap.bundle.min.js"></script>
     <script src="Scripts/JS/jquery.datetimepicker.full.min.js"></script>
+    <script src="Scripts/JS/select2.js"></script>
     <script>
         $.datetimepicker.setLocale('it');
 
@@ -71,6 +116,10 @@
         $("#TxtTo").datetimepicker({
             format: "d/m/Y H.i",
         });
+
+        $("#ComboReceiver").select2();
+
+        $("#ComboSender").select2();
     </script>
     <script>
         $(function () {
@@ -114,8 +163,8 @@
                 }],
 
                 "fnServerParams": function (aoData) {
-                    aoData.searchReceiver = $('#TxtReceiver').val();
-                    aoData.searchSender = $('#TxtSender').val();
+                    aoData.searchReceiver = $('#ComboReceiver').val();
+                    aoData.searchSender = $('#ComboSender').val();
                     aoData.searchFrom = $('#TxtFrom').val();
                     aoData.searchTo = $('#TxtTo').val();
                 },
@@ -134,11 +183,11 @@
                 datatable.fnDraw();
             });
 
-            $('#TxtReceiver').on('input', function () {
+            $('#ComboReceiver').change(function () {
                 datatable.fnDraw();
             });
 
-            $('#TxtSender').on('input', function () {
+            $('#ComboSender').change(function () {
                 datatable.fnDraw();
             });
 

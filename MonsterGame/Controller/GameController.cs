@@ -30,9 +30,9 @@ namespace MonsterGame.Controller
         public SearchResult Search(int start, int length, string searchVal, int status)
         {
             SearchResult result = new SearchResult();
-            IEnumerable<Game> gameList = gameDao.FindAll();
+            IEnumerable<Game> gameList = gameDao.FindAll().OrderByDescending(g => g.StartDate);
             if (status != 0) gameList = gameList.Where(x => x.Status == status).ToList();
-            if (!string.IsNullOrEmpty(searchVal)) gameList = gameList.Where(x => x.Title.Contains(searchVal)).ToList();
+            if (!string.IsNullOrEmpty(searchVal)) gameList = gameList.Where(x => x.Title.ToLower().Contains(searchVal.ToLower())).ToList();
 
             result.TotalCount = gameList.Count();
             gameList = gameList.Skip(start).Take(length);
@@ -43,6 +43,11 @@ namespace MonsterGame.Controller
                 GameCheck gameCheck = AddData(game);
                 List<TeamsForGame> teamList = new TeamsForGameDAO().FindByGame(game.Id).ToList();
                 gameCheck.TeamList = teamList.Select(t => t.TeamID ?? 0).ToList();
+
+                TeamsForGame teamsForGame = new TeamsForGameDAO().FindByGame(game.Id).FirstOrDefault();
+                Result r = new ResultDAO().FindByTeamsForGame(teamsForGame.Id).LastOrDefault();
+
+                gameCheck.Round = r?.RoundNo ?? 0;
                 checks.Add(gameCheck);
             }
             result.ResultList = checks;
@@ -53,7 +58,7 @@ namespace MonsterGame.Controller
         {
             List<Game> gameList = gameDao.FindAll();
             if (status != 0) gameList = gameList.Where(x => x.Status == status).ToList();
-            if (!string.IsNullOrEmpty(search)) gameList = gameList.Where(x => x.Title.Contains(search)).ToList();
+            if (!string.IsNullOrEmpty(search)) gameList = gameList.Where(x => x.Title.ToLower().Contains(search.ToLower())).ToList();
 
             List<GameCheck> result = new List<GameCheck>();
             foreach (Game game in gameList)
