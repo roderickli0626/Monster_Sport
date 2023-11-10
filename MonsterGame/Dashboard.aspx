@@ -265,6 +265,8 @@
                                 <th>Teams</th>
                                 <th>Fee</th>
                                 <th>Players</th>
+                                <th>Prize</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -387,6 +389,15 @@
                 "data": "Fee",
             }, {
                 "data": "RealPlayers",
+            }, {
+                "data": "Prize",
+            }, {
+                "data": null,
+                "render": function (data, type, row, meta) {
+                    return '<div class="justify-content-center">' +
+                        '<a class="cmn--btn active btn--md radius-1 w-100 mt-1" href="UserGameDetail.aspx?gameId=' + row.Id + '">Detail</a>' +
+                        '</div > ';
+                }
             }],
 
             "fnServerParams": function (aoData) {

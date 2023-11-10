@@ -23,7 +23,7 @@ namespace MonsterGame
         protected void Page_Load(object sender, EventArgs e)
         {
             user = loginSystem.GetCurrentUserAccount();
-            if (user == null || !loginSystem.IsUserLoggedIn())
+            if (user == null)
             {
                 Response.Redirect("~/Login.aspx");
                 return;
@@ -43,19 +43,6 @@ namespace MonsterGame
             if (!IsPostBack)
             {
                 LoadInfo();
-
-                //// If Game status is Completed or Closed, but there is no Winner in the game, then add Winners to the game.
-                //// This case can occur when SA changed game status as Completed or Closed Manually in AdminGames.aspx page.
-                //if (game.Status == (int)GameStatus.COMPLETED || game.Status == (int)GameStatus.CLOSED)
-                //{
-                //    List<Winner> winners = new WinnerDAO().FindByGame(game.Id);
-                //    if (winners.Count() == 0)
-                //    {
-                //        SaveWinners();
-                //        Page.Response.Redirect(Page.Request.Url.ToString(), true);
-                //    }
-                //}
-
                 SetVisible();
             }
         }
@@ -67,26 +54,25 @@ namespace MonsterGame
             //List<Team> teamList = new TeamDAO().FindAll();
             ControlUtil.DataBind(ComboTeams, teamList, "Id", "Description", "0", "");
 
-            // Load Results
-            //ComboResults.Items.Clear();
-            //ComboResults.Items.Add(new ListItem("", ((int)RoundResult.N).ToString()));
-            //ComboResults.Items.Add(new ListItem("WIN", ((int)RoundResult.W).ToString()));
-            //ComboResults.Items.Add(new ListItem("DRAW", ((int)RoundResult.P).ToString()));
-            //ComboResults.Items.Add(new ListItem("LOSE", ((int)RoundResult.L).ToString()));
-
             Prize.InnerText = "$" + Math.Round(game.Prize ?? 0, 2);
             TxtBalance.Text = Math.Round(user.Balance ?? 0, 2).ToString();
+            GameTitle.InnerText = "Game" + game.Id + " Details";
         }
 
         private void SetVisible()
         {
-            //if (game.Status == (int)GameStatus.OPEN || game.Status == (int)GameStatus.STARTED)
-            //{
-            //    List<Ticket> ticketList = new TicketDAO().FindByGame(game.Id);
-            //    if (ticketList.Count() == 0) BtnRound.Visible = false;
-            //    else BtnRound.Visible = true;
-            //}
-            //else BtnRound.Visible = false;
+            if (loginSystem.IsUserLoggedIn())
+            {
+                liMyTicket.Visible = true;
+                DivMyTicket.Visible = true;
+                SubTitle.Visible = true;
+            }
+            else
+            {
+                liMyTicket.Visible = false;
+                DivMyTicket.Visible = false;
+                SubTitle.Visible = false;
+            }
 
             if (game.Status == (int)GameStatus.OPEN)
             {
@@ -98,9 +84,6 @@ namespace MonsterGame
             {
                 liWinner.Visible = true;
                 DivWinners.Visible = true;
-                //List<double?> prizeList = new WinnerDAO().FindByGame(game.Id).Select(w => w.Prize).ToList();
-                //if (prizeList.Contains(null)) BtnPrize.Visible = true;
-                //else BtnPrize.Visible = false;
             }
             else
             {
@@ -108,71 +91,6 @@ namespace MonsterGame
                 DivWinners.Visible = false;
             }
         }
-
-        //protected void BtnRound_Click(object sender, EventArgs e)
-        //{
-        //    int? currentRound = ParseUtil.TryParseInt(HfCurrentRound.Value);
-        //    if (currentRound == null) return;
-
-        //    bool success1 = gameController.AddNewRound(game.Id, currentRound);
-        //    bool success2 = ticketController.AddNewRound(game.Id, currentRound);
-
-        //    int remainedTickets = ticketController.GetRemainedTickets(game.Id, currentRound);
-        //    if (remainedTickets <= game.NumOfWinners && game.Status != (int)GameStatus.OPEN)
-        //    {
-        //        game.Status = (int)GameStatus.COMPLETED;
-        //        bool success = new GameDAO().Update(game);
-        //        // Add Winners to Winner table and then Page Refresh
-        //        if (success) SaveWinners();
-        //        Page.Response.Redirect(Page.Request.Url.ToString(), true);
-        //    }
-        //    else if (game.Status == (int)GameStatus.STARTED)
-        //    {
-        //        game.Status = (int)GameStatus.TEAMCHOICE;
-        //        bool success = new GameDAO().Update(game);
-        //        SetVisible();
-        //        return;
-        //    }
-        //}
-
-        //private void SaveWinners()
-        //{
-        //    WinnerController winnerController = new WinnerController();
-        //    bool success = winnerController.AddWinners(game.Id);
-        //}
-
-        //protected void BtnPrize_Click(object sender, EventArgs e)
-        //{
-        //    WinnerDAO winnerDAO = new WinnerDAO();
-        //    UserDAO userDAO = new UserDAO();
-        //    MovementDAO movementDAO = new MovementDAO();
-        //    List<Winner> winners = winnerDAO.FindByGame(game.Id);
-        //    double prize = game.Prize ?? 0;
-
-        //    foreach (Winner winner in winners)
-        //    {
-        //        winner.Prize = prize * (winner.Rate / 100);
-        //        winnerDAO.Update(winner);
-        //        User user = userDAO.FindByID(winner.UserID ?? 0);
-        //        if (user != null)
-        //        {
-        //            // Add Balance of User
-        //            user.Balance = (user.Balance ?? 0) + winner.Prize;
-        //            userDAO.Update(user);
-
-        //            // Add A Movement
-        //            if (winner.Prize == 0) continue;
-        //            Movement movement = new Movement();
-        //            movement.UserID = user.Id;
-        //            movement.Amount = winner.Prize;
-        //            movement.Note = "Winner Prize";
-        //            movement.Type = (int)MovementType.DEPOSIT;
-        //            movement.MoveDate = DateTime.Now;
-        //            movementDAO.Insert(movement);
-        //        }
-        //    }
-        //    SetVisible();
-        //}
 
         protected void BtnChangeTeam_Click(object sender, EventArgs e)
         {
@@ -250,56 +168,5 @@ namespace MonsterGame
                 return;
             }
         }
-
-        //protected void BtnResult_Click(object sender, EventArgs e)
-        //{
-        //    int roundResult = ControlUtil.GetSelectedValue(ComboResults) ?? 0;
-        //    int resultID = ParseUtil.TryParseInt(HfResultID.Value) ?? 0;
-        //    bool success = false;
-        //    if (resultID != 0)
-        //    {
-        //        ResultDAO resultDAO = new ResultDAO();
-        //        Result result = resultDAO.FindByID(resultID);
-        //        if (result != null)
-        //        {
-        //            result.RoundResult = roundResult;
-        //            success = resultDAO.Update(result);
-
-        //            TicketResultDAO ticketResultDAO = new TicketResultDAO();
-        //            List<TicketResult> ticketResults = ticketResultDAO.FindByGameAndTeamAndRound(result.TeamsForGame.GameID ?? 0, result.TeamsForGame.TeamID ?? 0, result.RoundNo ?? 0);
-        //            foreach (TicketResult ticketResult in ticketResults)
-        //            {
-        //                ticketResult.RoundResult = roundResult;
-        //                ticketResultDAO.Update(ticketResult);
-        //            }
-        //        }
-        //    }
-
-        //    if (success)
-        //    {
-        //        Page.Response.Redirect(Page.Request.Url.ToString(), true);
-        //    }
-        //    else
-        //    {
-        //        ServerValidator1.IsValid = false;
-        //        return;
-        //    }
-        //}
-
-        //protected void BtnPercent_Click(object sender, EventArgs e)
-        //{
-        //    double percent = ParseUtil.TryParseDouble(TxtPercent.Text) ?? 0;
-        //    int winnerID = ParseUtil.TryParseInt(HfWinnerID.Value) ?? 0;
-
-        //    bool success = new WinnerController().UpdateWinnerPercent(winnerID, percent);
-        //    if (!success)
-        //    {
-        //        ServerValidator2.IsValid = false;
-        //        return;
-        //    }
-
-        //    Page.Response.Redirect(Page.Request.Url.ToString(), true);
-        //}
-
     }
 }

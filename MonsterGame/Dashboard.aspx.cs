@@ -21,6 +21,11 @@ namespace MonsterGame
             if (user != null || loginSystem.IsSuperAdminLoggedIn())
             {
                 InDiv.Visible = false;
+                if (loginSystem.IsSuperAdminLoggedIn())
+                {
+                    AllGameDiv.Visible = false;
+                    AllGameSearchDiv.Visible = false;
+                }
             }
             else
             {

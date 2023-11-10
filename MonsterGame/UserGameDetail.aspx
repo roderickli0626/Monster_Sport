@@ -7,8 +7,8 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-7 col-xl-6 text-center">
-                    <h2 class="title text-white">Game Details</h2>
-                    <ul class="breadcrumbs d-flex flex-wrap align-items-center justify-content-center">
+                    <h2 runat="server" id="GameTitle" class="title text-white">Game Details</h2>
+                    <ul runat="server" id="SubTitle" class="breadcrumbs d-flex flex-wrap align-items-center justify-content-center">
                         <li><a href="UserGame.aspx">Games</a></li>
                         <li>Game Details</li>
                     </ul>
@@ -32,7 +32,7 @@
                 <div class="row">
                     <div class="col-3">
                         <ul class="privacy-policy-sidebar-menu" style="padding-top:120px;">
-                            <li style="padding-left:30px;">
+                            <li runat="server" id="liMyTicket" style="padding-left:30px;">
                                 <a href="#myTickets" class="nav-link">MY TICKETS</a>
                             </li>
                             <li style="padding-left:30px;">
@@ -48,7 +48,7 @@
                     </div>
                     <div class="col-9">
                         <div class="privacy-policy-content">
-                            <div class="content-item mb-0">
+                            <div runat="server" id="DivMyTicket" class="content-item mb-0">
                                 <h3 class="title" id="myTickets" style="padding-top:120px;">MY TICKETS</h3>
                                 <div class="row justify-content-center pt-5">
                                     <div class="col-lg-4 col-xl-4 ms-auto">
@@ -357,15 +357,6 @@
                             }
                         });
                     }
-                    //columns.push({
-                    //    "title": "Action",
-                    //    "class": modifyTeam,
-                    //    "width": "5%",
-                    //    "render": function (data, type, row, meta) {
-                    //        if (row.TicketResults.length == 0 || row.TicketResults[row.TicketResults.length - 1].RoundResult == null) return "";
-                    //        else return '<a href="#" class="btn-edit mr-4"><i class="fa fa-edit" style="font-size:25px"></i></a>';
-                    //    }
-                    //});
 
                     if (datatable) datatable.fnDestroy();
 
@@ -395,26 +386,6 @@
                     }
 
                     datatable.fnDraw();
-                    /*onSuccess({ success: true });*/
-
-                    //datatable.on('click', '.btn-edit', function (e) {
-                    //    e.preventDefault();
-
-                    //    var row = datatable.fnGetData($(this).closest('tr'));
-
-                    //    $("#TeamChangeModal").modal('show');
-                    //    var modalTitle = "Team Change in Round " + row.TicketResults.length;
-                    //    for (var k = 0; k < (row.TicketResults.length - 1); k++) {
-                    //        // Remove before assigned Teams
-                    //        $('#ComboTeams option[value="' + row.TicketResults[k].TeamID + '"]').remove();
-                    //    }
-                    //    var teamID = row.TicketResults[row.TicketResults.length - 1].TeamID;
-                    //    $("#HfTicketResultID").val(row.TicketResults[row.TicketResults.length - 1].Id);
-                    //    $(".modal-title").text(modalTitle);
-                    //    $("#HfTicketID").val(row.Id);
-                    //    $("#ValSummary").addClass("d-none");
-                    //    $("#ComboTeams").val(teamID);
-                    //});
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
                     // Handle the error response
@@ -481,14 +452,6 @@
                             }
                         });
                     }
-                    //columnsForResult.push({
-                    //    "title": "Action",
-                    //    "width": "5%",
-                    //    "render": function (data, type, row, meta) {
-                    //        if (row.Results.length > 0) return '<a href="#" class="btn-edit mr-4"><i class="fa fa-edit" style="font-size:25px"></i></a>';
-                    //        else return "";
-                    //    }
-                    //});
 
                     if (datatableForResult) datatableForResult.fnDestroy();
 
@@ -518,22 +481,6 @@
                     }
 
                     datatableForResult.fnDraw();
-                    /*onSuccess({ success: true });*/
-
-                    //datatableForResult.on('click', '.btn-edit', function (e) {
-                    //    e.preventDefault();
-
-                    //    var row = datatableForResult.fnGetData($(this).closest('tr'));
-
-                    //    $("#ResultChangeModal").modal('show');
-                    //    var modalTitle = "Match Result in Round " + row.Results.length;
-                    //    var roundResult = row.Results[row.Results.length - 1].RoundResult;
-                    //    $("#HfResultID").val(row.Results[row.Results.length - 1].Id);
-                    //    $(".modal-title").text(modalTitle);
-                    //    $("#ValSummary1").addClass("d-none");
-                    //    $("#ComboResults").val(roundResult);
-
-                    //});
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
                     // Handle the error response

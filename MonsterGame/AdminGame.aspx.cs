@@ -77,6 +77,20 @@ namespace MonsterGame
             double percent5 = ParseUtil.TryParseDouble(TxtPercent5.Text) ?? 0;
             int NumOfWinners = ParseUtil.TryParseInt(TxtWinners.Text) ?? 0;
 
+            bool WinnerValid = false;
+            if (NumOfWinners == 1 && percent1 > 0 && percent2 == 0 && percent3 == 0 && percent4 == 0 && percent5 == 0) WinnerValid = true;
+            else if (NumOfWinners == 2 && percent1 > 0 && percent2 > 0 && percent3 == 0 && percent4 == 0 && percent5 == 0) WinnerValid = true;
+            else if (NumOfWinners == 3 && percent1 > 0 && percent2 > 0 && percent3 > 0 && percent4 == 0 && percent5 == 0) WinnerValid = true;
+            else if (NumOfWinners == 4 && percent1 > 0 && percent2 > 0 && percent3 > 0 && percent4 > 0 && percent5 == 0) WinnerValid = true;
+            else if (NumOfWinners == 5 && percent1 > 0 && percent2 > 0 && percent3 > 0 && percent4 > 0 && percent5 > 0) WinnerValid = true;
+            else if (NumOfWinners > 5) WinnerValid = true;
+
+            if ((percent1 + percent2 + percent3 + percent4 + percent5) != 100 || !WinnerValid)
+            {
+                ServerValidator1.IsValid = false;
+                return;
+            }
+
             string[] selectedValues = Request.Form.GetValues(ComboTeams.UniqueID);
             List<int> teamList = new List<int>();
 

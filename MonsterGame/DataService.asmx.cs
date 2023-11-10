@@ -285,7 +285,7 @@ namespace MonsterGame
             Response.ContentType = "application/json; charset=utf-8";
 
             User user = loginSystem.GetCurrentUserAccount();
-            if (!loginSystem.IsSuperAdminLoggedIn() && (user == null || !loginSystem.IsUserLoggedIn()))
+            if (!loginSystem.IsSuperAdminLoggedIn() && (user == null))
             {
                 Response.Write(serializer.Serialize(result));
                 return;
@@ -314,7 +314,7 @@ namespace MonsterGame
             Response.ContentType = "application/json; charset=utf-8";
 
             User user = loginSystem.GetCurrentUserAccount();
-            if (!loginSystem.IsSuperAdminLoggedIn() && (user == null || !loginSystem.IsUserLoggedIn()))
+            if (!loginSystem.IsSuperAdminLoggedIn() && (user == null))
             {
                 Response.Write(serializer.Serialize(result));
                 return;
@@ -339,7 +339,7 @@ namespace MonsterGame
         public void FindWinners(int draw, int start, int length, int gameID)
         {
             User user = loginSystem.GetCurrentUserAccount();
-            if (!loginSystem.IsSuperAdminLoggedIn() && (user == null || !loginSystem.IsUserLoggedIn())) return;
+            if (!loginSystem.IsSuperAdminLoggedIn() && (user == null)) return;
 
             WinnerController winnerController = new WinnerController();
             SearchResult searchResult = winnerController.Search(start, length, gameID);

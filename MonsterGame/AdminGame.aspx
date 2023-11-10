@@ -240,6 +240,7 @@
                                         <asp:RequiredFieldValidator ID="ReqValMinPlayers" runat="server" ErrorMessage="Insert Min Players." CssClass="text-black" ControlToValidate="TxtMinPlayers" Display="None"></asp:RequiredFieldValidator>
                                         <asp:RequiredFieldValidator ID="ReqValTeamNum" runat="server" ErrorMessage="Insert Number Of Teams." CssClass="text-black" ControlToValidate="TxtTeamNum" Display="None"></asp:RequiredFieldValidator>
                                         <asp:CustomValidator ID="ServerValidator0" runat="server" ErrorMessage="Please Select Valid Teams." Display="None"></asp:CustomValidator>
+                                        <asp:CustomValidator ID="ServerValidator1" runat="server" ErrorMessage="Please Input Valid Percents and Winners." Display="None"></asp:CustomValidator>
                                         <asp:CustomValidator ID="ServerValidator" runat="server" ErrorMessage="Save Failed." Display="None"></asp:CustomValidator>
                                         <div class="col-md-6">
                                             <div class="form-group">

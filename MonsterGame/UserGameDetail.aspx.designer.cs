@@ -15,6 +15,24 @@ namespace MonsterGame
     {
 
         /// <summary>
+        /// GameTitle control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl GameTitle;
+
+        /// <summary>
+        /// SubTitle control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl SubTitle;
+
+        /// <summary>
         /// form1 control.
         /// </summary>
         /// <remarks>
@@ -114,6 +132,15 @@ namespace MonsterGame
         protected global::System.Web.UI.WebControls.HiddenField HfWinnerID;
 
         /// <summary>
+        /// liMyTicket control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liMyTicket;
+
+        /// <summary>
         /// liWinner control.
         /// </summary>
         /// <remarks>
@@ -121,6 +148,15 @@ namespace MonsterGame
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl liWinner;
+
+        /// <summary>
+        /// DivMyTicket control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl DivMyTicket;
 
         /// <summary>
         /// BtnTicket control.
