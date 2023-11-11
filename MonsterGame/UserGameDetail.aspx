@@ -117,7 +117,7 @@
                                 <asp:UpdatePanel runat="server" ID="UpdatePanel" ClientIDMode="Static" class="row gy-3">
                                     <ContentTemplate>
                                         <asp:ValidationSummary ID="ValSummary" runat="server" CssClass="mt-lg mb-lg text-left bg-gradient" ClientIDMode="Static" />
-                                        <asp:CustomValidator ID="ServerValidator" runat="server" ErrorMessage="Save Failed." Display="None"></asp:CustomValidator>
+                                        <asp:CustomValidator ID="ServerValidator" runat="server" ErrorMessage="Salvataggio Fallito." Display="None"></asp:CustomValidator>
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <asp:DropDownList runat="server" ID="ComboTeams" CssClass="form-select form--control style-two" ClientIDMode="Static"></asp:DropDownList>
@@ -147,7 +147,7 @@
                                     <ContentTemplate>   
                                         <asp:ValidationSummary ID="ValSummary1" runat="server" CssClass="mt-lg mb-lg text-left bg-gradient" ClientIDMode="Static" />
                                         <asp:CustomValidator ID="ServerValidator0" runat="server" ErrorMessage="Please Select Number Of Tickets." Display="None"></asp:CustomValidator>
-                                        <asp:CustomValidator ID="ServerValidator1" runat="server" ErrorMessage="Save Failed." Display="None"></asp:CustomValidator>
+                                        <asp:CustomValidator ID="ServerValidator1" runat="server" ErrorMessage="Salvataggio Fallito." Display="None"></asp:CustomValidator>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="TxtBalance" class="form-label">Current Balance</label>

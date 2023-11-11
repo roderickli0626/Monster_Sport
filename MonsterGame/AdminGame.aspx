@@ -196,7 +196,7 @@
                         <asp:DropDownList runat="server" ID="ComboStatus" CssClass="form-select form--control" ClientIDMode="Static"></asp:DropDownList>
                     </div>
                     <div class="col-lg-4 col-xl-4">
-                        <button class="cmn--btn active radius-1 w-100 btn-add">ADD GAME</button>
+                        <button class="cmn--btn active radius-1 w-100 btn-add">AGGIUNGI GAME</button>
                     </div>
                     <div class="col-lg-4 col-xl-4 pt-1">
                         <asp:TextBox runat="server" ID="TxtSearch" CssClass="form--control form-control" ClientIDMode="Static" placeholder="SEARCH"></asp:TextBox>
@@ -207,16 +207,16 @@
                         <thead>
                             <tr>
                                 <th>Game</th>
-                                <th>Title</th>
-                                <th>Start Date</th>
-                                <th>End Date</th>
-                                <th>Teams</th>
-                                <th>Fee</th>
+                                <th>Titolo</th>
+                                <th>Start</th>
+                                <th>Fine</th>
+                                <th>Squadre</th>
+                                <th>€</th>
                                 <th>Tax</th>
-                                <th>Players</th>
-                                <th>Prize</th>
+                                <th>Player</th>
+                                <th>Monte</th>
                                 <th>Round</th>
-                                <th>Action</th>
+                                <th>Azione</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -227,7 +227,7 @@
                     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                         <div class="modal-content section-bg border-0">
                             <div class="modal-header modal--header bg--base">
-                                <h4 class="modal-title text-dark" id="modalTitle">Game Details</h4>
+                                <h4 class="modal-title text-dark" id="modalTitle">Dettagli del gioco</h4>
                             </div>
                             <div class="modal-body modal--body">
                                 <asp:ScriptManager ID="ScriptManager" runat="server"></asp:ScriptManager>
@@ -241,46 +241,46 @@
                                         <asp:RequiredFieldValidator ID="ReqValTeamNum" runat="server" ErrorMessage="Insert Number Of Teams." CssClass="text-black" ControlToValidate="TxtTeamNum" Display="None"></asp:RequiredFieldValidator>
                                         <asp:CustomValidator ID="ServerValidator0" runat="server" ErrorMessage="Please Select Valid Teams." Display="None"></asp:CustomValidator>
                                         <asp:CustomValidator ID="ServerValidator1" runat="server" ErrorMessage="Please Input Valid Percents and Winners." Display="None"></asp:CustomValidator>
-                                        <asp:CustomValidator ID="ServerValidator" runat="server" ErrorMessage="Save Failed." Display="None"></asp:CustomValidator>
+                                        <asp:CustomValidator ID="ServerValidator" runat="server" ErrorMessage="Salvataggio Fallito." Display="None"></asp:CustomValidator>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="TxtTitle" class="form-label">Title</label>
+                                                <label for="TxtTitle" class="form-label">Titolo</label>
                                                 <asp:TextBox runat="server" ID="TxtTitle" ClientIDMode="Static" CssClass="form-control form--control style-two"></asp:TextBox>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="ComboModalStatus" class="form-label">Status</label>
+                                                <label for="ComboModalStatus" class="form-label">Stato</label>
                                                 <asp:DropDownList runat="server" ID="ComboModalStatus" CssClass="form-select form--control style-two" ClientIDMode="Static"></asp:DropDownList>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="TxtStartDate" class="form-label">Start Date</label>
+                                                <label for="TxtStartDate" class="form-label">Start</label>
                                                 <asp:TextBox runat="server" ID="TxtStartDate" ClientIDMode="Static" CssClass="form-control form--control style-two text-white" style="border: 1px solid rgba(255, 255, 255, 0.17); padding-left:10px;"></asp:TextBox>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="TxtEndDate" class="form-label">End Date</label>
+                                                <label for="TxtEndDate" class="form-label">End </label>
                                                 <asp:TextBox runat="server" ID="TxtEndDate" ClientIDMode="Static" CssClass="form-control form--control style-two text-white" style="border: 1px solid rgba(255, 255, 255, 0.17); padding-left:10px;"></asp:TextBox>
                                             </div>
                                         </div>
                                         <div class="col-md-3">
                                             <div class="form-group">
-                                                <label for="TxtTeamNum" class="form-label">Number Of Teams</label>
+                                                <label for="TxtTeamNum" class="form-label">Nr. di Squadre</label>
                                                 <asp:TextBox runat="server" ID="TxtTeamNum" ClientIDMode="Static" CssClass="form-control form--control style-two" TextMode="Number"></asp:TextBox>
                                             </div>
                                         </div>
                                         <div class="col-md-3">
                                             <div class="form-group">
-                                                <label for="TxtMinPlayers" class="form-label">Min Palyers</label>
+                                                <label for="TxtMinPlayers" class="form-label">Player min.</label>
                                                 <asp:TextBox runat="server" ID="TxtMinPlayers" ClientIDMode="Static" CssClass="form-control form--control style-two" TextMode="Number"></asp:TextBox>
                                             </div>
                                         </div>
                                         <div class="col-md-3">
                                             <div class="form-group">
-                                                <label for="TxtFee" class="form-label">Fee</label>
+                                                <label for="TxtFee" class="form-label">Quota</label>
                                                 <asp:TextBox runat="server" ID="TxtFee" ClientIDMode="Static" CssClass="form-control form--control style-two"></asp:TextBox>
                                             </div>
                                         </div>
@@ -298,42 +298,42 @@
                                         </div>
                                         <div class="col-md-2">
                                             <div class="form-group">
-                                                <label for="TxtPercent1" class="form-label">Percent 1</label>
+                                                <label for="TxtPercent1" class="form-label">% al 1°</label>
                                                 <asp:TextBox runat="server" ID="TxtPercent1" ClientIDMode="Static" CssClass="form-control form--control style-two"></asp:TextBox>
                                             </div>
                                         </div>
                                         <div class="col-md-2">
                                             <div class="form-group">
-                                                <label for="TxtPercent2" class="form-label">Percent 2</label>
+                                                <label for="TxtPercent2" class="form-label">% al 2°</label>
                                                 <asp:TextBox runat="server" ID="TxtPercent2" ClientIDMode="Static" CssClass="form-control form--control style-two"></asp:TextBox>
                                             </div>
                                         </div>
                                         <div class="col-md-2">
                                             <div class="form-group">
-                                                <label for="TxtPercent3" class="form-label">Percent 3</label>
+                                                <label for="TxtPercent3" class="form-label">% al 3°</label>
                                                 <asp:TextBox runat="server" ID="TxtPercent3" ClientIDMode="Static" CssClass="form-control form--control style-two"></asp:TextBox>
                                             </div>
                                         </div>
                                         <div class="col-md-2">
                                             <div class="form-group">
-                                                <label for="TxtPercent4" class="form-label">Percent 4</label>
+                                                <label for="TxtPercent4" class="form-label">% al 4°</label>
                                                 <asp:TextBox runat="server" ID="TxtPercent4" ClientIDMode="Static" CssClass="form-control form--control style-two"></asp:TextBox>
                                             </div>
                                         </div>
                                         <div class="col-md-2">
                                             <div class="form-group">
-                                                <label for="TxtPercent5" class="form-label">Percent 5</label>
+                                                <label for="TxtPercent5" class="form-label">% al 5°</label>
                                                 <asp:TextBox runat="server" ID="TxtPercent5" ClientIDMode="Static" CssClass="form-control form--control style-two"></asp:TextBox>
                                             </div>
                                         </div>
                                         <div class="col-md-2">
                                             <div class="form-group">
-                                                <label for="TxtPercent6" class="form-label">Winners</label>
+                                                <label for="TxtPercent6" class="form-label">Vincitori</label>
                                                 <asp:TextBox runat="server" ID="TxtWinners" ClientIDMode="Static" CssClass="form-control form--control style-two"></asp:TextBox>
                                             </div>
                                         </div>
                                         <div class="col-md-12">
-                                            <label for="ComboModalStatus" class="form-label">Teams</label>
+                                            <label for="ComboModalStatus" class="form-label">Elenco Squadre</label>
                                             <div>
                                                 <asp:DropDownList runat="server" ID="ComboTeams" CssClass="form-select form--control style-two" ClientIDMode="Static" Multiple="true"></asp:DropDownList>
                                             </div>
@@ -346,7 +346,7 @@
                             </div>
                             <div class="modal-footer modal--footer">
                                 <asp:Button runat="server" ID="BtnSave" CssClass="btn btn--warning btn--md" Text="Save" OnClick="BtnSave_Click"/>
-                                <button type="button" class="btn btn--danger btn--md" data-bs-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn--danger btn--md" data-bs-dismiss="modal">Chiudi</button>
                             </div>
                         </div>
                     </div>

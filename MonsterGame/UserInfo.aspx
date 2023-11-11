@@ -8,10 +8,10 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-7 col-xl-6 text-center">
-                    <h2 class="title text-white">Information</h2>
+                    <h2 class="title text-white">Scheda</h2>
                     <ul class="breadcrumbs d-flex flex-wrap align-items-center justify-content-center">
                         <li><a href="Dashboard.aspx">Dashboard</a></li>
-                        <li>Information</li>
+                        <li>Scheda</li>
                     </ul>
                 </div>
             </div>
@@ -24,20 +24,20 @@
                     <div class="col-3">
                         <ul class="privacy-policy-sidebar-menu" style="padding-top:120px;">
                             <li style="padding-left:30px;">
-                                <a href="#purchase" class="nav-link">PURCHASE WITH PAYPAL</a>
+                                <a href="#purchase" class="nav-link">ACQUISTA CON PAYPAL</a>
                             </li>
                             <li style="padding-left:30px;">
-                                <a href="#history" class="nav-link">TRANSACTION HISTORY</a>
+                                <a href="#history" class="nav-link">LISTA MOVIMENTI</a>
                             </li>
                             <li runat="server" id="liGame" style="padding-left:30px;">
-                                <a href="#games" class="nav-link">MY GAMES</a>
+                                <a href="#games" class="nav-link">I MIEI GIOCHI</a>
                             </li>
                         </ul>
                     </div>
                     <div class="col-9">
                         <div class="privacy-policy-content">
                             <div class="content-item mb-0">
-                                <h3 class="title" id="purchase" style="padding-top:120px;">PURCHASE</h3>
+                                <h3 class="title" id="purchase" style="padding-top:120px;">ACQUISTI</h3>
                                 <asp:ValidationSummary ID="ValSummary" runat="server" CssClass="mt-lg mb-lg text-left bg-gradient" ClientIDMode="Static" />
                                 <asp:CustomValidator ID="PaypalAmount" runat="server" ErrorMessage="Please insert valid amount." Display="None"></asp:CustomValidator>
                                 <div class="pt-5">
@@ -45,7 +45,7 @@
                                         <div class="dashboard__card" style="border: 2px solid #ffdd2d;">
                                             <div class="dashboard__card-content">
                                                 <h2 runat="server" id="Balance" class="price">$3750</h2>
-                                                <p class="info">CURRENT BALANCE</p>
+                                                <p class="info">SALDO</p>
                                             </div>
                                             <div class="dashboard__card-icon">
                                                 <i class="las la-wallet"></i>
@@ -54,20 +54,20 @@
                                                 <asp:TextBox runat="server" ID="TxtAmount" CssClass="form--control form-control" ClientIDMode="Static" placeholder="Amount"></asp:TextBox>
                                             </div>
                                             <div>
-                                                <asp:Button runat="server" ID="BtnPurchase" ClientIDMode="Static" CssClass="cmn--btn active radius-1 w-100" Text="PURCHASE WITH PAYPAL" OnClick="BtnPurchase_Click"></asp:Button>
+                                                <asp:Button runat="server" ID="BtnPurchase" ClientIDMode="Static" CssClass="cmn--btn active radius-1 w-100" Text="ACQUISTA CON PAYPAL" OnClick="BtnPurchase_Click"></asp:Button>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="pt-5 col-6 ms-auto">
-                                    <asp:TextBox runat="server" ID="TxtPaymentSearch" CssClass="form--control form-control" ClientIDMode="Static" placeholder="Search..."></asp:TextBox>
+                                    <asp:TextBox runat="server" ID="TxtPaymentSearch" CssClass="form--control form-control" ClientIDMode="Static" placeholder="Cerca..."></asp:TextBox>
                                 </div>
                                 <div class="pt-3 justify-content-center">
                                     <table class="table text-center" id="payment-table">
                                         <thead>
                                             <tr>
-                                                <th>Pay Date</th>
-                                                <th>Amount</th>
+                                                <th>Data Pag.</th>
+                                                <th>Importo</th>
                                                 <th>Paypal Transition</th>
                                                 <th>Note</th>
                                             </tr>
@@ -78,13 +78,13 @@
                                 </div>
                             </div>
                             <div class="content-item mb-0">
-                                <h3 class="title" id="history" style="padding-top:120px;">TRANSACTION HISTORY</h3>
+                                <h3 class="title" id="history" style="padding-top:120px;">LISTA MOVIMENTI</h3>
                                 <div class="row">
                                     <div class="col-lg-6 col-xl-6 col-md-6 col-sm-10">
                                         <div class="dashboard__card" style="border: 2px solid #ffdd2d;">
                                             <div class="dashboard__card-content">
                                                 <h2 runat="server" id="Deposit" class="price">$4550</h2>
-                                                <p class="info">TOTAL DEPOSIT</p>
+                                                <p class="info">TOTALE ENTRATE</p>
                                             </div>
                                             <div class="dashboard__card-icon">
                                                 <i class="las la-wallet"></i>
@@ -95,7 +95,7 @@
                                         <div class="dashboard__card" style="border: 2px solid #ffdd2d;">
                                             <div class="dashboard__card-content">
                                                 <h2 runat="server" id="Withdraw" class="price">$2500</h2>
-                                                <p class="info">TOTAL WITHDRAW</p>
+                                                <p class="info">TOTALE USCITE</p>
                                             </div>
                                             <div class="dashboard__card-icon">
                                                 <i class="las la-money-check"></i>
@@ -105,24 +105,24 @@
                                 </div>
                                 <div class="row justify-content-center pt-5">
                                     <div class="col-lg-4 col-xl-4 ">
-                                        <asp:TextBox runat="server" ID="TxtFrom" CssClass="form--control form-control" ClientIDMode="Static" placeholder="From"></asp:TextBox>
+                                        <asp:TextBox runat="server" ID="TxtFrom" CssClass="form--control form-control" ClientIDMode="Static" placeholder="Dal"></asp:TextBox>
                                     </div>
                                     <div class="col-lg-4 col-xl-4 ">
-                                        <asp:TextBox runat="server" ID="TxtTo" CssClass="form--control form-control" ClientIDMode="Static" placeholder="To"></asp:TextBox>
+                                        <asp:TextBox runat="server" ID="TxtTo" CssClass="form--control form-control" ClientIDMode="Static" placeholder="al"></asp:TextBox>
                                     </div>
                                     <div class="col-lg-4 col-xl-4 ">
-                                        <asp:TextBox runat="server" ID="TxtTransfer" CssClass="form--control form-control" ClientIDMode="Static" placeholder="Search..."></asp:TextBox>
+                                        <asp:TextBox runat="server" ID="TxtTransfer" CssClass="form--control form-control" ClientIDMode="Static" placeholder="Cerca..."></asp:TextBox>
                                     </div>
                                 </div>
                                 <div class="pt-3 justify-content-center">
                                     <table class="table text-center" id="movement-table">
                                         <thead>
                                             <tr>
-                                                <th>Move Date</th>
-                                                <th>Amount</th>
-                                                <th>Transfer</th>
+                                                <th>Data</th>
+                                                <th>Importo</th>
+                                                <th>Provenienza</th>
                                                 <th>Note</th>
-                                                <th>Type</th>
+                                                <th>Tipo</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -131,7 +131,7 @@
                                 </div>
                             </div>
                             <div runat="server" id="DivGameContent" class="content-item mb-0">
-                                <h3 class="title" id="games" style="padding-top: 120px;">MY GAMES</h3>
+                                <h3 class="title" id="games" style="padding-top: 120px;">I MIEI GIOCHI</h3>
                                 <div class="row gy-4 justify-content-center">
                                     <asp:Repeater runat="server" ID="RepeaterGame">
                                         <ItemTemplate>

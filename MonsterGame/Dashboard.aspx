@@ -167,14 +167,14 @@
         <div class="container">
             <div class="banner-wrapper d-flex flex-wrap align-items-center">
                 <div class="banner-content">
-                    <h1 class="banner-content__title">Play <span class="text--base">Monster Game</span> & Win Money Unlimited</h1>
-                    <p class="banner-content__subtitle">PLAY MONSTER AND EARN CRYPTO IN ONLINE. THE ULTIMATE ONLINE CASINO PLATFORM.</p>
+                    <h1 class="banner-content__title">Gioca su <span class="text--base">Kick Score</span> & supera la giornata di campionato!!</h1>
+                    <p class="banner-content__subtitle">SCEGLI IL TUO TEAM VINCENTE E SUPERA I GURU DELLE PREVISIONI</p>
                     <div class="button-wrapper" runat="server" id="InDiv">
-                        <a href="Login.aspx" class="cmn--btn active btn--lg">Log In</a>
-                        <a href="Register.aspx" class="cmn--btn btn--lg">Register</a>
+                        <a href="Login.aspx" class="cmn--btn active btn--lg">Entra</a>
+                        <a href="Register.aspx" class="cmn--btn btn--lg">Registrati</a>
                     </div>
                     <div class="button-wrapper" runat="server" id="OutDiv">
-                        <a href="Login.aspx" class="cmn--btn active btn--lg">Log Out</a>
+                        <a href="Login.aspx" class="cmn--btn active btn--lg">Esci</a>
                     </div>
                     <div class="position-fixed top-50 translate-middle-y align-self-center start-0 ps-4 ps-sm-5 flex flex-column left-control">
                         <div class="list-group" id="list-example">
@@ -215,8 +215,8 @@
                 <div class="row justify-content-center">
                     <div class="col-lg-6 col-xl-5">
                         <div class="section-header text-center">
-                            <h2 class="section-header__title">Top Awesome Games</h2>
-                            <p>A monster game is a game to get cashes from predicting winner in football matches.</p>
+                            <h2 class="section-header__title">GOCHI IN CORSO</h2>
+                            <p>Scegli i giochi.</p>
                         </div>
                     </div>
                 </div>
@@ -232,12 +232,13 @@
                                         </div>
                                         <div class="game-item__content">
                                             <h4 class="title"><%# Eval("Title") %></h4>
-                                            <p class="invest-info">Invest Limit: <span class="invest-amount">$<%# Eval("Fee") %></span></p>
-                                            <p class="invest-info">Min Players: <span class="invest-amount"><%# Eval("MinPlayers") %></span></p>
-                                            <p class="invest-info">Reached Players: <span class="invest-amount"><%# Eval("RealPlayers") %></span></p>
-                                            <p class="invest-info">Prize Pool: <span class="invest-amount"><%# Eval("Prize") %></span></p>
+                                            <p class="invest-info">Quota ingresso: <span class="invest-amount">€ <%# Eval("Fee") %></span></p>
+                                            <p class="invest-info">Player necessari: <span class="invest-amount"><%# Eval("MinPlayers") %></span></p>
+                                            <p class="invest-info">Player attuali: <span class="invest-amount"><%# Eval("RealPlayers") %></span></p>
+                                            <p class="invest-info">Numero di squadre: <span class="invest-amount"><%# Eval("NumberOfTeams") %></span></p>
+                                            <p class="invest-info">Scrigno minimo: <span class="invest-amount">€ <%# Eval("Prize") %></span></p>
                                             <button class="BtnDetails cmn--btn active btn--md radius-1" data-id="<%# Eval("Id") %>" 
-                                                data-title="<%# Eval("Title") %>" data-fee="<%# Eval("Fee") %>" data-players="<%# Eval("RealPlayers") %>">Details</button>
+                                                data-title="<%# Eval("Title") %>" data-fee="<%# Eval("Fee") %>" data-players="<%# Eval("RealPlayers") %>">Dettagli</button>
                                         </div>
                                     </div>
                                     <div class="ball"></div>
@@ -251,22 +252,23 @@
                         <asp:DropDownList runat="server" ID="ComboStatus" CssClass="form-select form--control" ClientIDMode="Static"></asp:DropDownList>
                     </div>
                     <div class="col-lg-6 col-xl-6 pt-1">
-                        <asp:TextBox runat="server" ID="TxtSearch" CssClass="form--control form-control" ClientIDMode="Static" placeholder="SEARCH"></asp:TextBox>
+                        <asp:TextBox runat="server" ID="TxtSearch" CssClass="form--control form-control" ClientIDMode="Static" placeholder="CERCA..."></asp:TextBox>
                     </div>
                 </div>
                 <div class="row gy-4 justify-content-center" runat="server" id="AllGameDiv">
                     <table class="table text-center" id="game-table">
                         <thead>
                             <tr>
-                                <th>Game</th>
-                                <th>Title</th>
-                                <th>Start Date</th>
-                                <th>End Date</th>
-                                <th>Teams</th>
-                                <th>Fee</th>
-                                <th>Players</th>
-                                <th>Prize</th>
-                                <th>Action</th>
+                                <th>Stato del Gioco</th>
+                                <th>Titolo</th>
+                                <th>Apertura</th>
+                                <th>Scadenza</th>
+                                <th>Squadre</th>
+                                <th>Rotondo</th>
+                                <th>Quota</th>
+                                <th>Player</th>
+                                <th>Scrigno</th>
+                                <th>Azione</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -284,8 +286,9 @@
             <div class="row justify-content-center">
                 <div class="col-lg-6">
                     <div class="section-header text-center">
-                        <h2 class="section-header__title">How to Play Game</h2>
-                        <p>A monster game is a game to get cashes from predicting winner in football matches.</p>
+                        <h2 class="section-header__title">COME GIOCARE</h2>
+                        <p>Il tuo obiettivo è superare ogni turno scegliendo saggiamente la squadra di calcio che ritieni sarà la vincente 
+                            nello scontro della prossima giornata sportiva.</p>
                     </div>
                 </div>
             </div>
@@ -297,7 +300,7 @@
                             <div class="badge badge--lg badge--round radius-50">01</div>
                         </div>
                         <div class="how-item__content">
-                            <h4 class="title">Sign Up First & Login</h4>
+                            <h4 class="title">Registrati ed Entra</h4>
                         </div>
                     </div>
                 </div>
@@ -308,7 +311,7 @@
                             <div class="badge badge--lg badge--round radius-50">02</div>
                         </div>
                         <div class="how-item__content">
-                            <h4 class="title">Purchase Your Balance</h4>
+                            <h4 class="title">Acquista i crediti</h4>
                         </div>
                     </div>
                 </div>
@@ -319,7 +322,7 @@
                             <div class="badge badge--lg badge--round radius-50">03</div>
                         </div>
                         <div class="how-item__content">
-                            <h4 class="title">Choose a Game & Play</h4>
+                            <h4 class="title">Scegli il campionato e gioca</h4>
                         </div>
                     </div>
                 </div>
@@ -331,7 +334,7 @@
         <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
             <div class="modal-content section-bg border-0">
                 <div class="modal-header modal--header bg--base">
-                    <h4 class="modal-title text-dark" id="modalTitle">Game Details</h4>
+                    <h4 class="modal-title text-dark" id="modalTitle">Dettagli del gioco</h4>
                 </div>
                 <div class="modal-body modal--body">
                     <h3 class="title mb-2">Before Game Start: </h3>
@@ -386,11 +389,25 @@
             }, {
                 "data": "NumberOfTeams",
             }, {
+                "data": "Round",
+                "render": function (data, type, row, meta) {
+                    return "<p class='text-warning'>R 0" + data + "</p>";
+                }
+            }, {
                 "data": "Fee",
+                "render": function (data, type, row, meta) {
+                    return "<p class='text-success'>€ " + data + "</p>";
+                }
             }, {
                 "data": "RealPlayers",
+                "render": function (data, type, row, meta) {
+                    return "<p class='text-success'>" + data + "</p>";
+                }
             }, {
                 "data": "Prize",
+                "render": function (data, type, row, meta) {
+                    return "<p class='text-success'>€ " + data + "</p>";
+                }
             }, {
                 "data": null,
                 "render": function (data, type, row, meta) {

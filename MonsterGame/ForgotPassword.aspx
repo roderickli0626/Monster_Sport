@@ -6,10 +6,10 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-7 col-xl-6 text-center">
-                    <h2 class="title text-white">Forgot Password</h2>
+                    <h2 class="title text-white">Password Dimenticata</h2>
                     <ul class="breadcrumbs d-flex flex-wrap align-items-center justify-content-center">
                         <li><a href="Dashboard.aspx">Dashboard</a></li>
-                        <li>Forgot Password</li>
+                        <li>Password Dimenticata</li>
                     </ul>
                 </div>
             </div>
@@ -34,7 +34,7 @@
                         </div>
                         <div class="col-12">
                             <div class="form-group">
-                                <asp:Button runat="server" ID="BtnSendMsg" CssClass="cmn--btn active w-100 btn--round" Text="Send Message" OnClick="BtnSendMsg_Click" />
+                                <asp:Button runat="server" ID="BtnSendMsg" CssClass="cmn--btn active w-100 btn--round" Text="Conferma Invio" OnClick="BtnSendMsg_Click" />
                             </div>
                         </div>
 
@@ -45,8 +45,8 @@
                 </div>
                 <div class="account__content__wrapper">
                     <div class="content text-center text-white">
-                        <h3 class="title text--base mb-4">Welcome to Monster Game</h3>
-                        <p class="">Please send email to reset your password.</p>
+                        <h3 class="title text--base mb-4">Benvenuto to Monster Game</h3>
+                        <p class="">Inserisci la tua email per ricevere il reset della password.</p>
                     </div>
                 </div>
             </div>

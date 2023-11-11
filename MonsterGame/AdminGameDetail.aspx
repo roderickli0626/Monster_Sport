@@ -7,10 +7,10 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-7 col-xl-6 text-center">
-                    <h2 runat="server" id="GameTitle" class="title text-white">Game Details</h2>
+                    <h2 runat="server" id="GameTitle" class="title text-white">Dettagli del gioco</h2>
                     <ul class="breadcrumbs d-flex flex-wrap align-items-center justify-content-center">
                         <li><a href="AdminGame.aspx">Games</a></li>
-                        <li>Game Details</li>
+                        <li>Dettagli del gioco</li>
                     </ul>
                 </div>
             </div>
@@ -30,20 +30,20 @@
                     <div class="col-3">
                         <ul class="privacy-policy-sidebar-menu" style="padding-top:120px;">
                             <li style="padding-left:30px;">
-                                <a href="#results" class="nav-link">RESULTS</a>
+                                <a href="#results" class="nav-link">RISULTATI</a>
                             </li>
                             <li style="padding-left:30px;">
                                 <a href="#tickets" class="nav-link">TICKETS</a>
                             </li>
                             <li runat="server" id="liWinner" style="padding-left:30px;">
-                                <a href="#winners" class="nav-link">WINNERS</a>
+                                <a href="#winners" class="nav-link">VINCITORI</a>
                             </li>
                         </ul>
                     </div>
                     <div class="col-9">
                         <div class="privacy-policy-content">
                             <div class="content-item mb-0">
-                                <h3 class="title" id="results" style="padding-top:120px;">RESULTS</h3>
+                                <h3 class="title" id="results" style="padding-top:120px;">RISULTATI</h3>
                                 <div class="row justify-content-center pt-5">
                                     <div class="col-lg-4 col-xl-4 ms-auto">
                                          <asp:Button runat="server" ID="BtnRound" ClientIDMode="Static" CssClass="cmn--btn active radius-1 w-100" Text="NEW ROUND" OnClick="BtnRound_Click"></asp:Button>
@@ -62,13 +62,13 @@
                                 </div>
                             </div>
                             <div runat="server" id="DivWinners" class="content-item mb-0">
-                                <h3 class="title" id="winners" style="padding-top: 120px;">WINNERS</h3>
+                                <h3 class="title" id="winners" style="padding-top: 120px;">VINCITORI</h3>
                                 <div class="row justify-content-center pb-3">
                                     <div class="col-lg-8 col-xl-8 col-md-8 col-sm-8">
                                         <div class="dashboard__card" style="border: 2px solid #ffdd2d;">
                                             <div class="dashboard__card-content">
                                                 <h2 runat="server" id="Prize" class="price">$0</h2>
-                                                <p class="info">GAME PRIZE</p>
+                                                <p class="info">MONTEPREMIO</p>
                                             </div>
                                             <div class="dashboard__card-icon">
                                                 <i class="las la-wallet"></i>
@@ -84,10 +84,10 @@
                                         <thead>
                                             <tr>
                                                 <th>No</th>
-                                                <th>Winner</th>
-                                                <th>Percent</th>
-                                                <th>Prize</th>
-                                                <th>Action</th>
+                                                <th>Vincitore</th>
+                                                <th>%</th>
+                                                <th>Importo</th>
+                                                <th>Azione</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -102,14 +102,14 @@
                     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                         <div class="modal-content section-bg border-0">
                             <div class="modal-header modal--header bg--base">
-                                <h4 class="modal-title text-dark" id="modalTitle">Change Team</h4>
+                                <h4 class="modal-title text-dark" id="modalTitle">Cambia Squadre</h4>
                             </div>
                             <div class="modal-body modal--body">
                                 <asp:ScriptManager ID="ScriptManager" runat="server"></asp:ScriptManager>
                                 <asp:UpdatePanel runat="server" ID="UpdatePanel" ClientIDMode="Static" class="row gy-3">
                                     <ContentTemplate>
                                         <asp:ValidationSummary ID="ValSummary" runat="server" CssClass="mt-lg mb-lg text-left bg-gradient" ClientIDMode="Static" />
-                                        <asp:CustomValidator ID="ServerValidator" runat="server" ErrorMessage="Save Failed." Display="None"></asp:CustomValidator>
+                                        <asp:CustomValidator ID="ServerValidator" runat="server" ErrorMessage="Salvataggio Fallito." Display="None"></asp:CustomValidator>
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <asp:DropDownList runat="server" ID="ComboTeams" CssClass="form-select form--control style-two" ClientIDMode="Static"></asp:DropDownList>
@@ -123,7 +123,7 @@
                             </div>
                             <div class="modal-footer modal--footer">
                                 <asp:Button runat="server" ID="BtnChangeTeam" CssClass="btn btn--warning btn--md" Text="Save" CausesValidation="false" OnClick="BtnChangeTeam_Click"/>
-                                <button runat="server" id="btnClose" clientIDMode="static" class="btn btn--danger btn--md">Close</button>
+                                <button runat="server" id="btnClose" clientIDMode="static" class="btn btn--danger btn--md">Chiudi</button>
                             </div>
                         </div>
                     </div>
@@ -132,13 +132,13 @@
                     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                         <div class="modal-content section-bg border-0">
                             <div class="modal-header modal--header bg--base">
-                                <h4 class="modal-title text-dark" id="modalTitle1">Change Team</h4>
+                                <h4 class="modal-title text-dark" id="modalTitle1">Cambia Squadre</h4>
                             </div>
                             <div class="modal-body modal--body">
                                 <asp:UpdatePanel runat="server" ID="UpdatePanel1" ClientIDMode="Static" class="row gy-3">
                                     <ContentTemplate>
                                         <asp:ValidationSummary ID="ValSummary1" runat="server" CssClass="mt-lg mb-lg text-left bg-gradient" ClientIDMode="Static" />
-                                        <asp:CustomValidator ID="ServerValidator1" runat="server" ErrorMessage="Save Failed." Display="None"></asp:CustomValidator>
+                                        <asp:CustomValidator ID="ServerValidator1" runat="server" ErrorMessage="Salvataggio Fallito." Display="None"></asp:CustomValidator>
                                         <div class="col-md-8 mx-auto">
                                             <div class="form-group">
                                                 <asp:DropDownList runat="server" ID="ComboResults" CssClass="form-select form--control style-two" ClientIDMode="Static"></asp:DropDownList>
@@ -167,7 +167,7 @@
                                 <asp:UpdatePanel runat="server" ID="UpdatePanel2" ClientIDMode="Static" class="row gy-3">
                                     <ContentTemplate>
                                         <asp:ValidationSummary ID="ValSummary2" runat="server" CssClass="mt-lg mb-lg text-left bg-gradient" ClientIDMode="Static" />
-                                        <asp:CustomValidator ID="ServerValidator2" runat="server" ErrorMessage="Save Failed." Display="None"></asp:CustomValidator>
+                                        <asp:CustomValidator ID="ServerValidator2" runat="server" ErrorMessage="Salvataggio Fallito." Display="None"></asp:CustomValidator>
                                         <div class="col-md-8 mx-auto">
                                             <div class="form-group">
                                                 <asp:TextBox runat="server" ID="TxtPercent" ClientIDMode="Static" CssClass="form-control form--control style-two"></asp:TextBox>
@@ -181,7 +181,7 @@
                             </div>
                             <div class="modal-footer modal--footer">
                                 <asp:Button runat="server" ID="BtnPercent" CssClass="btn btn--warning btn--md" Text="Save" CausesValidation="false" OnClick="BtnPercent_Click"/>
-                                <button type="button" class="btn btn--danger btn--md" data-bs-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn--danger btn--md" data-bs-dismiss="modal">Chiudi</button>
                             </div>
                         </div>
                     </div>
@@ -452,7 +452,7 @@
             $("#BtnRound").click(function () {
                 var currentRound = datatableForResult.fnGetData(0).Results.length + 1;
                 $("#HfCurrentRound").val(currentRound);
-                if (confirm("Create A New Round?")) return true;
+                if (confirm("Creare un nuovo Round ?")) return true;
                 else return false;
             });
 

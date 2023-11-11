@@ -102,35 +102,35 @@ namespace MonsterGame.Controller
                     {
                         check.Image = "gamemark2.jpg";
                         check.Mark = "<div class=\"ribbon red\"><span>STARTED</span></div>";
-                        check.ButtonTitle = "Detail";
+                        check.ButtonTitle = "Dettagli";
                     }
                     break;
                 case 3:
                     {
                         check.Image = "gamemark3.jpg";
                         check.Mark = "<div class=\"ribbon red\"><span>TEAMCHOICE</span></div>";
-                        check.ButtonTitle = "Detail";
+                        check.ButtonTitle = "Dettagli";
                     }
                     break;
                 case 4:
                     {
                         check.Image = "gamemark4.jpg";
                         check.Mark = "<div class=\"ribbon red\"><span>SUSPENDED</span></div>";
-                        check.ButtonTitle = "Detail";
+                        check.ButtonTitle = "Dettagli";
                     }
                     break;
                 case 5:
                     {
                         check.Image = "gamemark5.jpg";
                         check.Mark = "<div class=\"ribbon red\"><span>CLOSED</span></div>";
-                        check.ButtonTitle = "Detail";
+                        check.ButtonTitle = "Dettagli";
                     }
                     break;
                 case 6:
                     {
                         check.Image = "gamemark6.png";
                         check.Mark = "<div class=\"ribbon\"><span>COMPLETED</span></div>";
-                        check.ButtonTitle = "Detail";
+                        check.ButtonTitle = "Dettagli";
                     }
                     break;
             }

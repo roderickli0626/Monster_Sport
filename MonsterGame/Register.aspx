@@ -6,10 +6,10 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-7 col-xl-6 text-center">
-                    <h2 class="title text-white">Register</h2>
+                    <h2 class="title text-white">Registrazione</h2>
                     <ul class="breadcrumbs d-flex flex-wrap align-items-center justify-content-center">
                         <li><a href="Dashboard.aspx">Dashboard</a></li>
-                        <li>Register</li>
+                        <li>Registrazione</li>
                     </ul>
                 </div>
             </div>
@@ -93,7 +93,7 @@
                     <div class="content text-center text-white">
                         <h3 class="title text--base mb-4">Welcome to Monster Game</h3>
                         <p class="">Sign in your Account. Atque, fuga sapiente, doloribus qui enim tempora?</p>
-                        <p class="account-switch mt-4">Already have an Account ? <a class="text--base ms-2" href="Login.aspx">Log In</a></p>
+                        <p class="account-switch mt-4">Already have an Account ? <a class="text--base ms-2" href="Login.aspx">Entra</a></p>
                     </div>
                 </div>
             </div>

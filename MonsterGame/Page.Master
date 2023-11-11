@@ -44,13 +44,13 @@
                         <li runat="server" id="liDashboard"><a href="Dashboard.aspx">Home</a></li>
                         <li runat="server" id="liAdminGame"><a href="AdminGame.aspx">Games</a></li>
                         <li runat="server" id="liUserGame"><a href="UserGame.aspx">Games</a></li>
-                        <li runat="server" id="liAdmin"><a href="Admin.aspx">Admins</a></li>
-                        <li runat="server" id="liMaster"><a href="Master.aspx">Masters</a></li>
-                        <li runat="server" id="liAgency"><a href="Agency.aspx">Agencies</a></li>
-                        <li runat="server" id="liUser"><a href="Users.aspx">Users</a></li>
-                        <li runat="server" id="liMovement"><a href="Movements.aspx">Movements</a></li>
-                        <li><a href="Contact.aspx">Contact</a></li>
-                        <li runat="server" id="liLogin"><a href="Login.aspx">Log In</a></li>
+                        <li runat="server" id="liAdmin"><a href="Admin.aspx">Admin</a></li>
+                        <li runat="server" id="liMaster"><a href="Master.aspx">Master</a></li>
+                        <li runat="server" id="liAgency"><a href="Agency.aspx">Agenzia</a></li>
+                        <li runat="server" id="liUser"><a href="Users.aspx">Player</a></li>
+                        <li runat="server" id="liMovement"><a href="Movements.aspx">Movimenti</a></li>
+                        <li><a href="Contact.aspx">Contatti</a></li>
+                        <li runat="server" id="liLogin"><a href="Login.aspx">Entra</a></li>
                         <li runat="server" id="liUserInfo">
                             <a href="#0">
                                 <i class="fa fa-user-circle" style="font-size:20px;">
@@ -62,8 +62,8 @@
                             </a>
                             <ul class="sub-menu">
                                 <li><a href="#" runat="server" id="liName">User Name</a></li>
-                                <li runat="server" id="liInfo"><a href="UserInfo.aspx">Information</a></li>
-                                <li><a href="Login.aspx">Log Out</a></li>
+                                <li runat="server" id="liInfo"><a href="UserInfo.aspx">Scheda</a></li>
+                                <li><a href="Login.aspx">Esci</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -71,7 +71,7 @@
                         <div class="header-trigger me-4">
                             <span></span>
                         </div>
-                        <a href="Login.aspx" class="cmn--btn active btn--md d-none d-sm-block">Sign In</a>
+                        <a href="Login.aspx" class="cmn--btn active btn--md d-none d-sm-block">Entra</a>
                     </div>
                 </div>
             </div>
@@ -100,7 +100,7 @@
         <div class="footer-bottom">
             <div class="container">
                 <div class="footer-wrapper d-flex flex-wrap justify-content-center align-items-center text-center">
-                    <p class="copyright text-white">Copyrights &copy; 2023 All Rights Reserved by <a href="#0" class="text--base ms-2">Monster</a></p>
+                    <p class="copyright text-white">Copyrights &copy; 2023 All Rights Reserved by <a href="#0" class="text--base ms-2">SFB</a></p>
                 </div>
             </div>
         </div>

@@ -55,7 +55,7 @@ namespace MonsterGame
             ControlUtil.DataBind(ComboTeams, teamList, "Id", "Description", "0", "");
 
             Prize.InnerText = "$" + Math.Round(game.Prize ?? 0, 2);
-            TxtBalance.Text = Math.Round(user.Balance ?? 0, 2).ToString();
+            TxtBalance.Text = double.IsNaN(Math.Round(user.Balance ?? 0, 2)) ? "0.00" : Math.Round(user.Balance ?? 0, 2).ToString();
             GameTitle.InnerText = "Game" + game.Id + " Details";
         }
 

@@ -63,7 +63,8 @@ namespace MonsterGame
 
         private void SetVisible()
         {
-            if (game.Status == (int)GameStatus.OPEN || game.Status == (int)GameStatus.STARTED)
+            //if (game.Status == (int)GameStatus.OPEN || game.Status == (int)GameStatus.STARTED)
+            if (game.Status == (int)GameStatus.STARTED)
             {
                 List<Ticket> ticketList = new TicketDAO().FindByGame(game.Id);
                 if (ticketList.Count() == 0) BtnRound.Visible = false;

@@ -25,7 +25,7 @@ namespace MonsterGame
 
             //Send Email
             MailMessage Msg = new MailMessage();
-            Msg.From = new MailAddress(email, "Monster");// Sender details here, replace with valid value
+            Msg.From = new MailAddress(email, "Monster Game");// Sender details here, replace with valid value
             Msg.Subject = "Un nuovo CLIENTE si è registrato"; // subject of email
             Msg.To.Add("krandall2005@gmail.com"); //Add Email id, to which we will send email
             Msg.Body = name + " sent a message." + "\nMessage:" + message + "\nPhone:" + phone;

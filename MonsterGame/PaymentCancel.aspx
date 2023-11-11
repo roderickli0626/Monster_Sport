@@ -6,10 +6,10 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-7 col-xl-6 text-center">
-                    <h2 class="title text-white">Payment Cancelled</h2>
+                    <h2 class="title text-white">Pagamento Cancellato</h2>
                     <ul class="breadcrumbs d-flex flex-wrap align-items-center justify-content-center">
                         <li><a href="UserInfo.aspx">Information</a></li>
-                        <li>Payment Cancelled</li>
+                        <li>Pagamento Cancellato</li>
                     </ul>
                 </div>
             </div>
@@ -18,7 +18,7 @@
     <section class="game-section text-center">
         <div class="container">
             <form runat="server" id="form1" autocomplete="off">
-                <h2>Payment Cancelled</h2>
+                <h2>Pagamento Cancellato</h2>
             </form>
         </div>
     </section>

@@ -44,7 +44,7 @@ namespace MonsterGame
         private void LoadStatus()
         {
             ComboStatus.Items.Clear();
-            ComboStatus.Items.Add(new ListItem("ALL STATUS", "0"));
+            ComboStatus.Items.Add(new ListItem("TUTTI", "0"));
             ComboStatus.Items.Add(new ListItem("OPEN", ((int)GameStatus.OPEN).ToString()));
             ComboStatus.Items.Add(new ListItem("STARTED", ((int)GameStatus.STARTED).ToString()));
             ComboStatus.Items.Add(new ListItem("TEAMCHOICE", ((int)GameStatus.TEAMCHOICE).ToString()));

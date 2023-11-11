@@ -6,10 +6,10 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-7 col-xl-6 text-center">
-                    <h2 class="title text-white">Payment Completed</h2>
+                    <h2 class="title text-white">Pagamento Completato</h2>
                     <ul class="breadcrumbs d-flex flex-wrap align-items-center justify-content-center">
                         <li><a href="UserInfo.aspx">Information</a></li>
-                        <li>Payment Completed</li>
+                        <li>Pagamento Completato</li>
                     </ul>
                 </div>
             </div>

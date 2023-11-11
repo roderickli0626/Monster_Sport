@@ -50,10 +50,10 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-7 col-xl-6 text-center">
-                    <h2 class="title text-white">Movements</h2>
+                    <h2 class="title text-white">Movimenti</h2>
                     <ul class="breadcrumbs d-flex flex-wrap align-items-center justify-content-center">
                         <li><a href="Dashboard.aspx">Dashboard</a></li>
-                        <li>Movements</li>
+                        <li>Movimenti</li>
                     </ul>
                 </div>
             </div>
@@ -83,13 +83,13 @@
                     <table class="table text-center" id="movement-table">
                         <thead>
                             <tr>
-                                <th>Receiver</th>
-                                <th>Sender</th>
-                                <th>Move Date</th>
-                                <th>Amount</th>
+                                <th>Da</th>
+                                <th>A</th>
+                                <th>Data movimento</th>
+                                <th>Importo</th>
                                 <th>Note</th>
-                                <th>Type</th>
-                                <th>Action</th>
+                                <th>Tipo</th>
+                                <th>Azione</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -149,15 +149,15 @@
                 }, {
                     "data": "Type",
                     "render": function (data, type, row, meta) {
-                        if (data == 1) return "<p class='text-white bg-success' style='border-radius: 8px;'>DEPOSIT</p>";
-                        else return "<p class='text-white bg-danger' style='border-radius: 8px;'>WITHDRAWAL</p>";
+                        if (data == 1) return "<p class='text-white bg-success' style='border-radius: 8px;'>DEPOSITO</p>";
+                        else return "<p class='text-white bg-danger' style='border-radius: 8px;'>PRELIEVO</p>";
                     }
                 }, {
                     "width": "15%",
                     "data": null,
                     "render": function (data, type, row, meta) {
                         return '<div class="justify-content-center">' +
-                            '<button class="cmn--btn active btn--md radius-1 btn--danger btn-delete">Delete</button>' +
+                            '<button class="cmn--btn active btn--md radius-1 btn--danger btn-delete">Cancella</button>' +
                             '</div > ';
                     }
                 }],

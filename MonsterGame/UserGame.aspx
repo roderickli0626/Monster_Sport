@@ -150,10 +150,10 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-7 col-xl-6 text-center">
-                    <h2 class="title text-white">Games</h2>
+                    <h2 class="title text-white">Giochi</h2>
                     <ul class="breadcrumbs d-flex flex-wrap align-items-center justify-content-center">
                         <li><a href="Dashboard.aspx">Dashboard</a></li>
-                        <li>Games</li>
+                        <li>Giochi</li>
                     </ul>
                 </div>
             </div>
@@ -167,10 +167,10 @@
                         <asp:DropDownList runat="server" ID="ComboStatus" CssClass="form-select form--control" ClientIDMode="Static" OnSelectedIndexChanged="ComboStatus_SelectedIndexChanged" AutoPostBack="true"></asp:DropDownList>
                     </div>
                     <div class="col-lg-5 col-xl-5 pt-1">
-                        <asp:TextBox runat="server" ID="TxtSearch" ClientIDMode="Static" CssClass="form--control form-control" placeholder="SEARCH"></asp:TextBox>
+                        <asp:TextBox runat="server" ID="TxtSearch" ClientIDMode="Static" CssClass="form--control form-control" placeholder="CERCA..."></asp:TextBox>
                     </div>
                     <div class="col-lg-2 col-xl-2">
-                        <asp:Button runat="server" ID="BtnSearch" CssClass="cmn--btn active radius-1 w-100" ClientIDMode="Static" Text="SEARCH" OnClick="BtnSearch_Click" />
+                        <asp:Button runat="server" ID="BtnSearch" CssClass="cmn--btn active radius-1 w-100" ClientIDMode="Static" Text="CERCA" OnClick="BtnSearch_Click" />
                     </div>
                 </div>
                 <asp:ScriptManager runat="server" ID="ScriptManager"></asp:ScriptManager>
@@ -187,10 +187,11 @@
                                             </div>
                                             <div class="game-item__content">
                                                 <h4 class="title"><%# Eval("Title") %></h4>
-                                                <p class="invest-info">Invest Limit: <span class="invest-amount">$<%# Eval("Fee") %></span></p>
-                                                <p class="invest-info">Min Players: <span class="invest-amount"><%# Eval("MinPlayers") %></span></p>
-                                                <p class="invest-info">Reached Players: <span class="invest-amount"><%# Eval("RealPlayers") %></span></p>
-                                                <p class="invest-info">Prize Pool: <span class="invest-amount"><%# Eval("Prize") %></span></p>
+                                                <p class="invest-info">Quota ingresso: <span class="invest-amount">€ <%# Eval("Fee") %></span></p>
+                                                <p class="invest-info">Player necessari: <span class="invest-amount"><%# Eval("MinPlayers") %></span></p>
+                                                <p class="invest-info">Player attuali: <span class="invest-amount"><%# Eval("RealPlayers") %></span></p>
+                                                <p class="invest-info">Numero di squadre: <span class="invest-amount"><%# Eval("NumberOfTeams") %></span></p>
+                                                <p class="invest-info">Scrigno minimo: <span class="invest-amount">€ <%# Eval("Prize") %></span></p>
                                                 <a class="cmn--btn active btn--md radius-1" href="UserGameDetail.aspx?gameId=<%# Eval("Id") %>"><%# Eval("ButtonTitle") %></a>
                                             </div>
                                         </div>
@@ -209,15 +210,16 @@
                     <table class="table text-center" id="game-table">
                         <thead>
                             <tr>
-                                <th>Game</th>
-                                <th>Title</th>
-                                <th>Start Date</th>
-                                <th>End Date</th>
-                                <th>Teams</th>
-                                <th>Fee</th>
-                                <th>Players</th>
-                                <th>Prize</th>
-                                <th>Action</th>
+                                <th>Stato del Gioco</th>
+                                <th>Titolo</th>
+                                <th>Apertura</th>
+                                <th>Scadenza</th>
+                                <th>Squadre</th>
+                                <th>Rotondo</th>
+                                <th>Quota</th>
+                                <th>Player</th>
+                                <th>Scrigno</th>
+                                <th>Azione</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -266,11 +268,25 @@
             }, {
                 "data": "NumberOfTeams",
             }, {
+                "data": "Round",
+                "render": function (data, type, row, meta) {
+                    return "<p class='text-warning'>R 0" + data + "</p>";
+                }
+            }, {
                 "data": "Fee",
+                "render": function (data, type, row, meta) {
+                    return "<p class='text-success'>€ " + data + "</p>";
+                }
             }, {
                 "data": "RealPlayers",
+                "render": function (data, type, row, meta) {
+                    return "<p class='text-success'>" + data + "</p>";
+                }
             }, {
                 "data": "Prize",
+                "render": function (data, type, row, meta) {
+                    return "<p class='text-success'>€ " + data + "</p>";
+                }
             }, {
                 "data": null,
                 "render": function (data, type, row, meta) {

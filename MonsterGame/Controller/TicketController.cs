@@ -109,7 +109,8 @@ namespace MonsterGame.Controller
             int ticketID = ticketDAO.Insert(ticket);
 
             List<TicketResult> ticketResults = ticketResultDAO.FindGameAndRound(gameID, 1);
-            if (ticketResults.Count > 0)
+            //if (ticketResults.Count > 0)
+            if (true)
             {
                 TicketResult result = new TicketResult();
                 result.TicketID = ticketID;
@@ -133,7 +134,7 @@ namespace MonsterGame.Controller
                 // Open the connection
                 string sqlCommand = @"SET TRANSACTION ISOLATION LEVEL SERIALIZABLE
                                 BEGIN TRANSACTION;
-                                UPDATE Game SET RealPlayers = IIF(RealPlayers IS NULL, 1, RealPlayers+1) WHERE Id = @gameID;
+                                UPDATE Game SET RealPlayers = IIF(RealPlayers IS NULL, 1, RealPlayers+1), Prize = IIF(Prize IS NULL, (Fee * (100 - Tax) / 100), Prize + (Fee * (100 - Tax) / 100)) WHERE Id = @gameID;
                                 COMMIT TRANSACTION;";
 
                 using (SqlCommand command = new SqlCommand(sqlCommand, connection))

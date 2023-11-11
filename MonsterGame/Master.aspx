@@ -8,10 +8,10 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-7 col-xl-6 text-center">
-                    <h2 class="title text-white">Masters</h2>
+                    <h2 class="title text-white">Master</h2>
                     <ul class="breadcrumbs d-flex flex-wrap align-items-center justify-content-center">
                         <li><a href="Dashboard.aspx">Dashboard</a></li>
-                        <li>Masters</li>
+                        <li>Master</li>
                     </ul>
                 </div>
             </div>
@@ -24,7 +24,7 @@
                 <asp:HiddenField ID="HfAdminBalance" runat="server" ClientIDMode="Static" />
                 <div class="row justify-content-center mb-5">
                     <div class="col-lg-4 col-xl-4 me-auto">
-                        <button class="cmn--btn active radius-1 w-100 btn-add">ADD MASTER</button>
+                        <button class="cmn--btn active radius-1 w-100 btn-add">Agg.</button>
                     </div>
                     <div class="col-lg-4 col-xl-4 pt-1 ms-auto">
                         <asp:TextBox runat="server" ID="TxtSearch" CssClass="form--control form-control" ClientIDMode="Static" placeholder="SEARCH"></asp:TextBox>
@@ -34,13 +34,13 @@
                     <table class="table text-center" id="master-table">
                         <thead>
                             <tr>
-                                <th>Name</th>
+                                <th>Nome</th>
                                 <th>Nick Name</th>
                                 <th>Email</th>
                                 <th>Mobile</th>
-                                <th>Balance</th>
+                                <th>Saldo</th>
                                 <th>Admin</th>
-                                <th>Action</th>
+                                <th>Azione</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -64,13 +64,13 @@
                                         <asp:CustomValidator ID="ServerValidator" runat="server" ErrorMessage="Questo indirizzo Email è già registrato." Display="None"></asp:CustomValidator>
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="TxtTitle" class="form-label">Name</label>
+                                                <label for="TxtTitle" class="form-label">Nome</label>
                                                 <asp:TextBox runat="server" ID="TxtName" ClientIDMode="Static" CssClass="form-control form--control style-two"></asp:TextBox>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="TxtTitle" class="form-label">Surname</label>
+                                                <label for="TxtTitle" class="form-label">Cognome</label>
                                                 <asp:TextBox runat="server" ID="TxtSurname" ClientIDMode="Static" CssClass="form-control form--control style-two"></asp:TextBox>
                                             </div>
                                         </div>
@@ -100,7 +100,7 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="TxtTitle" class="form-label">Confirm Password</label>
+                                                <label for="TxtTitle" class="form-label">Conferma Password</label>
                                                 <asp:TextBox runat="server" ID="TxtPasswordRepeat" ClientIDMode="Static" TextMode="Password" CssClass="form-control form--control style-two"></asp:TextBox>
                                             </div>
                                         </div>
@@ -117,8 +117,8 @@
                                 </asp:UpdatePanel>
                             </div>
                             <div class="modal-footer modal--footer">
-                                <asp:Button runat="server" ID="BtnSave" CssClass="btn btn--warning btn--md" Text="Save" OnClick="BtnSave_Click"/>
-                                <button type="button" class="btn btn--danger btn--md" data-bs-dismiss="modal">Close</button>
+                                <asp:Button runat="server" ID="BtnSave" CssClass="btn btn--warning btn--md" Text="Salva" OnClick="BtnSave_Click"/>
+                                <button type="button" class="btn btn--danger btn--md" data-bs-dismiss="modal">Chiudi</button>
                             </div>
                         </div>
                     </div>
@@ -127,16 +127,16 @@
                     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                         <div class="modal-content section-bg border-0">
                             <div class="modal-header modal--header bg--base">
-                                <h4 class="modal-title text-dark" id="modalTitle1">Purchase</h4>
+                                <h4 class="modal-title text-dark" id="modalTitle1">Acquisti</h4>
                             </div>
                             <div class="modal-body modal--body">
                                 <asp:UpdatePanel runat="server" ID="UpdatePanel1" ClientIDMode="Static" class="row gy-3">
                                     <ContentTemplate>
                                         <asp:ValidationSummary ID="ValSummary1" runat="server" CssClass="mt-lg mb-lg text-left bg-gradient" ClientIDMode="Static" />
-                                        <asp:CustomValidator ID="ServerValidator1" runat="server" ErrorMessage="Save Failed." Display="None"></asp:CustomValidator>
+                                        <asp:CustomValidator ID="ServerValidator1" runat="server" ErrorMessage="Salvataggio Fallito." Display="None"></asp:CustomValidator>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="TxtCurrentBalance" class="form-label">Current</label>
+                                                <label for="TxtCurrentBalance" class="form-label">Saldo</label>
                                                 <asp:TextBox runat="server" ID="TxtCurrentBalance" ClientIDMode="Static" CssClass="form-control form--control style-two" ReadOnly="true"></asp:TextBox>
                                             </div>
                                         </div>
@@ -160,7 +160,7 @@
                             </div>
                             <div class="modal-footer modal--footer">
                                 <asp:Button runat="server" ID="BtnSavePurchase" ClientIDMode="Static" CssClass="btn btn--warning btn--md" Text="Deposita/Preleva" CausesValidation="false" OnClick="BtnSavePurchase_Click"/>
-                                <button type="button" class="btn btn--danger btn--md" data-bs-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn--danger btn--md" data-bs-dismiss="modal">Chiudi</button>
                             </div>
                         </div>
                     </div>
@@ -175,7 +175,7 @@
     <script>
         $(".btn-add").click(function () {
             $("#MasterModal").modal('show');
-            $(".modal-title").text("ADD MASTER");
+            $(".modal-title").text("AGGIUNGI MASTER");
             $("#HfMasterID").val("");
             $("#ValSummary").addClass("d-none");
             $("#TxtName").val("");
@@ -218,7 +218,7 @@
                         return '<div class="justify-content-center">' +
                             '<button class="cmn--btn active btn--md radius-1 btn--success btn-edit float-start">Edit</button>' +
                             '<button class="cmn--btn active btn--md radius-1 btn--danger btn-delete float-end">Delete</button>' +
-                            '<button class="cmn--btn active btn--md radius-1 btn-purchase w-100 mt-1">Purchase</button>' +
+                            '<button class="cmn--btn active btn--md radius-1 btn-purchase w-100 mt-1">Crediti</button>' +
                             '</div > ';
                     }
                 }],
@@ -247,7 +247,7 @@
                 var row = datatable.fnGetData($(this).closest('tr'));
 
                 $("#MasterModal").modal('show');
-                $(".modal-title").text("UPDATE MASTER");
+                $(".modal-title").text("AGGIORNA MASTER");
                 $("#HfMasterID").val(row.Id);
                 $("#ValSummary").addClass("d-none");
                 $("#TxtName").val(row.Name);
@@ -266,7 +266,7 @@
                 var row = datatable.fnGetData($(this).closest('tr'));
 
                 $("#PurchaseModal").modal('show');
-                $(".modal-title").text("PURCHASE");
+                $(".modal-title").text("ACQUISTA");
                 $("#HfMasterID").val(row.Id);
                 $("#TxtCurrentBalance").val(row.Balance);
                 $("#TxtBalance").val("");
@@ -309,11 +309,11 @@
             $("#BtnSavePurchase").click(function () {
                 var amount = $("#TxtBalance").val();
                 if ($("#HfAdminBalance").val() != "" && amount > $("#HfAdminBalance").val()) {
-                    alert("It is not allowed to transfer greater than your balance.");
+                    alert("Disponibilità non sufficiente a completare il trasferimento.");
                     return false;
                 }
                 else if (amount < 0 && Math.abs(amount) > $("#TxtCurrentBalance").val()) {
-                    alert("Negative Balance is not allowed");
+                    alert("Fido non consentito.");
                     return false;
                 }
                 return true;

@@ -6,10 +6,10 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-7 col-xl-6 text-center">
-                    <h2 class="title text-white">Conditions</h2>
+                    <h2 class="title text-white">Condizioni</h2>
                     <ul class="breadcrumbs d-flex flex-wrap align-items-center justify-content-center">
                         <li><a href="Dashboard.aspx">Dashboard</a></li>
-                        <li>Conditions</li>
+                        <li>Condizioni</li>
                     </ul>
                 </div>
             </div>
