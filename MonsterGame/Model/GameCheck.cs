@@ -30,7 +30,7 @@ namespace MonsterGame.Model
             Percent4 = game.PercentForForth ?? 0;
             Percent5 = game.PercentForFifth ?? 0;
             Winners = game.NumOfWinners ?? 0;
-            Prize = game.Prize ?? 0;
+            Prize = Math.Round(game.Prize ?? 0, 2);
         }
         public int Id
         {
