@@ -82,7 +82,7 @@ namespace MonsterGame
             {
                 liName0.InnerText = user.Name;
                 liName1.InnerText = "|| balance:";
-                liName2.InnerText = "$" + Math.Round(user.Balance ?? 0, 2).ToString();
+                liName2.InnerText = "€ " + Math.Round(user.Balance ?? 0, 2).ToString();
                 liName.InnerText = user.Name;
             }
         }

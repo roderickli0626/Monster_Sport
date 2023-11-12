@@ -54,8 +54,8 @@ namespace MonsterGame
             //List<Team> teamList = new TeamDAO().FindAll();
             ControlUtil.DataBind(ComboTeams, teamList, "Id", "Description", "0", "");
 
-            Prize.InnerText = "$" + Math.Round(game.Prize ?? 0, 2);
-            TxtBalance.Text = double.IsNaN(Math.Round(user.Balance ?? 0, 2)) ? "0.00" : Math.Round(user.Balance ?? 0, 2).ToString();
+            Prize.InnerText = "€ " + Math.Round(game.Prize ?? 0, 2);
+            TxtBalance.Text = "€ " + (double.IsNaN(Math.Round(user.Balance ?? 0, 2)) ? "0.00" : Math.Round(user.Balance ?? 0, 2).ToString());
             GameTitle.InnerText = "Game" + game.Id + " Details";
         }
 

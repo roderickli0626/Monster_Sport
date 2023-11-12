@@ -44,7 +44,7 @@ namespace MonsterGame
         }
         private void LoadInfo()
         {
-            Balance.InnerText = "$" + Math.Round(user.Balance ?? 0, 2);
+            Balance.InnerText = "€ " + Math.Round(user.Balance ?? 0, 2);
             List<Movement> movements = new MovementController().GetMovementList(user.Id);
             double deposit = 0;
             double withdraw = 0;
@@ -69,8 +69,8 @@ namespace MonsterGame
                     }
                 }
             }
-            Deposit.InnerText = "$" + Math.Round(deposit, 2);
-            Withdraw.InnerText = "$" + Math.Round(withdraw, 2);
+            Deposit.InnerText = "€ " + Math.Round(deposit, 2);
+            Withdraw.InnerText = "€ " + Math.Round(withdraw, 2);
         }
         private void LoadUserGames()
         {

@@ -211,6 +211,9 @@
                     "data": "Mobile",
                 }, {
                     "data": "Balance",
+                    "render": function (data, type, row, meta) {
+                        return "€ " + data;
+                    }
                 }, {
                     "data": "admin",
                 }, {
@@ -299,7 +302,7 @@
                 $("#PurchaseModal").modal('show');
                 $(".modal-title").text("ACQUISTI");
                 $("#HfAgencyID").val(row.Id);
-                $("#TxtCurrentBalance").val(row.Balance);
+                $("#TxtCurrentBalance").val("€ " + row.Balance);
                 $("#TxtBalance").val("");
                 $("#TxtBalanceNote").val("");
                 $("#ValSummary1").addClass("d-none");
@@ -343,7 +346,7 @@
                     alert("Disponibilità non sufficiente a completare il trasferimento.");
                     return false;
                 }
-                else if (amount < 0 && Math.abs(amount) > $("#TxtCurrentBalance").val()) {
+                else if (amount < 0 && Math.abs(amount) > $("#TxtCurrentBalance").val().substring(2, $("#TxtCurrentBalance").val().length-1)) {
                     alert("Fido non consentito.");
                     return false;
                 }

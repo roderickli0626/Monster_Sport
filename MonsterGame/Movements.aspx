@@ -139,6 +139,9 @@
                     "data": "MoveDate",
                 }, {
                     "data": "Amount",
+                    "render": function (data, type, row, meta) {
+                        return "€ " + data;
+                    }
                 }, {
                     "width": "25%",
                     "data": "Note",

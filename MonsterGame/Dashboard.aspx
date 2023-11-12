@@ -361,7 +361,7 @@
     <script>
         $(".BtnDetails").click(function () {
             $("#modalTitle").text($(this)[0].dataset.title);
-            $("#fee").text("$" + $(this)[0].dataset.fee);
+            $("#fee").text("€ " + $(this)[0].dataset.fee);
             $("#players").text($(this)[0].dataset.players);
             $("#gameDetailModal").modal('show');
             return false;

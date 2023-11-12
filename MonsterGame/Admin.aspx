@@ -207,6 +207,9 @@
                     "data": "Mobile",
                 }, {
                     "data": "Balance",
+                    "render": function (data, type, row, meta) {
+                        return "€ " + data;
+                    }
                 }, {
                     "width": "25%",
                     "data": null,
@@ -264,7 +267,7 @@
                 $("#PurchaseModal").modal('show');
                 $(".modal-title").text("CREDITI");
                 $("#HfAdminID").val(row.Id);
-                $("#TxtCurrentBalance").val(row.Balance);
+                $("#TxtCurrentBalance").val("€ " + row.Balance);
                 $("#TxtBalance").val("");
                 $("#TxtBalanceNote").val("");
                 $("#ValSummary1").addClass("d-none");
@@ -304,7 +307,7 @@
 
             $("#BtnSave1").click(function () {
                 var amount = $("#TxtBalance").val();
-                if (amount < 0 && Math.abs(amount) > $("#TxtCurrentBalance").val()) {
+                if (amount < 0 && Math.abs(amount) > $("#TxtCurrentBalance").val().substring(2, $("#TxtCurrentBalance").val().length - 1)) {
                     alert("Negative Balance is not allowed");
                     return false;
                 }

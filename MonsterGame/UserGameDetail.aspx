@@ -506,6 +506,9 @@
                     "data": "Winner",
                 }, {
                     "data": "Prize",
+                    "render": function (data, type, row, meta) {
+                        return "€ " + data;
+                    }
                 }],
 
                 "fnServerParams": function (aoData) {
@@ -544,7 +547,7 @@
                     $('#TxtNumOfTickets').val($('#TxtNumOfTickets').val() - 1);
                     return;
                 }
-                $("#TxtBalance").val($("#HfBalance").val() - amount);
+                $("#TxtBalance").val("€ " + ($("#HfBalance").val() - amount));
             });
 
             // Real Time Notification

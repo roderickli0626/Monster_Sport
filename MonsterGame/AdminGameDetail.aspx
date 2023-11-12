@@ -475,6 +475,9 @@
                     "data": "Percent",
                 }, {
                     "data": "Prize",
+                    "render": function (data, type, row, meta) {
+                        return "€ " + data;
+                    }
                 }, {
                     "data": null,
                     "render": function (data, type, row, meta) {

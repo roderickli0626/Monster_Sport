@@ -211,7 +211,7 @@
                                 <th>Start</th>
                                 <th>Fine</th>
                                 <th>Squadre</th>
-                                <th>€</th>
+                                <th>Quota</th>
                                 <th>Tax</th>
                                 <th>Player</th>
                                 <th>Monte</th>
@@ -456,14 +456,29 @@
                     "data": "NumberOfTeams",
                 }, {
                     "data": "Fee",
+                    "render": function (data, type, row, meta) {
+                        return "<p class='text-success'>€ " + data + "</p>";
+                    }
                 }, {
                     "data": "Tax",
+                    "render": function (data, type, row, meta) {
+                        return "<p class='text-success'>" + data + "%</p>";
+                    }
                 }, {
                     "data": "RealPlayers",
+                    "render": function (data, type, row, meta) {
+                        return "<p class='text-success'>" + data + "</p>";
+                    }
                 }, {
                     "data": "Prize",
+                    "render": function (data, type, row, meta) {
+                        return "<p class='text-success'>€ " + data + "</p>";
+                    }
                 }, {
                     "data": "Round",
+                    "render": function (data, type, row, meta) {
+                        return "<p class='text-warning'>R 0" + data + "</p>";
+                    }
                 }, {
                     "data": null,
                     "render": function (data, type, row, meta) {

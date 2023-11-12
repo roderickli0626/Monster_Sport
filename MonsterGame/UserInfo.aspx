@@ -44,7 +44,7 @@
                                     <div class="col-lg-12 col-xl-12 col-md-12 col-sm-10">
                                         <div class="dashboard__card" style="border: 2px solid #ffdd2d;">
                                             <div class="dashboard__card-content">
-                                                <h2 runat="server" id="Balance" class="price">$3750</h2>
+                                                <h2 runat="server" id="Balance" class="price">€ 3750</h2>
                                                 <p class="info">SALDO</p>
                                             </div>
                                             <div class="dashboard__card-icon">
@@ -144,8 +144,11 @@
                                                         </div>
                                                         <div class="game-item__content">
                                                             <h4 class="title"><%# Eval("Title") %></h4>
-                                                            <p class="invest-info">Invest Limit</p>
-                                                            <p class="invest-amount">$<%# Eval("Fee") %></p>
+                                                            <p class="invest-info">Quota ingresso: <span class="invest-amount">€ <%# Eval("Fee") %></span></p>
+                                                            <p class="invest-info">Player necessari: <span class="invest-amount"><%# Eval("MinPlayers") %></span></p>
+                                                            <p class="invest-info">Player attuali: <span class="invest-amount"><%# Eval("RealPlayers") %></span></p>
+                                                            <p class="invest-info">Numero di squadre: <span class="invest-amount"><%# Eval("NumberOfTeams") %></span></p>
+                                                            <p class="invest-info">Scrigno minimo: <span class="invest-amount">€ <%# Eval("Prize") %></span></p>
                                                             <a class="cmn--btn active btn--md radius-1" href="UserGameDetail.aspx?gameId=<%# Eval("Id") %>"><%# Eval("ButtonTitle") %></a>
                                                         </div>
                                                     </div>
@@ -182,6 +185,9 @@
                     "data": "PayDate",
                 }, {
                     "data": "Amount",
+                    "render": function (data, type, row, meta) {
+                        return "€ " + data;
+                    }
                 }, {
                     "data": "Transition",
                 }, {
@@ -241,7 +247,10 @@
                 "columns": [{
                     "data": "MoveDate"
                 }, {
-                    "data": "Amount"
+                    "data": "Amount",
+                    "render": function (data, type, row, meta) {
+                        return "€ " + data;
+                    }
                 }, {
                     "data": "Transfer"
                 }, {
