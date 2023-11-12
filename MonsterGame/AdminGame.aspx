@@ -213,6 +213,7 @@
                                 <th>Squadre</th>
                                 <th>Quota</th>
                                 <th>Tax</th>
+                                <th>Min Player</th>
                                 <th>Player</th>
                                 <th>Monte</th>
                                 <th>Round</th>
@@ -463,6 +464,11 @@
                     "data": "Tax",
                     "render": function (data, type, row, meta) {
                         return "<p class='text-success'>" + data + "%</p>";
+                    }
+                }, {
+                    "data": "MinPlayers",
+                    "render": function (data, type, row, meta) {
+                        return "<p class='text-success'>" + data + "</p>";
                     }
                 }, {
                     "data": "RealPlayers",

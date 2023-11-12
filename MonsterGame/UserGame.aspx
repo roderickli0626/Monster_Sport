@@ -217,6 +217,7 @@
                                 <th>Squadre</th>
                                 <th>Rotondo</th>
                                 <th>Quota</th>
+                                <th>Min Player</th>
                                 <th>Player</th>
                                 <th>Scrigno</th>
                                 <th>Azione</th>
@@ -276,6 +277,11 @@
                 "data": "Fee",
                 "render": function (data, type, row, meta) {
                     return "<p class='text-success'>€ " + data + "</p>";
+                }
+            }, {
+                "data": "MinPlayers",
+                "render": function (data, type, row, meta) {
+                    return "<p class='text-success'>" + data + "</p>";
                 }
             }, {
                 "data": "RealPlayers",
