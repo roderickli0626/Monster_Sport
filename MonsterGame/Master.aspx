@@ -315,7 +315,7 @@
                     alert("Disponibilità non sufficiente a completare il trasferimento.");
                     return false;
                 }
-                else if (amount < 0 && Math.abs(amount) > $("#TxtCurrentBalance").val().substring(2, $("#TxtCurrentBalance").val().length - 1)) {
+                else if (amount < 0 && Math.abs(amount) > $("#TxtCurrentBalance").val().substring(2)) {
                     alert("Fido non consentito.");
                     return false;
                 }

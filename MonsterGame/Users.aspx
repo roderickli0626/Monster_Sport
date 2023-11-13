@@ -349,7 +349,7 @@
                     alert("It is not allowed to transfer greater than your balance.");
                     return false;
                 }
-                else if (amount < 0 && Math.abs(amount) > $("#TxtCurrentBalance").val().substring(2, $("#TxtCurrentBalance").val().length - 1)) {
+                else if (amount < 0 && Math.abs(amount) > $("#TxtCurrentBalance").val().substring(2)) {
                     alert("Negative Balance is not allowed");
                     return false;
                 }
