@@ -236,6 +236,10 @@ namespace MonsterGame.Controller
                     teamsForGame.GameID = savedGameID;
                     teamForGameDao.Insert(teamsForGame);
                 }
+
+                // Create First Round for New Game
+                AddNewRound(savedGameID, 1);
+
                 return true;
             }
             else
