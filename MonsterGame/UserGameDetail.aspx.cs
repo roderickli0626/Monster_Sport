@@ -148,6 +148,7 @@ namespace MonsterGame
 
             Movement movement = new Movement();
             movement.UserID = user.Id;
+            movement.SenderID = user.Id;
             movement.Amount = (game.Fee * numOfTickets);
             movement.Type = (int)MovementType.WITHDRAWAL;
             movement.MoveDate = DateTime.Now;

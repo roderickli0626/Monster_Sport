@@ -257,7 +257,7 @@
                     "width": "20%",
                     "data": "Note",
                     "render": function (data, type, row, meta) {
-                        var note = (data != null && data.length > 20) ? data.substring(0, 20) : data;
+                        var note = (data != null && data.length > 40) ? data.substring(0, 40) : data;
                         return '<p class="text-white" title="' + row.Note + '">' + (note == null ? "" : note) + '</p>';
                     }
                 }, {

@@ -37,6 +37,11 @@ namespace MonsterGame.Controller
             foreach (Movement movement in movementList)
             {
                 MovementCheck usercheck = new MovementCheck(movement);
+                if (string.IsNullOrEmpty(usercheck.Sender) && usercheck.Note.Contains("Deleted"))
+                {
+                    usercheck.Sender = usercheck.Note.Split(' ')[1];
+                }
+                else if (string.IsNullOrEmpty(usercheck.Sender)) usercheck.Sender = "Super Admin";
                 checks.Add(usercheck);
             }
             result.ResultList = checks;
@@ -65,7 +70,12 @@ namespace MonsterGame.Controller
                 MovementCheck usercheck = new MovementCheck(movement);
                 if (usercheck.ReceiverID == userID)
                 {
-                    usercheck.Transfer = usercheck.Sender;
+                    if (!string.IsNullOrEmpty(usercheck.Sender)) usercheck.Transfer = usercheck.Sender;
+                    else if (usercheck.Note.Contains("Deleted"))
+                    {
+                        usercheck.Transfer = usercheck.Note.Split(' ')[1];
+                    }
+                    else usercheck.Transfer = "Super Admin";
                 }
                 else
                 {
