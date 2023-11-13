@@ -24,10 +24,10 @@
                 <asp:HiddenField ID="HfAdminBalance" runat="server" ClientIDMode="Static" />
                 <div class="row justify-content-center mb-5">
                     <div class="col-lg-4 col-xl-4 me-auto">
-                        <button class="cmn--btn active radius-1 w-100 btn-add">Agg.</button>
+                        <button class="cmn--btn active radius-1 w-100 btn-add">Agg. Nuovo</button>
                     </div>
                     <div class="col-lg-4 col-xl-4 pt-1 ms-auto">
-                        <asp:TextBox runat="server" ID="TxtSearch" CssClass="form--control form-control" ClientIDMode="Static" placeholder="SEARCH"></asp:TextBox>
+                        <asp:TextBox runat="server" ID="TxtSearch" CssClass="form--control form-control" ClientIDMode="Static" placeholder="CERCA ..."></asp:TextBox>
                     </div>
                 </div>
                 <div class="row gy-4 justify-content-center">

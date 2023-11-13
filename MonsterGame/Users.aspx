@@ -8,10 +8,10 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-7 col-xl-6 text-center">
-                    <h2 class="title text-white">Users</h2>
+                    <h2 class="title text-white">PLAYERS</h2>
                     <ul class="breadcrumbs d-flex flex-wrap align-items-center justify-content-center">
                         <li><a href="Dashboard.aspx">Dashboard</a></li>
-                        <li>Users</li>
+                        <li>PLAYERS</li>
                     </ul>
                 </div>
             </div>
@@ -25,7 +25,7 @@
                 <asp:HiddenField ID="HfAgencyBalance" runat="server" ClientIDMode="Static" />
                 <div class="row justify-content-center mb-5">
                     <div class="col-lg-4 col-xl-4 me-auto">
-                        <button class="cmn--btn active radius-1 w-100 btn-add" runat="server" id="BtnAddAgency">ADD USER</button>
+                        <button class="cmn--btn active radius-1 w-100 btn-add" runat="server" id="BtnAddAgency">AGG. NUOVO</button>
                     </div>
                     <div class="col-lg-4 col-xl-4 pt-1 ms-auto">
                         <asp:TextBox runat="server" ID="TxtSearch" CssClass="form--control form-control" ClientIDMode="Static" placeholder="SEARCH"></asp:TextBox>
@@ -35,15 +35,15 @@
                     <table class="table text-center" id="user-table">
                         <thead>
                             <tr>
-                                <th>Name</th>
+                                <th>Nome</th>
                                 <th>Nick Name</th>
                                 <th>Email</th>
                                 <th>Mobile</th>
-                                <th>Balance</th>
+                                <th>Saldo</th>
                                 <th>Admin</th>
                                 <th>Master</th>
-                                <th>Agency</th>
-                                <th>Action</th>
+                                <th>Agenzia</th>
+                                <th>Azione</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -54,7 +54,7 @@
                     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                         <div class="modal-content section-bg border-0">
                             <div class="modal-header modal--header bg--base">
-                                <h4 class="modal-title text-dark" id="modalTitle">User</h4>
+                                <h4 class="modal-title text-dark" id="modalTitle">Player</h4>
                             </div>
                             <div class="modal-body modal--body">
                                 <asp:ScriptManager ID="ScriptManager" runat="server"></asp:ScriptManager>
@@ -67,13 +67,13 @@
                                         <asp:CustomValidator ID="ServerValidator" runat="server" ErrorMessage="Questo indirizzo Email è già registrato." Display="None"></asp:CustomValidator>
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="TxtTitle" class="form-label">Name</label>
+                                                <label for="TxtTitle" class="form-label">Nome</label>
                                                 <asp:TextBox runat="server" ID="TxtName" ClientIDMode="Static" CssClass="form-control form--control style-two"></asp:TextBox>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="TxtTitle" class="form-label">Surname</label>
+                                                <label for="TxtTitle" class="form-label">Cognome</label>
                                                 <asp:TextBox runat="server" ID="TxtSurname" ClientIDMode="Static" CssClass="form-control form--control style-two"></asp:TextBox>
                                             </div>
                                         </div>
@@ -103,7 +103,7 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="TxtTitle" class="form-label">Confirm Password</label>
+                                                <label for="TxtTitle" class="form-label">Conferma Password</label>
                                                 <asp:TextBox runat="server" ID="TxtPasswordRepeat" ClientIDMode="Static" TextMode="Password" CssClass="form-control form--control style-two"></asp:TextBox>
                                             </div>
                                         </div>
@@ -120,8 +120,8 @@
                                 </asp:UpdatePanel>
                             </div>
                             <div class="modal-footer modal--footer">
-                                <asp:Button runat="server" ID="BtnSave" CssClass="btn btn--warning btn--md" Text="Save" OnClick="BtnSave_Click"/>
-                                <button type="button" class="btn btn--danger btn--md" data-bs-dismiss="modal">Close</button>
+                                <asp:Button runat="server" ID="BtnSave" CssClass="btn btn--warning btn--md" Text="Salva" OnClick="BtnSave_Click"/>
+                                <button type="button" class="btn btn--danger btn--md" data-bs-dismiss="modal">Chiudi</button>
                             </div>
                         </div>
                     </div>
@@ -130,7 +130,7 @@
                     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                         <div class="modal-content section-bg border-0">
                             <div class="modal-header modal--header bg--base">
-                                <h4 class="modal-title text-dark" id="modalTitle1">Purchase</h4>
+                                <h4 class="modal-title text-dark" id="modalTitle1">Acquisto</h4>
                             </div>
                             <div class="modal-body modal--body">
                                 <asp:UpdatePanel runat="server" ID="UpdatePanel1" ClientIDMode="Static" class="row gy-3">
@@ -139,7 +139,7 @@
                                         <asp:CustomValidator ID="ServerValidator1" runat="server" ErrorMessage="Salvataggio Fallito." Display="None"></asp:CustomValidator>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="TxtCurrentBalance" class="form-label">Current</label>
+                                                <label for="TxtCurrentBalance" class="form-label">Saldo</label>
                                                 <asp:TextBox runat="server" ID="TxtCurrentBalance" ClientIDMode="Static" CssClass="form-control form--control style-two" ReadOnly="true"></asp:TextBox>
                                             </div>
                                         </div>
@@ -163,7 +163,7 @@
                             </div>
                             <div class="modal-footer modal--footer">
                                 <asp:Button runat="server" ID="BtnSavePurchase" ClientIDMode="Static" CssClass="btn btn--warning btn--md" Text="Deposita/Preleva" CausesValidation="false" OnClick="BtnSavePurchase_Click"/>
-                                <button type="button" class="btn btn--danger btn--md" data-bs-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn--danger btn--md" data-bs-dismiss="modal">Chiudi</button>
                             </div>
                         </div>
                     </div>
@@ -178,7 +178,7 @@
     <script>
         $(".btn-add").click(function () {
             $("#UserModal").modal('show');
-            $(".modal-title").text("ADD USER");
+            $(".modal-title").text("AGGIUNGI PLAYER");
             $("#HfUserID").val("");
             $("#ValSummary").addClass("d-none");
             $("#TxtName").val("");
@@ -265,7 +265,7 @@
                 var row = datatable.fnGetData($(this).closest('tr'));
 
                 $("#UserModal").modal('show');
-                $(".modal-title").text("UPDATE USER");
+                $(".modal-title").text("AGGIORNA PLAYER");
                 $("#HfUserID").val(row.Id);
                 $("#ValSummary").addClass("d-none");
                 $("#TxtName").val(row.Name);
@@ -284,7 +284,7 @@
                 var row = datatable.fnGetData($(this).closest('tr'));
 
                 $("#UserModal").modal('show');
-                $(".modal-title").text("VIEW USER");
+                $(".modal-title").text("VEDI PLAYER");
                 $("#HfUserID").val(row.Id);
                 $("#ValSummary").addClass("d-none");
                 $("#TxtName").val(row.Name);
@@ -303,7 +303,7 @@
                 var row = datatable.fnGetData($(this).closest('tr'));
 
                 $("#PurchaseModal").modal('show');
-                $(".modal-title").text("PURCHASE");
+                $(".modal-title").text("ACQUISTO");
                 $("#HfUserID").val(row.Id);
                 $("#TxtCurrentBalance").val("€ " + row.Balance);
                 $("#TxtBalance").val("");
@@ -346,11 +346,11 @@
             $("#BtnSavePurchase").click(function () {
                 var amount = $("#TxtBalance").val();
                 if ($("#HfAgencyBalance").val() != "" && amount > $("#HfAgencyBalance").val()) {
-                    alert("It is not allowed to transfer greater than your balance.");
+                    alert("Disponibilità non sufficiente a completare il trasferimento.");
                     return false;
                 }
                 else if (amount < 0 && Math.abs(amount) > $("#TxtCurrentBalance").val().substring(2)) {
-                    alert("Negative Balance is not allowed");
+                    alert("Fido non consentito");
                     return false;
                 }
                 return true;

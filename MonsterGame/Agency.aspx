@@ -25,7 +25,7 @@
                 <asp:HiddenField ID="HfMasterBalance" runat="server" ClientIDMode="Static" />
                 <div class="row justify-content-center mb-5">
                     <div class="col-lg-4 col-xl-4 me-auto">
-                        <button class="cmn--btn active radius-1 w-100 btn-add" runat="server" id="BtnAddAgency">Agg.</button>
+                        <button class="cmn--btn active radius-1 w-100 btn-add" runat="server" id="BtnAddAgency">Agg. Nuova</button>
                     </div>
                     <div class="col-lg-4 col-xl-4 pt-1 ms-auto">
                         <asp:TextBox runat="server" ID="TxtSearch" CssClass="form--control form-control" ClientIDMode="Static" placeholder="SEARCH"></asp:TextBox>

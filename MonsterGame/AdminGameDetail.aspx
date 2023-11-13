@@ -9,7 +9,7 @@
                 <div class="col-lg-7 col-xl-6 text-center">
                     <h2 runat="server" id="GameTitle" class="title text-white">Dettagli del gioco</h2>
                     <ul class="breadcrumbs d-flex flex-wrap align-items-center justify-content-center">
-                        <li><a href="AdminGame.aspx">Games</a></li>
+                        <li><a href="AdminGame.aspx">TORNEI</a></li>
                         <li>Dettagli del gioco</li>
                     </ul>
                 </div>
@@ -68,7 +68,7 @@
                                         <div class="dashboard__card" style="border: 2px solid #ffdd2d;">
                                             <div class="dashboard__card-content">
                                                 <h2 runat="server" id="Prize" class="price">$0</h2>
-                                                <p class="info">MONTEPREMIO</p>
+                                                <p class="info">FORZIERE</p>
                                             </div>
                                             <div class="dashboard__card-icon">
                                                 <i class="las la-wallet"></i>
@@ -83,7 +83,7 @@
                                     <table class="table text-center" id="winner-table">
                                         <thead>
                                             <tr>
-                                                <th>No</th>
+                                                <th>Nr.</th>
                                                 <th>Vincitore</th>
                                                 <th>%</th>
                                                 <th>Importo</th>
@@ -152,7 +152,7 @@
                             </div>
                             <div class="modal-footer modal--footer">
                                 <asp:Button runat="server" ID="BtnResult" CssClass="btn btn--warning btn--md" ClientIDMode="Static" Text="Save" CausesValidation="false" OnClick="BtnResult_Click"/>
-                                <button type="button" class="btn btn--danger btn--md" data-bs-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn--danger btn--md" data-bs-dismiss="modal">Chiudi</button>
                             </div>
                         </div>
                     </div>
@@ -161,7 +161,7 @@
                     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                         <div class="modal-content section-bg border-0">
                             <div class="modal-header modal--header bg--base">
-                                <h4 class="modal-title text-dark" id="modalTitle2">Percent</h4>
+                                <h4 class="modal-title text-dark" id="modalTitle2">% Perc.</h4>
                             </div>
                             <div class="modal-body modal--body">
                                 <asp:UpdatePanel runat="server" ID="UpdatePanel2" ClientIDMode="Static" class="row gy-3">
@@ -222,14 +222,14 @@
                     // Draw DataTable
                     columns.length = 0;
                     columns.push({
-                        "title": "No",
+                        "title": "Nr.",
                         "width": "5%",
                         "render": function (data, type, row, meta) {
                             return meta.row + meta.settings._iDisplayStart + 1;
                         }
                     });
                     columns.push({
-                        "title": "User",
+                        "title": "Player",
                         "width": "15%",
                         "render": function (data, type, row, meta) {
                             return row.UserName;
@@ -256,7 +256,7 @@
                     }
 
                     columns.push({
-                        "title": "Status",
+                        "title": "Fase",
                         "width": "5%",
                         "render": function (data, type, row, meta) {
                             if (row.TicketResults.length == 0) return "PLAYING";
@@ -267,7 +267,7 @@
                     });
 
                     columns.push({
-                        "title": "Action",
+                        "title": "Azione",
                         "class": modifyTeam,
                         "width": "5%",
                         "render": function (data, type, row, meta) {
@@ -344,14 +344,14 @@
                     console.log(res.data);
                     // Draw DataTable
                     columnsForResult.push({
-                        "title": "No",
+                        "title": "Nr.",
                         "width": "5%",
                         "render": function (data, type, row, meta) {
                             return meta.row + meta.settings._iDisplayStart + 1;
                         }
                     });
                     columnsForResult.push({
-                        "title": "Team",
+                        "title": "Squadra",
                         "width": "15%",
                         "render": function (data, type, row, meta) {
                             return row.TeamName;
@@ -390,7 +390,7 @@
                         });
                     }
                     columnsForResult.push({
-                        "title": "Action",
+                        "title": "Azione",
                         "width": "5%",
                         "render": function (data, type, row, meta) {
                             if (row.Results.length > 0) return '<a href="#" class="btn-edit mr-4"><i class="fa fa-edit" style="font-size:25px"></i></a>';
@@ -513,7 +513,7 @@
             });
 
             $("#BtnPrize").click(function () {
-                if (confirm("Divide Prize to Winners?")) return true;
+                if (confirm("Divide il Montepremi tra i Vincitori?")) return true;
                 else return false;
             });
 

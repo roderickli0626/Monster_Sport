@@ -61,7 +61,7 @@
                                     </div>
                                 </div>
                                 <div class="text-center col-12">
-                                    <asp:Button runat="server" ID="BtnSend" CssClass="cmn--btn active w-100 btn--round" Text="Send Message" OnClick="BtnSend_Click" />
+                                    <asp:Button runat="server" ID="BtnSend" CssClass="cmn--btn active w-100 btn--round" Text="Invia Messaggio" OnClick="BtnSend_Click" />
                                 </div>
 
                                 <asp:ValidationSummary ID="ValSummary" runat="server" CssClass="mt-lg mb-lg text-left bg-gradient" ClientIDMode="Static" />

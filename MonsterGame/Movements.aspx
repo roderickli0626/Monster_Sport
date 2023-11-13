@@ -65,10 +65,10 @@
                 <asp:HiddenField ID="HfMovementID" runat="server" ClientIDMode="Static" />
                 <div class="row justify-content-center mb-5">
                     <div class="col-lg-3 col-xl-3 ">
-                        <asp:TextBox runat="server" ID="TxtFrom" CssClass="form--control form-control" ClientIDMode="Static" placeholder="FROM"></asp:TextBox>
+                        <asp:TextBox runat="server" ID="TxtFrom" CssClass="form--control form-control" ClientIDMode="Static" placeholder="DAL ..."></asp:TextBox>
                     </div>
                     <div class="col-lg-3 col-xl-3 ">
-                        <asp:TextBox runat="server" ID="TxtTo" CssClass="form--control form-control" ClientIDMode="Static" placeholder="TO"></asp:TextBox>
+                        <asp:TextBox runat="server" ID="TxtTo" CssClass="form--control form-control" ClientIDMode="Static" placeholder="AL ..."></asp:TextBox>
                     </div>
                     <div class="col-lg-3 col-xl-3 ">
                         <asp:DropDownList runat="server" ID="ComboReceiver" CssClass="form-select form--control style-two" ClientIDMode="Static"></asp:DropDownList>
@@ -83,8 +83,8 @@
                     <table class="table text-center" id="movement-table">
                         <thead>
                             <tr>
-                                <th>Da</th>
                                 <th>A</th>
+                                <th>DA</th>
                                 <th>Data movimento</th>
                                 <th>Importo</th>
                                 <th>Note</th>

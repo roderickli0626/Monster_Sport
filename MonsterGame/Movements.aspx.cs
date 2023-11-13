@@ -31,8 +31,8 @@ namespace MonsterGame
         private void LoadTransfers()
         {
             List<User> users = new UserDAO().FindAll().OrderBy(u => u.Name).ToList();
-            ControlUtil.DataBind(ComboReceiver, users, "Name", "Name", "", "RECEIVER");
-            ControlUtil.DataBind(ComboSender, users, "Name", "Name", "", "SENDER");
+            ControlUtil.DataBind(ComboReceiver, users, "Name", "Name", "", "RICEVE ..");
+            ControlUtil.DataBind(ComboSender, users, "Name", "Name", "", "INVIA ..");
         }
     }
 }

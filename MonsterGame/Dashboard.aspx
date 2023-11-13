@@ -236,7 +236,7 @@
                                             <p class="invest-info">Player necessari: <span class="invest-amount"><%# Eval("MinPlayers") %></span></p>
                                             <p class="invest-info">Player attuali: <span class="invest-amount"><%# Eval("RealPlayers") %></span></p>
                                             <p class="invest-info">Numero di squadre: <span class="invest-amount"><%# Eval("NumberOfTeams") %></span></p>
-                                            <p class="invest-info">Scrigno minimo: <span class="invest-amount">€ <%# Eval("Prize") %></span></p>
+                                            <p class="invest-info">Forziere minimo: <span class="invest-amount">€ <%# Eval("Prize") %></span></p>
                                             <button class="BtnDetails cmn--btn active btn--md radius-1" data-id="<%# Eval("Id") %>" 
                                                 data-title="<%# Eval("Title") %>" data-fee="<%# Eval("Fee") %>" data-players="<%# Eval("RealPlayers") %>">Dettagli</button>
                                         </div>
@@ -259,16 +259,16 @@
                     <table class="table text-center" id="game-table">
                         <thead>
                             <tr>
-                                <th>Stato del Gioco</th>
+                                <th>Fase</th>
                                 <th>Titolo</th>
-                                <th>Apertura</th>
-                                <th>Scadenza</th>
-                                <th>Squadre</th>
-                                <th>Rotondo</th>
+                                <th>Start</th>
+                                <th>Fine</th>
+                                <th><img src="content\images\team.png" alt="Squadre" width="44" height="44" title="Squadre"/></th>
+                                <th>Round</th>
                                 <th>Quota</th>
-                                <th>Min Player</th>
-                                <th>Player</th>
-                                <th>Scrigno</th>
+                                <th><img src="content\images\utentemin.png" alt="Necessari" width="44" height="44" title="Player Necessari" /></th>
+                                <th><img src="content\images\utentereal.png" alt="Registrati" width="44" height="44" title="Player Registrati" /></th>    
+                                <th><img src="content\images\forziere.png" alt="Forziere" width="44" height="44" title="Montepremi"/></th>
                                 <th>Azione</th>
                             </tr>
                         </thead>

@@ -56,7 +56,7 @@ namespace MonsterGame
 
             Prize.InnerText = "€ " + Math.Round(game.Prize ?? 0, 2);
             TxtBalance.Text = "€ " + (double.IsNaN(Math.Round(user.Balance ?? 0, 2)) ? "0.00" : Math.Round(user.Balance ?? 0, 2).ToString());
-            GameTitle.InnerText = "Game" + game.Id + " Details";
+            GameTitle.InnerText = "Game" + game.Id + " Dettaglio";
         }
 
         private void SetVisible()
@@ -116,7 +116,7 @@ namespace MonsterGame
             {
                 // Send Notification to Admin
                 var hubContext = GlobalHost.ConnectionManager.GetHubContext<NotificationHub>();
-                hubContext.Clients.All.receiveTeamChoiceNotificationA("Team Selected!");
+                hubContext.Clients.All.receiveTeamChoiceNotificationA("Squadra Selezionata!");
 
                 Page.Response.Redirect(Page.Request.Url.ToString(), true);
             }
@@ -152,14 +152,14 @@ namespace MonsterGame
             movement.Amount = (game.Fee * numOfTickets);
             movement.Type = (int)MovementType.WITHDRAWAL;
             movement.MoveDate = DateTime.Now;
-            movement.Note = "Got " + numOfTickets + " Tickets";
+            movement.Note = "Acquisto " + numOfTickets + " Tickets";
             new MovementDAO().Insert(movement);
 
             if (success)
             {
                 // Send Notification to Admin
                 var hubContext = GlobalHost.ConnectionManager.GetHubContext<NotificationHub>();
-                hubContext.Clients.All.receiveTicketNotificationA("A new ticket added!");
+                hubContext.Clients.All.receiveTicketNotificationA("Un nuovo Ticket aggiunto!");
 
                 Page.Response.Redirect(Page.Request.Url.ToString(), true);
             }

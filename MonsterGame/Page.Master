@@ -42,8 +42,8 @@
                     </div>
                     <ul class="menu">
                         <li runat="server" id="liDashboard"><a href="Dashboard.aspx">Home</a></li>
-                        <li runat="server" id="liAdminGame"><a href="AdminGame.aspx">Games</a></li>
-                        <li runat="server" id="liUserGame"><a href="UserGame.aspx">Games</a></li>
+                        <li runat="server" id="liAdminGame"><a href="AdminGame.aspx">Tornei</a></li>
+                        <li runat="server" id="liUserGame"><a href="UserGame.aspx">Tornei</a></li>
                         <li runat="server" id="liAdmin"><a href="Admin.aspx">Admin</a></li>
                         <li runat="server" id="liMaster"><a href="Master.aspx">Master</a></li>
                         <li runat="server" id="liAgency"><a href="Agency.aspx">Agenzia</a></li>

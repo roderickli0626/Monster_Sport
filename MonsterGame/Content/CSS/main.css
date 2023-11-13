@@ -1842,7 +1842,8 @@ i {
 .table tbody tr td {
     color: #fff;
     vertical-align: middle;
-    padding: 10px 15px;
+  /*   padding: 10px 15px;   */
+    padding: 3px 2px;
     border-width: 1px;
     border-color: rgba(255, 255, 255, 0.17);
 }

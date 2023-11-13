@@ -178,10 +178,10 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-7 col-xl-6 text-center">
-                    <h2 class="title text-white">Games</h2>
+                    <h2 class="title text-white">Tornei</h2>
                     <ul class="breadcrumbs d-flex flex-wrap align-items-center justify-content-center">
                         <li><a href="Dashboard.aspx">Dashboard</a></li>
-                        <li>Games</li>
+                        <li>Tornei</li>
                     </ul>
                 </div>
             </div>
@@ -196,26 +196,26 @@
                         <asp:DropDownList runat="server" ID="ComboStatus" CssClass="form-select form--control" ClientIDMode="Static"></asp:DropDownList>
                     </div>
                     <div class="col-lg-4 col-xl-4">
-                        <button class="cmn--btn active radius-1 w-100 btn-add">AGGIUNGI GAME</button>
+                        <button class="cmn--btn active radius-1 w-100 btn-add">AGGIUNGI TORNEO</button>
                     </div>
                     <div class="col-lg-4 col-xl-4 pt-1">
-                        <asp:TextBox runat="server" ID="TxtSearch" CssClass="form--control form-control" ClientIDMode="Static" placeholder="SEARCH"></asp:TextBox>
+                        <asp:TextBox runat="server" ID="TxtSearch" CssClass="form--control form-control" ClientIDMode="Static" placeholder="CERCA ..."></asp:TextBox>
                     </div>
                 </div>
                 <div class="row gy-4 justify-content-center">
                     <table class="table text-center" id="game-table">
                         <thead>
                             <tr>
-                                <th>Game</th>
+                                <th>Fase</th>
                                 <th>Titolo</th>
                                 <th>Start</th>
                                 <th>Fine</th>
-                                <th>Squadre</th>
+                                <th><img src="content\images\team.png" alt="Squadre" width="44" height="44" title="Squadre"/></th>
                                 <th>Quota</th>
                                 <th>Tax</th>
-                                <th>Min Player</th>
-                                <th>Player</th>
-                                <th>Monte</th>
+                                <th><img src="content\images\utentemin.png" alt="Necessari" width="44" height="44" title="Player Necessari" /></th>
+                                <th><img src="content\images\utentereal.png" alt="Registrati" width="44" height="44" title="Player Registrati" /></th>                                
+                                <th><img src="content\images\forziere.png" alt="Forziere" width="44" height="44" title="Montepremi"/></th>
                                 <th>Round</th>
                                 <th>Azione</th>
                             </tr>
@@ -409,7 +409,7 @@
 
         $(".btn-add").click(function () {
             $("#gameDetailModal").modal('show');
-            $(".modal-title").text("ADD GAME");
+            $(".modal-title").text("AGG. TORNEO");
             $("#HfGameID").val("");
             $("#ValSummary").addClass("d-none");
             $("#TxtTitle").val("");
@@ -490,8 +490,8 @@
                     "render": function (data, type, row, meta) {
                             return '<div class="justify-content-center">' +
                                 '<button class="cmn--btn active btn--md radius-1 btn--success btn-edit float-start">Edit</button >' + 
-                                '<button class="cmn--btn active btn--md radius-1 btn--danger btn-delete float-end">Delete</button>' +
-                                '<a class="cmn--btn active btn--md radius-1 w-100 mt-1" href="AdminGameDetail.aspx?gameId=' + row.Id + '">Detail</a>' +
+                                '<button class="cmn--btn active btn--md radius-1 btn--danger btn-delete float-end">Cancella</button>' +
+                                '<a class="cmn--btn active btn--md radius-1 w-100 mt-1" href="AdminGameDetail.aspx?gameId=' + row.Id + '">Dettaglio</a>' +
                                 '</div > ';
                     }
                 }],
@@ -525,7 +525,7 @@
                 var row = datatable.fnGetData($(this).closest('tr'));
 
                 $("#gameDetailModal").modal('show');
-                $(".modal-title").text("UPDATE GAME");
+                $(".modal-title").text("AGGIORNA TORNEO");
                 $("#HfGameID").val(row.Id);
                 $("#ValSummary").addClass("d-none");
                 $("#TxtTitle").val(row.Title);

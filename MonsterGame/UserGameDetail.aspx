@@ -7,10 +7,10 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-7 col-xl-6 text-center">
-                    <h2 runat="server" id="GameTitle" class="title text-white">Game Details</h2>
+                    <h2 runat="server" id="GameTitle" class="title text-white">Dettagli del Torneo</h2>
                     <ul runat="server" id="SubTitle" class="breadcrumbs d-flex flex-wrap align-items-center justify-content-center">
-                        <li><a href="UserGame.aspx">Games</a></li>
-                        <li>Game Details</li>
+                        <li><a href="UserGame.aspx">Tornei</a></li>
+                        <li>Dettagli del Torneo</li>
                     </ul>
                 </div>
             </div>
@@ -33,26 +33,26 @@
                     <div class="col-3">
                         <ul class="privacy-policy-sidebar-menu" style="padding-top:120px;">
                             <li runat="server" id="liMyTicket" style="padding-left:30px;">
-                                <a href="#myTickets" class="nav-link">MY TICKETS</a>
+                                <a href="#myTickets" class="nav-link">I MIEI TICKETS</a>
                             </li>
                             <li style="padding-left:30px;">
-                                <a href="#tickets" class="nav-link">TICKETS</a>
+                                <a href="#tickets" class="nav-link">TUTTI I TICKETS</a>
                             </li>
                             <li style="padding-left:30px;">
-                                <a href="#results" class="nav-link">RESULTS</a>
+                                <a href="#results" class="nav-link">RISULTATI</a>
                             </li>
                             <li runat="server" id="liWinner" style="padding-left:30px;">
-                                <a href="#winners" class="nav-link">WINNERS</a>
+                                <a href="#winners" class="nav-link">VINCITORI</a>
                             </li>
                         </ul>
                     </div>
                     <div class="col-9">
                         <div class="privacy-policy-content">
                             <div runat="server" id="DivMyTicket" class="content-item mb-0">
-                                <h3 class="title" id="myTickets" style="padding-top:120px;">MY TICKETS</h3>
+                                <h3 class="title" id="myTickets" style="padding-top:120px;">I MIEI TICKETS</h3>
                                 <div class="row justify-content-center pt-5">
                                     <div class="col-lg-4 col-xl-4 ms-auto">
-                                         <asp:Button runat="server" ID="BtnTicket" ClientIDMode="Static" CssClass="cmn--btn active radius-1 w-100" Text="NEW TICKETS"></asp:Button>
+                                         <asp:Button runat="server" ID="BtnTicket" ClientIDMode="Static" CssClass="cmn--btn active radius-1 w-100" Text="NUOVO TICKET"></asp:Button>
                                     </div>
                                 </div>
                                 <div class="pt-3 justify-content-center">
@@ -61,27 +61,27 @@
                                 </div>
                             </div>
                             <div class="content-item mb-0">
-                                <h3 class="title" id="tickets" style="padding-top:120px;">TICKETS</h3>
+                                <h3 class="title" id="tickets" style="padding-top:120px;">TUTTI I TICKETS</h3>
                                 <div class="pt-3 justify-content-center">
                                     <table class="table text-center" id="ticket-table">
                                     </table>
                                 </div>
                             </div>
                             <div class="content-item mb-0">
-                                <h3 class="title" id="results" style="padding-top:120px;">RESULTS</h3>
+                                <h3 class="title" id="results" style="padding-top:120px;">RISULTATI</h3>
                                 <div class="pt-3 justify-content-center">
                                     <table class="table text-center" id="result-table">
                                     </table>
                                 </div>
                             </div>
                             <div runat="server" id="DivWinners" class="content-item mb-0">
-                                <h3 class="title" id="winners" style="padding-top: 120px;">WINNERS</h3>
+                                <h3 class="title" id="winners" style="padding-top: 120px;">VINCITORI</h3>
                                 <div class="row justify-content-center pb-3">
                                     <div class="col-lg-8 col-xl-8 col-md-8 col-sm-8">
                                         <div class="dashboard__card" style="border: 2px solid #ffdd2d;">
                                             <div class="dashboard__card-content">
                                                 <h2 runat="server" id="Prize" class="price">$0</h2>
-                                                <p class="info">GAME PRIZE</p>
+                                                <p class="info">FORZIERE</p>
                                             </div>
                                             <div class="dashboard__card-icon">
                                                 <i class="las la-wallet"></i>
@@ -93,9 +93,9 @@
                                     <table class="table text-center" id="winner-table">
                                         <thead>
                                             <tr>
-                                                <th>No</th>
-                                                <th>Winner</th>
-                                                <th>Prize</th>
+                                                <th>Nr.</th>
+                                                <th>Vincitore</th>
+                                                <th>Forziere</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -110,7 +110,7 @@
                     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                         <div class="modal-content section-bg border-0">
                             <div class="modal-header modal--header bg--base">
-                                <h4 class="modal-title text-dark" id="modalTitle">Change Team</h4>
+                                <h4 class="modal-title text-dark" id="modalTitle">Scegli la Squadra</h4>
                             </div>
                             <div class="modal-body modal--body">
                                 <asp:ScriptManager ID="ScriptManager" runat="server"></asp:ScriptManager>
@@ -131,7 +131,7 @@
                             </div>
                             <div class="modal-footer modal--footer">
                                 <asp:Button runat="server" ID="BtnChangeTeam" CssClass="btn btn--warning btn--md" Text="Save" CausesValidation="false" OnClick="BtnChangeTeam_Click"/>
-                                <button runat="server" id="btnClose" clientIDMode="static" class="btn btn--danger btn--md">Close</button>
+                                <button runat="server" id="btnClose" clientIDMode="static" class="btn btn--danger btn--md">Chiudi</button>
                             </div>
                         </div>
                     </div>
@@ -140,23 +140,23 @@
                     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                         <div class="modal-content section-bg border-0">
                             <div class="modal-header modal--header bg--base">
-                                <h4 class="modal-title text-dark" id="modalTitle1">New Tickets</h4>
+                                <h4 class="modal-title text-dark" id="modalTitle1">Nuovo Ticket</h4>
                             </div>
                             <div class="modal-body modal--body">
                                 <asp:UpdatePanel runat="server" ID="UpdatePanel1" ClientIDMode="Static" class="row gy-3">
                                     <ContentTemplate>   
                                         <asp:ValidationSummary ID="ValSummary1" runat="server" CssClass="mt-lg mb-lg text-left bg-gradient" ClientIDMode="Static" />
-                                        <asp:CustomValidator ID="ServerValidator0" runat="server" ErrorMessage="Please Select Number Of Tickets." Display="None"></asp:CustomValidator>
+                                        <asp:CustomValidator ID="ServerValidator0" runat="server" ErrorMessage="Inserisci quanti ticket comprare." Display="None"></asp:CustomValidator>
                                         <asp:CustomValidator ID="ServerValidator1" runat="server" ErrorMessage="Salvataggio Fallito." Display="None"></asp:CustomValidator>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="TxtBalance" class="form-label">Current Balance</label>
+                                                <label for="TxtBalance" class="form-label">Saldo</label>
                                                 <asp:TextBox runat="server" ID="TxtBalance" ClientIDMode="Static" CssClass="form-control form--control style-two" ReadOnly="true"></asp:TextBox>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="TxtNumOfTickets" class="form-label">Number Of Tickets</label>
+                                                <label for="TxtNumOfTickets" class="form-label">Numero di Tickets</label>
                                                 <asp:TextBox runat="server" ID="TxtNumOfTickets" ClientIDMode="Static" CssClass="form-control form--control style-two" TextMode="Number"></asp:TextBox>
                                             </div>
                                         </div>
@@ -168,7 +168,7 @@
                             </div>
                             <div class="modal-footer modal--footer">
                                 <asp:Button runat="server" ID="BtnNewTicket" CssClass="btn btn--warning btn--md" Text="Save" CausesValidation="false" OnClick="BtnNewTicket_Click"/>
-                                <button type="button" class="btn btn--danger btn--md" data-bs-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn--danger btn--md" data-bs-dismiss="modal">Chiudi</button>
                             </div>
                         </div>
                     </div>
@@ -214,14 +214,14 @@
                     // Draw DataTable
                     columnsForMyTicket.length = 0;
                     columnsForMyTicket.push({
-                        "title": "No",
+                        "title": "Nr.",
                         "width": "5%",
                         "render": function (data, type, row, meta) {
                             return meta.row + meta.settings._iDisplayStart + 1;
                         }
                     });
                     columnsForMyTicket.push({
-                        "title": "User",
+                        "title": "Player",
                         "width": "15%",
                         "render": function (data, type, row, meta) {
                             return row.UserName;
@@ -247,7 +247,7 @@
                         });
                     }
                     columnsForMyTicket.push({
-                        "title": "Action",
+                        "title": "Azione",
                         "class": modifyTeam,
                         "width": "5%",
                         "render": function (data, type, row, meta) {
@@ -292,7 +292,7 @@
                         var row = datatableForMyTicket.fnGetData($(this).closest('tr'));
 
                         $("#TeamChangeModal").modal('show');
-                        var modalTitle = "Team Change in Round " + row.TicketResults.length;
+                        var modalTitle = "Scegli la tua squadra per il Round " + row.TicketResults.length;
                         for (var k = 0; k < (row.TicketResults.length - 1); k++) {
                             // Remove before assigned Teams
                             $('#ComboTeams option[value="' + row.TicketResults[k].TeamID + '"]').remove();
@@ -325,14 +325,14 @@
                     // Draw DataTable
                     columns.length = 0;
                     columns.push({
-                        "title": "No",
+                        "title": "Nr.",
                         "width": "5%",
                         "render": function (data, type, row, meta) {
                             return meta.row + meta.settings._iDisplayStart + 1;
                         }
                     });
                     columns.push({
-                        "title": "User",
+                        "title": "Player",
                         "width": "15%",
                         "render": function (data, type, row, meta) {
                             return row.UserName;
@@ -407,14 +407,14 @@
                     // Draw DataTable
                     columnsForResult.length = 0;
                     columnsForResult.push({
-                        "title": "No",
+                        "title": "Nr.",
                         "width": "5%",
                         "render": function (data, type, row, meta) {
                             return meta.row + meta.settings._iDisplayStart + 1;
                         }
                     });
                     columnsForResult.push({
-                        "title": "Team",
+                        "title": "Squadra",
                         "width": "15%",
                         "render": function (data, type, row, meta) {
                             return row.TeamName;
@@ -528,7 +528,7 @@
             $("#BtnTicket").click(function () {
 
                 $("#NewTicketModal").modal('show');
-                $("#modalTitle1").text("NEW TICKETS");
+                $("#modalTitle1").text("NUOVO TICKET");
                 $("#ValSummary1").addClass("d-none");
                 $("#TxtNumOfTickets").val("");
                 return false;

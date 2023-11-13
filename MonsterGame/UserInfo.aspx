@@ -8,7 +8,7 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-7 col-xl-6 text-center">
-                    <h2 class="title text-white">Scheda</h2>
+                    <h2 class="title text-white">Scheda Personale</h2>
                     <ul class="breadcrumbs d-flex flex-wrap align-items-center justify-content-center">
                         <li><a href="Dashboard.aspx">Dashboard</a></li>
                         <li>Scheda</li>
@@ -30,7 +30,7 @@
                                 <a href="#history" class="nav-link">LISTA MOVIMENTI</a>
                             </li>
                             <li runat="server" id="liGame" style="padding-left:30px;">
-                                <a href="#games" class="nav-link">I MIEI GIOCHI</a>
+                                <a href="#games" class="nav-link">I MIEI TORNEI</a>
                             </li>
                         </ul>
                     </div>
@@ -51,7 +51,7 @@
                                                 <i class="las la-wallet"></i>
                                             </div>
                                             <div class="pt-1">
-                                                <asp:TextBox runat="server" ID="TxtAmount" CssClass="form--control form-control" ClientIDMode="Static" placeholder="Amount"></asp:TextBox>
+                                                <asp:TextBox runat="server" ID="TxtAmount" CssClass="form--control form-control" ClientIDMode="Static" placeholder="Importo"></asp:TextBox>
                                             </div>
                                             <div>
                                                 <asp:Button runat="server" ID="BtnPurchase" ClientIDMode="Static" CssClass="cmn--btn active radius-1 w-100" Text="ACQUISTA CON PAYPAL" OnClick="BtnPurchase_Click"></asp:Button>
@@ -68,7 +68,7 @@
                                             <tr>
                                                 <th>Data Pag.</th>
                                                 <th>Importo</th>
-                                                <th>Paypal Transition</th>
+                                                <th>Nr. Transazione Paypal</th>
                                                 <th>Note</th>
                                             </tr>
                                         </thead>
@@ -120,7 +120,7 @@
                                             <tr>
                                                 <th>Data</th>
                                                 <th>Importo</th>
-                                                <th>Provenienza</th>
+                                                <th>Destinazione</th>
                                                 <th>Note</th>
                                                 <th>Tipo</th>
                                             </tr>
@@ -131,7 +131,7 @@
                                 </div>
                             </div>
                             <div runat="server" id="DivGameContent" class="content-item mb-0">
-                                <h3 class="title" id="games" style="padding-top: 120px;">I MIEI GIOCHI</h3>
+                                <h3 class="title" id="games" style="padding-top: 120px;">I MIEI TORNEI</h3>
                                 <div class="row gy-4 justify-content-center">
                                     <asp:Repeater runat="server" ID="RepeaterGame">
                                         <ItemTemplate>
@@ -148,7 +148,7 @@
                                                             <p class="invest-info">Player necessari: <span class="invest-amount"><%# Eval("MinPlayers") %></span></p>
                                                             <p class="invest-info">Player attuali: <span class="invest-amount"><%# Eval("RealPlayers") %></span></p>
                                                             <p class="invest-info">Numero di squadre: <span class="invest-amount"><%# Eval("NumberOfTeams") %></span></p>
-                                                            <p class="invest-info">Scrigno minimo: <span class="invest-amount">€ <%# Eval("Prize") %></span></p>
+                                                            <p class="invest-info">Forziere minimo: <span class="invest-amount">€ <%# Eval("Prize") %></span></p>
                                                             <a class="cmn--btn active btn--md radius-1" href="UserGameDetail.aspx?gameId=<%# Eval("Id") %>"><%# Eval("ButtonTitle") %></a>
                                                         </div>
                                                     </div>
@@ -263,8 +263,8 @@
                 }, {
                     "data": "Type",
                     "render": function (data, type, row, meta) {
-                        if (data == 1) return "<p class='text-white bg-success' style='border-radius: 6px;'>DEPOSIT</p>";
-                        else return "<p class='text-white bg-danger' style='border-radius: 6px;'>WITHDRAWAL</p>";
+                        if (data == 1) return "<p class='text-white bg-success' style='border-radius: 6px;'>ACCREDITO</p>";
+                        else return "<p class='text-white bg-danger' style='border-radius: 6px;'>ADDEBITO</p>";
                     }
                 }],
 

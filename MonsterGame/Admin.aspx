@@ -173,7 +173,7 @@
     <script>
         $(".btn-add").click(function () {
             $("#AdminModal").modal('show');
-            $(".modal-title").text("ADD ADMIN");
+            $(".modal-title").text("AGG. ADMIN");
             $("#HfAdminID").val("");
             $("#ValSummary").addClass("d-none");
             $("#TxtName").val("");
@@ -246,7 +246,7 @@
                 var row = datatable.fnGetData($(this).closest('tr'));
 
                 $("#AdminModal").modal('show');
-                $(".modal-title").text("UPDATE ADMIN");
+                $(".modal-title").text("AGGIORNA ADMIN");
                 $("#HfAdminID").val(row.Id);
                 $("#ValSummary").addClass("d-none");
                 $("#TxtName").val(row.Name);
