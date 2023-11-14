@@ -216,8 +216,10 @@
                     columnsForMyTicket.push({
                         "title": "Nr.",
                         "width": "5%",
+                        "data": "Id",
                         "render": function (data, type, row, meta) {
-                            return meta.row + meta.settings._iDisplayStart + 1;
+                            return data;
+                            //return meta.row + meta.settings._iDisplayStart + 1;
                         }
                     });
                     columnsForMyTicket.push({
@@ -327,8 +329,10 @@
                     columns.push({
                         "title": "Nr.",
                         "width": "5%",
+                        "data": "Id",
                         "render": function (data, type, row, meta) {
-                            return meta.row + meta.settings._iDisplayStart + 1;
+                            //return meta.row + meta.settings._iDisplayStart + 1;
+                            return data;
                         }
                     });
                     columns.push({
@@ -357,6 +361,17 @@
                             }
                         });
                     }
+
+                    columns.push({
+                        "title": "Fase",
+                        "width": "5%",
+                        "render": function (data, type, row, meta) {
+                            if (row.TicketResults.length == 0) return "PLAYING";
+                            else if (row.TicketResults[row.TicketResults.length - 1].RoundResult == null) return "LOST";
+                            else if (gameStatus == "6") return "WIN";
+                            else return "PLAYING";
+                        }
+                    });
 
                     if (datatable) datatable.fnDestroy();
 

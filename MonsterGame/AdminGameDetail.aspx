@@ -224,8 +224,10 @@
                     columns.push({
                         "title": "Nr.",
                         "width": "5%",
+                        "data": "Id",
                         "render": function (data, type, row, meta) {
-                            return meta.row + meta.settings._iDisplayStart + 1;
+                            //return meta.row + meta.settings._iDisplayStart + 1;
+                            return data;
                         }
                     });
                     columns.push({

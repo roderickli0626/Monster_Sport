@@ -92,6 +92,7 @@ namespace MonsterGame.Controller
                     winner.UserID = ticket.UserID;
                     winner.WinDate = DateTime.Now;
                     winner.Rate = percents[remainedTickets.IndexOf(ticket)];
+                    winner.Note = ticket.Id.ToString();
 
                     winnerDao.Insert(winner);
                 }
@@ -112,6 +113,7 @@ namespace MonsterGame.Controller
                     winner.UserID = ticket.UserID;
                     winner.WinDate = DateTime.Now;
                     winner.Rate = 0;
+                    winner.Note = ticket.Id.ToString();
 
                     winnerDao.Insert(winner);
                 }

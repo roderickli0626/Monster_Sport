@@ -334,7 +334,7 @@
                                             </div>
                                         </div>
                                         <div class="col-md-12">
-                                            <label for="ComboModalStatus" class="form-label">Elenco Squadre</label>
+                                            <label for="ComboModalStatus" class="form-label teamCount">Elenco Squadre</label>
                                             <div>
                                                 <asp:DropDownList runat="server" ID="ComboTeams" CssClass="form-select form--control style-two" ClientIDMode="Static" Multiple="true"></asp:DropDownList>
                                             </div>
@@ -394,6 +394,10 @@
         function SelectSetting() {
             $("#ComboTeams").select2({
                 dropdownParent: $(".modal-body")
+            });
+
+            $('#ComboTeams').change(function () {
+                $(".teamCount").text("Elenco Squadre (" + $(this).val().length + ")");
             });
 
             $.datetimepicker.setLocale('it');

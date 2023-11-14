@@ -30,13 +30,13 @@
                         <div class="col-xl-6 col-md-6">
                             <div class="form-group">
                                 <div for="TxtName" class="input-pre-icon"><i class="las la-user"></i></div>
-                                <asp:TextBox runat="server" ID="TxtName" CssClass="form--control form-control style--two" placeholder="Name"></asp:TextBox>
+                                <asp:TextBox runat="server" ID="TxtName" CssClass="form--control form-control style--two" placeholder="Nome"></asp:TextBox>
                             </div>
                         </div>
                         <div class="col-xl-6 col-md-6">
                             <div class="form-group">
                                 <div for="lname" class="input-pre-icon"><i class="las la-user"></i></div>
-                                <asp:TextBox runat="server" ID="TxtSurname" CssClass="form--control form-control style--two" placeholder="Surname"></asp:TextBox>
+                                <asp:TextBox runat="server" ID="TxtSurname" CssClass="form--control form-control style--two" placeholder="Cognome"></asp:TextBox>
                             </div>
                         </div>
                         <div class="col-xl-6 col-md-6">
@@ -66,7 +66,7 @@
                         <div class="col-xl-6 col-md-6">
                             <div class="form-group">
                                 <div for="pass" class="input-pre-icon"><i class="las la-lock"></i></div>
-                                <asp:TextBox runat="server" ID="TxtPasswordRepeat" CssClass="form--control form-control style--two" TextMode="Password" placeholder="Confirm Password"></asp:TextBox>
+                                <asp:TextBox runat="server" ID="TxtPasswordRepeat" CssClass="form--control form-control style--two" TextMode="Password" placeholder="Conferma Password"></asp:TextBox>
                             </div>
                         </div>
                         <div class="col-xl-12 col-md-12">
@@ -77,7 +77,7 @@
                         </div>
                         <div class="col-lg-12">
                             <div class="form-group">
-                                <asp:Button runat="server" ID="BtnRegister" CssClass="cmn--btn active w-100 btn--round" Text="Register" OnClick="BtnRegister_Click" />
+                                <asp:Button runat="server" ID="BtnRegister" CssClass="cmn--btn active w-100 btn--round" Text="Registrati" OnClick="BtnRegister_Click" />
                             </div>
                         </div>
 
@@ -91,9 +91,9 @@
                 </div>
                 <div class="account__content__wrapper" >
                     <div class="content text-center text-white">
-                        <h3 class="title text--base mb-4">Welcome to Monster Game</h3>
-                        <p class="">Sign in your Account. Atque, fuga sapiente, doloribus qui enim tempora?</p>
-                        <p class="account-switch mt-4">Already have an Account ? <a class="text--base ms-2" href="Login.aspx">Entra</a></p>
+                        <h3 class="title text--base mb-4">Benvenuto su Monster Game</h3>
+                        <p class="">Registra il tuo account e partecipa ai nostri tornei.</p>
+                        <p class="account-switch mt-4">Hai già l'account ? <a class="text--base ms-2" href="Login.aspx">Entra</a></p>
                     </div>
                 </div>
             </div>

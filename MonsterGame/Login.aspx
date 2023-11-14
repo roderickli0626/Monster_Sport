@@ -56,8 +56,8 @@
                 </div>
                 <div class="account__content__wrapper">
                     <div class="content text-center text-white">
-                        <h3 class="title text--base mb-4">Welcome to Monster Game</h3>
-                        <p class="">Sign in your Account. Atque, fuga sapiente, doloribus qui enim tempora?</p>
+                        <h3 class="title text--base mb-4">Benvenuto su Monster Game</h3>
+                        <p class="">Accedi con il tuo account e partecipa ai nostri tornei.</p>
                         <p class="account-switch mt-4">Non hai ancora l'account ? <a class="text--base ms-2" href="Register.aspx">Registrati</a></p>
                     </div>
                 </div>
