@@ -192,6 +192,7 @@
                                                 <p class="invest-info">Player attuali: <span class="invest-amount"><%# Eval("RealPlayers") %></span></p>
                                                 <p class="invest-info">Numero di squadre: <span class="invest-amount"><%# Eval("NumberOfTeams") %></span></p>
                                                 <p class="invest-info">Scrigno minimo: <span class="invest-amount">€ <%# Eval("Prize") %></span></p>
+                                                <p class="invest-info">Vincitori Previsti: <span class="invest-amount"><%# Eval("Winners") %></span></p>
                                                 <a class="cmn--btn active btn--md radius-1" href="UserGameDetail.aspx?gameId=<%# Eval("Id") %>"><%# Eval("ButtonTitle") %></a>
                                             </div>
                                         </div>

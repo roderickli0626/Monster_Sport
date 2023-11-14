@@ -562,7 +562,7 @@
                     $('#TxtNumOfTickets').val($('#TxtNumOfTickets').val() - 1);
                     return;
                 }
-                $("#TxtBalance").val("€ " + ($("#HfBalance").val() - amount));
+                $("#TxtBalance").val("€ " + ($("#HfBalance").val().replaceAll(',', '.') - amount).toFixed(2));
             });
 
             // Real Time Notification

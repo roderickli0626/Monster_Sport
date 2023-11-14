@@ -237,6 +237,7 @@
                                             <p class="invest-info">Player attuali: <span class="invest-amount"><%# Eval("RealPlayers") %></span></p>
                                             <p class="invest-info">Numero di squadre: <span class="invest-amount"><%# Eval("NumberOfTeams") %></span></p>
                                             <p class="invest-info">Forziere minimo: <span class="invest-amount">€ <%# Eval("Prize") %></span></p>
+                                            <p class="invest-info">Vincitori Previsti: <span class="invest-amount"><%# Eval("Winners") %></span></p>
                                             <button class="BtnDetails cmn--btn active btn--md radius-1" data-id="<%# Eval("Id") %>" 
                                                 data-title="<%# Eval("Title") %>" data-fee="<%# Eval("Fee") %>" data-players="<%# Eval("RealPlayers") %>">Dettagli</button>
                                         </div>
