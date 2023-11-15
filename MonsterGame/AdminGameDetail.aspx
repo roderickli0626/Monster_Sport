@@ -16,7 +16,7 @@
             </div>
         </div>
     </section>
-    <section class="game-section padding-bottom bg_img" style="background: url(Content/Images/gamebg.jpeg);">
+    <section class="game-section padding-bottom bg_img" style="background: url(Content/Images/gamebg.jpeg); background-attachment: fixed;">
         <div class="container">
             <form runat="server" id="form1" autocomplete="off">
                 <asp:HiddenField ID="HfGameID" runat="server" ClientIDMode="Static" />

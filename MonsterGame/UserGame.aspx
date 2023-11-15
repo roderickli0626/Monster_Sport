@@ -159,7 +159,7 @@
             </div>
         </div>
     </section>
-    <section class="game-section padding-top padding-bottom bg_img" style="background: url(Content/Images/gamebg.jpeg);">
+    <section class="game-section padding-top padding-bottom bg_img" style="background: url(Content/Images/gamebg.jpeg); background-attachment: fixed;">
         <div class="container">
             <form runat="server" id="form1" autocomplete="off">
                 <div class="row justify-content-center mb-5">
