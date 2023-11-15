@@ -440,6 +440,7 @@
     <Compile Include="Model\ProcResult.cs" />
     <Compile Include="Model\ResultCheck.cs" />
     <Compile Include="Model\SearchResult.cs" />
+    <Compile Include="Model\TeamCheck.cs" />
     <Compile Include="Model\TeamsForGameCheck.cs" />
     <Compile Include="Model\TicketCheck.cs" />
     <Compile Include="Model\TicketResultCheck.cs" />

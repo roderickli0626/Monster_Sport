@@ -244,7 +244,7 @@
                             <div class="modal-header modal--header bg--base">
                                 <h4 class="modal-title text-dark" id="modalTitle">Dettagli del gioco</h4>
                             </div>
-                            <div class="modal-body modal--body">
+                            <div class="modal-body modal--body modal-body-select2">
                                 <asp:ScriptManager ID="ScriptManager" runat="server"></asp:ScriptManager>
                                 <asp:UpdatePanel runat="server" ID="UpdatePanel" ClientIDMode="Static" class="row gy-3">
                                     <ContentTemplate>
@@ -422,7 +422,7 @@
         SelectSetting();
         function SelectSetting() {
             $("#ComboTeams").select2({
-                dropdownParent: $(".modal-body"),
+                dropdownParent: $(".modal-body-select2")
             });
 
             $('#ComboTeams').change(function () {

@@ -360,6 +360,7 @@
                     columnsForResult.push({
                         "title": "Squadra",
                         "width": "15%",
+                        "class": "text-nowrap",
                         "render": function (data, type, row, meta) {
                             return row.TeamName;
                         }

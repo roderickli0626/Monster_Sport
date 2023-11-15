@@ -36,7 +36,13 @@ namespace MonsterGame
         private void LoadTeams()
         {
             List<Team> teams = new TeamDAO().FindAll().OrderBy(t => t.Description).ToList();
-            ControlUtil.DataBind(ComboTeams, teams, "Id", "Description");
+            List<TeamCheck> checks = new List<TeamCheck>();
+            foreach (Team t in teams)
+            {
+                TeamCheck check = new TeamCheck(t);
+                checks.Add(check);
+            }
+            ControlUtil.DataBind(ComboTeams, checks, "Id", "Description");
         }
 
         private void LoadStatus()
