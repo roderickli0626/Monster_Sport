@@ -103,8 +103,10 @@
                         </a>
                     </div>
                     <ul class="footer-links d-flex flex-wrap justify-content-center">
-                        <li><a href="Conditions.aspx">Terms & Conditions</a></li>
-                        <li><a href="Policy.aspx">Privacy Policy</a></li>
+                        <%--<li><a href="Conditions.aspx">Terms & Conditions</a></li>
+                        <li><a href="Policy.aspx">Privacy Policy</a></li>--%>
+                        <li><a href="#0" id="TermsCondition">Terms & Conditions</a></li>
+                        <li><a href="#0" id="Policy">Privacy Policy</a></li>
                     </ul>
                 </div>
             </div>
@@ -118,6 +120,34 @@
         </div>
         <div class="shapes">
             <img src="Content/Images/logo.png" alt="footer" class="shape1">
+        </div>
+        <div class=" modal custom--modal fade show" id="TermsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-modal="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                <div class="modal-content section-bg border-0">
+                    <div class="modal-header modal--header bg--base">
+                        <h4 class="modal-title text-dark">Terms & Conditions</h4>
+                    </div>
+                    <div class="modal-body modal--body">
+                    </div>
+                    <div class="modal-footer modal--footer">
+                        <button type="button" class="btn btn--danger btn--md" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class=" modal custom--modal fade show" id="PolicyModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-modal="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                <div class="modal-content section-bg border-0">
+                    <div class="modal-header modal--header bg--base">
+                        <h4 class="modal-title text-dark">Privacy Policy</h4>
+                    </div>
+                    <div class="modal-body modal--body">
+                    </div>
+                    <div class="modal-footer modal--footer">
+                        <button type="button" class="btn btn--danger btn--md" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </footer>
     <!-- Footer Section Ends Here -->
@@ -145,6 +175,14 @@
                 $(this).removeClass("fa-eye");
                 $("#liName2").removeClass("d-none");
             }
+        });
+
+        $("#TermsCondition").click(function () {
+            $("#TermsModal").modal('show');
+        });
+
+        $("#Policy").click(function () {
+            $("#PolicyModal").modal('show');
         });
     </script>
     <script type="text/javascript">
