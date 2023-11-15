@@ -267,7 +267,7 @@
                                                             <p class="invest-info">Quota ingresso: <span class="invest-amount">€ <%# Eval("Fee") %></span></p>
                                                             <p class="invest-info">Player necessari: <span class="invest-amount"><%# Eval("MinPlayers") %></span></p>
                                                             <p class="invest-info">Player attuali: <span class="invest-amount"><%# Eval("RealPlayers") %></span></p>
-                                                            <p class="invest-info">Numero di squadre: <span class="invest-amount"><%# Eval("NumberOfTeams") %></span></p>
+                                                            <p class="invest-info">Numero di squadre: <span class="invest-amount TeamShow" style="cursor: pointer;" data-id="<%# Eval("Id") %>"><%# Eval("NumberOfTeams") %></span></p>
                                                             <p class="invest-info">Forziere minimo: <span class="invest-amount">€ <%# Eval("Prize") %></span></p>
                                                             <p class="invest-info">Vincitori Previsti: <span class="invest-amount"><%# Eval("Winners") %></span></p>
                                                             <a class="cmn--btn active btn--md radius-1" href="UserGameDetail.aspx?gameId=<%# Eval("Id") %>"><%# Eval("ButtonTitle") %></a>
@@ -279,6 +279,21 @@
                                         </ItemTemplate>
                                     </asp:Repeater>
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class=" modal custom--modal fade show" id="gameTeamsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-modal="true">
+                    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                        <div class="modal-content section-bg border-0">
+                            <div class="modal-header modal--header bg--base">
+                                <h4 class="modal-title text-dark">TEAMS</h4>
+                            </div>
+                            <div class="modal-body modal--body">
+                                <h5 class="p-5 teamNames"></h5>
+                            </div>
+                            <div class="modal-footer modal--footer">
+                                <button type="button" class="btn btn--danger btn--md" data-bs-dismiss="modal">Close</button>
                             </div>
                         </div>
                     </div>
@@ -336,6 +351,26 @@
 
             $('#TxtPaymentSearch').on('input', function () {
                 datatable.fnDraw();
+            });
+
+            $(".TeamShow").click(function () {
+                var id = $(this)[0].dataset.id;
+                $.ajax({
+                    type: "GET",
+                    url: 'DataService.asmx/GetTeams',
+                    data: {
+                        gameID: id
+                    },
+                    success: function (res) {
+                        var dataArrayForTeams = res.data;
+                        $("#gameTeamsModal").modal('show');
+                        $(".teamNames").text(dataArrayForTeams.join(', '));
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        // Handle the error response
+                        console.log('Error:', textStatus, errorThrown);
+                    }
+                });
             });
         })
     </script>

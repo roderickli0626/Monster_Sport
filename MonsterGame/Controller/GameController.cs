@@ -337,7 +337,16 @@ namespace MonsterGame.Controller
             }
             return result;
         }
-
+        public List<string> FindTeams(int gameID)
+        {
+            List<TeamsForGame> teamList = teamForGameDao.FindByGame(gameID);
+            List<string> result = new List<string>();
+            foreach (TeamsForGame team in teamList)
+            {
+                result.Add(team.Team.Description);
+            }
+            return result;
+        }
         public bool AddNewRound(int gameID, int? Round)
         {
             List<TeamsForGame> teamList = teamForGameDao.FindByGame(gameID);

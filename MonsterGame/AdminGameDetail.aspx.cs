@@ -50,12 +50,12 @@ namespace MonsterGame
             //List<Team> teamList = new TeamDAO().FindAll();
             ControlUtil.DataBind(ComboTeams, teamList, "Id", "Description", "0", "");
 
-            // Load Results
-            ComboResults.Items.Clear();
-            ComboResults.Items.Add(new ListItem("", ((int)RoundResult.N).ToString()));
-            ComboResults.Items.Add(new ListItem("WIN", ((int)RoundResult.W).ToString()));
-            ComboResults.Items.Add(new ListItem("DRAW", ((int)RoundResult.P).ToString()));
-            ComboResults.Items.Add(new ListItem("LOSE", ((int)RoundResult.L).ToString()));
+            //// Load Results
+            //ComboResults.Items.Clear();
+            //ComboResults.Items.Add(new ListItem("", ((int)RoundResult.N).ToString()));
+            //ComboResults.Items.Add(new ListItem("WIN", ((int)RoundResult.W).ToString()));
+            //ComboResults.Items.Add(new ListItem("DRAW", ((int)RoundResult.P).ToString()));
+            //ComboResults.Items.Add(new ListItem("LOSE", ((int)RoundResult.L).ToString()));
 
             Prize.InnerText = "€ " + Math.Round(game.Prize ?? 0, 2);
             GameTitle.InnerText = "Game" + game.Id + " Details";
@@ -96,7 +96,7 @@ namespace MonsterGame
             bool success2 = ticketController.AddNewRound(game.Id, currentRound);
 
             int remainedTickets = ticketController.GetRemainedTickets(game.Id, currentRound);
-            if (remainedTickets <= game.NumOfWinners && game.Status != (int)GameStatus.OPEN)
+            if ((remainedTickets <= game.NumOfWinners && game.Status != (int)GameStatus.OPEN) || currentRound > game.NumberOfTeams)
             {
                 game.Status = (int)GameStatus.COMPLETED;
                 bool success = new GameDAO().Update(game);
@@ -207,7 +207,8 @@ namespace MonsterGame
 
         protected void BtnResult_Click(object sender, EventArgs e)
         {
-            int roundResult = ControlUtil.GetSelectedValue(ComboResults) ?? 0;
+            //int roundResult = ControlUtil.GetSelectedValue(ComboResults) ?? 0;
+            int roundResult = ParseUtil.TryParseInt(ResultOptions.SelectedValue) ?? 0;
             int resultID = ParseUtil.TryParseInt(HfResultID.Value) ?? 0;
             bool success = false;
             if (resultID != 0) {

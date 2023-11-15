@@ -5,6 +5,17 @@
     <link rel="stylesheet" href="Content/CSS/select2.css" />
     <link rel="stylesheet" href="Content/CSS/select2-bootstrap.css" />
     <style>
+        .id-mark {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background-color: darkgreen;
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 30px;
+            font-size: 15px;
+        }
         .box {
             position: relative;
             background: #eeee;
@@ -171,6 +182,9 @@
         .select2-container--default .select2-results__option[aria-selected="true"] {
             background-color: dimgray;
         }
+        .select2-search__field {
+            color: white;
+        }
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder" runat="server">
@@ -206,7 +220,6 @@
                     <table class="table text-center" id="game-table">
                         <thead>
                             <tr>
-                                <th>Nr.</th>
                                 <th>Fase</th>
                                 <th>Titolo</th>
                                 <th>Start</th>
@@ -353,6 +366,21 @@
                         </div>
                     </div>
                 </div>
+                <div class=" modal custom--modal fade show" id="gameTeamsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-modal="true">
+                    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                        <div class="modal-content section-bg border-0">
+                            <div class="modal-header modal--header bg--base">
+                                <h4 class="modal-title text-dark">TEAMS</h4>
+                            </div>
+                            <div class="modal-body modal--body">
+                                <h5 class="p-5 teamNames"></h5>
+                            </div>
+                            <div class="modal-footer modal--footer">
+                                <button type="button" class="btn btn--danger btn--md" data-bs-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </form>
         </div>
     </section>
@@ -394,7 +422,7 @@
         SelectSetting();
         function SelectSetting() {
             $("#ComboTeams").select2({
-                dropdownParent: $(".modal-body")
+                dropdownParent: $(".modal-body"),
             });
 
             $('#ComboTeams').change(function () {
@@ -448,10 +476,8 @@
                 "processing": true,
                 "ordering": false,
                 "columns": [{
-                    "data": "Id"
-                }, {
                     "render": function (data, type, row, meta) {
-                        return '<div class="game-table-item"><div class="game-item__thumb mb-0">' + row.Mark +
+                        return '<div class="game-table-item"><div class="game-item__thumb mb-0"><span class="id-mark">' + row.Id + '</span>' + row.Mark +
                             '<img src="Content/Images/' + row.Image + '" alt = "game"></div></div>';
                     }
                 }, {
@@ -462,6 +488,9 @@
                     "data": "EndDate",
                 }, {
                     "data": "NumberOfTeams",
+                    "render": function (data, type, row, meta) {
+                        return "<p class='TeamShow' style='cursor:pointer;' data-id='" + row.Id + "'>" + data + "</p>";
+                    }
                 }, {
                     "data": "Fee",
                     "render": function (data, type, row, meta) {
@@ -524,6 +553,26 @@
 
             $('#TxtSearch').on('input', function () {
                 datatable.fnDraw();
+            });
+
+            datatable.on('click', '.TeamShow', function (e) {
+                var id = $(this)[0].dataset.id;
+                $.ajax({
+                    type: "GET",
+                    url: 'DataService.asmx/GetTeams',
+                    data: {
+                        gameID: id
+                    },
+                    success: function (res) {
+                        var dataArrayForTeams = res.data;
+                        $("#gameTeamsModal").modal('show');
+                        $(".teamNames").text(dataArrayForTeams.join(', '));
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        // Handle the error response
+                        console.log('Error:', textStatus, errorThrown);
+                    }
+                });
             });
 
             datatable.on('click', '.btn-edit', function (e) {

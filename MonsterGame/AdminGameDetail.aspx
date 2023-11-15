@@ -129,7 +129,7 @@
                     </div>
                 </div>
                 <div class="modal custom--modal fade show" id="ResultChangeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" data-bs-backdrop="static" aria-modal="true">
-                    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                    <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
                         <div class="modal-content section-bg border-0">
                             <div class="modal-header modal--header bg--base">
                                 <h4 class="modal-title text-dark" id="modalTitle1">Cambia Squadre</h4>
@@ -141,7 +141,12 @@
                                         <asp:CustomValidator ID="ServerValidator1" runat="server" ErrorMessage="Salvataggio Fallito." Display="None"></asp:CustomValidator>
                                         <div class="col-md-8 mx-auto">
                                             <div class="form-group">
-                                                <asp:DropDownList runat="server" ID="ComboResults" CssClass="form-select form--control style-two" ClientIDMode="Static"></asp:DropDownList>
+                                                <asp:RadioButtonList ID="ResultOptions" runat="server" CssClass="justify-content-center mx-auto" ClientIDMode="Static">
+                                                    <asp:ListItem Text="WIN" Value="1"></asp:ListItem>
+                                                    <asp:ListItem Text="DRAW" Value="2"></asp:ListItem>
+                                                    <asp:ListItem Text="LOSE" Value="3"></asp:ListItem>
+                                                </asp:RadioButtonList>
+                                                <%--<asp:DropDownList runat="server" ID="ComboResults" CssClass="form-select form--control style-two" ClientIDMode="Static"></asp:DropDownList>--%>
                                             </div>
                                         </div>
                                     </ContentTemplate>
@@ -440,8 +445,6 @@
                         $("#HfResultID").val(row.Results[row.Results.length - 1].Id);
                         $(".modal-title").text(modalTitle);
                         $("#ValSummary1").addClass("d-none");
-                        $("#ComboResults").val(roundResult);
-
                     });
                 },
                 error: function (jqXHR, textStatus, errorThrown) {

@@ -2,6 +2,18 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link rel="stylesheet" href="Content/CSS/datatables.css" />
     <style>
+        .id-mark {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background-color: darkgreen;
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 30px;
+            font-size: 15px;
+        }
+
         .box {
             position: relative;
             background: #eeee;
@@ -235,7 +247,7 @@
                                             <p class="invest-info">Quota ingresso: <span class="invest-amount">€ <%# Eval("Fee") %></span></p>
                                             <p class="invest-info">Player necessari: <span class="invest-amount"><%# Eval("MinPlayers") %></span></p>
                                             <p class="invest-info">Player attuali: <span class="invest-amount"><%# Eval("RealPlayers") %></span></p>
-                                            <p class="invest-info">Numero di squadre: <span class="invest-amount"><%# Eval("NumberOfTeams") %></span></p>
+                                            <p class="invest-info">Numero di squadre: <span class="invest-amount TeamShow" style="cursor: pointer;" data-id="<%# Eval("Id") %>"><%# Eval("NumberOfTeams") %></span></p>
                                             <p class="invest-info">Forziere minimo: <span class="invest-amount">€ <%# Eval("Prize") %></span></p>
                                             <p class="invest-info">Vincitori Previsti: <span class="invest-amount"><%# Eval("Winners") %></span></p>
                                             <button class="BtnDetails cmn--btn active btn--md radius-1" data-id="<%# Eval("Id") %>" 
@@ -260,7 +272,6 @@
                     <table class="table text-center" id="game-table">
                         <thead>
                             <tr>
-                                <th>Nr.</th>
                                 <th>Fase</th>
                                 <th>Titolo</th>
                                 <th>Start</th>
@@ -277,6 +288,21 @@
                         <tbody>
                         </tbody>
                     </table>
+                </div>
+                <div class=" modal custom--modal fade show" id="gameTeamsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-modal="true">
+                    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                        <div class="modal-content section-bg border-0">
+                            <div class="modal-header modal--header bg--base">
+                                <h4 class="modal-title text-dark">TEAMS</h4>
+                            </div>
+                            <div class="modal-body modal--body">
+                                <h5 class="p-5 teamNames"></h5>
+                            </div>
+                            <div class="modal-footer modal--footer">
+                                <button type="button" class="btn btn--danger btn--md" data-bs-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </form>
         </div>
@@ -379,10 +405,8 @@
             "processing": true,
             "ordering": false,
             "columns": [{
-                "data": "Id"
-            }, {
                 "render": function (data, type, row, meta) {
-                    return '<div class="game-table-item"><div class="game-item__thumb mb-0">' + row.Mark +
+                    return '<div class="game-table-item"><div class="game-item__thumb mb-0"><span class="id-mark">' + row.Id + '</span>' + row.Mark +
                         '<img src="Content/Images/' + row.Image + '" alt = "game"></div></div>';
                 }
             }, {
@@ -393,6 +417,9 @@
                 "data": "EndDate",
             }, {
                 "data": "NumberOfTeams",
+                "render": function (data, type, row, meta) {
+                    return "<p class='TeamShow' style='cursor:pointer;' data-id='" + row.Id + "'>" + data + "</p>";
+                }
             }, {
                 "data": "Round",
                 "render": function (data, type, row, meta) {
@@ -448,6 +475,46 @@
 
         $('#TxtSearch').on('input', function () {
             datatable.fnDraw();
+        });
+
+        datatable.on('click', '.TeamShow', function (e) {
+            var id = $(this)[0].dataset.id;
+            $.ajax({
+                type: "GET",
+                url: 'DataService.asmx/GetTeams',
+                data: {
+                    gameID: id
+                },
+                success: function (res) {
+                    var dataArrayForTeams = res.data;
+                    $("#gameTeamsModal").modal('show');
+                    $(".teamNames").text(dataArrayForTeams.join(', '));
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    // Handle the error response
+                    console.log('Error:', textStatus, errorThrown);
+                }
+            });
+        });
+
+        $(".TeamShow").click(function () {
+            var id = $(this)[0].dataset.id;
+            $.ajax({
+                type: "GET",
+                url: 'DataService.asmx/GetTeams',
+                data: {
+                    gameID: id
+                },
+                success: function (res) {
+                    var dataArrayForTeams = res.data;
+                    $("#gameTeamsModal").modal('show');
+                    $(".teamNames").text(dataArrayForTeams.join(', '));
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    // Handle the error response
+                    console.log('Error:', textStatus, errorThrown);
+                }
+            });
         });
     </script>
 </asp:Content>
