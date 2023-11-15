@@ -2,6 +2,126 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link rel="stylesheet" href="Content/CSS/datatables.css" />
     <link rel="stylesheet" href="Content/CSS/jquery.datetimepicker.min.css" />
+    <style>
+        .box {
+            position: relative;
+            background: #eeee;
+            float: left;
+        }
+
+        .ribbon {
+            position: absolute;
+            right: -5px;
+            top: -5px;
+            z-index: 1;
+            overflow: hidden;
+            width: 93px;
+            height: 93px;
+            text-align: right;
+        }
+
+            .ribbon span {
+                font-size: 0.8rem;
+                color: #fff;
+                text-transform: uppercase;
+                text-align: center;
+                font-weight: bold;
+                line-height: 32px;
+                transform: rotate(45deg);
+                width: 125px;
+                display: block;
+                background: #79a70a;
+                background: linear-gradient(#9bc90d 0%, #79a70a 100%);
+                box-shadow: 0 3px 10px -5px rgba(0, 0, 0, 1);
+                position: absolute;
+                top: 17px;
+            }
+
+                .ribbon span::before {
+                    content: '';
+                    position: absolute;
+                    left: 0px;
+                    top: 100%;
+                    z-index: -1;
+                    border-left: 3px solid #79A70A;
+                    border-right: 3px solid transparent;
+                    border-bottom: 3px solid transparent;
+                    border-top: 3px solid #79A70A;
+                }
+
+                .ribbon span::after {
+                    content: '';
+                    position: absolute;
+                    right: 0%;
+                    top: 100%;
+                    z-index: -1;
+                    border-right: 3px solid #79A70A;
+                    border-left: 3px solid transparent;
+                    border-bottom: 3px solid transparent;
+                    border-top: 3px solid #79A70A;
+                }
+
+        .red span {
+            background: linear-gradient(#f70505 0%, #8f0808 100%);
+        }
+
+            .red span::before {
+                border-left-color: #8f0808;
+                border-top-color: #8f0808;
+            }
+
+            .red span::after {
+                border-right-color: #8f0808;
+                border-top-color: #8f0808;
+            }
+
+        .blue span {
+            background: linear-gradient(#2989d8 0%, #1e5799 100%);
+        }
+
+            .blue span::before {
+                border-left-color: #1e5799;
+                border-top-color: #1e5799;
+            }
+
+            .blue span::after {
+                border-right-color: #1e5799;
+                border-top-color: #1e5799;
+            }
+
+        .foo {
+            clear: both;
+        }
+
+        .bar {
+            content: "";
+            left: 0px;
+            top: 100%;
+            z-index: -1;
+            border-left: 3px solid #79a70a;
+            border-right: 3px solid transparent;
+            border-bottom: 3px solid transparent;
+            border-top: 3px solid #79a70a;
+        }
+
+        .baz {
+            font-size: 1rem;
+            color: #fff;
+            text-transform: uppercase;
+            text-align: center;
+            font-weight: bold;
+            line-height: 2em;
+            transform: rotate(45deg);
+            width: 100px;
+            display: block;
+            background: #79a70a;
+            background: linear-gradient(#9bc90d 0%, #79a70a 100%);
+            box-shadow: 0 3px 10px -5px rgba(0, 0, 0, 1);
+            position: absolute;
+            top: 100px;
+            left: 1000px;
+        }
+    </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder" runat="server">
     <section class="inner-banner bg_img" style="background: url('Content/Images/stadium2.jpg') center;">
@@ -21,7 +141,7 @@
         <div class="container">
             <form runat="server" id="form1" autocomplete="off">
                 <div class="row">
-                    <div class="col-3">
+                    <div class="col-md-3">
                         <ul class="privacy-policy-sidebar-menu" style="padding-top:120px;">
                             <li style="padding-left:30px;">
                                 <a href="#purchase" class="nav-link">ACQUISTA CON PAYPAL</a>
@@ -34,7 +154,7 @@
                             </li>
                         </ul>
                     </div>
-                    <div class="col-9">
+                    <div class="col-md-9">
                         <div class="privacy-policy-content">
                             <div class="content-item mb-0">
                                 <h3 class="title" id="purchase" style="padding-top:120px;">ACQUISTI</h3>
@@ -59,7 +179,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="pt-5 col-6 ms-auto">
+                                <div class="pt-5 col-md-6 ms-auto">
                                     <asp:TextBox runat="server" ID="TxtPaymentSearch" CssClass="form--control form-control" ClientIDMode="Static" placeholder="Cerca..."></asp:TextBox>
                                 </div>
                                 <div class="pt-3 justify-content-center">

@@ -30,7 +30,7 @@
                 <asp:HiddenField ID="HfCurrentRound" runat="server" ClientIDMode="Static" />
                 <asp:HiddenField ID="HfWinnerID" runat="server" ClientIDMode="Static" />
                 <div class="row">
-                    <div class="col-3">
+                    <div class="col-12 col-md-3">
                         <ul class="privacy-policy-sidebar-menu" style="padding-top:120px;">
                             <li runat="server" id="liMyTicket" style="padding-left:30px;">
                                 <a href="#myTickets" class="nav-link">I MIEI TICKETS</a>
@@ -46,7 +46,7 @@
                             </li>
                         </ul>
                     </div>
-                    <div class="col-9">
+                    <div class="col-12 col-md-9">
                         <div class="privacy-policy-content">
                             <div runat="server" id="DivMyTicket" class="content-item mb-0">
                                 <h3 class="title" id="myTickets" style="padding-top:120px;">I MIEI TICKETS</h3>

@@ -260,6 +260,7 @@
                     <table class="table text-center" id="game-table">
                         <thead>
                             <tr>
+                                <th>Nr.</th>
                                 <th>Fase</th>
                                 <th>Titolo</th>
                                 <th>Start</th>
@@ -378,6 +379,8 @@
             "processing": true,
             "ordering": false,
             "columns": [{
+                "data": "Id"
+            }, {
                 "render": function (data, type, row, meta) {
                     return '<div class="game-table-item"><div class="game-item__thumb mb-0">' + row.Mark +
                         '<img src="Content/Images/' + row.Image + '" alt = "game"></div></div>';
