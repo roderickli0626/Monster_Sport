@@ -118,7 +118,7 @@ namespace MonsterGame
 
             // Create the email message
             MailMessage mailMessage = new MailMessage();
-            mailMessage.From = new MailAddress("Krandall2005@gmail.com", "Monster Game");
+            mailMessage.From = new MailAddress("Krandall2005@gmail.com", "FantaGame365");
             mailMessage.To.Add(email);
             mailMessage.Subject = subject;
             mailMessage.Body = body;

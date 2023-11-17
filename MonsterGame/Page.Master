@@ -6,7 +6,7 @@
 <head runat="server">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Monster - Game</title>
+    <title>Fanta Game365</title>
     <link rel="icon" type="image/png" href="Content/Images/logo.png" sizes="16x16">
     <!-- bootstrap 5  -->
     <link rel="stylesheet" href="Content/CSS/bootstrap.min.css">
@@ -49,7 +49,7 @@
                     <div class="logo">
                         <a href="Dashboard.aspx" class="d-flex">
                             <img src="Content/Images/logo.png" alt="logo">
-                            <h3 class="pt-3"><strong class="text-warning">Monster</strong> Game</h3>
+                            <h3 class="pt-3"><strong class="text-warning">Fanta</strong>Game365</h3>
                         </a>
                     </div>
                     <ul class="menu">
@@ -99,13 +99,13 @@
                     <div class="logo mb-3 mb-md-0">
                         <a href="Dashboard.aspx" class="d-flex">
                             <img src="Content/Images/logo.png" alt="logo">
-                            <h3 class="pt-3"><strong class="text-warning">Monster</strong> Game</h3>
+                            <h3 class="pt-3"><strong class="text-warning">Fanta</strong>Game365</h3>
                         </a>
                     </div>
                     <ul class="footer-links d-flex flex-wrap justify-content-center">
                         <%--<li><a href="Conditions.aspx">Terms & Conditions</a></li>
                         <li><a href="Policy.aspx">Privacy Policy</a></li>--%>
-                        <li><a href="#0" id="TermsCondition">Terms & Conditions</a></li>
+                        <li><a href="#0" id="TermsCondition">Termini & Condizioni</a></li>
                         <li><a href="#0" id="Policy">Privacy Policy</a></li>
                     </ul>
                 </div>
@@ -125,10 +125,69 @@
             <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                 <div class="modal-content section-bg border-0">
                     <div class="modal-header modal--header bg--base">
-                        <h4 class="modal-title text-dark">Terms & Conditions</h4>
-                    </div>
-                    <div class="modal-body modal--body">
-                    </div>
+                        <h4 class="modal-title text-dark">Termini & Condizioni</h4></div>
+
+        <div class="modal-body modal--body">
+                     
+                    <h3 class="title mb-2 mt-3">Come si gioca: </h3>
+                    <p>I giocatori entro la fine della settimana sportiva dovranno scegliere una SQUADRA dall'elenco fornito dagli organizzatori. <br />
+                        Il Venerdi (generalmente entro le 18.00), il Torneo inizia e non sarà più possibile parteciparvi.<br />
+                        Ogni partecipante verrà abilitato o meno al successivo Turno in base ai risultati dell'incontro sportivo che si andrà a disputare.<br />
+                    <h3 class="title mb-2 mt-3">Informazioni e Regolamento: </h3>    
+                        1. I partecipanti devono predire quale squadra, tra quelle selezionate dal Torneo, è Vincente nella successiva giornata di campionato. <br />
+                        - In caso di sconfitta, si verrà eliminati dal Torneo<br />
+                        - In caso di pareggio scatterà un'ammonizione e, alla seconda ammonizione anche se non consecutiva, si procederà all'eliminazione dal Torneo.<br />
+                        - In caso di vittoria si passerà al Turno successivo con la scelta di una nuova squadra... e cosi via ..<br />
+                        - I risultati di riferimento sono quelli pubblicati sul sito Diretta/Livescore.it <br />
+                        <br />
+                        2. I partecipanti non possono utilizzare una squadra già selezionata nei propri turni precedenti. <br />
+                        <br />
+                        3. Se un evento in corso viene sospeso durante un Turno, i partecipanti che hanno selezionato le squadre coinvolte verranno automaticamente promossi al Turno successivo.<br />
+                        <br />                        
+                        4. Nel caso di rinvio di una singola partita e se il rinvio si verifica dopo l'orario limite per la scelta delle squadre, la selezione rimarrà valida. Se il rinvio avviene prima della scadenza per la consegna, non sarà possibile scegliere le squadre coinvolte nella partita posticipata.<br />
+                        <br />
+                        5. Il numero max di Turno è uguale al numero di Squadre previste dal Torneo. <br />
+                        <br />
+                        6. Quando sono esaurite le scelte disponibili da parte di due o più partecipanti (fine delle squadre), il torneo si conclude e il montepremi residuo viene diviso in parti uguali tra i partecipanti ancora in gara.<br />
+                        <br />
+                        7. In situazioni di sospensione del campionato durante l'evento, se la sospensione è prolungata, il montepremi verrà equamente diviso tra i partecipanti ancora in gioco.<br />
+                        <br />
+                        8. Se due o più contendenti stanno gareggiando per un premio e le squadre da loro scelte subiscono una sconfitta, il premio sarà assegnato al partecipante che non ha ancora ottenuto un pareggio durante il torneo. <br />
+                        <br />
+                        9. Nel caso in cui due o più partecipanti stiano competendo per un premio e non abbiano ricevuto alcuna ammonizione, o entrambi ne abbiano ricevuta una, in caso di sconfitta/pareggio delle squadre selezionate, i premi in disputa saranno equamente divisi.<br />
+                        <br />
+                        10. Se due o più partecipanti stanno gareggiando per un premio e vengono eliminati entrambi, uno per pareggio e l'altro per la sconfitta della squadra scelta, il premio superiore andrà al giocatore eliminato con doppia ammonizione. <br />
+                        <br />
+                        11. Le selezioni delle squadre dovranno essere effettuate entro 12h antecedenti la giornata di campionato (tale giornata verrà comunicata continuamente sul sito e anche in email).<br />
+                        <br />
+                        12. In caso di mancata comunicazione della scelta della squadra, verrà effettuata una scelta automatica, in ordine alfabetico, di una squadra tra quelle ancora disponibili.<br />
+                        <br />
+                        13. Durante il gioco, quando rimangono in gioco almeno quattro Ticket, è possibile stipulare un accordo per dividere il montepremi in qualsiasi modo si ritenga opportuno.
+                            La richiesta è da effettuarsi via chat e, per trasparenza, nel message board del sito.<br />
+                        <br />
+                        14. Se un partecipante raggiunge le fasi finali del torneo con più ticket, in caso di eliminazione dei ticket avversari, vincerà i premi corrispondenti ai piazzamenti dei suoi ticket.<br />
+                        <br />
+                        15. La quota di partecipazione è variabile in base alle opzioni del Torneo (Lega, numero di squadre, montepremi etc).<br />
+                        <br />
+                        16. L'iscrizione è valida solo se effettuata prima dell'inizio del primo Turno; non sono ammesse iscrizioni in corso. <br />
+                        <br />
+                        17. La tasse del Torneo è in proporzione alla quota di partecipazione.<br />
+                        <br />
+                        18. Alcuni Tornei sono free e pertanto alcun importo è richiesto per la partecipazione.<br />
+                        <br />
+                        19. Tutti i premi sono esigibili anche in Agenzia.<br />
+                        <br />
+                        20. Il Torneo termina in queste determinate condizioni:<br />
+                            i. Sono rimasti in gioco il numero di Partecipanti definiti dal Torneo (Vincitori: Xx).<br />
+                            ii. Per sopraggiunta sospensione/termine del campionato di riferimento.<br />
+                            iii. Per esaurimento del numero di Squadre disponibili per avanzare nel successivo Turno.<br />
+                        <br />
+                    </p>
+																  
+            </div>
+
+                    
+
                     <div class="modal-footer modal--footer">
                         <button type="button" class="btn btn--danger btn--md" data-bs-dismiss="modal">Close</button>
                     </div>

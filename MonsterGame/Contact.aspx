@@ -27,8 +27,8 @@
                                 <li><a href="#"></a> <i class="las la-map-marker-alt"></i> <span>Piazza Municipio, 134 - 80121 Napoli (NA)</span></li>
                                 <li><a href="#"> <i class="las la-phone-volume"></i> <span>(+39)-081554114523</span></a></li>
                                 <li><a href="#"> <i class="las la-phone-volume"></i> <span>(+39)-3386958521</span></a></li>
-                                <li><a href="#"> <i class="las la-envelope"></i> <span>info@monstergame.com</span></a></li>
-                                <li><a href="#"> <i class="las la-envelope"></i> <span>support@monstergame.com</span></a></li>
+                                <li><a href="#"> <i class="las la-envelope"></i> <span>info@FantaGame365.it</span></a></li>
+                                <li><a href="#"> <i class="las la-envelope"></i> <span>support@FantaGame365.it</span></a></li>
                             </ul>
                         </div>
                     </div>

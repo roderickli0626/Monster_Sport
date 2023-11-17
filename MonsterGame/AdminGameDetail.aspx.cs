@@ -58,7 +58,8 @@ namespace MonsterGame
             //ComboResults.Items.Add(new ListItem("LOSE", ((int)RoundResult.L).ToString()));
 
             Prize.InnerText = "€ " + Math.Round(game.Prize ?? 0, 2);
-            GameTitle.InnerText = "Game" + game.Id + " Details";
+            GameTitle.InnerText = "Torneo nr " + game.Id + ": Dettagli";
+
         }
 
         private void SetVisible()
@@ -105,7 +106,7 @@ namespace MonsterGame
 
                 // Send Notification to All Users
                 var hubContext = GlobalHost.ConnectionManager.GetHubContext<NotificationHub>();
-                hubContext.Clients.All.receiveRoundNotification("Game" + game.Id + " '" + game.Title + "' is Completed At Round" + currentRound + "!");
+                hubContext.Clients.All.receiveRoundNotification("Torneo " + game.Id + " '" + game.Title + "' terminato al Turno: " + currentRound + "!");
 
                 Page.Response.Redirect(Page.Request.Url.ToString(), true);
             }
@@ -116,14 +117,14 @@ namespace MonsterGame
 
                 // Send Notification to All Users
                 var hubContext = GlobalHost.ConnectionManager.GetHubContext<NotificationHub>();
-                hubContext.Clients.All.receiveRoundNotification("New Round" + currentRound + " is Started!");
+                hubContext.Clients.All.receiveRoundNotification("Un nuovo Turno " + currentRound + " è appena iniziato!");
 
                 Page.Response.Redirect(Page.Request.Url.ToString(), true);
             }
 
             // Send Notification to All Users
             var hubContext1 = GlobalHost.ConnectionManager.GetHubContext<NotificationHub>();
-            hubContext1.Clients.All.receiveRoundNotification("New Round" + currentRound + " is Started!");
+            hubContext1.Clients.All.receiveRoundNotification("Un nuovo Turno " + currentRound + " è appena iniziato!");
         }
 
         private void SaveWinners()
@@ -156,7 +157,7 @@ namespace MonsterGame
                     Movement movement = new Movement();
                     movement.UserID = user.Id;
                     movement.Amount = winner.Prize;
-                    movement.Note = "Ticket" + winner.Note + "WIN - Game" + game.Id + " '" + game.Title + "'";
+                    movement.Note = "Ticket " + winner.Note + " VINCENTE TORNEO " + game.Id + " '" + game.Title + "'";
                     movement.Type = (int)MovementType.DEPOSIT;
                     movement.MoveDate = DateTime.Now;
                     movementDAO.Insert(movement);
@@ -165,7 +166,7 @@ namespace MonsterGame
 
             // Send Notification to All Users
             var hubContext = GlobalHost.ConnectionManager.GetHubContext<NotificationHub>();
-            hubContext.Clients.All.receivePrizeNotification("Awarded Prize!");
+            hubContext.Clients.All.receivePrizeNotification("Premi assegnati!");
 
             SetVisible();
         }
@@ -194,7 +195,7 @@ namespace MonsterGame
             {
                 // Send Notification to All Users
                 var hubContext = GlobalHost.ConnectionManager.GetHubContext<NotificationHub>();
-                hubContext.Clients.All.receiveTeamChoiceNotification("Team Selected!");
+                hubContext.Clients.All.receiveTeamChoiceNotification("Squadra Selezionata!");
 
                 Page.Response.Redirect(Page.Request.Url.ToString(), true);
             }
@@ -233,7 +234,7 @@ namespace MonsterGame
             {
                 // Send Notification to All Users
                 var hubContext = GlobalHost.ConnectionManager.GetHubContext<NotificationHub>();
-                hubContext.Clients.All.receiveResultNotification("Result Added!");
+                hubContext.Clients.All.receiveResultNotification("Risultato Aggiunto!");
 
                 Page.Response.Redirect(Page.Request.Url.ToString(), true);
             }

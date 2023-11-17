@@ -159,7 +159,7 @@
                             <div class="content-item mb-0">
                                 <h3 class="title" id="purchase" style="padding-top:120px;">ACQUISTI</h3>
                                 <asp:ValidationSummary ID="ValSummary" runat="server" CssClass="mt-lg mb-lg text-left bg-gradient" ClientIDMode="Static" />
-                                <asp:CustomValidator ID="PaypalAmount" runat="server" ErrorMessage="Please insert valid amount." Display="None"></asp:CustomValidator>
+                                <asp:CustomValidator ID="PaypalAmount" runat="server" ErrorMessage="Inserire un importo valido." Display="None"></asp:CustomValidator>
                                 <div class="pt-5">
                                     <div class="col-lg-12 col-xl-12 col-md-12 col-sm-10">
                                         <div class="dashboard__card" style="border: 2px solid #ffdd2d;">
@@ -268,8 +268,8 @@
                                                             <p class="invest-info">Player necessari: <span class="invest-amount"><%# Eval("MinPlayers") %></span></p>
                                                             <p class="invest-info">Player attuali: <span class="invest-amount"><%# Eval("RealPlayers") %></span></p>
                                                             <p class="invest-info">Numero di squadre: <span class="invest-amount TeamShow" style="cursor: pointer;" data-id="<%# Eval("Id") %>"><%# Eval("NumberOfTeams") %></span></p>
-                                                            <p class="invest-info">Forziere minimo: <span class="invest-amount">€ <%# Eval("Prize") %></span></p>
-                                                            <p class="invest-info">Vincitori Previsti: <span class="invest-amount"><%# Eval("Winners") %></span></p>
+                                                            <p class="invest-info">Premio min.: <span class="invest-amount">€ <%# Eval("Prize") %></span></p>
+                                                            <p class="invest-info">Vincenti: <span class="invest-amount"><%# Eval("Winners") %></span></p>
                                                             <a class="cmn--btn active btn--md radius-1" href="UserGameDetail.aspx?gameId=<%# Eval("Id") %>"><%# Eval("ButtonTitle") %></a>
                                                         </div>
                                                     </div>
@@ -293,7 +293,7 @@
                                 <h5 class="p-5 teamNames"></h5>
                             </div>
                             <div class="modal-footer modal--footer">
-                                <button type="button" class="btn btn--danger btn--md" data-bs-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn--danger btn--md" data-bs-dismiss="modal">Chiudi</button>
                             </div>
                         </div>
                     </div>
@@ -364,7 +364,7 @@
                     success: function (res) {
                         var dataArrayForTeams = res.data;
                         $("#gameTeamsModal").modal('show');
-                        $(".teamNames").text(dataArrayForTeams.join(', '));
+                        $(".teamNames").text(dataArrayForTeams.join('<br/>'));
                     },
                     error: function (jqXHR, textStatus, errorThrown) {
                         // Handle the error response

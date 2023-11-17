@@ -91,7 +91,7 @@
                 </div>
                 <div class="account__content__wrapper" >
                     <div class="content text-center text-white">
-                        <h3 class="title text--base mb-4">Benvenuto su Monster Game</h3>
+                        <h3 class="title text--base mb-4">Benvenuto su FantaGame365</h3>
                         <p class="">Registra il tuo account e partecipa ai nostri tornei.</p>
                         <p class="account-switch mt-4">Hai già l'account ? <a class="text--base ms-2" href="Login.aspx">Entra</a></p>
                     </div>

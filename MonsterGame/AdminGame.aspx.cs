@@ -49,19 +49,19 @@ namespace MonsterGame
         {
             ComboStatus.Items.Clear();
             ComboStatus.Items.Add(new ListItem("TUTTI ...", "0"));
-            ComboStatus.Items.Add(new ListItem("OPEN", ((int)GameStatus.OPEN).ToString()));
-            ComboStatus.Items.Add(new ListItem("STARTED", ((int)GameStatus.STARTED).ToString()));
-            ComboStatus.Items.Add(new ListItem("TEAMCHOICE", ((int)GameStatus.TEAMCHOICE).ToString()));
-            ComboStatus.Items.Add(new ListItem("SUSPENDED", ((int)GameStatus.SUSPENDED).ToString()));
-            ComboStatus.Items.Add(new ListItem("CLOSED", ((int)GameStatus.CLOSED).ToString()));
-            ComboStatus.Items.Add(new ListItem("COMPLETED", ((int)GameStatus.COMPLETED).ToString()));
+            ComboStatus.Items.Add(new ListItem("APERTO", ((int)GameStatus.OPEN).ToString()));
+            ComboStatus.Items.Add(new ListItem("INIZIATO", ((int)GameStatus.STARTED).ToString()));
+            ComboStatus.Items.Add(new ListItem("SCELTA TEAM", ((int)GameStatus.TEAMCHOICE).ToString()));
+            ComboStatus.Items.Add(new ListItem("SOSPESO", ((int)GameStatus.SUSPENDED).ToString()));
+            ComboStatus.Items.Add(new ListItem("CHIUSO", ((int)GameStatus.CLOSED).ToString()));
+            ComboStatus.Items.Add(new ListItem("TERMINATO", ((int)GameStatus.COMPLETED).ToString()));
             ComboModalStatus.Items.Clear();
-            ComboModalStatus.Items.Add(new ListItem("OPEN", ((int)GameStatus.OPEN).ToString()));
-            ComboModalStatus.Items.Add(new ListItem("STARTED", ((int)GameStatus.STARTED).ToString()));
-            ComboModalStatus.Items.Add(new ListItem("TEAMCHOICE", ((int)GameStatus.TEAMCHOICE).ToString()));
-            ComboModalStatus.Items.Add(new ListItem("SUSPENDED", ((int)GameStatus.SUSPENDED).ToString()));
-            ComboModalStatus.Items.Add(new ListItem("CLOSED", ((int)GameStatus.CLOSED).ToString()));
-            ComboModalStatus.Items.Add(new ListItem("COMPLETED", ((int)GameStatus.COMPLETED).ToString()));
+            ComboModalStatus.Items.Add(new ListItem("APERTO", ((int)GameStatus.OPEN).ToString()));
+            ComboModalStatus.Items.Add(new ListItem("INIZIATO", ((int)GameStatus.STARTED).ToString()));
+            ComboModalStatus.Items.Add(new ListItem("SCELTA TEAM", ((int)GameStatus.TEAMCHOICE).ToString()));
+            ComboModalStatus.Items.Add(new ListItem("SOSPESO", ((int)GameStatus.SUSPENDED).ToString()));
+            ComboModalStatus.Items.Add(new ListItem("CHIUSO", ((int)GameStatus.CLOSED).ToString()));
+            ComboModalStatus.Items.Add(new ListItem("TERMINATO", ((int)GameStatus.COMPLETED).ToString()));
         }
 
         protected void BtnSave_Click(object sender, EventArgs e)

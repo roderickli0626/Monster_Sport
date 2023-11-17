@@ -220,8 +220,8 @@
                     "render": function (data, type, row, meta) {
                         return '<div class="justify-content-center">' +
                             '<button class="cmn--btn active btn--md radius-1 btn--success w-100 mt-1 btn-edit float-start">Edit</button>' +
-                            '<button class="cmn--btn active btn--md radius-1 btn--danger w-100 mt-1 btn-delete float-end">Delete</button>' +
-                            '<button class="cmn--btn active btn--md radius-1 btn-purchase w-100 mt-1">Crediti</button>' +
+                            '<button class="cmn--btn active btn--md radius-1 btn--danger w-100 mt-1 btn-delete float-end">Cancella</button>' +
+                            '<button class="cmn--btn active btn--md radius-1 btn-purchase w-100 mt-1">Agg. & Rim. Crediti</button>' +
                             '</div > ';
                     }
                 }],

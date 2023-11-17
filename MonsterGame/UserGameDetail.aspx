@@ -36,13 +36,13 @@
                                 <a href="#myTickets" class="nav-link">I MIEI TICKETS</a>
                             </li>
                             <li style="padding-left:30px;">
-                                <a href="#tickets" class="nav-link">TUTTI I TICKETS</a>
+                                <a href="#tickets" class="nav-link">TUTTI I TICKETS DEL TORNEO</a>
                             </li>
                             <li style="padding-left:30px;">
                                 <a href="#results" class="nav-link">RISULTATI</a>
                             </li>
                             <li runat="server" id="liWinner" style="padding-left:30px;">
-                                <a href="#winners" class="nav-link">VINCITORI</a>
+                                <a href="#winners" class="nav-link">VINCENTI</a>
                             </li>
                         </ul>
                     </div>
@@ -61,7 +61,7 @@
                                 </div>
                             </div>
                             <div class="content-item mb-0">
-                                <h3 class="title" id="tickets" style="padding-top:120px;">TUTTI I TICKETS</h3>
+                                <h3 class="title" id="tickets" style="padding-top:120px;">TUTTI I TICKETS DEL TORNEO</h3>
                                 <div class="pt-3 justify-content-center">
                                     <table class="table text-center" id="ticket-table">
                                     </table>
@@ -75,13 +75,13 @@
                                 </div>
                             </div>
                             <div runat="server" id="DivWinners" class="content-item mb-0">
-                                <h3 class="title" id="winners" style="padding-top: 120px;">VINCITORI</h3>
+                                <h3 class="title" id="winners" style="padding-top: 120px;">VINCENTI</h3>
                                 <div class="row justify-content-center pb-3">
                                     <div class="col-lg-8 col-xl-8 col-md-8 col-sm-8">
                                         <div class="dashboard__card" style="border: 2px solid #ffdd2d;">
                                             <div class="dashboard__card-content">
                                                 <h2 runat="server" id="Prize" class="price">$0</h2>
-                                                <p class="info">FORZIERE</p>
+                                                <p class="info">PREMIO</p>
                                             </div>
                                             <div class="dashboard__card-icon">
                                                 <i class="las la-wallet"></i>
@@ -94,8 +94,8 @@
                                         <thead>
                                             <tr>
                                                 <th>Nr.</th>
-                                                <th>Vincitore</th>
-                                                <th>Forziere</th>
+                                                <th>Vincente</th>
+                                                <th>Premio</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -233,7 +233,7 @@
                     for (var i = 0; i < numColumns; i++) {
                         columnsForMyTicket.push({
                             "class": "ps-0 pe-0",
-                            "title": "Round " + (i + 1),
+                            "title": "Turno " + (i + 1),
                             "render": function (data, type, row, meta) {
                                 var result = row.TicketResults[meta.col - 2].RoundResult;
                                 var bg = "";
@@ -294,7 +294,7 @@
                         var row = datatableForMyTicket.fnGetData($(this).closest('tr'));
 
                         $("#TeamChangeModal").modal('show');
-                        var modalTitle = "Scegli la tua squadra per il Round " + row.TicketResults.length;
+                        var modalTitle = "Scegli la squadra per superare il Turno " + row.TicketResults.length;
                         for (var k = 0; k < (row.TicketResults.length - 1); k++) {
                             // Remove before assigned Teams
                             $('#ComboTeams option[value="' + row.TicketResults[k].TeamID + '"]').remove();
@@ -346,7 +346,7 @@
                     for (var i = 0; i < numColumns; i++) {
                         columns.push({
                             "class": "ps-0 pe-0",
-                            "title": "Round " + (i + 1),
+                            "title": "Turno " + (i + 1),
                             "render": function (data, type, row, meta) {
                                 var result = row.TicketResults[meta.col-2].RoundResult;
                                 var bg = "";
@@ -363,13 +363,13 @@
                     }
 
                     columns.push({
-                        "title": "Fase",
+                        "title": "Stato",
                         "width": "5%",
                         "render": function (data, type, row, meta) {
-                            if (row.TicketResults.length == 0) return "PLAYING";
-                            else if (row.TicketResults[row.TicketResults.length - 1].RoundResult == null) return "LOST";
-                            else if (gameStatus == "6") return "WIN";
-                            else return "PLAYING";
+                            if (row.TicketResults.length == 0) return "IN GIOCO";
+                            else if (row.TicketResults[row.TicketResults.length - 1].RoundResult == null) return "PERSO";
+                            else if (gameStatus == "6") return "VINTO";
+                            else return "IN GIOCO";
                         }
                     });
 
@@ -440,7 +440,7 @@
                     for (var i = 0; i < numColumns; i++) {
                         columnsForResult.push({
                             "class": "ps-0 pe-0",
-                            "title": "Round " + (i + 1),
+                            "title": "Turno " + (i + 1),
                             "render": function (data, type, row, meta) {
                                 var result = row.Results[meta.col - 2].RoundResult;
                                 var bg = "";
@@ -448,15 +448,15 @@
                                 switch (result) {
                                     case 1: {
                                         bg = "bg-success";
-                                        content = "W";
+                                        content = "V";
                                     } break;
                                     case 2: {
                                         bg = "bg-warning";
-                                        content = "P";
+                                        content = "N";
                                     } break;
                                     case 3: {
                                         bg = "bg-danger";
-                                        content = "L"
+                                        content = "P"
                                     } break;
                                     default: {
                                         bg = "";

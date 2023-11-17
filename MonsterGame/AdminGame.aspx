@@ -229,8 +229,8 @@
                                 <th>Tax</th>
                                 <th><img src="content\images\utentemin.png" alt="Necessari" width="44" height="44" title="Player Necessari" /></th>
                                 <th><img src="content\images\utentereal.png" alt="Registrati" width="44" height="44" title="Player Registrati" /></th>                                
-                                <th><img src="content\images\forziere.png" alt="Forziere" width="44" height="44" title="Montepremi"/></th>
-                                <th>Round</th>
+                                <th><img src="content\images\forziere.png" alt="Premio" width="44" height="44" title="Premio"/></th>
+                                <th>Turno</th>
                                 <th>Azione</th>
                             </tr>
                         </thead>
@@ -242,20 +242,20 @@
                     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                         <div class="modal-content section-bg border-0">
                             <div class="modal-header modal--header bg--base">
-                                <h4 class="modal-title text-dark" id="modalTitle">Dettagli del gioco</h4>
+                                <h4 class="modal-title text-dark" id="modalTitle">Dettagli del Torneo</h4>
                             </div>
                             <div class="modal-body modal--body modal-body-select2">
                                 <asp:ScriptManager ID="ScriptManager" runat="server"></asp:ScriptManager>
                                 <asp:UpdatePanel runat="server" ID="UpdatePanel" ClientIDMode="Static" class="row gy-3">
                                     <ContentTemplate>
                                         <asp:ValidationSummary ID="ValSummary" runat="server" CssClass="mt-lg mb-lg text-left bg-gradient" ClientIDMode="Static" />
-                                        <asp:RequiredFieldValidator ID="ReqValTitle" runat="server" ErrorMessage="Insert Title." CssClass="text-bg-danger" ControlToValidate="TxtTitle" Display="None"></asp:RequiredFieldValidator>
-                                        <asp:RequiredFieldValidator ID="ReqValFee" runat="server" ErrorMessage="Insert Fee." CssClass="text-black" ControlToValidate="TxtFee" Display="None"></asp:RequiredFieldValidator>
-                                        <asp:RequiredFieldValidator ID="ReqValTax" runat="server" ErrorMessage="Insert Tax." CssClass="text-black" ControlToValidate="TxtTax" Display="None"></asp:RequiredFieldValidator>
-                                        <asp:RequiredFieldValidator ID="ReqValMinPlayers" runat="server" ErrorMessage="Insert Min Players." CssClass="text-black" ControlToValidate="TxtMinPlayers" Display="None"></asp:RequiredFieldValidator>
-                                        <asp:RequiredFieldValidator ID="ReqValTeamNum" runat="server" ErrorMessage="Insert Number Of Teams." CssClass="text-black" ControlToValidate="TxtTeamNum" Display="None"></asp:RequiredFieldValidator>
-                                        <asp:CustomValidator ID="ServerValidator0" runat="server" ErrorMessage="Please Select Valid Teams." Display="None"></asp:CustomValidator>
-                                        <asp:CustomValidator ID="ServerValidator1" runat="server" ErrorMessage="Please Input Valid Percents and Winners." Display="None"></asp:CustomValidator>
+                                        <asp:RequiredFieldValidator ID="ReqValTitle" runat="server" ErrorMessage="Inserisci il Titolo." CssClass="text-bg-danger" ControlToValidate="TxtTitle" Display="None"></asp:RequiredFieldValidator>
+                                        <asp:RequiredFieldValidator ID="ReqValFee" runat="server" ErrorMessage="Inserisci la quota di partecipazione." CssClass="text-black" ControlToValidate="TxtFee" Display="None"></asp:RequiredFieldValidator>
+                                        <asp:RequiredFieldValidator ID="ReqValTax" runat="server" ErrorMessage="Inserisci la tassa." CssClass="text-black" ControlToValidate="TxtTax" Display="None"></asp:RequiredFieldValidator>
+                                        <asp:RequiredFieldValidator ID="ReqValMinPlayers" runat="server" ErrorMessage="Inserisci il numero Min di Players." CssClass="text-black" ControlToValidate="TxtMinPlayers" Display="None"></asp:RequiredFieldValidator>
+                                        <asp:RequiredFieldValidator ID="ReqValTeamNum" runat="server" ErrorMessage="Inserisci il numero di squadre." CssClass="text-black" ControlToValidate="TxtTeamNum" Display="None"></asp:RequiredFieldValidator>
+                                        <asp:CustomValidator ID="ServerValidator0" runat="server" ErrorMessage="Inserisci le Squadre valide." Display="None"></asp:CustomValidator>
+                                        <asp:CustomValidator ID="ServerValidator1" runat="server" ErrorMessage="Inserisci % e Vincenti validi." Display="None"></asp:CustomValidator>
                                         <asp:CustomValidator ID="ServerValidator" runat="server" ErrorMessage="Salvataggio Fallito." Display="None"></asp:CustomValidator>
                                         <div class="col-md-6">
                                             <div class="form-group">
@@ -343,7 +343,7 @@
                                         </div>
                                         <div class="col-md-2">
                                             <div class="form-group">
-                                                <label for="TxtPercent6" class="form-label">Vincitori</label>
+                                                <label for="TxtPercent6" class="form-label">Vincenti</label>
                                                 <asp:TextBox runat="server" ID="TxtWinners" ClientIDMode="Static" CssClass="form-control form--control style-two"></asp:TextBox>
                                             </div>
                                         </div>
@@ -373,10 +373,10 @@
                                 <h4 class="modal-title text-dark">TEAMS</h4>
                             </div>
                             <div class="modal-body modal--body">
-                                <h5 class="p-5 teamNames"></h5>
+                                <h5 class="p-5 teamNames"><br /></h5>
                             </div>
                             <div class="modal-footer modal--footer">
-                                <button type="button" class="btn btn--danger btn--md" data-bs-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn--danger btn--md" data-bs-dismiss="modal">Chiudi</button>
                             </div>
                         </div>
                     </div>
@@ -566,7 +566,7 @@
                     success: function (res) {
                         var dataArrayForTeams = res.data;
                         $("#gameTeamsModal").modal('show');
-                        $(".teamNames").text(dataArrayForTeams.join(', '));
+                        $(".teamNames").html(dataArrayForTeams.join('<br/>')); 
                     },
                     error: function (jqXHR, textStatus, errorThrown) {
                         // Handle the error response

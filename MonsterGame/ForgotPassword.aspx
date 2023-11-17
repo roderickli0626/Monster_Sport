@@ -22,7 +22,7 @@
                     <div class="logo">
                         <a href="Dashboard.aspx" class="d-flex">
                             <img src="Content/Images/Logo.png" alt="logo" class="ms-auto">
-                            <h3 class="pt-3 me-auto"><strong class="text-warning">Monster</strong> Sport</h3>
+                            <h3 class="pt-3 me-auto"><strong class="text-warning">Fanta</strong>Game365</h3>
                         </a>
                     </div>
                     <form class="account__form form row g-4" runat="server" id="form1" autocomplete="off">
@@ -45,7 +45,7 @@
                 </div>
                 <div class="account__content__wrapper">
                     <div class="content text-center text-white">
-                        <h3 class="title text--base mb-4">Benvenuto to Monster Game</h3>
+                        <h3 class="title text--base mb-4">Benvenuto su FantaGame365</h3>
                         <p class="">Inserisci la tua email per ricevere il reset della password.</p>
                     </div>
                 </div>

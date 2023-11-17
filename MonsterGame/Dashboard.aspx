@@ -179,8 +179,8 @@
         <div class="container">
             <div class="banner-wrapper d-flex flex-wrap align-items-center">
                 <div class="banner-content">
-                    <h1 class="banner-content__title">Gioca su <span class="text--base">Kick Score</span> & supera la giornata di campionato!!</h1>
-                    <p class="banner-content__subtitle">SCEGLI IL TUO TEAM VINCENTE E SUPERA I GURU DELLE PREVISIONI</p>
+                    <h1 class="banner-content__title">Gioca su <span class="text--base">FantaGame365</span> & supera la giornata di campionato!!</h1>
+                    <p class="banner-content__subtitle">SCEGLI LE TUE SQUADRE VINCENTI E SUPERA I GURU DELLE PREVISIONI</p>
                     <div class="button-wrapper" runat="server" id="InDiv">
                         <a href="Login.aspx" class="cmn--btn active btn--lg">Entra</a>
                         <a href="Register.aspx" class="cmn--btn btn--lg">Registrati</a>
@@ -227,8 +227,8 @@
                 <div class="row justify-content-center">
                     <div class="col-lg-6 col-xl-5">
                         <div class="section-header text-center">
-                            <h2 class="section-header__title">GOCHI IN CORSO</h2>
-                            <p>Scegli i giochi.</p>
+                            <h2 class="section-header__title">TORNEI IN CORSO</h2>
+                            <p>Scegli i Tornei a cui partecipare e vincere!</p>
                         </div>
                     </div>
                 </div>
@@ -245,11 +245,11 @@
                                         <div class="game-item__content">
                                             <h4 class="title"><%# Eval("Title") %></h4>
                                             <p class="invest-info">Quota ingresso: <span class="invest-amount">€ <%# Eval("Fee") %></span></p>
-                                            <p class="invest-info">Player necessari: <span class="invest-amount"><%# Eval("MinPlayers") %></span></p>
-                                            <p class="invest-info">Player attuali: <span class="invest-amount"><%# Eval("RealPlayers") %></span></p>
+                                            <p class="invest-info" title="Player necessari all'inizio del Torneo">Player min.: <span class="invest-amount" title="Player necessari all'inizio del Torneo"><%# Eval("MinPlayers") %></span></p>
+                                            <p class="invest-info" title="Player già registrati al Torneo">Player attuali: <span class="invest-amount"><%# Eval("RealPlayers") %></span></p>
                                             <p class="invest-info">Numero di squadre: <span class="invest-amount TeamShow" style="cursor: pointer;" data-id="<%# Eval("Id") %>"><%# Eval("NumberOfTeams") %></span></p>
-                                            <p class="invest-info">Forziere minimo: <span class="invest-amount">€ <%# Eval("Prize") %></span></p>
-                                            <p class="invest-info">Vincitori Previsti: <span class="invest-amount"><%# Eval("Winners") %></span></p>
+                                            <p class="invest-info">Premio min.: <span class="invest-amount">€ <%# Eval("Prize") %></span></p>
+                                            <p class="invest-info">Vincenti: <span class="invest-amount"><%# Eval("Winners") %></span></p>
                                             <button class="BtnDetails cmn--btn active btn--md radius-1" data-id="<%# Eval("Id") %>" 
                                                 data-title="<%# Eval("Title") %>" data-fee="<%# Eval("Fee") %>" data-players="<%# Eval("RealPlayers") %>">Dettagli</button>
                                         </div>
@@ -277,11 +277,11 @@
                                 <th>Start</th>
                                 <th>Fine</th>
                                 <th><img src="content\images\team.png" alt="Squadre" width="44" height="44" title="Squadre"/></th>
-                                <th>Round</th>
+                                <th>Turno</th>
                                 <th>Quota</th>
                                 <th><img src="content\images\utentemin.png" alt="Necessari" width="44" height="44" title="Player Necessari" /></th>
                                 <th><img src="content\images\utentereal.png" alt="Registrati" width="44" height="44" title="Player Registrati" /></th>    
-                                <th><img src="content\images\forziere.png" alt="Forziere" width="44" height="44" title="Montepremi"/></th>
+                                <th><img src="content\images\forziere.png" alt="Premio" width="44" height="44" title="Premio"/></th>
                                 <th>Azione</th>
                             </tr>
                         </thead>
@@ -299,7 +299,7 @@
                                 <h5 class="p-5 teamNames"></h5>
                             </div>
                             <div class="modal-footer modal--footer">
-                                <button type="button" class="btn btn--danger btn--md" data-bs-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn--danger btn--md" data-bs-dismiss="modal">Chiudi</button>
                             </div>
                         </div>
                     </div>
@@ -363,22 +363,73 @@
         <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
             <div class="modal-content section-bg border-0">
                 <div class="modal-header modal--header bg--base">
-                    <h4 class="modal-title text-dark" id="modalTitle">Dettagli del gioco</h4>
+                    <h4 class="modal-title text-dark" id="modalTitle">Dettagli del Torneo</h4>
                 </div>
-                <div class="modal-body modal--body">
-                    <h3 class="title mb-2">Before Game Start: </h3>
-                    <p>It is need to log in this site and register to this game. To register, it is necessary to check balance and purchase credits for game tickets. 
-                        Every user can get maximum 10 tickets in a game. </p>
-                    <h3 class="title mb-2 mt-3">How To Play: </h3>
-                    <p>Registered user, by the end of the weekly game, will choose a TEAM, from the list of teams decided by the organization. 
-                        On Friday (generally at 8.00 pm), the game ends and it is no longer possible to participate in the round.
-                        Every players will be promoted or failed to the next round according to the results of the teams.
+               <div class="modal-body modal--body">
+                    <h3 class="title mb-2">Prima che inizi il Torneo: </h3>
+                    <p>Scegli il Torneo -> Compra il biglietto -> Scegli la Squadra -> Attendi l'esito dell'incontro -> Andrai al Turno successivo ? </p>
+                    <h3 class="title mb-2 mt-3">Come si gioca: </h3>
+                    <p>I giocatori entro la fine della settimana sportiva dovranno scegliere una SQUADRA, dall'elenco fornito dagli organizzatori. <br />
+                        Il Venerdi (generalmente entro le 18.00), il Torneo inizia e non sarà più possibile parteciparvi.<br />
+                        Ogni partecipante verrà abilitato o meno al successivo Turno in base ai risultati dell'incontro sportivo che si andrà a disputare.<br />
+                    <h3 class="title mb-2 mt-3">Informazioni e Regolamento: </h3>    
+                        1. I partecipanti devono predire quale squadra, tra quelle selezionate dal Torneo, è Vincente nella successiva giornata di campionato. <br />
+                        - In caso di sconfitta si verrà eliminati dal Torneo<br />
+                        - In caso di pareggio scatterà un'ammonizione e, alla seconda ammonizione anche se non consecutiva, si procederà all'eliminazione dal Torneo.<br />
+                        - In caso di vittoria si passerà al Turno successivo con la scelta di una nuova squadra... e cosi via ..<br />
+                        - I risultati di riferimento sono quelli pubblicati sul sito Diretta/Livescore.it <br />
+                        <br />
+                        2. I partecipanti non possono utilizzare una squadra già selezionata nei propri turni precedenti. <br />
+                        <br />
+                        3. Se un evento in corso viene sospeso durante un Turno, i partecipanti che hanno selezionato le squadre coinvolte verranno automaticamente promossi al Turno successivo.<br />
+                        <br />                        
+                        4. Nel caso di rinvio di una singola partita e se il rinvio si verifica dopo l'orario limite per la scelta delle squadre, la selezione rimarrà valida. Se il rinvio avviene prima della scadenza per la consegna, non sarà possibile scegliere le squadre coinvolte nella partita posticipata.<br />
+                        <br />
+                        5. Il numero max di Turno è uguale al numero di Squadre previste dal Torneo. <br />
+                        <br />
+                        6. Quando sono esaurite le scelte disponibili da parte di due o più partecipanti (fine delle squadre), il torneo si conclude e il montepremi residuo viene diviso in parti uguali tra i partecipanti ancora in gara.<br />
+                        <br />
+                        7. In situazioni di sospensione del campionato durante l'evento, se la sospensione è prolungata, il montepremi verrà equamente diviso tra i partecipanti ancora in gioco.<br />
+                        <br />
+                        8. Se due o più contendenti stanno gareggiando per un premio e le squadre da loro scelte subiscono una sconfitta, il premio sarà assegnato al partecipante che non ha ancora ottenuto un pareggio durante il torneo. <br />
+                        <br />
+                        9. Nel caso in cui due o più partecipanti stiano competendo per un premio e non abbiano ricevuto alcuna ammonizione, o entrambi ne abbiano ricevuta una, in caso di sconfitta/pareggio delle squadre selezionate, i premi in disputa saranno equamente divisi.<br />
+                        <br />
+                        10. Se due o più partecipanti stanno gareggiando per un premio e vengono eliminati entrambi, uno per pareggio e l'altro per la sconfitta della squadra scelta, il premio superiore andrà al giocatore eliminato con doppia ammonizione. <br />
+                        <br />
+                        11. Le selezioni delle squadre dovranno essere effettuate entro 12h antecedenti la giornata di campionato (tale giornata verrà comunicata continuamente sul sito e anche in email).<br />
+                        <br />
+                        12. In caso di mancata comunicazione della scelta della squadra, verrà effettuata una scelta automatica, in ordine alfabetico, di una squadra tra quelle ancora disponibili.<br />
+                        <br />
+                        13. Durante il gioco, quando rimangono in gioco almeno quattro Ticket, è possibile stipulare un accordo per dividere il montepremi in qualsiasi modo si ritenga opportuno.
+                            La richiesta è da effettuarsi via chat e, per trasparenza, nel message board del sito.<br />
+                        <br />
+                        14. Se un partecipante raggiunge le fasi finali del torneo con più ticket, in caso di eliminazione dei ticket avversari, vincerà i premi corrispondenti ai piazzamenti dei suoi ticket.<br />
+                        <br />
+                        15. La quota di partecipazione è variabile in base alle opzioni del Torneo (Lega, numero di squadre, montepremi etc).<br />
+                        <br />
+                        16. L'iscrizione è valida solo se effettuata prima dell'inizio del primo Turno; non sono ammesse iscrizioni in corso. <br />
+                        <br />
+                        17. La tasse del Torneo è in proporzione alla quota di partecipazione.<br />
+                        <br />
+                        18. Alcuni Tornei sono free e pertanto alcun importo è richiesto per la partecipazione.<br />
+                        <br />
+                        19. Tutti i premi sono esigibili in Agenzia.<br />
+                        <br />
+                        20. Il Torneo termina in queste determinate condizioni:<br />
+                            i. Sono rimasti in gioco il numero di Partecipanti definiti dal Torneo (Vincitori: Xx).<br />
+                            ii. Per sopraggiunta sospensione/termine del campionato di riferimento.<br />
+                            iii. Per esaurimento del numero di Squadre disponibili per avanzare nel successivo Turno.<br />
+                        <br />
                     </p>
-                    <h3 class="title mb-2 mt-3">Information: </h3>
-                    <p>The credits for this game is <strong id="fee"></strong> and there are <strong id="players"></strong> registered palyers now. </p>
+                    <h3 class="title mb-2 mt-3">DETTAGLI PER QUESTO TORNEO </h3>
+                    <p>La quota di partecipazione per questo torneo è di <strong id="fee"></strong> e attualmente ci sono già <strong id="players"></strong> player registrati.
+                    </p>
+																  
+																																						
                 </div>
                 <div class="modal-footer modal--footer">
-                    <button type="button" class="btn btn--danger btn--md" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn--danger btn--md" data-bs-dismiss="modal">Chiudi</button>
                 </div>
             </div>
         </div>
@@ -449,7 +500,7 @@
                 "data": null,
                 "render": function (data, type, row, meta) {
                     return '<div class="justify-content-center">' +
-                        '<a class="cmn--btn active btn--md radius-1 w-100 mt-1" href="UserGameDetail.aspx?gameId=' + row.Id + '">Detail</a>' +
+                        '<a class="cmn--btn active btn--md radius-1 w-100 mt-1" href="UserGameDetail.aspx?gameId=' + row.Id + '">Dettagli</a>' +
                         '</div > ';
                 }
             }],
@@ -488,7 +539,7 @@
                 success: function (res) {
                     var dataArrayForTeams = res.data;
                     $("#gameTeamsModal").modal('show');
-                    $(".teamNames").text(dataArrayForTeams.join(', '));
+                    $(".teamNames").html(dataArrayForTeams.join('<br>'));
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
                     // Handle the error response
@@ -508,7 +559,7 @@
                 success: function (res) {
                     var dataArrayForTeams = res.data;
                     $("#gameTeamsModal").modal('show');
-                    $(".teamNames").text(dataArrayForTeams.join(', '));
+                    $(".teamNames").html(dataArrayForTeams.join('<br/>'));
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
                     // Handle the error response

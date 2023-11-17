@@ -163,13 +163,13 @@
     <Content Include="Content\fonts\la-brands-400.svg" />
     <Content Include="Content\fonts\la-regular-400.svg" />
     <Content Include="Content\fonts\la-solid-900.svg" />
+    <Content Include="Content\Images\gamemark6.jpg" />
     <Content Include="Content\Images\gamemark7.jpg" />
     <Content Include="Content\Images\gamemark5.jpg" />
     <Content Include="Content\Images\gamemark4.jpg" />
     <Content Include="Content\Images\gamemark3.jpg" />
     <Content Include="Content\Images\gamemark1.jpg" />
     <Content Include="Content\Images\gamemark2.jpg" />
-    <Content Include="Content\Images\gamemark6.png" />
     <Content Include="Content\Images\left-icon-selected.png" />
     <Content Include="Content\Images\left-icon.png" />
     <Content Include="Content\Images\registerbg.jpg" />

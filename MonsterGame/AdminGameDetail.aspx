@@ -7,10 +7,10 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-7 col-xl-6 text-center">
-                    <h2 runat="server" id="GameTitle" class="title text-white">Dettagli del gioco</h2>
+                    <h2 runat="server" id="GameTitle" class="title text-white">Dettagli del Torneo</h2>
                     <ul class="breadcrumbs d-flex flex-wrap align-items-center justify-content-center">
                         <li><a href="AdminGame.aspx">TORNEI</a></li>
-                        <li>Dettagli del gioco</li>
+                        <li>Dettagli del Torneo</li>
                     </ul>
                 </div>
             </div>
@@ -33,10 +33,10 @@
                                 <a href="#results" class="nav-link">RISULTATI</a>
                             </li>
                             <li style="padding-left:30px;">
-                                <a href="#tickets" class="nav-link">TICKETS</a>
+                                <a href="#tickets" class="nav-link">TUTTI I TICKETS</a>
                             </li>
                             <li runat="server" id="liWinner" style="padding-left:30px;">
-                                <a href="#winners" class="nav-link">VINCITORI</a>
+                                <a href="#winners" class="nav-link">VINCENTI</a>
                             </li>
                         </ul>
                     </div>
@@ -46,7 +46,7 @@
                                 <h3 class="title" id="results" style="padding-top:120px;">RISULTATI</h3>
                                 <div class="row justify-content-center pt-5">
                                     <div class="col-lg-4 col-xl-4 ms-auto">
-                                         <asp:Button runat="server" ID="BtnRound" ClientIDMode="Static" CssClass="cmn--btn active radius-1 w-100" Text="NEW ROUND" OnClick="BtnRound_Click"></asp:Button>
+                                         <asp:Button runat="server" ID="BtnRound" ClientIDMode="Static" CssClass="cmn--btn active radius-1 w-100" Text="NUOVO TURNO" OnClick="BtnRound_Click"></asp:Button>
                                     </div>
                                 </div>
                                 <div class="pt-3 justify-content-center">
@@ -62,13 +62,13 @@
                                 </div>
                             </div>
                             <div runat="server" id="DivWinners" class="content-item mb-0">
-                                <h3 class="title" id="winners" style="padding-top: 120px;">VINCITORI</h3>
+                                <h3 class="title" id="winners" style="padding-top: 120px;">VINCENTI</h3>
                                 <div class="row justify-content-center pb-3">
                                     <div class="col-lg-8 col-xl-8 col-md-8 col-sm-8">
                                         <div class="dashboard__card" style="border: 2px solid #ffdd2d;">
                                             <div class="dashboard__card-content">
                                                 <h2 runat="server" id="Prize" class="price">$0</h2>
-                                                <p class="info">FORZIERE</p>
+                                                <p class="info">Premio</p>
                                             </div>
                                             <div class="dashboard__card-icon">
                                                 <i class="las la-wallet"></i>
@@ -76,7 +76,7 @@
                                         </div>
                                     </div>
                                     <div class="col-lg-4 col-xl-4 d-flex flex-column justify-content-end">
-                                         <asp:Button runat="server" ID="BtnPrize" ClientIDMode="Static" CssClass="cmn--btn active radius-1 w-100" Text="DIVIDE PRIZE" OnClick="BtnPrize_Click"></asp:Button>
+                                         <asp:Button runat="server" ID="BtnPrize" ClientIDMode="Static" CssClass="cmn--btn active radius-1 w-100" Text="DIVIDI I PREMI" OnClick="BtnPrize_Click"></asp:Button>
                                     </div>
                                 </div>
                                 <div class="pt-3 justify-content-center">
@@ -84,7 +84,7 @@
                                         <thead>
                                             <tr>
                                                 <th>Nr.</th>
-                                                <th>Vincitore</th>
+                                                <th>Vincente</th>
                                                 <th>%</th>
                                                 <th>Importo</th>
                                                 <th>Azione</th>
@@ -142,9 +142,9 @@
                                         <div class="col-md-8 mx-auto">
                                             <div class="form-group">
                                                 <asp:RadioButtonList ID="ResultOptions" runat="server" CssClass="justify-content-center mx-auto" ClientIDMode="Static">
-                                                    <asp:ListItem Text="WIN" Value="1"></asp:ListItem>
-                                                    <asp:ListItem Text="DRAW" Value="2"></asp:ListItem>
-                                                    <asp:ListItem Text="LOSE" Value="3"></asp:ListItem>
+                                                    <asp:ListItem Text=" VINCENTE " Value="1"></asp:ListItem>
+                                                    <asp:ListItem Text=" PAREGGIO " Value="2"></asp:ListItem>
+                                                    <asp:ListItem Text=" PERDENTE " Value="3"></asp:ListItem>
                                                 </asp:RadioButtonList>
                                                 <%--<asp:DropDownList runat="server" ID="ComboResults" CssClass="form-select form--control style-two" ClientIDMode="Static"></asp:DropDownList>--%>
                                             </div>
@@ -246,7 +246,7 @@
                     for (var i = 0; i < numColumns; i++) {
                         columns.push({
                             "class": "ps-0 pe-0",
-                            "title": "Round " + (i + 1),
+                            "title": "Turno " + (i + 1),
                             "render": function (data, type, row, meta) {
                                 var result = row.TicketResults[meta.col-2].RoundResult;
                                 var bg = "";
@@ -267,8 +267,8 @@
                         "width": "5%",
                         "render": function (data, type, row, meta) {
                             if (row.TicketResults.length == 0) return "PLAYING";
-                            else if (row.TicketResults[row.TicketResults.length - 1].RoundResult == null) return "LOST";
-                            else if (gameStatus == "6") return "WIN";
+                            else if (row.TicketResults[row.TicketResults.length - 1].RoundResult == null) return "P";
+                            else if (gameStatus == "6") return "V";
                             else return "PLAYING";
                         }
                     });
@@ -319,7 +319,7 @@
                         var row = datatable.fnGetData($(this).closest('tr'));
 
                         $("#TeamChangeModal").modal('show');
-                        var modalTitle = "Team Change in Round " + row.TicketResults.length;
+                        var modalTitle = "Scelta Squadra per il Turno " + row.TicketResults.length;
                         for (var k = 0; k < (row.TicketResults.length - 1); k++) {
                             // Remove before assigned Teams
                             $('#ComboTeams option[value="' + row.TicketResults[k].TeamID + '"]').remove();
@@ -369,7 +369,7 @@
                     for (var i = 0; i < numColumns; i++) {
                         columnsForResult.push({
                             "class": "ps-0 pe-0",
-                            "title": "Round " + (i + 1),
+                            "title": "Turno " + (i + 1),
                             "render": function (data, type, row, meta) {
                                 var result = row.Results[meta.col - 2].RoundResult;
                                 var bg = "";
@@ -377,15 +377,15 @@
                                 switch (result) {
                                     case 1: {
                                         bg = "bg-success";
-                                        content = "W";
+                                        content = "V";
                                     } break;
                                     case 2: {
                                         bg = "bg-warning";
-                                        content = "P";
+                                        content = "N";
                                     } break;
                                     case 3: {
                                         bg = "bg-danger";
-                                        content = "L"
+                                        content = "P"
                                     } break;
                                     default: {
                                         bg = "";
@@ -441,7 +441,7 @@
                         var row = datatableForResult.fnGetData($(this).closest('tr'));
 
                         $("#ResultChangeModal").modal('show');
-                        var modalTitle = "Match Result in Round " + row.Results.length;
+                        var modalTitle = "Esiti del Turno " + row.Results.length;
                         var roundResult = row.Results[row.Results.length - 1].RoundResult;
                         $("#HfResultID").val(row.Results[row.Results.length - 1].Id);
                         $(".modal-title").text(modalTitle);
@@ -458,7 +458,7 @@
             $("#BtnRound").click(function () {
                 var currentRound = datatableForResult.fnGetData(0).Results.length + 1;
                 $("#HfCurrentRound").val(currentRound);
-                if (confirm("Creare un nuovo Round ?")) return true;
+                if (confirm("Creare un nuovo Turno ?")) return true;
                 else return false;
             });
 

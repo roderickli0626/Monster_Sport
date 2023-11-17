@@ -8,7 +8,7 @@
                 <div class="col-lg-7 col-xl-6 text-center">
                     <h2 class="title text-white">Pagamento Cancellato</h2>
                     <ul class="breadcrumbs d-flex flex-wrap align-items-center justify-content-center">
-                        <li><a href="UserInfo.aspx">Information</a></li>
+                        <li><a href="UserInfo.aspx">Informazioni</a></li>
                         <li>Pagamento Cancellato</li>
                     </ul>
                 </div>

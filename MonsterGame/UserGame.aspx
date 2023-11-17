@@ -161,10 +161,10 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-7 col-xl-6 text-center">
-                    <h2 class="title text-white">Giochi</h2>
+                    <h2 class="title text-white">Tornei</h2>
                     <ul class="breadcrumbs d-flex flex-wrap align-items-center justify-content-center">
                         <li><a href="Dashboard.aspx">Dashboard</a></li>
-                        <li>Giochi</li>
+                        <li>Tornei</li>
                     </ul>
                 </div>
             </div>
@@ -202,8 +202,8 @@
                                                 <p class="invest-info">Player necessari: <span class="invest-amount"><%# Eval("MinPlayers") %></span></p>
                                                 <p class="invest-info">Player attuali: <span class="invest-amount"><%# Eval("RealPlayers") %></span></p>
                                                 <p class="invest-info">Numero di squadre: <span class="invest-amount TeamShow" style="cursor: pointer;" data-id="<%# Eval("Id") %>"><%# Eval("NumberOfTeams") %></span></p>
-                                                <p class="invest-info">Scrigno minimo: <span class="invest-amount">€ <%# Eval("Prize") %></span></p>
-                                                <p class="invest-info">Vincitori Previsti: <span class="invest-amount"><%# Eval("Winners") %></span></p>
+                                                <p class="invest-info">Premio min.: <span class="invest-amount">€ <%# Eval("Prize") %></span></p>
+                                                <p class="invest-info">Vincenti: <span class="invest-amount"><%# Eval("Winners") %></span></p>
                                                 <a class="cmn--btn active btn--md radius-1" href="UserGameDetail.aspx?gameId=<%# Eval("Id") %>"><%# Eval("ButtonTitle") %></a>
                                             </div>
                                         </div>
@@ -222,16 +222,16 @@
                     <table class="table text-center" id="game-table">
                         <thead>
                             <tr>
-                                <th>Stato del Gioco</th>
+                                <th>Stato del Torneo</th>
                                 <th>Titolo</th>
                                 <th>Apertura</th>
                                 <th>Scadenza</th>
-                                <th>Squadre</th>
-                                <th>Rotondo</th>
+                                <th><img src="content\images\team.png" alt="Squadre" width="44" height="44" title="Squadre"/></th>
+                                <th>Turno</th>
                                 <th>Quota</th>
-                                <th>Min Player</th>
-                                <th>Player</th>
-                                <th>Scrigno</th>
+                                <th><img src="content\images\utentemin.png" alt="Necessari" width="44" height="44" title="Player Necessari" /></th>
+                                <th><img src="content\images\utentereal.png" alt="Registrati" width="44" height="44" title="Player Registrati" /></th>
+                                <th><img src="content\images\forziere.png" alt="Premio" width="44" height="44" title="Premio"/></th>
                                 <th>Azione</th>
                             </tr>
                         </thead>
@@ -249,7 +249,7 @@
                                 <h5 class="p-5 teamNames"></h5>
                             </div>
                             <div class="modal-footer modal--footer">
-                                <button type="button" class="btn btn--danger btn--md" data-bs-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn--danger btn--md" data-bs-dismiss="modal">Chiudi</button>
                             </div>
                         </div>
                     </div>
@@ -327,7 +327,7 @@
                 "data": null,
                 "render": function (data, type, row, meta) {
                     return '<div class="justify-content-center">' +
-                        '<a class="cmn--btn active btn--md radius-1 w-100 mt-1" href="UserGameDetail.aspx?gameId=' + row.Id + '">Detail</a>' +
+                        '<a class="cmn--btn active btn--md radius-1 w-100 mt-1" href="UserGameDetail.aspx?gameId=' + row.Id + '">Dettaglio</a>' +
                         '</div > ';
                 }
             }],
@@ -366,7 +366,7 @@
                 success: function (res) {
                     var dataArrayForTeams = res.data;
                     $("#gameTeamsModal").modal('show');
-                    $(".teamNames").text(dataArrayForTeams.join(', '));
+                    $(".teamNames").html(dataArrayForTeams.join('<br/>'));
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
                     // Handle the error response
@@ -386,7 +386,7 @@
                 success: function (res) {
                     var dataArrayForTeams = res.data;
                     $("#gameTeamsModal").modal('show');
-                    $(".teamNames").text(dataArrayForTeams.join(', '));
+                    $(".teamNames").html(dataArrayForTeams.join('<br/>'));
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
                     // Handle the error response
