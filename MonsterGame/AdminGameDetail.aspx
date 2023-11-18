@@ -1,6 +1,15 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Page.Master" AutoEventWireup="true" CodeBehind="AdminGameDetail.aspx.cs" Inherits="MonsterGame.AdminGameDetail" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link rel="stylesheet" href="Content/CSS/datatables.css" />
+    <link rel="stylesheet" href="Content/CSS/jquery.datetimepicker.min.css" />
+    <style>
+        .hidden-input {
+            position: absolute;
+            width: 0px;
+            height: 0px;
+            overflow: hidden;
+        }
+    </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder" runat="server">
     <section class="inner-banner bg_img" style="background: url('Content/Images/stadium2.jpg') center;">
@@ -26,6 +35,8 @@
                 <asp:HiddenField ID="HfResultID" runat="server" ClientIDMode="Static" />
                 <asp:HiddenField ID="HfCurrentRound" runat="server" ClientIDMode="Static" />
                 <asp:HiddenField ID="HfWinnerID" runat="server" ClientIDMode="Static" />
+                <asp:HiddenField ID="HfGameImage1" runat="server" ClientIDMode="Static" />
+                <asp:HiddenField ID="HfGameImage2" runat="server" ClientIDMode="Static" />
                 <div class="row">
                     <div class="col-12 col-md-3">
                         <ul class="privacy-policy-sidebar-menu" style="padding-top:120px;">
@@ -37,6 +48,15 @@
                             </li>
                             <li runat="server" id="liWinner" style="padding-left:30px;">
                                 <a href="#winners" class="nav-link">VINCENTI</a>
+                            </li>
+                            <li id="liEdit" style="padding-left:30px;">
+                                <a href="#0" class="nav-link">EDIT</a>
+                            </li>
+                            <li style="padding-top: 30px;">
+                                <img src="Upload/Game/default.jpg" id="GameImage" runat="server" clientidmode="Static" alt="service-image" class="img-thumbnail" style="height: auto; width: 100%;" />
+                            </li>
+                            <li style="padding-top: 30px;">
+                                <p runat="server" id="GameNote"></p>
                             </li>
                         </ul>
                     </div>
@@ -191,6 +211,141 @@
                         </div>
                     </div>
                 </div>
+                <div class="modal custom--modal fade show" id="gameDetailModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" data-bs-backdrop="static" aria-modal="true">
+                    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                        <div class="modal-content section-bg border-0">
+                            <div class="modal-header modal--header bg--base">
+                                <h4 class="modal-title text-dark">Dettagli del Torneo</h4>
+                            </div>
+                            <div class="modal-body modal--body modal-body-select2">
+                                <asp:UpdatePanel runat="server" ID="UpdatePanel3" ClientIDMode="Static" class="row gy-3">
+                                    <ContentTemplate>
+                                        <asp:ValidationSummary ID="ValSummary3" runat="server" CssClass="mt-lg mb-lg text-left bg-gradient" ClientIDMode="Static" />
+                                        <asp:RequiredFieldValidator ID="ReqValTitle" runat="server" ErrorMessage="Inserisci il Titolo." CssClass="text-bg-danger" ControlToValidate="TxtTitle" Display="None"></asp:RequiredFieldValidator>
+                                        <asp:RequiredFieldValidator ID="ReqValFee" runat="server" ErrorMessage="Inserisci la quota di partecipazione." CssClass="text-black" ControlToValidate="TxtFee" Display="None"></asp:RequiredFieldValidator>
+                                        <asp:RequiredFieldValidator ID="ReqValTax" runat="server" ErrorMessage="Inserisci la tassa." CssClass="text-black" ControlToValidate="TxtTax" Display="None"></asp:RequiredFieldValidator>
+                                        <asp:RequiredFieldValidator ID="ReqValMinPlayers" runat="server" ErrorMessage="Inserisci il numero Min di Players." CssClass="text-black" ControlToValidate="TxtMinPlayers" Display="None"></asp:RequiredFieldValidator>
+                                        <asp:RequiredFieldValidator ID="ReqValTeamNum" runat="server" ErrorMessage="Inserisci il numero di squadre." CssClass="text-black" ControlToValidate="TxtTeamNum" Display="None"></asp:RequiredFieldValidator>
+                                        <asp:CustomValidator ID="ServerValidator0" runat="server" ErrorMessage="Inserisci le Squadre valide." Display="None"></asp:CustomValidator>
+                                        <asp:CustomValidator ID="ServerValidator3" runat="server" ErrorMessage="Inserisci % e Vincenti validi." Display="None"></asp:CustomValidator>
+                                        <asp:CustomValidator ID="ServerValidator4" runat="server" ErrorMessage="Salvataggio Fallito." Display="None"></asp:CustomValidator>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="TxtTitle" class="form-label">Titolo</label>
+                                                <asp:TextBox runat="server" ID="TxtTitle" ClientIDMode="Static" CssClass="form-control form--control style-two"></asp:TextBox>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="ComboModalStatus" class="form-label">Stato</label>
+                                                <asp:DropDownList runat="server" ID="ComboModalStatus" CssClass="form-select form--control style-two" ClientIDMode="Static"></asp:DropDownList>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="TxtStartDate" class="form-label">Start</label>
+                                                <asp:TextBox runat="server" ID="TxtStartDate" ClientIDMode="Static" CssClass="form-control form--control style-two text-white" style="border: 1px solid rgba(255, 255, 255, 0.17); padding-left:10px;"></asp:TextBox>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="TxtEndDate" class="form-label">End </label>
+                                                <asp:TextBox runat="server" ID="TxtEndDate" ClientIDMode="Static" CssClass="form-control form--control style-two text-white" style="border: 1px solid rgba(255, 255, 255, 0.17); padding-left:10px;"></asp:TextBox>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label for="TxtTeamNum" class="form-label">Nr. di Squadre</label>
+                                                <asp:TextBox runat="server" ID="TxtTeamNum" ClientIDMode="Static" CssClass="form-control form--control style-two" TextMode="Number"></asp:TextBox>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label for="TxtMinPlayers" class="form-label">Player min.</label>
+                                                <asp:TextBox runat="server" ID="TxtMinPlayers" ClientIDMode="Static" CssClass="form-control form--control style-two" TextMode="Number"></asp:TextBox>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label for="TxtFee" class="form-label">Quota</label>
+                                                <asp:TextBox runat="server" ID="TxtFee" ClientIDMode="Static" CssClass="form-control form--control style-two"></asp:TextBox>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label for="TxtTax" class="form-label">Tax</label>
+                                                <asp:TextBox runat="server" ID="TxtTax" ClientIDMode="Static" CssClass="form-control form--control style-two"></asp:TextBox>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="TxtNote" class="form-label">Note</label>
+                                                <asp:TextBox runat="server" ID="TxtNote" ClientIDMode="Static" CssClass="form-control form--control style-two" TextMode="MultiLine" Rows="2"></asp:TextBox>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 col-md-4">
+                                            <div class="form-group">
+                                                <label for="TxtNote" class="form-label">Photo 1</label>
+                                                <img src="Content/Images/gamemark3.jpg" id="GameImage1" runat="server" clientidmode="Static" alt="service-image" class="img-thumbnail" style="height: 150px; width: 100%;" />
+                                                <asp:FileUpload runat="server" ID="ImageFile1" ClientIDMode="Static" CssClass="hidden-input" />
+                                            </div> 
+                                        </div>
+                                        <div class="col-lg-4 col-md-4">
+                                            <div class="form-group">
+                                                <label for="TxtNote" class="form-label">Photo 2</label>
+                                                <img src="Content/Images/gamemark3.jpg" id="GameImage2" runat="server" clientidmode="Static" alt="service-image" class="img-thumbnail" style="height: 150px; width: 100%;" />
+                                                <asp:FileUpload runat="server" ID="ImageFile2" ClientIDMode="Static" CssClass="hidden-input" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="form-group">
+                                                <label for="TxtPercent1" class="form-label">% al 1°</label>
+                                                <asp:TextBox runat="server" ID="TxtPercent1" ClientIDMode="Static" CssClass="form-control form--control style-two"></asp:TextBox>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="form-group">
+                                                <label for="TxtPercent2" class="form-label">% al 2°</label>
+                                                <asp:TextBox runat="server" ID="TxtPercent2" ClientIDMode="Static" CssClass="form-control form--control style-two"></asp:TextBox>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="form-group">
+                                                <label for="TxtPercent3" class="form-label">% al 3°</label>
+                                                <asp:TextBox runat="server" ID="TxtPercent3" ClientIDMode="Static" CssClass="form-control form--control style-two"></asp:TextBox>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="form-group">
+                                                <label for="TxtPercent4" class="form-label">% al 4°</label>
+                                                <asp:TextBox runat="server" ID="TxtPercent4" ClientIDMode="Static" CssClass="form-control form--control style-two"></asp:TextBox>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="form-group">
+                                                <label for="TxtPercent5" class="form-label">% al 5°</label>
+                                                <asp:TextBox runat="server" ID="TxtPercent5" ClientIDMode="Static" CssClass="form-control form--control style-two"></asp:TextBox>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="form-group">
+                                                <label for="TxtPercent6" class="form-label">Vincenti</label>
+                                                <asp:TextBox runat="server" ID="TxtWinners" ClientIDMode="Static" CssClass="form-control form--control style-two"></asp:TextBox>
+                                            </div>
+                                        </div>
+                                    </ContentTemplate>
+                                    <Triggers>
+                                        <asp:AsyncPostBackTrigger ControlID="BtnSave" />
+                                    </Triggers>
+                                </asp:UpdatePanel>
+                            </div>
+                            <div class="modal-footer modal--footer">
+                                <asp:Button runat="server" ID="BtnSave" CssClass="btn btn--warning btn--md" Text="Save" OnClick="BtnSave_Click"/>
+                                <button type="button" class="btn btn--danger btn--md" data-bs-dismiss="modal">Chiudi</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </form>
         </div>
     </section>
@@ -198,9 +353,76 @@
 <asp:Content ID="Content3" ContentPlaceHolderID="FooterPlaceHolder" runat="server">
     <script src="Scripts/JS/jquery.dataTables.js"></script>
     <script src="Scripts/JS/datatables.js"></script>
+    <script src="Scripts/bootstrap.bundle.min.js"></script>
+    <script src="Scripts/JS/jquery.datetimepicker.full.min.js"></script>
     <script src="Scripts/jquery-3.4.1.sec.js"></script>
     <script src="Scripts/jquery.signalR-2.4.3.js"></script>
     <script src="signalr/hubs"></script>
+    <script>
+        Sys.WebForms.PageRequestManager.getInstance().add_pageLoaded(pageLoadedHandler);
+
+        function pageLoadedHandler(sender, args) {
+            // This function will be called after each UpdatePanel postback
+            var updatedPanels = args.get_panelsUpdated();
+
+            for (var i = 0; i < updatedPanels.length; i++) {
+                var updatePanelID = updatedPanels[i].id;
+
+                if (updatePanelID === "UpdatePanel3") {
+                    SelectSetting();
+                }
+            }
+        };
+
+        SelectSetting();
+        function SelectSetting() {
+
+            $.datetimepicker.setLocale('it');
+
+            $("#TxtStartDate").datetimepicker({
+                format: "d/m/Y H.i",
+            });
+
+            $("#TxtEndDate").datetimepicker({
+                format: "d/m/Y H.i",
+            });
+
+            $("#ImageFile1").change(function () {
+                readURL(this, '#GameImage1', "#HfGameImage1");
+            });
+
+            $("#ImageFile2").change(function () {
+                readURL(this, '#GameImage2', "#HfGameImage2");
+            });
+
+            $("#GameImage1").click(function () {
+                $("#ImageFile1").click();
+            });
+
+            $("#GameImage2").click(function () {
+                $("#ImageFile2").click();
+            });
+        };
+
+        function readURL(input, target, source) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $(target).attr('src', e.target.result);
+                    var base64string = e.target.result;
+                    $(source).val(base64string);
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        };
+
+        $("#liEdit").click(function () {
+            $("#gameDetailModal").modal('show');
+            $(".modal-title").text("AGGIORNA TORNEO");
+        });
+    </script>
     <script>
         $(function () {
             // Ticket Table
@@ -266,10 +488,10 @@
                         "title": "Fase",
                         "width": "5%",
                         "render": function (data, type, row, meta) {
-                            if (row.TicketResults.length == 0) return "PLAYING";
-                            else if (row.TicketResults[row.TicketResults.length - 1].RoundResult == null) return "P";
-                            else if (gameStatus == "6") return "V";
-                            else return "PLAYING";
+                            if (row.TicketResults.length == 0) return "<p class='text-warning'>PLAYING</p>";
+                            else if (row.TicketResults[row.TicketResults.length - 1].RoundResult == null) return "<p class='text-danger'>P</p>";
+                            else if (gameStatus == "6") return "<p class='text-success'>V</p>";
+                            else return "<p class='text-warning'>PLAYING</p>";
                         }
                     });
 

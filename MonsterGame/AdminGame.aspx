@@ -185,6 +185,12 @@
         .select2-search__field {
             color: white;
         }
+        .hidden-input {
+            position: absolute;
+            width: 0px;
+            height: 0px;
+            overflow: hidden;
+        }
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder" runat="server">
@@ -205,6 +211,8 @@
         <div class="container">
             <form runat="server" id="form1" autocomplete="off">
                 <asp:HiddenField ID="HfGameID" runat="server" ClientIDMode="Static" />
+                <asp:HiddenField ID="HfGameImage1" runat="server" ClientIDMode="Static" />
+                <asp:HiddenField ID="HfGameImage2" runat="server" ClientIDMode="Static" />
                 <div class="row justify-content-center mb-5">
                     <div class="col-lg-4 col-xl-4 pt-1">
                         <asp:DropDownList runat="server" ID="ComboStatus" CssClass="form-select form--control" ClientIDMode="Static"></asp:DropDownList>
@@ -305,10 +313,24 @@
                                                 <asp:TextBox runat="server" ID="TxtTax" ClientIDMode="Static" CssClass="form-control form--control style-two"></asp:TextBox>
                                             </div>
                                         </div>
-                                        <div class="col-md-12">
+                                        <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="TxtNote" class="form-label">Note</label>
                                                 <asp:TextBox runat="server" ID="TxtNote" ClientIDMode="Static" CssClass="form-control form--control style-two" TextMode="MultiLine" Rows="2"></asp:TextBox>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 col-md-4">
+                                            <div class="form-group">
+                                                <label for="TxtNote" class="form-label">Photo 1</label>
+                                                <img src="Content/Images/gamemark3.jpg" id="GameImage1" runat="server" clientidmode="Static" alt="service-image" class="img-thumbnail" style="height: 150px; width: 100%;" />
+                                                <asp:FileUpload runat="server" ID="ImageFile1" ClientIDMode="Static" CssClass="hidden-input" />
+                                            </div> 
+                                        </div>
+                                        <div class="col-lg-4 col-md-4">
+                                            <div class="form-group">
+                                                <label for="TxtNote" class="form-label">Photo 2</label>
+                                                <img src="Content/Images/gamemark3.jpg" id="GameImage2" runat="server" clientidmode="Static" alt="service-image" class="img-thumbnail" style="height: 150px; width: 100%;" />
+                                                <asp:FileUpload runat="server" ID="ImageFile2" ClientIDMode="Static" CssClass="hidden-input" />
                                             </div>
                                         </div>
                                         <div class="col-md-2">
@@ -373,7 +395,10 @@
                                 <h4 class="modal-title text-dark">TEAMS</h4>
                             </div>
                             <div class="modal-body modal--body">
-                                <h5 class="p-5 teamNames"><br /></h5>
+                                <div class="d-flex">
+                                    <h5 class="p-5 teamNames" style="white-space:nowrap;"><br /></h5>
+                                    <img src="Upload/Game/default.jpg" id="TeamImage" runat="server" clientidmode="Static" alt="service-image" class="m-3 mt-auto mb-auto img-thumbnail" style="height: 100%; width: 100%;" />
+                                </div>
                             </div>
                             <div class="modal-footer modal--footer">
                                 <button type="button" class="btn btn--danger btn--md" data-bs-dismiss="modal">Chiudi</button>
@@ -438,6 +463,22 @@
             $("#TxtEndDate").datetimepicker({
                 format: "d/m/Y H.i",
             });
+
+            $("#ImageFile1").change(function () {
+                readURL(this, '#GameImage1', "#HfGameImage1");
+            });
+
+            $("#ImageFile2").change(function () {
+                readURL(this, '#GameImage2', "#HfGameImage2");
+            });
+
+            $("#GameImage1").click(function () {
+                $("#ImageFile1").click();
+            });
+
+            $("#GameImage2").click(function () {
+                $("#ImageFile2").click();
+            });
         }
 
         $(".btn-add").click(function () {
@@ -461,6 +502,8 @@
             $("#TxtPercent4").val("");
             $("#TxtPercent5").val("");
             $("#TxtWinners").val("");
+            $("#GameImage1").attr('src', "Upload/Game/default.jpg");
+            $("#GameImage2").attr('src', "Upload/Game/default.jpg");
 
             return false;
         });
@@ -556,6 +599,7 @@
             });
 
             datatable.on('click', '.TeamShow', function (e) {
+                var row = datatable.fnGetData($(this).closest('tr'));
                 var id = $(this)[0].dataset.id;
                 $.ajax({
                     type: "GET",
@@ -566,7 +610,8 @@
                     success: function (res) {
                         var dataArrayForTeams = res.data;
                         $("#gameTeamsModal").modal('show');
-                        $(".teamNames").html(dataArrayForTeams.join('<br/>')); 
+                        $(".teamNames").html(dataArrayForTeams.join('<br/>'));
+                        $("#TeamImage").attr('src', "Upload/Game/" + (row.Image2 ? row.Image2 : "default.jpg"));
                     },
                     error: function (jqXHR, textStatus, errorThrown) {
                         // Handle the error response
@@ -601,6 +646,8 @@
                 $("#TxtPercent4").val(row.Percent4);
                 $("#TxtPercent5").val(row.Percent5);
                 $("#TxtWinners").val(row.Winners);
+                $("#GameImage1").attr('src', "Upload/Game/" + (row.Image1 ? row.Image1 : "default.jpg"));
+                $("#GameImage2").attr('src', "Upload/Game/" + (row.Image2 ? row.Image2 : "default.jpg"));
             });
 
             datatable.on('click', '.btn-delete', function (e) {
@@ -635,5 +682,20 @@
                 }
             };
         })
+    </script>
+    <script>
+        function readURL(input, target, source) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $(target).attr('src', e.target.result);
+                    var base64string = e.target.result;
+                    $(source).val(base64string);
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        };
     </script>
 </asp:Content>

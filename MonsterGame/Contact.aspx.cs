@@ -40,6 +40,8 @@ namespace MonsterGame
             smtp.EnableSsl = true;
 
             smtp.Send(Msg);
+
+            ServerValidator.IsValid = false;
         }
     }
 }

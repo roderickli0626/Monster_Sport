@@ -69,6 +69,7 @@
                                 <asp:RequiredFieldValidator ID="ReqValPhone" runat="server" ErrorMessage="Inserire un indirizzo Phone." CssClass="text-bg-danger" ControlToValidate="TxtPhone" Display="None"></asp:RequiredFieldValidator>
                                 <asp:RequiredFieldValidator ID="ReqValEmail" runat="server" ErrorMessage="Inserire un indirizzo Email." CssClass="text-bg-danger" ControlToValidate="TxtEmail" Display="None"></asp:RequiredFieldValidator>
                                 <asp:RequiredFieldValidator ID="ReqValMessage" runat="server" ErrorMessage="Scrivere il Messaggio." CssClass="text-black" ControlToValidate="TxtMessage" Display="None"></asp:RequiredFieldValidator>
+                                <asp:CustomValidator ID="ServerValidator" runat="server" ErrorMessage="Messaggio inviato con successo." Display="None"></asp:CustomValidator>
                             </div>
                         </form>
                     </div>

@@ -30,7 +30,7 @@ namespace MonsterGame.Controller
         public SearchResult Search(int start, int length, string searchVal, int status)
         {
             SearchResult result = new SearchResult();
-            IEnumerable<Game> gameList = gameDao.FindAll().OrderByDescending(g => g.StartDate);
+            IEnumerable<Game> gameList = gameDao.FindAll().OrderByDescending(g => g.RealPlayers).ThenBy(g => g.Id);
             if (status != 0) gameList = gameList.Where(x => x.Status == status).ToList();
             if (!string.IsNullOrEmpty(searchVal)) gameList = gameList.Where(x => x.Title.ToLower().Contains(searchVal.ToLower())).ToList();
 
@@ -205,7 +205,7 @@ namespace MonsterGame.Controller
 
         public bool SaveGame(int? gameID, string title, DateTime? sdate, DateTime? edate, double fee, double tax, 
             int status, int minPlayers, int teamNum, string note, double percent1, double percent2, double percent3, 
-            double percent4, double percent5, int numOfWinners, List<int> teamList)
+            double percent4, double percent5, int numOfWinners, List<int> teamList, string image1, string image2)
         {
             Game game = gameDao.FindByID(gameID ?? 0);
             if (game == null)
@@ -227,6 +227,8 @@ namespace MonsterGame.Controller
                 game.PercentForForth = percent4;
                 game.PercentForFifth = percent5;
                 game.NumOfWinners = numOfWinners;
+                game.Image1 = image1;
+                game.Image2 = image2;
 
                 int savedGameID =  gameDao.Insert(game);
                 foreach (int teamID in teamList)
@@ -259,10 +261,12 @@ namespace MonsterGame.Controller
                 game.PercentForForth = percent4;
                 game.PercentForFifth = percent5;
                 game.NumOfWinners = numOfWinners;
+                if (!string.IsNullOrEmpty(image1)) game.Image1 = image1;
+                if (!string.IsNullOrEmpty(image2)) game.Image2 = image2;
 
                 List<int> existedTeamList = teamForGameDao.FindByGame(game.Id).Select(t => t.TeamID ?? 0).ToList();
                 bool areEqual = existedTeamList.OrderBy(x => x).SequenceEqual(teamList.OrderBy(x => x));
-                if (!areEqual)
+                if (teamList.Count != 0 && !areEqual)
                 {
                     teamForGameDao.DeleteByGame(game.Id);
                     foreach (int teamID in teamList)

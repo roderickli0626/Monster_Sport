@@ -31,6 +31,8 @@ namespace MonsterGame.Model
             Percent5 = game.PercentForFifth ?? 0;
             Winners = game.NumOfWinners ?? 0;
             Prize = Math.Round(game.Prize ?? 0, 2);
+            Image1 = game.Image1;
+            Image2 = game.Image2;
         }
         public int Id
         {
@@ -109,6 +111,14 @@ namespace MonsterGame.Model
             get; set;
         }
         public string Image
+        {
+            get; set;
+        }
+        public string Image1
+        {
+            get; set;
+        }
+        public string Image2
         {
             get; set;
         }

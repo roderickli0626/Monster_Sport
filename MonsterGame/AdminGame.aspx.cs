@@ -11,6 +11,7 @@ using MonsterGame.Common;
 using MonsterGame.Util;
 using MonsterGame.DAO;
 using PayPal.Api;
+using System.IO;
 
 namespace MonsterGame
 {
@@ -114,9 +115,13 @@ namespace MonsterGame
                     teamList.Add(selectedValue);
                 }
             }
-
+            
             int? gameID = ParseUtil.TryParseInt(HfGameID.Value);
-            bool success = gameController.SaveGame(gameID, title, sdate, edate, fee, tax, status, minPlayers, teamNum, note, percent1, percent2, percent3, percent4, percent5, NumOfWinners, teamList);
+            //Image Save
+            string imageTitle1 = UploadImage(HfGameImage1);
+            string imageTitle2 = UploadImage(HfGameImage2);
+
+            bool success = gameController.SaveGame(gameID, title, sdate, edate, fee, tax, status, minPlayers, teamNum, note, percent1, percent2, percent3, percent4, percent5, NumOfWinners, teamList, imageTitle1, imageTitle2);
             if (!success)
             {
                 ServerValidator.IsValid = false;
@@ -124,6 +129,26 @@ namespace MonsterGame
             }
 
             Page.Response.Redirect(Page.Request.Url.ToString(), true);
+        }
+
+        private string UploadImage(HiddenField hiddenField)
+        {
+            string base64String = hiddenField.Value;
+            if (string.IsNullOrEmpty(base64String)) return "";
+            // Extract the file extension from the Base64 string
+            // Extract image format and data from the Base64 string
+            string[] base64Data = base64String.Split(',');
+            string imageFormat = base64Data[0].Split('/')[1].Split(';')[0];
+            byte[] imageData = Convert.FromBase64String(base64Data[1]);
+
+            // Generate a unique filename
+            string filename = Guid.NewGuid().ToString() + "." + imageFormat;
+
+            // Save the byte array as an image to a specific folder
+            string path = Server.MapPath("~/Upload/Game/" + filename);
+            File.WriteAllBytes(path, imageData);
+
+            return filename;
         }
     }
 }

@@ -366,10 +366,10 @@
                         "title": "Stato",
                         "width": "5%",
                         "render": function (data, type, row, meta) {
-                            if (row.TicketResults.length == 0) return "IN GIOCO";
-                            else if (row.TicketResults[row.TicketResults.length - 1].RoundResult == null) return "PERSO";
-                            else if (gameStatus == "6") return "VINTO";
-                            else return "IN GIOCO";
+                            if (row.TicketResults.length == 0) return "<p class='text-warning'>IN GIOCO</p>";
+                            else if (row.TicketResults[row.TicketResults.length - 1].RoundResult == null) return "<p class='text-danger'>PERSO</p>";
+                            else if (gameStatus == "6") return "<p class='text-success'>VINTO</p>";
+                            else return "<p class='text-warning'>IN GIOCO</p>";
                         }
                     });
 

@@ -240,14 +240,15 @@
                                     <div class="game-inner">
                                         <div class="game-item__thumb">
                                             <%# Eval("Mark") %>
-                                            <img src="Content/Images/<%# Eval("Image") %>" alt="game">
+                                            <%--<img src="Content/Images/<%# Eval("Image") %>" alt="game">--%>
+                                            <img src="Upload/Game/<%# (Eval("Image1") == "" || Eval("Image1") == null) ? "default.jpg" : Eval("Image1") %>" alt="game">
                                         </div>
                                         <div class="game-item__content">
                                             <h4 class="title"><%# Eval("Title") %></h4>
                                             <p class="invest-info">Quota ingresso: <span class="invest-amount">€ <%# Eval("Fee") %></span></p>
                                             <p class="invest-info" title="Player necessari all'inizio del Torneo">Player min.: <span class="invest-amount" title="Player necessari all'inizio del Torneo"><%# Eval("MinPlayers") %></span></p>
                                             <p class="invest-info" title="Player già registrati al Torneo">Player attuali: <span class="invest-amount"><%# Eval("RealPlayers") %></span></p>
-                                            <p class="invest-info">Numero di squadre: <span class="invest-amount TeamShow" style="cursor: pointer;" data-id="<%# Eval("Id") %>"><%# Eval("NumberOfTeams") %></span></p>
+                                            <p class="invest-info">Numero di squadre: <span class="invest-amount TeamShow" style="cursor: pointer;" data-id="<%# Eval("Id") %>" data-img="<%# Eval("Image2") %>"><%# Eval("NumberOfTeams") %></span></p>
                                             <p class="invest-info">Premio min.: <span class="invest-amount">€ <%# Eval("Prize") %></span></p>
                                             <p class="invest-info">Vincenti: <span class="invest-amount"><%# Eval("Winners") %></span></p>
                                             <button class="BtnDetails cmn--btn active btn--md radius-1" data-id="<%# Eval("Id") %>" 
@@ -296,7 +297,10 @@
                                 <h4 class="modal-title text-dark">TEAMS</h4>
                             </div>
                             <div class="modal-body modal--body">
-                                <h5 class="p-5 teamNames"></h5>
+                                <div class="d-flex">
+                                    <h5 class="p-5 teamNames" style="white-space:nowrap;"><br /></h5>
+                                    <img src="Upload/Game/default.jpg" id="TeamImage" runat="server" clientidmode="Static" alt="service-image" class="m-3 mt-auto mb-auto img-thumbnail" style="height: 100%; width: 100%;" />
+                                </div>
                             </div>
                             <div class="modal-footer modal--footer">
                                 <button type="button" class="btn btn--danger btn--md" data-bs-dismiss="modal">Chiudi</button>
@@ -529,6 +533,7 @@
         });
 
         datatable.on('click', '.TeamShow', function (e) {
+            var row = datatable.fnGetData($(this).closest('tr'));
             var id = $(this)[0].dataset.id;
             $.ajax({
                 type: "GET",
@@ -540,6 +545,7 @@
                     var dataArrayForTeams = res.data;
                     $("#gameTeamsModal").modal('show');
                     $(".teamNames").html(dataArrayForTeams.join('<br>'));
+                    $("#TeamImage").attr('src', "Upload/Game/" + (row.Image2 ? row.Image2 : "default.jpg"));
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
                     // Handle the error response
@@ -549,6 +555,7 @@
         });
 
         $(".TeamShow").click(function () {
+            var img = $(this)[0].dataset.img;
             var id = $(this)[0].dataset.id;
             $.ajax({
                 type: "GET",
@@ -560,6 +567,7 @@
                     var dataArrayForTeams = res.data;
                     $("#gameTeamsModal").modal('show');
                     $(".teamNames").html(dataArrayForTeams.join('<br/>'));
+                    $("#TeamImage").attr('src', "Upload/Game/" + (img ? img : "default.jpg"));
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
                     // Handle the error response
