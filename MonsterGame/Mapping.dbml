@@ -63,6 +63,8 @@
       <Association Name="User_Movement" Member="Movements" ThisKey="Id" OtherKey="UserID" Type="Movement" />
       <Association Name="User_Movement1" Member="Movements1" ThisKey="Id" OtherKey="SenderID" Type="Movement" />
       <Association Name="User_Winner" Member="Winners" ThisKey="Id" OtherKey="UserID" Type="Winner" />
+      <Association Name="User_Feedback" Member="Feedbacks" ThisKey="Id" OtherKey="Creater" Type="Feedback" />
+      <Association Name="User_GameBoard" Member="GameBoards" ThisKey="Id" OtherKey="Creater" Type="GameBoard" />
       <Association Name="User_User" Member="User1" ThisKey="ParentID" OtherKey="Id" Type="User" IsForeignKey="true" />
     </Type>
   </Table>
@@ -137,9 +139,41 @@
       <Column Name="NumOfWinners" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="Image1" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
       <Column Name="Image2" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="AllowedBoard" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
       <Association Name="Game_TeamsForGame" Member="TeamsForGames" ThisKey="Id" OtherKey="GameID" Type="TeamsForGame" />
       <Association Name="Game_Ticket" Member="Tickets" ThisKey="Id" OtherKey="GameID" Type="Ticket" />
       <Association Name="Game_Winner" Member="Winners" ThisKey="Id" OtherKey="GameID" Type="Winner" />
+      <Association Name="Game_GameBoard" Member="GameBoards" ThisKey="Id" OtherKey="GameID" Type="GameBoard" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Feedback" Member="Feedbacks">
+    <Type Name="Feedback">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Title" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="Description" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="Creater" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CreatedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="User_Feedback" Member="User" ThisKey="Creater" OtherKey="Id" Type="User" IsForeignKey="true" DeleteRule="CASCADE" />
+    </Type>
+  </Table>
+  <Table Name="dbo.GameBoard" Member="GameBoards">
+    <Type Name="GameBoard">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="GameID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Creater" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CreatedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Title" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="Description" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Association Name="Game_GameBoard" Member="Game" ThisKey="GameID" OtherKey="Id" Type="Game" IsForeignKey="true" DeleteRule="CASCADE" />
+      <Association Name="User_GameBoard" Member="User" ThisKey="Creater" OtherKey="Id" Type="User" IsForeignKey="true" DeleteRule="CASCADE" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Notifications" Member="Notifications">
+    <Type Name="Notification">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Title" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="Description" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="CreatedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
     </Type>
   </Table>
 </Database>

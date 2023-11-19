@@ -33,6 +33,7 @@ namespace MonsterGame.Model
             Prize = Math.Round(game.Prize ?? 0, 2);
             Image1 = game.Image1;
             Image2 = game.Image2;
+            AllowedBoard = game.AllowedBoard ?? false;
         }
         public int Id
         {
@@ -119,6 +120,10 @@ namespace MonsterGame.Model
             get; set;
         }
         public string Image2
+        {
+            get; set;
+        }
+        public bool AllowedBoard
         {
             get; set;
         }

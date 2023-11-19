@@ -61,7 +61,15 @@
                         <li runat="server" id="liAgency"><a href="Agency.aspx">Agenzia</a></li>
                         <li runat="server" id="liUser"><a href="Users.aspx">Player</a></li>
                         <li runat="server" id="liMovement"><a href="Movements.aspx">Movimenti</a></li>
-                        <li><a href="Contact.aspx">Contatti</a></li>
+                        <li runat="server" id="liExtra">
+                            <a href="#0">Extra</a>
+                            <ul class="sub-menu">
+                                <li runat="server" id="liNews"><a href="Notification.aspx">Notizie</a></li>
+                                <li runat="server" id="liBoards"><a href="MessageBoards.aspx">Bacheca Messaggi</a></li>
+                                <li runat="server" id="liFeedback"><a href="Feedback.aspx">Feedback</a></li>
+                            </ul>
+                        </li>
+                        <li runat="server" id="liContact"><a href="Contact.aspx">Contatti</a></li>
                         <li runat="server" id="liLogin"><a href="Login.aspx">Entra</a></li>
                         <li runat="server" id="liUserInfo">
                             <a href="#0">
@@ -75,6 +83,8 @@
                             <ul class="sub-menu">
                                 <li><a href="#" runat="server" id="liName">User Name</a></li>
                                 <li runat="server" id="liInfo"><a href="UserInfo.aspx">Scheda</a></li>
+                                <li runat="server" id="liBoard"><a href="MessageBoard.aspx">Bacheca Messaggi</a></li>
+                                <li runat="server" id="liSetting"><a href="SettingFeedback.aspx">Impostazione</a></li>
                                 <li><a href="Login.aspx">Esci</a></li>
                             </ul>
                         </li>

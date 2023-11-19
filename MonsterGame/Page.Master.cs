@@ -22,6 +22,9 @@ namespace MonsterGame
                 liUserGame.Visible = false;
                 liLogin.Visible = false;
                 liInfo.Visible = false;
+                liBoard.Visible = false;
+                liSetting.Visible = false;
+                liContact.Visible = false;
                 liName1.Visible = false;
                 liName2.Visible = false;
                 liEye.Visible = false;
@@ -35,6 +38,9 @@ namespace MonsterGame
                 liAdmin.Visible = false;
                 liMovement.Visible = false;
                 liLogin.Visible = false;
+                liBoard.Visible = false;
+                liBoards.Visible = false;
+                liFeedback.Visible = false;
             }
             else if (loginSystem.IsMasterLoggedIn())
             {
@@ -44,6 +50,9 @@ namespace MonsterGame
                 liMaster.Visible = false;
                 liMovement.Visible = false;
                 liLogin.Visible = false;
+                liBoard.Visible = false;
+                liBoards.Visible = false;
+                liFeedback.Visible = false;
             }
             else if (loginSystem.IsAgencyLoggedIn())
             {
@@ -54,6 +63,9 @@ namespace MonsterGame
                 liAgency.Visible = false;
                 liMovement.Visible = false;
                 liLogin.Visible = false;
+                liBoard.Visible = false;
+                liBoards.Visible = false;
+                liFeedback.Visible = false;
             }
             else if (loginSystem.IsUserLoggedIn())
             {
@@ -65,6 +77,8 @@ namespace MonsterGame
                 liUser.Visible = false;
                 liMovement.Visible = false;
                 liLogin.Visible = false;
+                liBoards.Visible = false;
+                liFeedback.Visible = false;
             }
             else
             {
@@ -76,6 +90,7 @@ namespace MonsterGame
                 liUser.Visible = false;
                 liMovement.Visible = false;
                 liUserInfo.Visible = false;
+                liExtra.Visible = false;
             }
 
             if (user != null)

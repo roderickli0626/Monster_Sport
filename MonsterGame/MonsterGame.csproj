@@ -367,6 +367,7 @@
       <DependentUpon>Contact.aspx</DependentUpon>
     </Compile>
     <Compile Include="Controller\CryptoController.cs" />
+    <Compile Include="Controller\ExtraController.cs" />
     <Compile Include="Controller\GameController.cs" />
     <Compile Include="Controller\LoginController.cs" />
     <Compile Include="Controller\MovementController.cs" />
@@ -376,8 +377,11 @@
     <Compile Include="Controller\UserController.cs" />
     <Compile Include="Controller\WinnerController.cs" />
     <Compile Include="DAO\BasicDAO.cs" />
+    <Compile Include="DAO\FeedbackDAO.cs" />
+    <Compile Include="DAO\GameBoardDAO.cs" />
     <Compile Include="DAO\GameDAO.cs" />
     <Compile Include="DAO\MovementDAO.cs" />
+    <Compile Include="DAO\NotificationDAO.cs" />
     <Compile Include="DAO\PaymentDAO.cs" />
     <Compile Include="DAO\ResultDAO.cs" />
     <Compile Include="DAO\TeamDAO.cs" />
@@ -433,9 +437,12 @@
     <Compile Include="Master.aspx.designer.cs">
       <DependentUpon>Master.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Model\FeedbackCheck.cs" />
+    <Compile Include="Model\GameBoardCheck.cs" />
     <Compile Include="Model\GameCheck.cs" />
     <Compile Include="Model\JSDataTable.cs" />
     <Compile Include="Model\MovementCheck.cs" />
+    <Compile Include="Model\NotificationCheck.cs" />
     <Compile Include="Model\PaymentCheck.cs" />
     <Compile Include="Model\ProcResult.cs" />
     <Compile Include="Model\ResultCheck.cs" />
