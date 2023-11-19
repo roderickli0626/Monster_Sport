@@ -453,6 +453,38 @@ namespace MonsterGame
                 Response.Write(serializer.Serialize(result));
             }
         }
+
+        [WebMethod(EnableSession = true)]
+        [ScriptMethod(UseHttpGet = true, ResponseFormat = ResponseFormat.Json)]
+        public void FindNews(int draw, int start, int length, string searchVal)
+        {
+            User admin = loginSystem.GetCurrentUserAccount();
+            if (!loginSystem.IsSuperAdminLoggedIn() && (admin == null)) return;
+
+            ExtraController extraController = new ExtraController();
+            SearchResult searchResult = extraController.SearchNews(start, length, searchVal);
+
+            JSDataTable result = new JSDataTable();
+            result.data = (IEnumerable<object>)searchResult.ResultList;
+            result.draw = draw;
+            result.recordsTotal = searchResult.TotalCount;
+            result.recordsFiltered = searchResult.TotalCount;
+
+            ResponseJson(result);
+        }
+
+        [WebMethod(EnableSession = true)]
+        [ScriptMethod(UseHttpGet = true, ResponseFormat = ResponseFormat.Json)]
+        public void DeleteNews(int id)
+        {
+            //Is Logged in?
+            if (!loginSystem.IsSuperAdminLoggedIn()) return;
+
+            ExtraController extraController = new ExtraController();
+            bool success = extraController.DeleteNews(id);
+
+            ResponseProc(success, "");
+        }
         protected void ResponseJson(Object result)
         {
             HttpResponse Response = Context.Response;

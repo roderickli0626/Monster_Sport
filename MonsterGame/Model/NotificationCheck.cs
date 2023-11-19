@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace MonsterSport.Model
+namespace MonsterGame.Model
 {
     public class NotificationCheck
     {
@@ -18,6 +18,7 @@ namespace MonsterSport.Model
             Title = notification.Title;
             Description = notification.Description;
             CreateDate = notification.CreatedDate?.ToString("dd/MM/yyyy HH.mm");
+            IsNew = notification.IsNew ?? false;
         }
         public int Id
         {
@@ -32,6 +33,10 @@ namespace MonsterSport.Model
             get; set;
         }
         public string CreateDate
+        {
+            get; set;
+        }
+        public bool IsNew
         {
             get; set;
         }

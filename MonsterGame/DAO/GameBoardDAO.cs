@@ -6,7 +6,7 @@ using System.Data.Linq;
 using System.Linq;
 using System.Web;
 
-namespace MonsterSport.DAO
+namespace MonsterGame.DAO
 {
     public class GameBoardDAO : BasicDAO
     {

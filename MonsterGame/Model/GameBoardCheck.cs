@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace MonsterSport.Model
+namespace MonsterGame.Model
 {
     public class GameBoardCheck
     {
@@ -22,6 +22,7 @@ namespace MonsterSport.Model
             CreaterId = gameboard.Creater ?? 0;
             GameTitle = gameboard.Game.Title;
             Creater = gameboard.User.Name;
+            IsNew = gameboard.IsNew ?? false;
         }
 
         public int Id
@@ -56,6 +57,9 @@ namespace MonsterSport.Model
         {
             get; set;
         }
-
+        public bool IsNew
+        {
+            get; set;
+        }
     }
 }

@@ -199,6 +199,7 @@
     <Content Include="Login.aspx" />
     <Content Include="Master.aspx" />
     <Content Include="Movements.aspx" />
+    <Content Include="Notifications.aspx" />
     <Content Include="PaymentCancel.aspx" />
     <Content Include="PaymentComplete.aspx" />
     <Content Include="Policy.aspx" />
@@ -461,6 +462,13 @@
       <DependentUpon>Movements.aspx</DependentUpon>
     </Compile>
     <Compile Include="NotificationHub.cs" />
+    <Compile Include="Notifications.aspx.cs">
+      <DependentUpon>Notifications.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Notifications.aspx.designer.cs">
+      <DependentUpon>Notifications.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Page.Master.cs">
       <DependentUpon>Page.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

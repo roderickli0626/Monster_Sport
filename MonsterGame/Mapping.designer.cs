@@ -60,15 +60,15 @@ namespace MonsterGame
     partial void InsertGame(Game instance);
     partial void UpdateGame(Game instance);
     partial void DeleteGame(Game instance);
-    partial void InsertFeedback(Feedback instance);
-    partial void UpdateFeedback(Feedback instance);
-    partial void DeleteFeedback(Feedback instance);
-    partial void InsertGameBoard(GameBoard instance);
-    partial void UpdateGameBoard(GameBoard instance);
-    partial void DeleteGameBoard(GameBoard instance);
     partial void InsertNotification(Notification instance);
     partial void UpdateNotification(Notification instance);
     partial void DeleteNotification(Notification instance);
+    partial void InsertGameBoard(GameBoard instance);
+    partial void UpdateGameBoard(GameBoard instance);
+    partial void DeleteGameBoard(GameBoard instance);
+    partial void InsertFeedback(Feedback instance);
+    partial void UpdateFeedback(Feedback instance);
+    partial void DeleteFeedback(Feedback instance);
     #endregion
 		
 		public MappingDataContext(string connection) : 
@@ -175,11 +175,11 @@ namespace MonsterGame
 			}
 		}
 		
-		public System.Data.Linq.Table<Feedback> Feedbacks
+		public System.Data.Linq.Table<Notification> Notifications
 		{
 			get
 			{
-				return this.GetTable<Feedback>();
+				return this.GetTable<Notification>();
 			}
 		}
 		
@@ -191,11 +191,11 @@ namespace MonsterGame
 			}
 		}
 		
-		public System.Data.Linq.Table<Notification> Notifications
+		public System.Data.Linq.Table<Feedback> Feedbacks
 		{
 			get
 			{
-				return this.GetTable<Notification>();
+				return this.GetTable<Feedback>();
 			}
 		}
 	}
@@ -1145,9 +1145,9 @@ namespace MonsterGame
 		
 		private EntitySet<Winner> _Winners;
 		
-		private EntitySet<Feedback> _Feedbacks;
-		
 		private EntitySet<GameBoard> _GameBoards;
+		
+		private EntitySet<Feedback> _Feedbacks;
 		
 		private EntityRef<User> _User1;
 		
@@ -1191,8 +1191,8 @@ namespace MonsterGame
 			this._Movements = new EntitySet<Movement>(new Action<Movement>(this.attach_Movements), new Action<Movement>(this.detach_Movements));
 			this._Movements1 = new EntitySet<Movement>(new Action<Movement>(this.attach_Movements1), new Action<Movement>(this.detach_Movements1));
 			this._Winners = new EntitySet<Winner>(new Action<Winner>(this.attach_Winners), new Action<Winner>(this.detach_Winners));
-			this._Feedbacks = new EntitySet<Feedback>(new Action<Feedback>(this.attach_Feedbacks), new Action<Feedback>(this.detach_Feedbacks));
 			this._GameBoards = new EntitySet<GameBoard>(new Action<GameBoard>(this.attach_GameBoards), new Action<GameBoard>(this.detach_GameBoards));
+			this._Feedbacks = new EntitySet<Feedback>(new Action<Feedback>(this.attach_Feedbacks), new Action<Feedback>(this.detach_Feedbacks));
 			this._User1 = default(EntityRef<User>);
 			OnCreated();
 		}
@@ -1539,19 +1539,6 @@ namespace MonsterGame
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Feedback", Storage="_Feedbacks", ThisKey="Id", OtherKey="Creater")]
-		public EntitySet<Feedback> Feedbacks
-		{
-			get
-			{
-				return this._Feedbacks;
-			}
-			set
-			{
-				this._Feedbacks.Assign(value);
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_GameBoard", Storage="_GameBoards", ThisKey="Id", OtherKey="Creater")]
 		public EntitySet<GameBoard> GameBoards
 		{
@@ -1562,6 +1549,19 @@ namespace MonsterGame
 			set
 			{
 				this._GameBoards.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Feedback", Storage="_Feedbacks", ThisKey="Id", OtherKey="Creater")]
+		public EntitySet<Feedback> Feedbacks
+		{
+			get
+			{
+				return this._Feedbacks;
+			}
+			set
+			{
+				this._Feedbacks.Assign(value);
 			}
 		}
 		
@@ -1691,18 +1691,6 @@ namespace MonsterGame
 			entity.User = null;
 		}
 		
-		private void attach_Feedbacks(Feedback entity)
-		{
-			this.SendPropertyChanging();
-			entity.User = this;
-		}
-		
-		private void detach_Feedbacks(Feedback entity)
-		{
-			this.SendPropertyChanging();
-			entity.User = null;
-		}
-		
 		private void attach_GameBoards(GameBoard entity)
 		{
 			this.SendPropertyChanging();
@@ -1710,6 +1698,18 @@ namespace MonsterGame
 		}
 		
 		private void detach_GameBoards(GameBoard entity)
+		{
+			this.SendPropertyChanging();
+			entity.User = null;
+		}
+		
+		private void attach_Feedbacks(Feedback entity)
+		{
+			this.SendPropertyChanging();
+			entity.User = this;
+		}
+		
+		private void detach_Feedbacks(Feedback entity)
 		{
 			this.SendPropertyChanging();
 			entity.User = null;
@@ -3433,8 +3433,8 @@ namespace MonsterGame
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Feedback")]
-	public partial class Feedback : INotifyPropertyChanging, INotifyPropertyChanged
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Notifications")]
+	public partial class Notification : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
@@ -3445,11 +3445,9 @@ namespace MonsterGame
 		
 		private string _Description;
 		
-		private System.Nullable<int> _Creater;
-		
 		private System.Nullable<System.DateTime> _CreatedDate;
 		
-		private EntityRef<User> _User;
+		private System.Nullable<bool> _IsNew;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -3461,15 +3459,14 @@ namespace MonsterGame
     partial void OnTitleChanged();
     partial void OnDescriptionChanging(string value);
     partial void OnDescriptionChanged();
-    partial void OnCreaterChanging(System.Nullable<int> value);
-    partial void OnCreaterChanged();
     partial void OnCreatedDateChanging(System.Nullable<System.DateTime> value);
     partial void OnCreatedDateChanged();
+    partial void OnIsNewChanging(System.Nullable<bool> value);
+    partial void OnIsNewChanged();
     #endregion
 		
-		public Feedback()
+		public Notification()
 		{
-			this._User = default(EntityRef<User>);
 			OnCreated();
 		}
 		
@@ -3533,30 +3530,6 @@ namespace MonsterGame
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Creater", DbType="Int")]
-		public System.Nullable<int> Creater
-		{
-			get
-			{
-				return this._Creater;
-			}
-			set
-			{
-				if ((this._Creater != value))
-				{
-					if (this._User.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnCreaterChanging(value);
-					this.SendPropertyChanging();
-					this._Creater = value;
-					this.SendPropertyChanged("Creater");
-					this.OnCreaterChanged();
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreatedDate", DbType="DateTime")]
 		public System.Nullable<System.DateTime> CreatedDate
 		{
@@ -3577,36 +3550,22 @@ namespace MonsterGame
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Feedback", Storage="_User", ThisKey="Creater", OtherKey="Id", IsForeignKey=true, DeleteRule="CASCADE")]
-		public User User
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsNew", DbType="Bit")]
+		public System.Nullable<bool> IsNew
 		{
 			get
 			{
-				return this._User.Entity;
+				return this._IsNew;
 			}
 			set
 			{
-				User previousValue = this._User.Entity;
-				if (((previousValue != value) 
-							|| (this._User.HasLoadedOrAssignedValue == false)))
+				if ((this._IsNew != value))
 				{
+					this.OnIsNewChanging(value);
 					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._User.Entity = null;
-						previousValue.Feedbacks.Remove(this);
-					}
-					this._User.Entity = value;
-					if ((value != null))
-					{
-						value.Feedbacks.Add(this);
-						this._Creater = value.Id;
-					}
-					else
-					{
-						this._Creater = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("User");
+					this._IsNew = value;
+					this.SendPropertyChanged("IsNew");
+					this.OnIsNewChanged();
 				}
 			}
 		}
@@ -3650,6 +3609,8 @@ namespace MonsterGame
 		
 		private string _Description;
 		
+		private System.Nullable<bool> _IsNew;
+		
 		private EntityRef<Game> _Game;
 		
 		private EntityRef<User> _User;
@@ -3670,6 +3631,8 @@ namespace MonsterGame
     partial void OnTitleChanged();
     partial void OnDescriptionChanging(string value);
     partial void OnDescriptionChanged();
+    partial void OnIsNewChanging(System.Nullable<bool> value);
+    partial void OnIsNewChanged();
     #endregion
 		
 		public GameBoard()
@@ -3807,6 +3770,26 @@ namespace MonsterGame
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsNew", DbType="Bit")]
+		public System.Nullable<bool> IsNew
+		{
+			get
+			{
+				return this._IsNew;
+			}
+			set
+			{
+				if ((this._IsNew != value))
+				{
+					this.OnIsNewChanging(value);
+					this.SendPropertyChanging();
+					this._IsNew = value;
+					this.SendPropertyChanged("IsNew");
+					this.OnIsNewChanged();
+				}
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Game_GameBoard", Storage="_Game", ThisKey="GameID", OtherKey="Id", IsForeignKey=true, DeleteRule="CASCADE")]
 		public Game Game
 		{
@@ -3896,8 +3879,8 @@ namespace MonsterGame
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Notifications")]
-	public partial class Notification : INotifyPropertyChanging, INotifyPropertyChanged
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Feedback")]
+	public partial class Feedback : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
@@ -3908,7 +3891,13 @@ namespace MonsterGame
 		
 		private string _Description;
 		
+		private System.Nullable<int> _Creater;
+		
 		private System.Nullable<System.DateTime> _CreatedDate;
+		
+		private System.Nullable<bool> _IsNew;
+		
+		private EntityRef<User> _User;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -3920,12 +3909,17 @@ namespace MonsterGame
     partial void OnTitleChanged();
     partial void OnDescriptionChanging(string value);
     partial void OnDescriptionChanged();
+    partial void OnCreaterChanging(System.Nullable<int> value);
+    partial void OnCreaterChanged();
     partial void OnCreatedDateChanging(System.Nullable<System.DateTime> value);
     partial void OnCreatedDateChanged();
+    partial void OnIsNewChanging(System.Nullable<bool> value);
+    partial void OnIsNewChanged();
     #endregion
 		
-		public Notification()
+		public Feedback()
 		{
+			this._User = default(EntityRef<User>);
 			OnCreated();
 		}
 		
@@ -3989,6 +3983,30 @@ namespace MonsterGame
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Creater", DbType="Int")]
+		public System.Nullable<int> Creater
+		{
+			get
+			{
+				return this._Creater;
+			}
+			set
+			{
+				if ((this._Creater != value))
+				{
+					if (this._User.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnCreaterChanging(value);
+					this.SendPropertyChanging();
+					this._Creater = value;
+					this.SendPropertyChanged("Creater");
+					this.OnCreaterChanged();
+				}
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreatedDate", DbType="DateTime")]
 		public System.Nullable<System.DateTime> CreatedDate
 		{
@@ -4005,6 +4023,60 @@ namespace MonsterGame
 					this._CreatedDate = value;
 					this.SendPropertyChanged("CreatedDate");
 					this.OnCreatedDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsNew", DbType="Bit")]
+		public System.Nullable<bool> IsNew
+		{
+			get
+			{
+				return this._IsNew;
+			}
+			set
+			{
+				if ((this._IsNew != value))
+				{
+					this.OnIsNewChanging(value);
+					this.SendPropertyChanging();
+					this._IsNew = value;
+					this.SendPropertyChanged("IsNew");
+					this.OnIsNewChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Feedback", Storage="_User", ThisKey="Creater", OtherKey="Id", IsForeignKey=true, DeleteRule="CASCADE")]
+		public User User
+		{
+			get
+			{
+				return this._User.Entity;
+			}
+			set
+			{
+				User previousValue = this._User.Entity;
+				if (((previousValue != value) 
+							|| (this._User.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._User.Entity = null;
+						previousValue.Feedbacks.Remove(this);
+					}
+					this._User.Entity = value;
+					if ((value != null))
+					{
+						value.Feedbacks.Add(this);
+						this._Creater = value.Id;
+					}
+					else
+					{
+						this._Creater = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("User");
 				}
 			}
 		}

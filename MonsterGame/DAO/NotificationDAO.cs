@@ -20,11 +20,11 @@ namespace MonsterGame.DAO
         {
             return GetContext().Notifications.Where(g => g.Id == id).FirstOrDefault();
         }
-        public int Insert(Notification notification)
+        public bool Insert(Notification notification)
         {
             GetContext().Notifications.InsertOnSubmit(notification);
             GetContext().SubmitChanges();
-            return notification.Id;
+            return true;
         }
 
         public bool Update(Notification notification)

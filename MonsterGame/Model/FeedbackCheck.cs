@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace MonsterSport.Model
+namespace MonsterGame.Model
 {
     public class FeedbackCheck
     {
@@ -20,6 +20,7 @@ namespace MonsterSport.Model
             Title = feedback.Title;
             Description = feedback.Description;
             CreateDate = feedback.CreatedDate?.ToString("dd/MM/yyyy HH.mm");
+            IsNew = feedback.IsNew ?? false;
         }
 
         public int Id
@@ -46,6 +47,9 @@ namespace MonsterSport.Model
         {
             get; set;
         }
-
+        public bool IsNew
+        {
+            get; set;
+        }
     }
 }
