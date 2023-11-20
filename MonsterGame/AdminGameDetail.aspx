@@ -428,8 +428,12 @@
             // Ticket Table
             var gameStatus = $("#HfGameStatus").val();
             var modifyTeam = "d-none";
+            var inputResult = "d-none";
             if (gameStatus == "1" || gameStatus == "3") {
                 modifyTeam = "";
+            }
+            if (gameStatus == "2") {
+                inputResult = "";
             }
             var dataArray = [];
             var dataArrayForResult = [];
@@ -621,6 +625,7 @@
                     }
                     columnsForResult.push({
                         "title": "Azione",
+                        "class": inputResult,
                         "width": "5%",
                         "render": function (data, type, row, meta) {
                             if (row.Results.length > 0) return '<a href="#" class="btn-edit mr-4"><i class="fa fa-edit" style="font-size:25px"></i></a>';
