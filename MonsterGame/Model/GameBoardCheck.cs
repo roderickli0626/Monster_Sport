@@ -21,7 +21,7 @@ namespace MonsterGame.Model
             GameId = gameboard.GameID ?? 0;
             CreaterId = gameboard.Creater ?? 0;
             GameTitle = gameboard.Game.Title;
-            Creater = gameboard.User.Name;
+            Creater = gameboard.User?.Name ?? "Super Admin";
             IsNew = gameboard.IsNew ?? false;
         }
 

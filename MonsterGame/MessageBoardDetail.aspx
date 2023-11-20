@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Page.Master" AutoEventWireup="true" CodeBehind="Notifications.aspx.cs" Inherits="MonsterGame.Notifications" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Page.Master" AutoEventWireup="true" CodeBehind="MessageBoardDetail.aspx.cs" Inherits="MonsterSport.MessageBoardDetail" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link rel="stylesheet" href="Content/CSS/datatables.css" />
     <style>
@@ -74,10 +74,11 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-7 col-xl-6 text-center">
-                    <h2 class="title text-white">News</h2>
+                    <h2 class="title text-white">MessageBoard Detail</h2>
                     <ul class="breadcrumbs d-flex flex-wrap align-items-center justify-content-center">
-                        <li><a href="Dashboard.aspx">Dashboard</a></li>
-                        <li>News</li>
+                        <li runat="server" id="liUserBoard"><a href="MessageBoard.aspx">MessageBoard</a></li>
+                        <li runat="server" id="liAdminBoard"><a href="MessageBoards.aspx">MessageBoard</a></li>
+                        <li>MessageBoard Detail</li>
                     </ul>
                 </div>
             </div>
@@ -86,18 +87,19 @@
     <section class="game-section padding-top padding-bottom bg_img" style="background: url(Content/Images/gamebg.jpeg); background-attachment: fixed;">
         <div class="container">
             <form runat="server" id="form1" autocomplete="off">
-                <asp:HiddenField ID="HfNotificationID" runat="server" ClientIDMode="Static" />
+                <asp:HiddenField ID="HfMessageBoardID" runat="server" ClientIDMode="Static" />
                 <asp:HiddenField ID="HfManage" runat="server" ClientIDMode="Static" />
+                <asp:HiddenField ID="HfGameID" runat="server" ClientIDMode="Static" />
                 <div class="row justify-content-center mb-5">
                     <div class="col-lg-4 col-xl-4 me-auto">
-                        <button class="cmn--btn active radius-1 w-100 btn-add" runat="server" id="BtnAddNews">Aggiungi</button>
+                        <button class="cmn--btn active radius-1 w-100 btn-add">Aggiungi</button>
                     </div>
                     <div class="col-lg-4 col-xl-4 pt-1 ms-auto">
                         <asp:TextBox runat="server" ID="TxtSearch" CssClass="form--control form-control" ClientIDMode="Static" placeholder="CERCA.."></asp:TextBox>
                     </div>
                 </div>
                 <div class="row gy-4 justify-content-center">
-                    <table class="table text-center" id="news-table">
+                    <table class="table text-center" id="board-table">
                         <thead>
                             <tr>
                                 <th>Nr.</th>
@@ -109,11 +111,11 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="modal custom--modal fade show" id="NewsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" data-bs-backdrop="static" aria-modal="true">
+                <div class="modal custom--modal fade show" id="BoardModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" data-bs-backdrop="static" aria-modal="true">
                     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                         <div class="modal-content section-bg border-0">
                             <div class="modal-header modal--header bg--base">
-                                <h4 class="modal-title text-dark" id="modalTitle">News</h4>
+                                <h4 class="modal-title text-dark" id="modalTitle"></h4>
                             </div>
                             <div class="modal-body modal--body">
                                 <asp:ScriptManager ID="ScriptManager" runat="server"></asp:ScriptManager>
@@ -141,7 +143,7 @@
                                 </asp:UpdatePanel>
                             </div>
                             <div class="modal-footer modal--footer">
-                                <asp:Button runat="server" ID="BtnSave" CssClass="btn btn--warning btn--md" Text="Conferma" OnClick="BtnSave_Click"/>
+                                <asp:Button runat="server" ID="BtnSave" ClientIDMode="Static" CssClass="btn btn--warning btn--md" Text="Conferma" OnClick="BtnSave_Click"/>
                                 <button type="button" class="btn btn--danger btn--md" data-bs-dismiss="modal">Chiudi</button>
                             </div>
                         </div>
@@ -156,10 +158,11 @@
     <script src="Scripts/JS/datatables.js"></script>
     <script>
         $(".btn-add").click(function () {
-            $("#NewsModal").modal('show');
-            $(".modal-title").text("AGG. NEWS");
-            $("#HfNotificationID").val("");
+            $("#BoardModal").modal('show');
+            $(".modal-title").text("AGG. MESSAGE");
+            $("#HfMessageBoardID").val("");
             $("#ValSummary").addClass("d-none");
+            $("#BtnSave").removeClass("d-none");
             $("#TxtTitle").val("");
             $("#TxtDescription").val("");
             return false;
@@ -167,9 +170,9 @@
     </script>
     <script>
         $(function () {
-            var datatable = $('#news-table').dataTable({
+            var datatable = $('#board-table').dataTable({
                 "serverSide": true,
-                "ajax": 'DataService.asmx/FindNews',
+                "ajax": 'DataService.asmx/FindBoards',
                 "dom": '<"table-responsive"t>pr',
                 "autoWidth": false,
                 "pageLength": 20,
@@ -180,16 +183,18 @@
                         return meta.row + meta.settings._iDisplayStart + 1;
                     }
                 }, {
+                    "data": "Description",
                     "class": "position-relative",
                     "render": function (data, type, row, meta) {
+                        var description = (data != null && data.length > 200) ? data.substring(0, 200) : data;
                         if (row.IsNew) {
                             return '<div class="p-3">' + '<div class="ribbon red"><span>NEW</span></div>' +
-                                '<h3>' + row.Title + '</h3><p>' + row.Description + '</p><span class="bg-primary mb-2 float-end radius-5">' + row.CreateDate + '</span>'
+                                '<h3>' + row.Title + '</h3><p>' + description + '</p><span class="bg-primary mb-2 float-end radius-5">' + row.Creater + ', ' + row.CreateDate + '</span>'
                             '</div>';
                         }
                         else {
-                            return '<div class="p-3">' + 
-                                '<h3>' + row.Title + '</h3><p>' + row.Description + '</p><span class="bg-primary mb-2 float-end radius-5">' + row.CreateDate + '</span>'
+                            return '<div class="p-3">' +
+                                '<h3>' + row.Title + '</h3><p>' + description + '</p><span class="bg-primary mb-2 float-end radius-5">' + row.Creater + ', ' + row.CreateDate + '</span>'
                             '</div>';
                         }
                     }
@@ -213,11 +218,12 @@
 
                 "fnServerParams": function (aoData) {
                     aoData.searchVal = $('#TxtSearch').val();
+                    aoData.gameID = $("#HfGameID").val();
                 },
 
                 "rowCallback": function (row, data, index) {
                     $(row).find('td').css({ 'vertical-align': 'middle' });
-                    $("#news-table_wrapper").css('width', '100%');
+                    $("#board-table_wrapper").css('width', '100%');
                 },
 
                 "drawCallback": function () {
@@ -234,10 +240,11 @@
 
                 var row = datatable.fnGetData($(this).closest('tr'));
 
-                $("#NewsModal").modal('show');
-                $(".modal-title").text("AGGIORNA NEWS");
-                $("#HfNotificationID").val(row.Id);
+                $("#BoardModal").modal('show');
+                $(".modal-title").text("AGGIORNA MESSAGE");
+                $("#HfMessageBoardID").val(row.Id);
                 $("#ValSummary").addClass("d-none");
+                $("#BtnSave").removeClass("d-none");
                 $("#TxtTitle").val(row.Title);
                 $("#TxtDescription").val(row.Description);
             });
@@ -249,16 +256,17 @@
 
                 $.ajax({
                     type: "POST",
-                    url: 'DataService.asmx/UpdateNews',
+                    url: 'DataService.asmx/UpdateBoard',
                     data: {
                         id: row.Id
                     },
                     success: function () {
                         onSuccess({ success: true });
-                        $("#NewsModal").modal('show');
-                        $(".modal-title").text("VEDI NEWS");
-                        $("#HfNotificationID").val(row.Id);
+                        $("#BoardModal").modal('show');
+                        $(".modal-title").text("VEDI MESSAGE");
+                        $("#HfMessageBoardID").val(row.Id);
                         $("#ValSummary").addClass("d-none");
+                        $("#BtnSave").addClass("d-none");
                         $("#TxtTitle").val(row.Title);
                         $("#TxtDescription").val(row.Description);
                     }
@@ -277,7 +285,7 @@
 
                 $.ajax({
                     type: "POST",
-                    url: 'DataService.asmx/DeleteNews',
+                    url: 'DataService.asmx/DeleteBoard',
                     data: {
                         id: row.Id
                     },

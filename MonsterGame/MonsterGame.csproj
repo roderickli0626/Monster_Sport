@@ -194,10 +194,14 @@
     <Content Include="DataService.asmx" />
     <Content Include="Default.aspx" />
     <Content Include="favicon.ico" />
+    <Content Include="Feedback.aspx" />
     <Content Include="ForgotPassword.aspx" />
     <Content Include="Global.asax" />
     <Content Include="Login.aspx" />
     <Content Include="Master.aspx" />
+    <Content Include="MessageBoard.aspx" />
+    <Content Include="MessageBoardDetail.aspx" />
+    <Content Include="MessageBoards.aspx" />
     <Content Include="Movements.aspx" />
     <Content Include="Notifications.aspx" />
     <Content Include="PaymentCancel.aspx" />
@@ -305,6 +309,7 @@
     <Content Include="Scripts\WebForms\WebForms.js" />
     <Content Include="Scripts\WebForms\WebParts.js" />
     <Content Include="Scripts\WebForms\WebUIValidation.js" />
+    <Content Include="SettingFeedback.aspx" />
     <Content Include="Site.Master" />
     <Content Include="TaskRunner.aspx" />
     <Content Include="UserGameDetail.aspx" />
@@ -409,6 +414,13 @@
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Feedback.aspx.cs">
+      <DependentUpon>Feedback.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Feedback.aspx.designer.cs">
+      <DependentUpon>Feedback.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ForgotPassword.aspx.cs">
       <DependentUpon>ForgotPassword.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -437,6 +449,27 @@
     </Compile>
     <Compile Include="Master.aspx.designer.cs">
       <DependentUpon>Master.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MessageBoard.aspx.cs">
+      <DependentUpon>MessageBoard.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MessageBoard.aspx.designer.cs">
+      <DependentUpon>MessageBoard.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MessageBoardDetail.aspx.cs">
+      <DependentUpon>MessageBoardDetail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MessageBoardDetail.aspx.designer.cs">
+      <DependentUpon>MessageBoardDetail.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MessageBoards.aspx.cs">
+      <DependentUpon>MessageBoards.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MessageBoards.aspx.designer.cs">
+      <DependentUpon>MessageBoards.aspx</DependentUpon>
     </Compile>
     <Compile Include="Model\FeedbackCheck.cs" />
     <Compile Include="Model\GameBoardCheck.cs" />
@@ -515,6 +548,13 @@
     </Compile>
     <Compile Include="ResetPassword.aspx.designer.cs">
       <DependentUpon>ResetPassword.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SettingFeedback.aspx.cs">
+      <DependentUpon>SettingFeedback.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SettingFeedback.aspx.designer.cs">
+      <DependentUpon>SettingFeedback.aspx</DependentUpon>
     </Compile>
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>

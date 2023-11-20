@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Page.Master" AutoEventWireup="true" CodeBehind="Notifications.aspx.cs" Inherits="MonsterGame.Notifications" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Page.Master" AutoEventWireup="true" CodeBehind="Feedback.aspx.cs" Inherits="MonsterSport.Feedback" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link rel="stylesheet" href="Content/CSS/datatables.css" />
     <style>
@@ -74,10 +74,10 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-7 col-xl-6 text-center">
-                    <h2 class="title text-white">News</h2>
+                    <h2 class="title text-white">Feedback</h2>
                     <ul class="breadcrumbs d-flex flex-wrap align-items-center justify-content-center">
                         <li><a href="Dashboard.aspx">Dashboard</a></li>
-                        <li>News</li>
+                        <li>Feedback</li>
                     </ul>
                 </div>
             </div>
@@ -86,18 +86,13 @@
     <section class="game-section padding-top padding-bottom bg_img" style="background: url(Content/Images/gamebg.jpeg); background-attachment: fixed;">
         <div class="container">
             <form runat="server" id="form1" autocomplete="off">
-                <asp:HiddenField ID="HfNotificationID" runat="server" ClientIDMode="Static" />
-                <asp:HiddenField ID="HfManage" runat="server" ClientIDMode="Static" />
-                <div class="row justify-content-center mb-5">
-                    <div class="col-lg-4 col-xl-4 me-auto">
-                        <button class="cmn--btn active radius-1 w-100 btn-add" runat="server" id="BtnAddNews">Aggiungi</button>
-                    </div>
+                <div class="row justify-content-center mb-4">
                     <div class="col-lg-4 col-xl-4 pt-1 ms-auto">
                         <asp:TextBox runat="server" ID="TxtSearch" CssClass="form--control form-control" ClientIDMode="Static" placeholder="CERCA.."></asp:TextBox>
                     </div>
                 </div>
                 <div class="row gy-4 justify-content-center">
-                    <table class="table text-center" id="news-table">
+                    <table class="table text-center" id="feedback-table">
                         <thead>
                             <tr>
                                 <th>Nr.</th>
@@ -109,39 +104,35 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="modal custom--modal fade show" id="NewsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" data-bs-backdrop="static" aria-modal="true">
+                <div class="modal custom--modal fade show" id="FeedbackModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" data-bs-backdrop="static" aria-modal="true">
                     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                         <div class="modal-content section-bg border-0">
                             <div class="modal-header modal--header bg--base">
-                                <h4 class="modal-title text-dark" id="modalTitle">News</h4>
+                                <h4 class="modal-title text-dark" id="modalTitle">Feedback</h4>
                             </div>
                             <div class="modal-body modal--body">
-                                <asp:ScriptManager ID="ScriptManager" runat="server"></asp:ScriptManager>
-                                <asp:UpdatePanel runat="server" ID="UpdatePanel" ClientIDMode="Static" class="row gy-3">
-                                    <ContentTemplate>
-                                        <asp:ValidationSummary ID="ValSummary" runat="server" CssClass="mt-lg mb-lg text-left bg-gradient" ClientIDMode="Static" />
-                                        <asp:RequiredFieldValidator ID="ReqValTitle" runat="server" ErrorMessage="Inserire un indirizzo Email." CssClass="text-bg-danger" ControlToValidate="TxtTitle" Display="None"></asp:RequiredFieldValidator>
-                                        <asp:CustomValidator ID="ServerValidator" runat="server" ErrorMessage="Questo indirizzo Email è già registrato." Display="None"></asp:CustomValidator>
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label for="TxtTitle" class="form-label">Title</label>
-                                                <asp:TextBox runat="server" ID="TxtTitle" ClientIDMode="Static" CssClass="form-control form--control style-two"></asp:TextBox>
-                                            </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="TxtTitle" class="form-label">Title</label>
+                                            <asp:TextBox runat="server" ID="TxtTitle" ClientIDMode="Static" CssClass="form-control form--control style-two" ReadOnly="true"></asp:TextBox>
                                         </div>
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label for="TxtDescription" class="form-label">Description</label>
-                                                <asp:TextBox runat="server" ID="TxtDescription" ClientIDMode="Static" TextMode="MultiLine" Rows="2" CssClass="form-control form--control style-two"></asp:TextBox>
-                                            </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="TxtTitle" class="form-label">Date & Creator</label>
+                                            <asp:TextBox runat="server" ID="TxtDateCreator" ClientIDMode="Static" CssClass="form-control form--control style-two" ReadOnly="true"></asp:TextBox>
                                         </div>
-                                    </ContentTemplate>
-                                    <Triggers>
-                                        <asp:AsyncPostBackTrigger ControlID="BtnSave" />
-                                    </Triggers>
-                                </asp:UpdatePanel>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="TxtDescription" class="form-label">Description</label>
+                                            <asp:TextBox runat="server" ID="TxtDescription" ClientIDMode="Static" TextMode="MultiLine" Rows="2" CssClass="form-control form--control style-two" ReadOnly="true"></asp:TextBox>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <div class="modal-footer modal--footer">
-                                <asp:Button runat="server" ID="BtnSave" CssClass="btn btn--warning btn--md" Text="Conferma" OnClick="BtnSave_Click"/>
                                 <button type="button" class="btn btn--danger btn--md" data-bs-dismiss="modal">Chiudi</button>
                             </div>
                         </div>
@@ -155,21 +146,10 @@
     <script src="Scripts/JS/jquery.dataTables.js"></script>
     <script src="Scripts/JS/datatables.js"></script>
     <script>
-        $(".btn-add").click(function () {
-            $("#NewsModal").modal('show');
-            $(".modal-title").text("AGG. NEWS");
-            $("#HfNotificationID").val("");
-            $("#ValSummary").addClass("d-none");
-            $("#TxtTitle").val("");
-            $("#TxtDescription").val("");
-            return false;
-        });
-    </script>
-    <script>
         $(function () {
-            var datatable = $('#news-table').dataTable({
+            var datatable = $('#feedback-table').dataTable({
                 "serverSide": true,
-                "ajax": 'DataService.asmx/FindNews',
+                "ajax": 'DataService.asmx/FindFeedbacks',
                 "dom": '<"table-responsive"t>pr',
                 "autoWidth": false,
                 "pageLength": 20,
@@ -184,12 +164,12 @@
                     "render": function (data, type, row, meta) {
                         if (row.IsNew) {
                             return '<div class="p-3">' + '<div class="ribbon red"><span>NEW</span></div>' +
-                                '<h3>' + row.Title + '</h3><p>' + row.Description + '</p><span class="bg-primary mb-2 float-end radius-5">' + row.CreateDate + '</span>'
+                                '<h3>' + row.Title + '</h3><p>' + row.Description + '</p><span class="bg-primary mb-2 float-end radius-5">' + row.Creater + ', ' + row.CreateDate + '</span>'
                             '</div>';
                         }
                         else {
-                            return '<div class="p-3">' + 
-                                '<h3>' + row.Title + '</h3><p>' + row.Description + '</p><span class="bg-primary mb-2 float-end radius-5">' + row.CreateDate + '</span>'
+                            return '<div class="p-3">' +
+                                '<h3>' + row.Title + '</h3><p>' + row.Description + '</p><span class="bg-primary mb-2 float-end radius-5">' + row.Creater + ', ' + row.CreateDate + '</span>'
                             '</div>';
                         }
                     }
@@ -197,17 +177,10 @@
                     "width": "15%",
                     "data": null,
                     "render": function (data, type, row, meta) {
-                        var manage = $("#HfManage").val();
-                        if (manage == "true") {
-                            return '<div class="justify-content-center">' +
-                                '<button class="cmn--btn active btn--md radius-1 btn--success w-100 mt-1 btn-edit float-start">Edit</button>' +
-                                '<button class="cmn--btn active btn--md radius-1 btn--danger w-100 mt-1 btn-delete float-end">Cancella</button>' +
-                                '</div > ';
-                        }
-                        else {
-                            return '<div class="justify-content-center">' +
-                                '<button class="cmn--btn active btn--md radius-1 btn-view">Vedi</button></div>';
-                        }
+                        return '<div class="justify-content-center">' +
+                            '<button class="cmn--btn active btn--md radius-1 btn--success w-100 mt-1 btn-view float-start">Vedi</button>' +
+                            '<button class="cmn--btn active btn--md radius-1 btn--danger w-100 mt-1 btn-delete float-end">Cancella</button>' +
+                            '</div > ';
                     }
                 }],
 
@@ -217,7 +190,7 @@
 
                 "rowCallback": function (row, data, index) {
                     $(row).find('td').css({ 'vertical-align': 'middle' });
-                    $("#news-table_wrapper").css('width', '100%');
+                    $("#feedback-table_wrapper").css('width', '100%');
                 },
 
                 "drawCallback": function () {
@@ -229,19 +202,6 @@
                 datatable.fnDraw();
             });
 
-            datatable.on('click', '.btn-edit', function (e) {
-                e.preventDefault();
-
-                var row = datatable.fnGetData($(this).closest('tr'));
-
-                $("#NewsModal").modal('show');
-                $(".modal-title").text("AGGIORNA NEWS");
-                $("#HfNotificationID").val(row.Id);
-                $("#ValSummary").addClass("d-none");
-                $("#TxtTitle").val(row.Title);
-                $("#TxtDescription").val(row.Description);
-            });
-
             datatable.on('click', '.btn-view', function (e) {
                 e.preventDefault();
 
@@ -249,17 +209,16 @@
 
                 $.ajax({
                     type: "POST",
-                    url: 'DataService.asmx/UpdateNews',
+                    url: 'DataService.asmx/UpdateFeedback',
                     data: {
                         id: row.Id
                     },
                     success: function () {
                         onSuccess({ success: true });
-                        $("#NewsModal").modal('show');
-                        $(".modal-title").text("VEDI NEWS");
-                        $("#HfNotificationID").val(row.Id);
-                        $("#ValSummary").addClass("d-none");
+                        $("#FeedbackModal").modal('show');
+                        $(".modal-title").text("VEDI FEEDBACK");
                         $("#TxtTitle").val(row.Title);
+                        $("#TxtDateCreator").val(row.Creater + ", " + row.CreateDate);
                         $("#TxtDescription").val(row.Description);
                     }
                 }).error(function () {
@@ -277,7 +236,7 @@
 
                 $.ajax({
                     type: "POST",
-                    url: 'DataService.asmx/DeleteNews',
+                    url: 'DataService.asmx/DeleteFeedback',
                     data: {
                         id: row.Id
                     },
@@ -291,9 +250,7 @@
 
             var onSuccess = function (data) {
                 if (data.success) {
-
                     datatable.fnDraw();
-
                 } else {
                     alert("Failed!");
                 }

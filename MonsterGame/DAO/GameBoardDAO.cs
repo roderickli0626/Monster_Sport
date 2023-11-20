@@ -24,11 +24,11 @@ namespace MonsterGame.DAO
         {
             return GetContext().GameBoards.Where(g => g.Id == id).FirstOrDefault();
         }
-        public int Insert(GameBoard gameboard)
+        public bool Insert(GameBoard gameboard)
         {
             GetContext().GameBoards.InsertOnSubmit(gameboard);
             GetContext().SubmitChanges();
-            return gameboard.Id;
+            return true;
         }
 
         public bool Update(GameBoard gameboard)

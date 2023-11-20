@@ -20,11 +20,11 @@ namespace MonsterGame.DAO
         {
             return GetContext().Feedbacks.Where(g => g.Id == id).FirstOrDefault();
         }
-        public int Insert(Feedback feedback)
+        public bool Insert(Feedback feedback)
         {
             GetContext().Feedbacks.InsertOnSubmit(feedback);
             GetContext().SubmitChanges();
-            return feedback.Id;
+            return true;
         }
 
         public bool Update(Feedback feedback)

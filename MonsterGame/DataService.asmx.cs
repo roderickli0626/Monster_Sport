@@ -485,6 +485,124 @@ namespace MonsterGame
 
             ResponseProc(success, "");
         }
+
+        [WebMethod(EnableSession = true)]
+        [ScriptMethod(UseHttpGet = true, ResponseFormat = ResponseFormat.Json)]
+        public void FindFeedbacks(int draw, int start, int length, string searchVal)
+        {
+            User admin = loginSystem.GetCurrentUserAccount();
+            if (!loginSystem.IsSuperAdminLoggedIn()) return;
+
+            ExtraController extraController = new ExtraController();
+            SearchResult searchResult = extraController.SearchFeedbacks(start, length, searchVal);
+
+            JSDataTable result = new JSDataTable();
+            result.data = (IEnumerable<object>)searchResult.ResultList;
+            result.draw = draw;
+            result.recordsTotal = searchResult.TotalCount;
+            result.recordsFiltered = searchResult.TotalCount;
+
+            ResponseJson(result);
+        }
+
+        [WebMethod(EnableSession = true)]
+        [ScriptMethod(UseHttpGet = true, ResponseFormat = ResponseFormat.Json)]
+        public void DeleteFeedback(int id)
+        {
+            //Is Logged in?
+            if (!loginSystem.IsSuperAdminLoggedIn()) return;
+
+            ExtraController extraController = new ExtraController();
+            bool success = extraController.DeleteFeedback(id);
+
+            ResponseProc(success, "");
+        }
+
+        [WebMethod(EnableSession = true)]
+        [ScriptMethod(UseHttpGet = true, ResponseFormat = ResponseFormat.Json)]
+        public void UpdateFeedback(int id)
+        {
+            //Is Logged in?
+            if (!loginSystem.IsSuperAdminLoggedIn()) return;
+
+            ExtraController extraController = new ExtraController();
+            bool success = extraController.UpdateFeedback(id);
+
+            ResponseProc(success, "");
+        }
+        [WebMethod(EnableSession = true)]
+        [ScriptMethod(UseHttpGet = true, ResponseFormat = ResponseFormat.Json)]
+        public void UpdateNews(int id)
+        {
+            //Is Logged in?
+            User user = loginSystem.GetCurrentUserAccount();
+            if ((user == null)) return;
+
+            ExtraController extraController = new ExtraController();
+            bool success = extraController.UpdateNews(id);
+
+            ResponseProc(success, "");
+        }
+
+        [WebMethod(EnableSession = true)]
+        [ScriptMethod(UseHttpGet = true, ResponseFormat = ResponseFormat.Json)]
+        public void FindBoards(int draw, int start, int length, string searchVal, int gameID)
+        {
+            User admin = loginSystem.GetCurrentUserAccount();
+            if (!loginSystem.IsSuperAdminLoggedIn() && (admin == null || !loginSystem.IsUserLoggedIn())) return;
+
+            ExtraController extraController = new ExtraController();
+            SearchResult searchResult = extraController.SearchBoards(start, length, searchVal, gameID);
+
+            JSDataTable result = new JSDataTable();
+            result.data = (IEnumerable<object>)searchResult.ResultList;
+            result.draw = draw;
+            result.recordsTotal = searchResult.TotalCount;
+            result.recordsFiltered = searchResult.TotalCount;
+
+            ResponseJson(result);
+        }
+
+        [WebMethod(EnableSession = true)]
+        [ScriptMethod(UseHttpGet = true, ResponseFormat = ResponseFormat.Json)]
+        public void DeleteBoard(int id)
+        {
+            //Is Logged in?
+            if (!loginSystem.IsSuperAdminLoggedIn()) return;
+
+            ExtraController extraController = new ExtraController();
+            bool success = extraController.DeleteBoard(id);
+
+            ResponseProc(success, "");
+        }
+
+        [WebMethod(EnableSession = true)]
+        [ScriptMethod(UseHttpGet = true, ResponseFormat = ResponseFormat.Json)]
+        public void UpdateBoard(int id)
+        {
+            //Is Logged in?
+            User user = loginSystem.GetCurrentUserAccount();
+            if (!loginSystem.IsSuperAdminLoggedIn() && (user == null || !loginSystem.IsUserLoggedIn())) return;
+
+            ExtraController extraController = new ExtraController();
+            bool success = extraController.UpdateBoard(id);
+
+            ResponseProc(success, "");
+        }
+        [WebMethod(EnableSession = true)]
+        [ScriptMethod(UseHttpGet = true, ResponseFormat = ResponseFormat.Json)]
+        public void UpdateBoardAllow(int gameID, int allowed)
+        {
+            //Is Logged in?
+            if (!loginSystem.IsSuperAdminLoggedIn()) return;
+
+            GameDAO gameDao = new GameDAO();
+            Game game = gameDao.FindByID(gameID);
+            game.AllowedBoard = allowed == 1 ? true : false;
+            bool success = gameDao.Update(game);
+
+            ResponseProc(success, "");
+        }
         protected void ResponseJson(Object result)
         {
             HttpResponse Response = Context.Response;

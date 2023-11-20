@@ -1,42 +1,45 @@
-﻿using MonsterGame.Common;
-using MonsterGame.Controller;
-using MonsterGame.Util;
+﻿using MonsterGame.Controller;
+using MonsterGame;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Xml.Linq;
+using MonsterGame.Common;
+using MonsterGame.Util;
+using PayPal.Api;
 
-namespace MonsterGame
+namespace MonsterSport
 {
-    public partial class Notifications : System.Web.UI.Page
+    public partial class MessageBoardDetail : System.Web.UI.Page
     {
-        private User admin;
+        private User user;
         private LoginController loginSystem = new LoginController();
         private ExtraController extraController = new ExtraController();
         protected void Page_Load(object sender, EventArgs e)
         {
-            admin = loginSystem.GetCurrentUserAccount();
-            if (!loginSystem.IsSuperAdminLoggedIn() && (admin == null))
+            user = loginSystem.GetCurrentUserAccount();
+            if (!loginSystem.IsSuperAdminLoggedIn() && (user == null || !loginSystem.IsUserLoggedIn()))
             {
                 Response.Redirect("~/Login.aspx");
                 return;
             }
+
+            int gameID = ParseUtil.TryParseInt(Request.Params["gameId"]) ?? 0;
+            HfGameID.Value = gameID.ToString();
 
             if (!IsPostBack)
             {
                 if (loginSystem.IsSuperAdminLoggedIn())
                 {
                     HfManage.Value = "true";
+                    liUserBoard.Visible = false;
                 }
                 else
                 {
                     HfManage.Value = "false";
-                    BtnSave.Visible = false;
-                    BtnAddNews.Visible = false;
+                    liAdminBoard.Visible = false;
                 }
             }
         }
@@ -47,9 +50,11 @@ namespace MonsterGame
             string title = TxtTitle.Text;
             string description = TxtDescription.Text;
 
-            int? notificationID = ParseUtil.TryParseInt(HfNotificationID.Value);
+            int? boardID = ParseUtil.TryParseInt(HfMessageBoardID.Value);
+            int? gameID = ParseUtil.TryParseInt(HfGameID.Value);
+            int userID = (user == null ? 0 : user.Id);
 
-            bool success = extraController.SaveNews(notificationID, title, description);
+            bool success = extraController.SaveBoard(boardID, gameID, userID, title, description);
             if (success)
             {
                 Page.Response.Redirect(Page.Request.Url.ToString(), true);
@@ -59,6 +64,7 @@ namespace MonsterGame
                 ServerValidator.IsValid = false;
                 return;
             }
+
         }
     }
 }
