@@ -1,4 +1,5 @@
-﻿using MonsterGame.Common;
+﻿using Microsoft.AspNet.SignalR;
+using MonsterGame.Common;
 using MonsterGame.Controller;
 using MonsterGame.Util;
 using System;
@@ -52,6 +53,10 @@ namespace MonsterGame
             bool success = extraController.SaveNews(notificationID, title, description);
             if (success)
             {
+                // Send Notification to All Users
+                var hubContext = GlobalHost.ConnectionManager.GetHubContext<NotificationHub>();
+                hubContext.Clients.All.receiveNewsAddMessage("News Added!");
+
                 Page.Response.Redirect(Page.Request.Url.ToString(), true);
             }
             else

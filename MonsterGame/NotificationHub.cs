@@ -44,5 +44,9 @@ namespace MonsterGame
         {
             Clients.All.receiveUserMessage(message);
         }
+        public void SendNewsAddMessage(string message)
+        {
+            Clients.All.receiveNewsAddMessage(message);
+        }
     }
 }

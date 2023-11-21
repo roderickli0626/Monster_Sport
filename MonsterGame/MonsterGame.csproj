@@ -160,6 +160,7 @@
     <Content Include="Content\CSS\select2-bootstrap.css" />
     <Content Include="Content\CSS\select2.css" />
     <Content Include="Content\CSS\slick.css" />
+    <Content Include="Content\CSS\toastr.css" />
     <Content Include="Content\fonts\la-brands-400.svg" />
     <Content Include="Content\fonts\la-regular-400.svg" />
     <Content Include="Content\fonts\la-solid-900.svg" />
@@ -287,6 +288,7 @@
     <Content Include="Scripts\JS\main.js" />
     <Content Include="Scripts\JS\select2.js" />
     <Content Include="Scripts\JS\slick.min.js" />
+    <Content Include="Scripts\JS\toastr.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\WebForms\DetailsView.js" />
     <Content Include="Scripts\WebForms\Focus.js" />
