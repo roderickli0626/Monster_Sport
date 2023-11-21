@@ -454,6 +454,19 @@
                 $(".teamCount").text("Elenco Squadre (" + $(this).val().length + ")");
             });
 
+            $('#ComboTeams').on('select2:open', function (e) {
+                // Use event delegation to handle the input event for the search input
+                $(document).on('input', '.select2-search__field', function () {
+                    var items = $("#select2-ComboTeams-results").children();
+                    var selectedValues = [];
+                    for (var i = 0; i < items.length; i++) {
+                        var teamID = items[i].id.split("-")[items[i].id.split("-").length - 1];
+                        selectedValues.push(teamID);
+                    }
+                    $('#ComboTeams').val(selectedValues).trigger('change');
+                });
+            });
+
             $.datetimepicker.setLocale('it');
 
             $("#TxtStartDate").datetimepicker({
