@@ -168,6 +168,36 @@
                         </div>
                     </div>
                 </div>
+                <div class="modal custom--modal fade show" id="MessageModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" data-bs-backdrop="static" aria-modal="true">
+                    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                        <div class="modal-content section-bg border-0">
+                            <div class="modal-header modal--header bg--base">
+                                <h4 class="modal-title text-dark" id="modalTitle2">MESSAGE</h4>
+                            </div>
+                            <div class="modal-body modal--body">
+                                <asp:UpdatePanel runat="server" ID="UpdatePanel2" ClientIDMode="Static" class="row gy-3">
+                                    <ContentTemplate>
+                                        <asp:ValidationSummary ID="ValSummary2" runat="server" CssClass="mt-lg mb-lg text-left bg-gradient" ClientIDMode="Static" />
+                                        <asp:RequiredFieldValidator ID="RequestMessage" runat="server" ErrorMessage="Inserire un indirizzo Message." CssClass="text-bg-danger" ControlToValidate="TxtMessage" Display="None"></asp:RequiredFieldValidator>
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label for="TxtBalanceNote" class="form-label">Message</label>
+                                                <asp:TextBox runat="server" ID="TxtMessage" ClientIDMode="Static" CssClass="form-control form--control style-two" TextMode="MultiLine" Rows="2"></asp:TextBox>
+                                            </div>
+                                        </div>
+                                    </ContentTemplate>
+                                    <Triggers>
+                                        <asp:AsyncPostBackTrigger ControlID="BtnMessage" />
+                                    </Triggers>
+                                </asp:UpdatePanel>
+                            </div>
+                            <div class="modal-footer modal--footer">
+                                <asp:Button runat="server" ID="BtnMessage" ClientIDMode="Static" CssClass="btn btn--warning btn--md" Text="Send Message" CausesValidation="false" OnClick="BtnMessage_Click"/>
+                                <button type="button" class="btn btn--danger btn--md" data-bs-dismiss="modal">Chiudi</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </form>
         </div>
     </section>
@@ -226,7 +256,15 @@
                     "data": null,
                     "render": function (data, type, row, meta) {
                         var manage = $("#HfManage").val();
-                        if (manage == "true") {
+                        if (manage == "1") {
+                            return '<div class="justify-content-center">' +
+                                '<button class="cmn--btn active btn--md radius-1 btn--success w-100 mt-1 btn-edit float-start">Edit</button>' +
+                                '<button class="cmn--btn active btn--md radius-1 btn--danger w-100 mt-1 btn-delete float-end">Cancella</button>' +
+                                '<button class="cmn--btn active btn--md radius-1 btn-purchase w-100 mt-1">Agg. & Rim. Crediti</button>' +
+                                '<button class="cmn--btn active btn--md radius-1 btn-message w-100 mt-1">Send Msg</button>' +
+                                '</div > ';
+                        }
+                        else if (manage == "2") {
                             return '<div class="justify-content-center">' +
                                 '<button class="cmn--btn active btn--md radius-1 btn--success w-100 mt-1 btn-edit float-start">Edit</button>' +
                                 '<button class="cmn--btn active btn--md radius-1 btn--danger w-100 mt-1 btn-delete float-end">Cancella</button>' +
@@ -237,7 +275,6 @@
                             return '<div class="justify-content-center">' +
                                 '<button class="cmn--btn active btn--md radius-1 btn-view">Vedi</button></div>';
                         }
-                        
                     }
                 }],
 
@@ -309,6 +346,18 @@
                 $("#TxtBalance").val("");
                 $("#TxtBalanceNote").val("");
                 $("#ValSummary1").addClass("d-none");
+            });
+
+            datatable.on('click', '.btn-message', function (e) {
+                e.preventDefault();
+
+                var row = datatable.fnGetData($(this).closest('tr'));
+
+                $("#MessageModal").modal('show');
+                $(".modal-title").text("Message To " + row.Name);
+                $("#HfUserID").val(row.Id);
+                $("#TxtMessage").val("");
+                $("#ValSummary2").addClass("d-none");
             });
 
             datatable.on('click', '.btn-delete', function (e) {

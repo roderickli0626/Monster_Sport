@@ -40,5 +40,9 @@ namespace MonsterGame
         {
             Clients.All.receiveStartGameNotification(message);
         }
+        public void SendMessageToUser(string message)
+        {
+            Clients.All.receiveUserMessage(message);
+        }
     }
 }

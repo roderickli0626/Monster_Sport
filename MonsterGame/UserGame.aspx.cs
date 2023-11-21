@@ -24,6 +24,7 @@ namespace MonsterGame
                 Response.Redirect("~/Login.aspx");
                 return;
             }
+            HfUserID.Value = user.Id.ToString();
             if (!IsPostBack)
             {
                 LoadGames();

@@ -25,7 +25,7 @@ namespace MonsterGame
                 Response.Redirect("~/Login.aspx");
                 return;
             }
-
+            HfUserID.Value = (admin?.Id ?? 0).ToString();
             if (!IsPostBack)
             {
                 if (loginSystem.IsSuperAdminLoggedIn())

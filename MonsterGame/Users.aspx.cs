@@ -1,4 +1,5 @@
-﻿using MonsterGame.Common;
+﻿using Microsoft.AspNet.SignalR;
+using MonsterGame.Common;
 using MonsterGame.Controller;
 using MonsterGame.Util;
 using System;
@@ -27,14 +28,19 @@ namespace MonsterGame
 
             if (!IsPostBack)
             {
-                if (loginSystem.IsSuperAdminLoggedIn() || admin.Role == (int)Role.AGENCY)
+                if (loginSystem.IsSuperAdminLoggedIn())
                 {
-                    HfManage.Value = "true";
+                    HfManage.Value = "1";
+                    HfAgencyBalance.Value = admin == null ? "" : admin.Balance.ToString();
+                }
+                else if (admin.Role == (int)Role.AGENCY)
+                {
+                    HfManage.Value = "2";
                     HfAgencyBalance.Value = admin == null ? "" : admin.Balance.ToString();
                 }
                 else
                 {
-                    HfManage.Value = "false";
+                    HfManage.Value = "3";
                     BtnSave.Visible = false;
                     BtnAddAgency.Visible = false;
                 }
@@ -109,6 +115,17 @@ namespace MonsterGame
                 ServerValidator1.IsValid = false;
                 return;
             }
+        }
+
+        protected void BtnMessage_Click(object sender, EventArgs e)
+        {
+            string message = TxtMessage.Text;
+            int? userID = ParseUtil.TryParseInt(HfUserID.Value);
+            // Send Notification to All Users
+            var hubContext = GlobalHost.ConnectionManager.GetHubContext<NotificationHub>();
+            hubContext.Clients.All.receiveUserMessage(userID + "," + message);
+
+            Page.Response.Redirect(Page.Request.Url.ToString(), true);
         }
     }
 }

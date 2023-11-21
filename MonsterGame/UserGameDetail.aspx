@@ -332,6 +332,28 @@
                         </div>
                     </div>
                 </div>
+                <div class=" modal custom--modal fade show" id="MessageModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-modal="true">
+                    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                        <div class="modal-content section-bg border-0">
+                            <div class="modal-header modal--header bg--base">
+                                <h4 class="modal-title text-dark">MESSAGE FROM ADMIN</h4>
+                            </div>
+                            <div class="modal-body modal--body">
+                                <div class="row gy-3">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="TxtMessage" class="form-label">Message</label>
+                                            <asp:TextBox runat="server" ID="TxtMessage" ClientIDMode="Static" CssClass="form-control form--control style-two" TextMode="MultiLine" Rows="2" ReadOnly="true"></asp:TextBox>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer modal--footer">
+                                <button type="button" class="btn btn--danger btn--md" data-bs-dismiss="modal">Chiudi</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </form>
         </div>
     </section>
@@ -764,6 +786,16 @@
             proxy.client.receiveStartGameNotification = function (message) {
                 alert(message);
                 window.location.reload();
+            };
+
+            proxy.client.receiveUserMessage = function (message) {
+                var userID = $("#HfUserID").val();
+                var splitList = message.split(",");
+                if (splitList.indexOf(userID) > -1) {
+                    $("#TxtMessage").val(splitList[1]);
+                    $("#MessageModal").modal('show');
+                }
+                else return false;
             };
             
             $.connection.hub.start();

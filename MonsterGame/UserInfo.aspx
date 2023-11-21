@@ -140,6 +140,7 @@
     <section class="game-section padding-bottom bg_img" style="background: url(Content/Images/gamebg.jpeg); background-attachment: fixed;">
         <div class="container">
             <form runat="server" id="form1" autocomplete="off">
+                <asp:HiddenField ID="HfUserID" runat="server" ClientIDMode="Static" />
                 <div class="row">
                     <div class="col-md-3">
                         <ul class="privacy-policy-sidebar-menu" style="padding-top:120px;">
@@ -301,6 +302,28 @@
                         </div>
                     </div>
                 </div>
+                <div class=" modal custom--modal fade show" id="MessageModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-modal="true">
+                    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                        <div class="modal-content section-bg border-0">
+                            <div class="modal-header modal--header bg--base">
+                                <h4 class="modal-title text-dark">MESSAGE FROM ADMIN</h4>
+                            </div>
+                            <div class="modal-body modal--body">
+                                <div class="row gy-3">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="TxtMessage" class="form-label">Message</label>
+                                            <asp:TextBox runat="server" ID="TxtMessage" ClientIDMode="Static" CssClass="form-control form--control style-two" TextMode="MultiLine" Rows="2" ReadOnly="true"></asp:TextBox>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer modal--footer">
+                                <button type="button" class="btn btn--danger btn--md" data-bs-dismiss="modal">Chiudi</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </form>
         </div>
     </section>
@@ -310,6 +333,23 @@
     <script src="Scripts/JS/datatables.js"></script>
     <script src="Scripts/bootstrap.bundle.min.js"></script>
     <script src="Scripts/JS/jquery.datetimepicker.full.min.js"></script>
+    <script src="Scripts/jquery.signalR-2.4.3.js"></script>
+    <script src="signalr/hubs"></script>
+    <script>
+        var proxy = $.connection.notificationHub;
+
+        proxy.client.receiveUserMessage = function (message) {
+            var userID = $("#HfUserID").val();
+            var splitList = message.split(",");
+            if (splitList.indexOf(userID) > -1) {
+                $("#TxtMessage").val(splitList[1]);
+                $("#MessageModal").modal('show');
+            }
+            else return false;
+        };
+
+        $.connection.hub.start();
+    </script>
     <script>
         $(function () {
             var datatable = $('#payment-table').dataTable({

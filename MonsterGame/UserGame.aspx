@@ -14,6 +14,7 @@
             line-height: 30px;
             font-size: 15px;
         }
+
         .game-table-item {
             text-align: center;
             padding: 0px;
@@ -23,14 +24,16 @@
             transition: all ease .3s;
             z-index: 1;
         }
-        .game-table-item::before {
-            position: absolute;
-            content: "";
-            width: 100%;
-            height: 100%;
-            left: 0;
-            top: 0;
-        }
+
+            .game-table-item::before {
+                position: absolute;
+                content: "";
+                width: 100%;
+                height: 100%;
+                left: 0;
+                top: 0;
+            }
+
         .my-card {
             background-color: greenyellow;
         }
@@ -173,6 +176,7 @@
     <section class="game-section padding-top padding-bottom bg_img" style="background: url(Content/Images/gamebg.jpeg); background-attachment: fixed;">
         <div class="container">
             <form runat="server" id="form1" autocomplete="off">
+                <asp:HiddenField ID="HfUserID" runat="server" ClientIDMode="Static" />
                 <div class="row justify-content-center mb-5">
                     <div class="col-lg-5 col-xl-5 pt-1">
                         <asp:DropDownList runat="server" ID="ComboStatus" CssClass="form-select form--control" ClientIDMode="Static" OnSelectedIndexChanged="ComboStatus_SelectedIndexChanged" AutoPostBack="true"></asp:DropDownList>
@@ -227,12 +231,16 @@
                                 <th>Titolo</th>
                                 <th>Apertura</th>
                                 <th>Scadenza</th>
-                                <th><img src="content\images\team.png" alt="Squadre" width="44" height="44" title="Squadre"/></th>
+                                <th>
+                                    <img src="content\images\team.png" alt="Squadre" width="44" height="44" title="Squadre" /></th>
                                 <th>Turno</th>
                                 <th>Quota</th>
-                                <th><img src="content\images\utentemin.png" alt="Necessari" width="44" height="44" title="Player Necessari" /></th>
-                                <th><img src="content\images\utentereal.png" alt="Registrati" width="44" height="44" title="Player Registrati" /></th>
-                                <th><img src="content\images\forziere.png" alt="Premio" width="44" height="44" title="Premio"/></th>
+                                <th>
+                                    <img src="content\images\utentemin.png" alt="Necessari" width="44" height="44" title="Player Necessari" /></th>
+                                <th>
+                                    <img src="content\images\utentereal.png" alt="Registrati" width="44" height="44" title="Player Registrati" /></th>
+                                <th>
+                                    <img src="content\images\forziere.png" alt="Premio" width="44" height="44" title="Premio" /></th>
                                 <th>Azione</th>
                             </tr>
                         </thead>
@@ -248,8 +256,32 @@
                             </div>
                             <div class="modal-body modal--body">
                                 <div class="d-flex">
-                                    <h5 class="p-5 teamNames" style="white-space:nowrap;"><br /></h5>
+                                    <h5 class="p-5 teamNames" style="white-space: nowrap;">
+                                        <br />
+                                    </h5>
                                     <img src="Upload/Game/default.jpg" id="TeamImage" runat="server" clientidmode="Static" alt="service-image" class="m-3 mt-auto mb-auto img-thumbnail" style="height: 100%; width: 100%;" />
+                                </div>
+                            </div>
+                            <div class="modal-footer modal--footer">
+                                <button type="button" class="btn btn--danger btn--md" data-bs-dismiss="modal">Chiudi</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class=" modal custom--modal fade show" id="MessageModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-modal="true">
+                    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                        <div class="modal-content section-bg border-0">
+                            <div class="modal-header modal--header bg--base">
+                                <h4 class="modal-title text-dark">MESSAGE FROM ADMIN</h4>
+                            </div>
+                            <div class="modal-body modal--body">
+                                <div class="row gy-3">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="TxtMessage" class="form-label">Message</label>
+                                            <asp:TextBox runat="server" ID="TxtMessage" ClientIDMode="Static" CssClass="form-control form--control style-two" TextMode="MultiLine" Rows="2" ReadOnly="true"></asp:TextBox>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="modal-footer modal--footer">
@@ -273,6 +305,16 @@
         proxy.client.receiveStartGameNotification = function (message) {
             alert(message);
             window.location.reload();
+        };
+
+        proxy.client.receiveUserMessage = function (message) {
+            var userID = $("#HfUserID").val();
+            var splitList = message.split(",");
+            if (splitList.indexOf(userID) > -1) {
+                $("#TxtMessage").val(splitList[1]);
+                $("#MessageModal").modal('show');
+            }
+            else return false;
         };
 
         $.connection.hub.start();

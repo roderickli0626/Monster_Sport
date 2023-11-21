@@ -28,6 +28,7 @@ namespace MonsterGame
 
             int gameID = ParseUtil.TryParseInt(Request.Params["gameId"]) ?? 0;
             HfGameID.Value = gameID.ToString();
+            HfUserID.Value = (user?.Id ?? 0).ToString();
 
             if (!IsPostBack)
             {
