@@ -7,6 +7,8 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using MonsterGame.Model;
+using MonsterGame.Common;
+using MonsterGame.Util;
 
 namespace MonsterGame
 {
@@ -23,15 +25,30 @@ namespace MonsterGame
             if (!IsPostBack)
             {
                 LoadGames();
+                LoadStatus();
             }
         }
 
         private void LoadGames()
         {
+            int status = ControlUtil.GetSelectedValue(ComboStatus) ?? 0;
             GameController gameController = new GameController();
-            List<GameCheck> list = gameController.FindAll(0, "", 0).ToList();
+            List<GameCheck> list = gameController.FindAll(0, "", 0);
+            if (status == 1) list = list.Where(g => g.AllowedBoard == true).ToList();
+            if (status == 2) list = list.Where(g => g.AllowedBoard == false).ToList();
             RepeaterGame.DataSource = list;
             RepeaterGame.DataBind();
+        }
+        private void LoadStatus()
+        {
+            ComboStatus.Items.Clear();
+            ComboStatus.Items.Add(new ListItem("BOARD STATUS(TUTTI)", "0"));
+            ComboStatus.Items.Add(new ListItem("ENABLED", "1"));
+            ComboStatus.Items.Add(new ListItem("DISABLED", "2"));
+        }
+        protected void ComboStatus_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            LoadGames();
         }
     }
 }

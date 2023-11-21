@@ -521,7 +521,7 @@
                 "columns": [{
                     "render": function (data, type, row, meta) {
                         return '<div class="game-table-item"><div class="game-item__thumb mb-0"><span class="id-mark">' + row.Id + '</span>' + row.Mark +
-                            '<img src="Content/Images/' + row.Image + '" alt = "game"></div></div>';
+                            '<img src="Upload/Game/' + ((row.Image1 == null || row.Image1 == "") ? "default.jpg" : row.Image1) + '" alt = "game"></div></div>';
                     }
                 }, {
                     "data": "Title",

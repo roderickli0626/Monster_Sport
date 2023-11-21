@@ -68,7 +68,14 @@ namespace MonsterGame
                 ServerValidator1.IsValid = false;
                 return;
             }
-            Response.Redirect("~/SettingFeedback.aspx");
+            else
+            {
+                TxtTitle.Text = "";
+                TxtDescription.Text = "";
+                ServerValidator1.ErrorMessage = "Feedback Sent Successfully.";
+                ServerValidator1.IsValid = false;
+            }
+            //Response.Redirect("~/SettingFeedback.aspx");
         }
     }
 }

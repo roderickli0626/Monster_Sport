@@ -3,6 +3,7 @@ using MonsterGame;
 using MonsterGame.Common;
 using MonsterGame.Controller;
 using MonsterGame.DAO;
+using MonsterGame.Model;
 using MonsterGame.Util;
 using System;
 using System.Collections.Generic;
@@ -42,9 +43,17 @@ namespace MonsterGame
 
             if (!IsPostBack)
             {
+                LoadUserGames();
                 LoadInfo();
                 SetVisible();
             }
+        }
+        private void LoadUserGames()
+        {
+            GameController gameController = new GameController();
+            List<GameCheck> list = gameController.FindUserGames(user.Id);
+            RepeaterGame.DataSource = list;
+            RepeaterGame.DataBind();
         }
 
         private void LoadInfo()
@@ -57,6 +66,9 @@ namespace MonsterGame
             Prize.InnerText = "€ " + Math.Round(game.Prize ?? 0, 2);
             TxtBalance.Text = "€ " + (double.IsNaN(Math.Round(user.Balance ?? 0, 2)) ? "0.00" : Math.Round(user.Balance ?? 0, 2).ToString());
             GameTitle.InnerText = "Torneo Nr " + game.Id + ": dettaglio";
+
+            GameImage.Attributes["src"] = "~/Upload/Game/" + (string.IsNullOrEmpty(game.Image1) ? "default.jpg" : game.Image1);
+            GameNote.InnerText = game.Note;
         }
 
         private void SetVisible()

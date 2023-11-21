@@ -171,6 +171,11 @@
     <section class="game-section padding-top padding-bottom bg_img" style="background: url(Content/Images/gamebg.jpeg); background-attachment: fixed;">
         <div class="container">
             <form runat="server" id="form1" autocomplete="off">
+                <div class="row justify-content-center mb-5">
+                    <div class="col-lg-5 col-xl-5 pt-1 d-flex">
+                        <asp:DropDownList runat="server" ID="ComboStatus" CssClass="form-select form--control" ClientIDMode="Static" OnSelectedIndexChanged="ComboStatus_SelectedIndexChanged" AutoPostBack="true"></asp:DropDownList>
+                    </div>
+                </div>
                 <div class="row gy-4 justify-content-center">
                     <asp:Repeater runat="server" ID="RepeaterGame">
                         <ItemTemplate>

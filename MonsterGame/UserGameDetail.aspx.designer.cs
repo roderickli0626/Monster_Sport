@@ -150,6 +150,33 @@ namespace MonsterGame
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl liWinner;
 
         /// <summary>
+        /// liGame control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liGame;
+
+        /// <summary>
+        /// GameImage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlImage GameImage;
+
+        /// <summary>
+        /// GameNote control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl GameNote;
+
+        /// <summary>
         /// DivMyTicket control.
         /// </summary>
         /// <remarks>
@@ -184,6 +211,24 @@ namespace MonsterGame
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl Prize;
+
+        /// <summary>
+        /// DivGameContent control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl DivGameContent;
+
+        /// <summary>
+        /// RepeaterGame control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater RepeaterGame;
 
         /// <summary>
         /// ScriptManager control.

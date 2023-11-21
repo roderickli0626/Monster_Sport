@@ -1,6 +1,126 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Page.Master" AutoEventWireup="true" CodeBehind="UserGameDetail.aspx.cs" Inherits="MonsterGame.UserGameDetail" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link rel="stylesheet" href="Content/CSS/datatables.css" />
+    <style>
+        .box {
+            position: relative;
+            background: #eeee;
+            float: left;
+        }
+
+        .ribbon {
+            position: absolute;
+            right: -5px;
+            top: -5px;
+            z-index: 1;
+            overflow: hidden;
+            width: 93px;
+            height: 93px;
+            text-align: right;
+        }
+
+            .ribbon span {
+                font-size: 0.8rem;
+                color: #fff;
+                text-transform: uppercase;
+                text-align: center;
+                font-weight: bold;
+                line-height: 32px;
+                transform: rotate(45deg);
+                width: 125px;
+                display: block;
+                background: #79a70a;
+                background: linear-gradient(#9bc90d 0%, #79a70a 100%);
+                box-shadow: 0 3px 10px -5px rgba(0, 0, 0, 1);
+                position: absolute;
+                top: 17px;
+            }
+
+                .ribbon span::before {
+                    content: '';
+                    position: absolute;
+                    left: 0px;
+                    top: 100%;
+                    z-index: -1;
+                    border-left: 3px solid #79A70A;
+                    border-right: 3px solid transparent;
+                    border-bottom: 3px solid transparent;
+                    border-top: 3px solid #79A70A;
+                }
+
+                .ribbon span::after {
+                    content: '';
+                    position: absolute;
+                    right: 0%;
+                    top: 100%;
+                    z-index: -1;
+                    border-right: 3px solid #79A70A;
+                    border-left: 3px solid transparent;
+                    border-bottom: 3px solid transparent;
+                    border-top: 3px solid #79A70A;
+                }
+
+        .red span {
+            background: linear-gradient(#f70505 0%, #8f0808 100%);
+        }
+
+            .red span::before {
+                border-left-color: #8f0808;
+                border-top-color: #8f0808;
+            }
+
+            .red span::after {
+                border-right-color: #8f0808;
+                border-top-color: #8f0808;
+            }
+
+        .blue span {
+            background: linear-gradient(#2989d8 0%, #1e5799 100%);
+        }
+
+            .blue span::before {
+                border-left-color: #1e5799;
+                border-top-color: #1e5799;
+            }
+
+            .blue span::after {
+                border-right-color: #1e5799;
+                border-top-color: #1e5799;
+            }
+
+        .foo {
+            clear: both;
+        }
+
+        .bar {
+            content: "";
+            left: 0px;
+            top: 100%;
+            z-index: -1;
+            border-left: 3px solid #79a70a;
+            border-right: 3px solid transparent;
+            border-bottom: 3px solid transparent;
+            border-top: 3px solid #79a70a;
+        }
+
+        .baz {
+            font-size: 1rem;
+            color: #fff;
+            text-transform: uppercase;
+            text-align: center;
+            font-weight: bold;
+            line-height: 2em;
+            transform: rotate(45deg);
+            width: 100px;
+            display: block;
+            background: #79a70a;
+            background: linear-gradient(#9bc90d 0%, #79a70a 100%);
+            box-shadow: 0 3px 10px -5px rgba(0, 0, 0, 1);
+            position: absolute;
+            top: 100px;
+            left: 1000px;
+        }
+    </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder" runat="server">
     <section class="inner-banner bg_img" style="background: url('Content/Images/stadium3.jpg') center;">
@@ -43,6 +163,15 @@
                             </li>
                             <li runat="server" id="liWinner" style="padding-left:30px;">
                                 <a href="#winners" class="nav-link">VINCENTI</a>
+                            </li>
+                            <li runat="server" id="liGame" style="padding-left:30px;">
+                                <a href="#games" class="nav-link">I MIEI TORNEI</a>
+                            </li>
+                            <li style="padding-top: 30px;">
+                                <img src="Upload/Game/default.jpg" id="GameImage" runat="server" clientidmode="Static" alt="service-image" class="img-thumbnail" style="height: auto; width: 100%;" />
+                            </li>
+                            <li style="padding-top: 30px;">
+                                <p runat="server" id="GameNote"></p>
                             </li>
                         </ul>
                     </div>
@@ -101,6 +230,36 @@
                                         <tbody>
                                         </tbody>
                                     </table>
+                                </div>
+                            </div>
+                            <div runat="server" id="DivGameContent" class="content-item mb-0">
+                                <h3 class="title" id="games" style="padding-top: 120px;">I MIEI TORNEI</h3>
+                                <div class="row gy-4 justify-content-center">
+                                    <asp:Repeater runat="server" ID="RepeaterGame">
+                                        <ItemTemplate>
+                                            <div class="col-lg-4 col-xl-4 col-md-6 col-sm-6">
+                                                <div class="game-item">
+                                                    <div class="game-inner">
+                                                        <div class="game-item__thumb">
+                                                            <%# Eval("Mark") %>
+                                                            <img src="Upload/Game/<%# (Eval("Image1") == "" || Eval("Image1") == null) ? "default.jpg" : Eval("Image1") %>" alt="game">
+                                                        </div>
+                                                        <div class="game-item__content">
+                                                            <h4 class="title"><%# Eval("Title") %></h4>
+                                                            <p class="invest-info">Quota ingresso: <span class="invest-amount">€ <%# Eval("Fee") %></span></p>
+                                                            <p class="invest-info">Player necessari: <span class="invest-amount"><%# Eval("MinPlayers") %></span></p>
+                                                            <p class="invest-info">Player attuali: <span class="invest-amount"><%# Eval("RealPlayers") %></span></p>
+                                                            <p class="invest-info">Numero di squadre: <span class="invest-amount TeamShow" style="cursor: pointer;" data-id="<%# Eval("Id") %>" data-img="<%# Eval("Image2") %>"><%# Eval("NumberOfTeams") %></span></p>
+                                                            <p class="invest-info">Premio min.: <span class="invest-amount">€ <%# Eval("Prize") %></span></p>
+                                                            <p class="invest-info">Vincenti: <span class="invest-amount"><%# Eval("Winners") %></span></p>
+                                                            <a class="cmn--btn active btn--md radius-1" href="UserGameDetail.aspx?gameId=<%# Eval("Id") %>"><%# Eval("ButtonTitle") %></a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="ball"></div>
+                                                </div>
+                                            </div>
+                                        </ItemTemplate>
+                                    </asp:Repeater>
                                 </div>
                             </div>
                         </div>
@@ -598,6 +757,7 @@
             };
 
             proxy.client.receivePrizeNotification = function (message) {
+                alert(message);
                 datatableForWinner.fnDraw();
             };
 
