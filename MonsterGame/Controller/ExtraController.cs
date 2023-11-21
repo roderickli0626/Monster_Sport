@@ -14,6 +14,11 @@ namespace MonsterGame.Controller
         private GameBoardDAO boardDAO;
         private FeedbackDAO feedbackDAO;
         private NotificationDAO notificationDAO;
+
+        private List<SummaryCheck> userSummary;
+        private List<SummaryCheck> agencySummary;
+        private List<SummaryCheck> masterSummary;
+        private List<SummaryCheck> adminSummary;
         public ExtraController() 
         { 
             boardDAO = new GameBoardDAO();
@@ -178,6 +183,140 @@ namespace MonsterGame.Controller
                 board.Description = description;
                 board.IsNew = true;
                 return boardDAO.Update(board);
+            }
+        }
+
+        public SearchResult SearchSummary(int start, int length, int ownerID, int status, DateTime? from, DateTime? to)
+        {
+            SearchResult result = new SearchResult();
+            User user = new UserDAO().FindByID(ownerID);
+            if (ownerID != 0 && user == null) { return result; }
+            GetSummary(status, from , to);
+            if (ownerID == 0)
+            {
+                result.TotalCount = adminSummary.Count();
+                adminSummary = adminSummary.Skip(start).Take(length).ToList();
+                result.ResultList = adminSummary;
+            }
+            else if (user.Role == (int)Role.ADMIN)
+            {
+                masterSummary = masterSummary.Where(m => m.ParentID == user.Id).ToList();
+                result.TotalCount = masterSummary.Count();
+                masterSummary = masterSummary.Skip(start).Take(length).ToList();
+                result.ResultList = masterSummary;
+            }
+            else if (user.Role ==  (int)Role.MASTER)
+            {
+                agencySummary = agencySummary.Where(a => a.ParentID == user.Id).ToList();
+                result.TotalCount = agencySummary.Count();
+                agencySummary = agencySummary.Skip(start).Take(length).ToList();
+                result.ResultList = agencySummary;
+            }
+            else if (user.Role == (int)Role.AGENCY)
+            {
+                userSummary = userSummary.Where(u => u.ParentID == user.Id).ToList();
+                result.TotalCount = userSummary.Count();
+                userSummary = userSummary.Skip(start).Take(length).ToList();
+                result.ResultList = userSummary;
+            }
+
+            //IEnumerable<Movement> movementList = movementDAO.FindAll().OrderByDescending(m => m.MoveDate);
+            //movementList = movementList.Where(m => m.User.Name.Contains(receiver) && ((m.User1?.Name ?? "").Contains(sender)));
+
+            //if (from != null)
+            //    movementList = movementList.Where(u => u.MoveDate >= from.Value);
+
+            //if (to != null)
+            //    movementList = movementList.Where(u => u.MoveDate <= to.Value);
+
+            //result.TotalCount = movementList.Count();
+            //movementList = movementList.Skip(start).Take(length);
+
+            //List<object> checks = new List<object>();
+            //foreach (Movement movement in movementList)
+            //{
+            //    MovementCheck usercheck = new MovementCheck(movement);
+            //    if (string.IsNullOrEmpty(usercheck.Sender) && usercheck.Note.Contains("Deleted"))
+            //    {
+            //        usercheck.Sender = usercheck.Note.Split(' ')[1];
+            //    }
+            //    else if (string.IsNullOrEmpty(usercheck.Sender)) usercheck.Sender = "Super Admin";
+            //    checks.Add(usercheck);
+            //}
+            //result.ResultList = checks;
+
+            return result;
+        }
+
+        private void GetSummary(int status, DateTime? from, DateTime? to)
+        {
+            List<User> allUsers = new UserDAO().FindAll().Where(u => u.Role == (int)Role.USER).ToList();
+            userSummary = new List<SummaryCheck>();
+            foreach (User user in allUsers)
+            {
+                SummaryCheck summaryCheck = new SummaryCheck(user);
+
+                List<Ticket> ticketList = new TicketDAO().FindByUser(user.Id).ToList();
+
+                if (from != null) ticketList = ticketList.Where(u => u.GetDate >= from.Value).ToList();
+                if (to != null) ticketList = ticketList.Where(u => u.GetDate <= to.Value).ToList();
+                if (status != 0) ticketList = ticketList.Where(x => x.Game.Status == status).ToList();
+
+                summaryCheck.Tickets = ticketList.Count();
+                summaryCheck.Players = 1;
+                summaryCheck.Amount = ticketList.Sum(t => t.Game.Fee ?? 0);
+
+                List<int> gameList = ticketList.Select(t => t.Game.Id).ToList();
+                List<Winner> winnerList = new WinnerDAO().FindAll().Where(w => w.UserID == user.Id).ToList();
+                summaryCheck.Prize = winnerList.Where(x => gameList.Contains(x.GameID ?? 0)).Sum(w => w.Prize) ?? 0;
+                summaryCheck.Utile = summaryCheck.Amount - summaryCheck.Prize;
+
+                userSummary.Add(summaryCheck);
+            }
+
+            List<User> allAgency = new UserDAO().FindAll().Where(u => u.Role == (int)Role.AGENCY).ToList();
+            agencySummary = new List<SummaryCheck>();
+            foreach(User agency in allAgency)
+            {
+                SummaryCheck agencySummaryCheck = new SummaryCheck(agency);
+                List<SummaryCheck> summaryChecks = userSummary.Where(u => u.ParentID == agency.Id).ToList();
+                agencySummaryCheck.Tickets = summaryChecks.Sum(t => t.Tickets);
+                agencySummaryCheck.Players = summaryChecks.Sum(t => t.Players);
+                agencySummaryCheck.Amount = summaryChecks.Sum(t => t.Amount);
+                agencySummaryCheck.Prize = summaryChecks.Sum(t => t.Prize);
+                agencySummaryCheck.Utile = summaryChecks.Sum(t => t.Utile);
+
+                agencySummary.Add(agencySummaryCheck);
+            }
+
+            List<User> allMasters = new UserDAO().FindAll().Where(u => u.Role == (int)Role.MASTER).ToList();
+            masterSummary = new List<SummaryCheck>();
+            foreach (User master in allMasters)
+            {
+                SummaryCheck masterSummaryCheck = new SummaryCheck(master);
+                List<SummaryCheck> summaryChecks = agencySummary.Where(u => u.ParentID == master.Id).ToList();
+                masterSummaryCheck.Tickets = summaryChecks.Sum(t => t.Tickets);
+                masterSummaryCheck.Players = summaryChecks.Sum(t => t.Players);
+                masterSummaryCheck.Amount = summaryChecks.Sum(t => t.Amount);
+                masterSummaryCheck.Prize = summaryChecks.Sum(t => t.Prize);
+                masterSummaryCheck.Utile = summaryChecks.Sum(t => t.Utile);
+
+                masterSummary.Add(masterSummaryCheck);
+            }
+
+            List<User> allAdmins = new UserDAO().FindAll().Where(u => u.Role == (int)Role.ADMIN).ToList();
+            adminSummary = new List<SummaryCheck>();
+            foreach (User admin in allAdmins)
+            {
+                SummaryCheck adminSummaryCheck = new SummaryCheck(admin);
+                List<SummaryCheck> summaryChecks = masterSummary.Where(u => u.ParentID == admin.Id).ToList();
+                adminSummaryCheck.Tickets = summaryChecks.Sum(t => t.Tickets);
+                adminSummaryCheck.Players = summaryChecks.Sum(t => t.Players);
+                adminSummaryCheck.Amount = summaryChecks.Sum(t => t.Amount);
+                adminSummaryCheck.Prize = summaryChecks.Sum(t => t.Prize);
+                adminSummaryCheck.Utile = summaryChecks.Sum(t => t.Utile);
+
+                adminSummary.Add(adminSummaryCheck);
             }
         }
     }

@@ -8,7 +8,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using MonsterGame.DAO;
 
-namespace MonsterSport
+namespace MonsterGame
 {
     public partial class SettingFeedback : System.Web.UI.Page
     {

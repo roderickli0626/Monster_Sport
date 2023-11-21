@@ -463,5 +463,26 @@ namespace MonsterGame.Controller
             }
             return new MovementDAO().Insert(movement);
         }
+
+        public List<User> FindChildren(int userID)
+        {
+            List<User> result = new List<User>();
+            if (userID == 0)
+            {
+                result = userDao.FindAll().Where(u => u.Role != (int)Role.USER).ToList();
+            }
+            else
+            {
+                User user = userDao.FindByID(userID);
+                if (user.Role == (int)Role.AGENCY) { return result; }
+                result = userDao.FindByParentID(userID);
+                foreach (User child in result)
+                {
+                    result = result.Concat(FindChildren(child.Id)).ToList();
+                }
+            }
+
+            return result;
+        }
     }
 }

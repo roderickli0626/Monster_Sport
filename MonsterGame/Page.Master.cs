@@ -79,6 +79,7 @@ namespace MonsterGame
                 liLogin.Visible = false;
                 liBoards.Visible = false;
                 liFeedback.Visible = false;
+                liSummary.Visible = false;
             }
             else
             {

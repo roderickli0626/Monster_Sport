@@ -603,6 +603,34 @@ namespace MonsterGame
 
             ResponseProc(success, "");
         }
+
+        [WebMethod(EnableSession = true)]
+        [ScriptMethod(UseHttpGet = true, ResponseFormat = ResponseFormat.Json)]
+        public void FindSummary(int draw, int start, int length, int searchOwner, int status, string searchFrom, string searchTo)
+        {
+            User user = loginSystem.GetCurrentUserAccount();
+            if (!loginSystem.IsSuperAdminLoggedIn() && user == null) return;
+
+            DateTime? from = null;
+            DateTime? to = null;
+
+            if (!string.IsNullOrEmpty(searchFrom))
+                from = DateTime.ParseExact(searchFrom, "dd/MM/yyyy HH.mm", CultureInfo.InvariantCulture);
+
+            if (!string.IsNullOrEmpty(searchTo))
+                to = DateTime.ParseExact(searchTo, "dd/MM/yyyy HH.mm", CultureInfo.InvariantCulture);
+
+            ExtraController extraController = new ExtraController();
+            SearchResult searchResult = extraController.SearchSummary(start, length, searchOwner, status, from, to);
+
+            JSDataTable result = new JSDataTable();
+            result.data = (IEnumerable<object>)searchResult.ResultList;
+            result.draw = draw;
+            result.recordsTotal = searchResult.TotalCount;
+            result.recordsFiltered = searchResult.TotalCount;
+
+            ResponseJson(result);
+        }
         protected void ResponseJson(Object result)
         {
             HttpResponse Response = Context.Response;

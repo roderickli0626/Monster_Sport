@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Owin.Security;
+using System;
 using System.Collections.Generic;
 using System.Data.Linq;
 using System.Linq;
@@ -17,6 +18,11 @@ namespace MonsterGame.DAO
         public User FindByID(int id)
         {
             return GetContext().Users.Where(g => g.Id == id).FirstOrDefault();
+        }
+
+        public List<User> FindByParentID(int parentID)
+        {
+            return GetContext().Users.Where(u => u.ParentID == parentID).ToList();
         }
         public User FindByEmail(string email)
         {

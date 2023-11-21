@@ -9,7 +9,7 @@ using System.Web.UI.WebControls;
 using MonsterGame.Model;
 using MonsterGame.Util;
 
-namespace MonsterSport
+namespace MonsterGame
 {
     public partial class MessageBoard : System.Web.UI.Page
     {

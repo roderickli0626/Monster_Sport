@@ -10,7 +10,7 @@ using MonsterGame.Common;
 using MonsterGame.Util;
 using PayPal.Api;
 
-namespace MonsterSport
+namespace MonsterGame
 {
     public partial class MessageBoardDetail : System.Web.UI.Page
     {

@@ -11,7 +11,7 @@ namespace MonsterGame
 {
 
 
-    public partial class Feedback
+    public partial class Summary
     {
 
         /// <summary>
@@ -24,39 +24,39 @@ namespace MonsterGame
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
 
         /// <summary>
-        /// TxtSearch control.
+        /// TxtFrom control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TxtSearch;
+        protected global::System.Web.UI.WebControls.TextBox TxtFrom;
 
         /// <summary>
-        /// TxtTitle control.
+        /// TxtTo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TxtTitle;
+        protected global::System.Web.UI.WebControls.TextBox TxtTo;
 
         /// <summary>
-        /// TxtDateCreator control.
+        /// ComboStatus control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TxtDateCreator;
+        protected global::System.Web.UI.WebControls.DropDownList ComboStatus;
 
         /// <summary>
-        /// TxtDescription control.
+        /// ComboGroup control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TxtDescription;
+        protected global::System.Web.UI.WebControls.DropDownList ComboGroup;
     }
 }

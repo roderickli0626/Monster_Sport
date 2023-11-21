@@ -67,6 +67,7 @@
                                 <li runat="server" id="liNews"><a href="Notifications.aspx">Notizie</a></li>
                                 <li runat="server" id="liBoards"><a href="MessageBoards.aspx">Bacheca Messaggi</a></li>
                                 <li runat="server" id="liFeedback"><a href="Feedback.aspx">Feedback</a></li>
+                                <li runat="server" id="liSummary"><a href="Summary.aspx">Summary</a></li>
                             </ul>
                         </li>
                         <li runat="server" id="liContact"><a href="Contact.aspx">Contatti</a></li>

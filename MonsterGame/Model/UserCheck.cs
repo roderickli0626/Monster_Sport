@@ -79,5 +79,9 @@ namespace MonsterGame.Model
         {
             get; set;
         }
+        public string fullTitle
+        {
+            get; set;
+        }
     }
 }

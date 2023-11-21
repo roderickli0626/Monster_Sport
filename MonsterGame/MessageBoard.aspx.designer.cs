@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace MonsterSport
+namespace MonsterGame
 {
 
 
