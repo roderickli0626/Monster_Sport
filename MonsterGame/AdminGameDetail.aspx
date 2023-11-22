@@ -37,6 +37,7 @@
                 <asp:HiddenField ID="HfWinnerID" runat="server" ClientIDMode="Static" />
                 <asp:HiddenField ID="HfGameImage1" runat="server" ClientIDMode="Static" />
                 <asp:HiddenField ID="HfGameImage2" runat="server" ClientIDMode="Static" />
+                <asp:HiddenField ID="HfGameImage3" runat="server" ClientIDMode="Static" />
                 <div class="row">
                     <div class="col-12 col-md-3">
                         <ul class="privacy-policy-sidebar-menu" style="padding-top:120px;">
@@ -277,7 +278,7 @@
                                                 <asp:TextBox runat="server" ID="TxtTax" ClientIDMode="Static" CssClass="form-control form--control style-two"></asp:TextBox>
                                             </div>
                                         </div>
-                                        <div class="col-md-4">
+                                        <div class="col-md-12">
                                             <div class="form-group">
                                                 <label for="TxtNote" class="form-label">Note</label>
                                                 <asp:TextBox runat="server" ID="TxtNote" ClientIDMode="Static" CssClass="form-control form--control style-two" TextMode="MultiLine" Rows="2"></asp:TextBox>
@@ -295,6 +296,13 @@
                                                 <label for="TxtNote" class="form-label">Photo 2</label>
                                                 <img src="Content/Images/gamemark3.jpg" id="GameImage2" runat="server" clientidmode="Static" alt="service-image" class="img-thumbnail" style="height: 150px; width: 100%;" />
                                                 <asp:FileUpload runat="server" ID="ImageFile2" ClientIDMode="Static" CssClass="hidden-input" />
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 col-md-4">
+                                            <div class="form-group">
+                                                <label for="TxtNote" class="form-label">Photo 3</label>
+                                                <img src="Content/Images/gamemark3.jpg" id="GameImage3" runat="server" clientidmode="Static" alt="service-image" class="img-thumbnail" style="height: 150px; width: 100%;" />
+                                                <asp:FileUpload runat="server" ID="ImageFile3" ClientIDMode="Static" CssClass="hidden-input" />
                                             </div>
                                         </div>
                                         <div class="col-md-2">
@@ -395,12 +403,20 @@
                 readURL(this, '#GameImage2', "#HfGameImage2");
             });
 
+            $("#ImageFile3").change(function () {
+                readURL(this, '#GameImage3', "#HfGameImage3");
+            });
+
             $("#GameImage1").click(function () {
                 $("#ImageFile1").click();
             });
 
             $("#GameImage2").click(function () {
                 $("#ImageFile2").click();
+            });
+
+            $("#GameImage3").click(function () {
+                $("#ImageFile3").click();
             });
         };
 
@@ -422,7 +438,7 @@
             $("#gameDetailModal").modal('show');
             $(".modal-title").text("AGGIORNA TORNEO");
         });
-    </script>
+                                        </script>
     <script>
         $(function () {
             // Ticket Table

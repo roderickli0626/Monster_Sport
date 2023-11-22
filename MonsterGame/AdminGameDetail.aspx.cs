@@ -69,7 +69,7 @@ namespace MonsterGame
             Prize.InnerText = "€ " + Math.Round(game.Prize ?? 0, 2);
             GameTitle.InnerText = "Torneo nr " + game.Id + ": Dettagli";
 
-            GameImage.Attributes["src"] = "~/Upload/Game/" + (string.IsNullOrEmpty(game.Image1) ? "default.jpg" : game.Image1);
+            GameImage.Attributes["src"] = "~/Upload/Game/" + (string.IsNullOrEmpty(game.Image3) ? "default.jpg" : game.Image3);
             GameNote.InnerText = game.Note;
 
             // Load Modal Info
@@ -90,6 +90,7 @@ namespace MonsterGame
             TxtWinners.Text = game.NumOfWinners.ToString();
             GameImage1.Attributes["src"] = "~/Upload/Game/" + (string.IsNullOrEmpty(game.Image1) ? "default.jpg" : game.Image1);
             GameImage2.Attributes["src"] = "~/Upload/Game/" + (string.IsNullOrEmpty(game.Image2) ? "default.jpg" : game.Image2);
+            GameImage3.Attributes["src"] = "~/Upload/Game/" + (string.IsNullOrEmpty(game.Image3) ? "default.jpg" : game.Image3);
         }
 
         private void SetVisible()
@@ -329,8 +330,9 @@ namespace MonsterGame
             //Image Save
             string imageTitle1 = UploadImage(HfGameImage1);
             string imageTitle2 = UploadImage(HfGameImage2);
+            string imageTitle3 = UploadImage(HfGameImage3);
 
-            bool success = gameController.SaveGame(gameID, title, sdate, edate, fee, tax, status, minPlayers, teamNum, note, percent1, percent2, percent3, percent4, percent5, NumOfWinners, teamList, imageTitle1, imageTitle2);
+            bool success = gameController.SaveGame(gameID, title, sdate, edate, fee, tax, status, minPlayers, teamNum, note, percent1, percent2, percent3, percent4, percent5, NumOfWinners, teamList, imageTitle1, imageTitle2, imageTitle3);
             if (!success)
             {
                 ServerValidator4.IsValid = false;

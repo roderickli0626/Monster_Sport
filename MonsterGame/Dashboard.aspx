@@ -241,7 +241,7 @@
                                         <div class="game-item__thumb">
                                             <%# Eval("Mark") %>
                                             <%--<img src="Content/Images/<%# Eval("Image") %>" alt="game">--%>
-                                            <img src="Upload/Game/<%# (Eval("Image1") == "" || Eval("Image1") == null) ? "default.jpg" : Eval("Image1") %>" alt="game">
+                                            <img class="GameImage" src="Upload/Game/<%# (Eval("Image1") == "" || Eval("Image1") == null) ? "default.jpg" : Eval("Image1") %>" alt="game">
                                         </div>
                                         <div class="game-item__content">
                                             <h4 class="title"><%# Eval("Title") %></h4>
@@ -302,7 +302,7 @@
                                         <h5 class="p-5 teamNames" style="white-space:nowrap;"><br /></h5>
                                     </div>
                                     <div class="col-md-8 text-center d-flex justify-content-center" style="padding-right: 30px;">
-                                        <img src="Upload/Game/default.jpg" id="TeamImage" runat="server" clientidmode="Static" alt="service-image" class="m-3 mt-auto mb-auto img-thumbnail" style="max-width: 100%;" />
+                                        <img src="Upload/Game/default.jpg" id="TeamImage" runat="server" clientidmode="Static" alt="service-image" class="m-3 mt-auto mb-auto img-thumbnail GameImage" style="max-width: 100%;" />
                                     </div>
                                 </div>
                             </div>
@@ -464,6 +464,7 @@
             "processing": true,
             "ordering": false,
             "columns": [{
+                "class": "GameImage",
                 "render": function (data, type, row, meta) {
                     return '<div class="game-table-item"><div class="game-item__thumb mb-0"><span class="id-mark">' + row.Id + '</span>' + row.Mark +
                         '<img src="Upload/Game/' + ((row.Image1 == null || row.Image1 == "") ? "default.jpg" : row.Image1) + '" alt = "game"></div></div>';
@@ -578,6 +579,36 @@
                     console.log('Error:', textStatus, errorThrown);
                 }
             });
+        });
+
+        datatable.on('click', '.GameImage', function (e) {
+            var src = $($(this).find('img')).attr('src');
+            $('<div>').css({
+                background: 'RGBA(0,0,0,.5) url(' + src + ') no-repeat center',
+                backgroundSize: 'contain',
+                width: '100%', height: '100%',
+                position: 'fixed',
+                zIndex: '10000',
+                top: '0', left: '0',
+                cursor: 'zoom-out'
+            }).click(function () {
+                $(this).remove();
+            }).appendTo('body');
+        });
+
+        $('.GameImage').addClass('img-enlargable').click(function () {
+            var src = $(this).attr('src');
+            $('<div>').css({
+                background: 'RGBA(0,0,0,.5) url(' + src + ') no-repeat center',
+                backgroundSize: 'contain',
+                width: '100%', height: '100%',
+                position: 'fixed',
+                zIndex: '10000',
+                top: '0', left: '0',
+                cursor: 'zoom-out'
+            }).click(function () {
+                $(this).remove();
+            }).appendTo('body');
         });
     </script>
 </asp:Content>

@@ -205,7 +205,7 @@ namespace MonsterGame.Controller
 
         public bool SaveGame(int? gameID, string title, DateTime? sdate, DateTime? edate, double fee, double tax, 
             int status, int minPlayers, int teamNum, string note, double percent1, double percent2, double percent3, 
-            double percent4, double percent5, int numOfWinners, List<int> teamList, string image1, string image2)
+            double percent4, double percent5, int numOfWinners, List<int> teamList, string image1, string image2, string image3)
         {
             Game game = gameDao.FindByID(gameID ?? 0);
             if (game == null)
@@ -229,6 +229,7 @@ namespace MonsterGame.Controller
                 game.NumOfWinners = numOfWinners;
                 game.Image1 = image1;
                 game.Image2 = image2;
+                game.Image3 = image3;
 
                 int savedGameID =  gameDao.Insert(game);
                 foreach (int teamID in teamList)
@@ -263,6 +264,7 @@ namespace MonsterGame.Controller
                 game.NumOfWinners = numOfWinners;
                 if (!string.IsNullOrEmpty(image1)) game.Image1 = image1;
                 if (!string.IsNullOrEmpty(image2)) game.Image2 = image2;
+                if (!string.IsNullOrEmpty(image3)) game.Image3 = image3;
 
                 List<int> existedTeamList = teamForGameDao.FindByGame(game.Id).Select(t => t.TeamID ?? 0).ToList();
                 bool areEqual = existedTeamList.OrderBy(x => x).SequenceEqual(teamList.OrderBy(x => x));

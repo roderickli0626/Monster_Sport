@@ -114,6 +114,15 @@ namespace MonsterGame
         protected global::System.Web.UI.WebControls.HiddenField HfGameImage2;
 
         /// <summary>
+        /// HfGameImage3 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField HfGameImage3;
+
+        /// <summary>
         /// liWinner control.
         /// </summary>
         /// <remarks>
@@ -535,6 +544,24 @@ namespace MonsterGame
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.FileUpload ImageFile2;
+
+        /// <summary>
+        /// GameImage3 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlImage GameImage3;
+
+        /// <summary>
+        /// ImageFile3 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.FileUpload ImageFile3;
 
         /// <summary>
         /// TxtPercent1 control.

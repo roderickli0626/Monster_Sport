@@ -261,7 +261,7 @@
                                                     <div class="game-inner">
                                                         <div class="game-item__thumb">
                                                             <%# Eval("Mark") %>
-                                                            <img src="Upload/Game/<%# (Eval("Image1") == "" || Eval("Image1") == null) ? "default.jpg" : Eval("Image1") %>" alt="game">
+                                                            <img class="GameImage" src="Upload/Game/<%# (Eval("Image1") == "" || Eval("Image1") == null) ? "default.jpg" : Eval("Image1") %>" alt="game">
                                                         </div>
                                                         <div class="game-item__content">
                                                             <h4 class="title"><%# Eval("Title") %></h4>
@@ -420,6 +420,21 @@
                         console.log('Error:', textStatus, errorThrown);
                     }
                 });
+            });
+
+            $('.GameImage').addClass('img-enlargable').click(function () {
+                var src = $(this).attr('src');
+                $('<div>').css({
+                    background: 'RGBA(0,0,0,.5) url(' + src + ') no-repeat center',
+                    backgroundSize: 'contain',
+                    width: '100%', height: '100%',
+                    position: 'fixed',
+                    zIndex: '10000',
+                    top: '0', left: '0',
+                    cursor: 'zoom-out'
+                }).click(function () {
+                    $(this).remove();
+                }).appendTo('body');
             });
         })
     </script>

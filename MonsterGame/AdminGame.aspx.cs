@@ -120,8 +120,9 @@ namespace MonsterGame
             //Image Save
             string imageTitle1 = UploadImage(HfGameImage1);
             string imageTitle2 = UploadImage(HfGameImage2);
+            string imageTitle3 = UploadImage(HfGameImage3);
 
-            bool success = gameController.SaveGame(gameID, title, sdate, edate, fee, tax, status, minPlayers, teamNum, note, percent1, percent2, percent3, percent4, percent5, NumOfWinners, teamList, imageTitle1, imageTitle2);
+            bool success = gameController.SaveGame(gameID, title, sdate, edate, fee, tax, status, minPlayers, teamNum, note, percent1, percent2, percent3, percent4, percent5, NumOfWinners, teamList, imageTitle1, imageTitle2, imageTitle3);
             if (!success)
             {
                 ServerValidator.IsValid = false;

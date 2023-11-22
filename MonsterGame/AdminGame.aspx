@@ -213,6 +213,7 @@
                 <asp:HiddenField ID="HfGameID" runat="server" ClientIDMode="Static" />
                 <asp:HiddenField ID="HfGameImage1" runat="server" ClientIDMode="Static" />
                 <asp:HiddenField ID="HfGameImage2" runat="server" ClientIDMode="Static" />
+                <asp:HiddenField ID="HfGameImage3" runat="server" ClientIDMode="Static" />
                 <div class="row justify-content-center mb-5">
                     <div class="col-lg-4 col-xl-4 pt-1">
                         <asp:DropDownList runat="server" ID="ComboStatus" CssClass="form-select form--control" ClientIDMode="Static"></asp:DropDownList>
@@ -313,7 +314,7 @@
                                                 <asp:TextBox runat="server" ID="TxtTax" ClientIDMode="Static" CssClass="form-control form--control style-two"></asp:TextBox>
                                             </div>
                                         </div>
-                                        <div class="col-md-4">
+                                        <div class="col-md-12">
                                             <div class="form-group">
                                                 <label for="TxtNote" class="form-label">Note</label>
                                                 <asp:TextBox runat="server" ID="TxtNote" ClientIDMode="Static" CssClass="form-control form--control style-two" TextMode="MultiLine" Rows="2"></asp:TextBox>
@@ -331,6 +332,13 @@
                                                 <label for="TxtNote" class="form-label">Photo 2</label>
                                                 <img src="Content/Images/gamemark3.jpg" id="GameImage2" runat="server" clientidmode="Static" alt="service-image" class="img-thumbnail" style="height: 150px; width: 100%;" />
                                                 <asp:FileUpload runat="server" ID="ImageFile2" ClientIDMode="Static" CssClass="hidden-input" />
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 col-md-4">
+                                            <div class="form-group">
+                                                <label for="TxtNote" class="form-label">Photo 3</label>
+                                                <img src="Content/Images/gamemark3.jpg" id="GameImage3" runat="server" clientidmode="Static" alt="service-image" class="img-thumbnail" style="height: 150px; width: 100%;" />
+                                                <asp:FileUpload runat="server" ID="ImageFile3" ClientIDMode="Static" CssClass="hidden-input" />
                                             </div>
                                         </div>
                                         <div class="col-md-2">
@@ -400,7 +408,7 @@
                                         <h5 class="p-5 teamNames" style="white-space:nowrap;"><br /></h5>
                                     </div>
                                     <div class="col-md-8 text-center d-flex justify-content-center" style="padding-right: 30px;">
-                                        <img src="Upload/Game/default.jpg" id="TeamImage" runat="server" clientidmode="Static" alt="service-image" class="m-3 mt-auto mb-auto img-thumbnail" style="max-width: 100%;" />
+                                        <img src="Upload/Game/default.jpg" id="TeamImage" runat="server" clientidmode="Static" alt="service-image" class="m-3 mt-auto mb-auto img-thumbnail GameImage" style="max-width: 100%;" />
                                     </div>
                                 </div>
                             </div>
@@ -489,12 +497,20 @@
                 readURL(this, '#GameImage2', "#HfGameImage2");
             });
 
+            $("#ImageFile3").change(function () {
+                readURL(this, '#GameImage3', "#HfGameImage3");
+            });
+
             $("#GameImage1").click(function () {
                 $("#ImageFile1").click();
             });
 
             $("#GameImage2").click(function () {
                 $("#ImageFile2").click();
+            });
+
+            $("#GameImage3").click(function () {
+                $("#ImageFile3").click();
             });
         }
 
@@ -521,6 +537,7 @@
             $("#TxtWinners").val("");
             $("#GameImage1").attr('src', "Upload/Game/default.jpg");
             $("#GameImage2").attr('src', "Upload/Game/default.jpg");
+            $("#GameImage3").attr('src', "Upload/Game/default.jpg");
 
             return false;
         });
@@ -536,6 +553,7 @@
                 "processing": true,
                 "ordering": false,
                 "columns": [{
+                    "class": "GameImage",
                     "render": function (data, type, row, meta) {
                         return '<div class="game-table-item"><div class="game-item__thumb mb-0"><span class="id-mark">' + row.Id + '</span>' + row.Mark +
                             '<img src="Upload/Game/' + ((row.Image1 == null || row.Image1 == "") ? "default.jpg" : row.Image1) + '" alt = "game"></div></div>';
@@ -665,6 +683,7 @@
                 $("#TxtWinners").val(row.Winners);
                 $("#GameImage1").attr('src', "Upload/Game/" + (row.Image1 ? row.Image1 : "default.jpg"));
                 $("#GameImage2").attr('src', "Upload/Game/" + (row.Image2 ? row.Image2 : "default.jpg"));
+                $("#GameImage3").attr('src', "Upload/Game/" + (row.Image3 ? row.Image3 : "default.jpg"));
             });
 
             datatable.on('click', '.btn-delete', function (e) {
@@ -698,6 +717,36 @@
                     alert("Failed!");
                 }
             };
+
+            datatable.on('click', '.GameImage', function (e) {
+                var src = $($(this).find('img')).attr('src');
+                $('<div>').css({
+                    background: 'RGBA(0,0,0,.5) url(' + src + ') no-repeat center',
+                    backgroundSize: 'contain',
+                    width: '100%', height: '100%',
+                    position: 'fixed',
+                    zIndex: '10000',
+                    top: '0', left: '0',
+                    cursor: 'zoom-out'
+                }).click(function () {
+                    $(this).remove();
+                }).appendTo('body');
+            });
+
+            $('.GameImage').addClass('img-enlargable').click(function () {
+                var src = $(this).attr('src');
+                $('<div>').css({
+                    background: 'RGBA(0,0,0,.5) url(' + src + ') no-repeat center',
+                    backgroundSize: 'contain',
+                    width: '100%', height: '100%',
+                    position: 'fixed',
+                    zIndex: '10000',
+                    top: '0', left: '0',
+                    cursor: 'zoom-out'
+                }).click(function () {
+                    $(this).remove();
+                }).appendTo('body');
+            });
         })
     </script>
     <script>

@@ -67,7 +67,7 @@ namespace MonsterGame
             TxtBalance.Text = "€ " + (double.IsNaN(Math.Round(user.Balance ?? 0, 2)) ? "0.00" : Math.Round(user.Balance ?? 0, 2).ToString());
             GameTitle.InnerText = "Torneo Nr " + game.Id + ": dettaglio";
 
-            GameImage.Attributes["src"] = "~/Upload/Game/" + (string.IsNullOrEmpty(game.Image1) ? "default.jpg" : game.Image1);
+            GameImage.Attributes["src"] = "~/Upload/Game/" + (string.IsNullOrEmpty(game.Image3) ? "default.jpg" : game.Image3);
             GameNote.InnerText = game.Note;
         }
 
