@@ -55,8 +55,8 @@
                             <li style="padding-top: 30px;">
                                 <img src="Upload/Game/default.jpg" id="GameImage" runat="server" clientidmode="Static" alt="service-image" class="img-thumbnail" style="height: auto; width: 100%;" />
                             </li>
-                            <li style="padding-top: 30px;">
-                                <p runat="server" id="GameNote"></p>
+                            <li style="padding-top: 30px; font-size: 20px;">
+                                <pre runat="server" id="GameNote"></pre>
                             </li>
                         </ul>
                     </div>

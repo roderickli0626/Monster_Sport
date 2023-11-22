@@ -256,10 +256,12 @@
                             </div>
                             <div class="modal-body modal--body">
                                 <div class="d-flex">
-                                    <h5 class="p-5 teamNames" style="white-space: nowrap;">
-                                        <br />
-                                    </h5>
-                                    <img src="Upload/Game/default.jpg" id="TeamImage" runat="server" clientidmode="Static" alt="service-image" class="m-3 mt-auto mb-auto img-thumbnail" style="height: 100%; width: 100%;" />
+                                    <div class="col-md-4">
+                                        <h5 class="p-5 teamNames" style="white-space:nowrap;"><br /></h5>
+                                    </div>
+                                    <div class="col-md-8 text-center d-flex justify-content-center" style="padding-right: 30px;">
+                                        <img src="Upload/Game/default.jpg" id="TeamImage" runat="server" clientidmode="Static" alt="service-image" class="m-3 mt-auto mb-auto img-thumbnail" style="max-width: 100%;" />
+                                    </div>
                                 </div>
                             </div>
                             <div class="modal-footer modal--footer">
