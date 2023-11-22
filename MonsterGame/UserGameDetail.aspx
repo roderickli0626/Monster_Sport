@@ -2,6 +2,18 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link rel="stylesheet" href="Content/CSS/datatables.css" />
     <style>
+        .id-mark {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background-color: darkgreen;
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 30px;
+            font-size: 15px;
+        }
+
         .box {
             position: relative;
             background: #eeee;
@@ -237,7 +249,7 @@
                                 <div class="row gy-4 justify-content-center">
                                     <asp:Repeater runat="server" ID="RepeaterGame">
                                         <ItemTemplate>
-                                            <div class="col-lg-4 col-xl-4 col-md-6 col-sm-6">
+                                            <div class="col-lg-4 col-xl-4 col-md-6 col-sm-6 position-relative">
                                                 <div class="game-item">
                                                     <div class="game-inner">
                                                         <div class="game-item__thumb">
@@ -257,6 +269,7 @@
                                                     </div>
                                                     <div class="ball"></div>
                                                 </div>
+                                                <span class="id-mark top-0 mt-2 start-0 ms-4" style="z-index:2;"><%# Eval("Id") %></span>
                                             </div>
                                         </ItemTemplate>
                                     </asp:Repeater>
