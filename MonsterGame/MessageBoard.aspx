@@ -182,7 +182,7 @@
                                         <div class="game-item__thumb">
                                             <%# Eval("Mark") %>
                                             <%--<img src="Content/Images/<%# Eval("Image") %>" alt="game">--%>
-                                            <img src="Upload/Game/<%# (Eval("Image1") == "" || Eval("Image1") == null) ? "default.jpg" : Eval("Image1") %>" alt="game">
+                                            <img class="GameImage" src="Upload/Game/<%# (Eval("Image1") == "" || Eval("Image1") == null) ? "default.jpg" : Eval("Image1") %>" alt="game">
                                         </div>
                                         <div class="game-item__content">
                                             <h4 class="title"><%# Eval("Title") %></h4>
@@ -223,6 +223,28 @@
                         </div>
                     </div>
                 </div>
+                <div class=" modal custom--modal fade show" id="gameTeamsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-modal="true">
+                    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                        <div class="modal-content section-bg border-0">
+                            <div class="modal-header modal--header bg--base">
+                                <h4 class="modal-title text-dark">TEAMS</h4>
+                            </div>
+                            <div class="modal-body modal--body">
+                                <div class="d-flex">
+                                    <div class="col-md-4">
+                                        <h5 class="p-5 teamNames" style="white-space:nowrap;"><br /></h5>
+                                    </div>
+                                    <div class="col-md-8 text-center d-flex justify-content-center" style="padding-right: 30px;">
+                                        <img src="Upload/Game/default.jpg" id="TeamImage" runat="server" clientidmode="Static" alt="service-image" class="m-3 mt-auto mb-auto img-thumbnail GameImage" style="max-width: 100%;" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer modal--footer">
+                                <button type="button" class="btn btn--danger btn--md" data-bs-dismiss="modal">Chiudi</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </form>
         </div>
     </section>
@@ -244,5 +266,42 @@
         };
 
         $.connection.hub.start();
+
+        $(".TeamShow").click(function () {
+            var img = $(this)[0].dataset.img;
+            var id = $(this)[0].dataset.id;
+            $.ajax({
+                type: "GET",
+                url: 'DataService.asmx/GetTeams',
+                data: {
+                    gameID: id
+                },
+                success: function (res) {
+                    var dataArrayForTeams = res.data;
+                    $("#gameTeamsModal").modal('show');
+                    $(".teamNames").html(dataArrayForTeams.join('<br />'));
+                    $("#TeamImage").attr('src', "Upload/Game/" + (img ? img : "default.jpg"));
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    // Handle the error response
+                    console.log('Error:', textStatus, errorThrown);
+                }
+            });
+        });
+
+        $('.GameImage').addClass('img-enlargable').click(function () {
+            var src = $(this).attr('src');
+            $('<div>').css({
+                background: 'RGBA(0,0,0,.5) url(' + src + ') no-repeat center',
+                backgroundSize: 'contain',
+                width: '100%', height: '100%',
+                position: 'fixed',
+                zIndex: '10000',
+                top: '0', left: '0',
+                cursor: 'zoom-out'
+            }).click(function () {
+                $(this).remove();
+            }).appendTo('body');
+        });
     </script>
 </asp:Content>

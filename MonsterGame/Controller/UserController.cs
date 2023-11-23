@@ -26,7 +26,7 @@ namespace MonsterGame.Controller
         {
             SearchResult result = new SearchResult();
             IEnumerable<User> adminList = userDao.FindAll().Where(u => u.Role == (int)Role.ADMIN);
-            if (!string.IsNullOrEmpty(searchVal)) adminList = adminList.Where(x => x.Name.Contains(searchVal)).ToList();
+            if (!string.IsNullOrEmpty(searchVal)) adminList = adminList.Where(x => x.Name.ToLower().Contains(searchVal.ToLower())).ToList();
 
             result.TotalCount = adminList.Count();
             adminList = adminList.Skip(start).Take(length);
@@ -46,7 +46,7 @@ namespace MonsterGame.Controller
             SearchResult result = new SearchResult();
             IEnumerable<User> masterList = userDao.FindAll().Where(u => u.Role == (int)Role.MASTER);
             if (adminID != 0) masterList = masterList.Where(m => m.ParentID == adminID).ToList();
-            if (!string.IsNullOrEmpty(searchVal)) masterList = masterList.Where(x => x.Name.Contains(searchVal)).ToList();
+            if (!string.IsNullOrEmpty(searchVal)) masterList = masterList.Where(x => x.Name.ToLower().Contains(searchVal.ToLower())).ToList();
 
             result.TotalCount = masterList.Count();
             masterList = masterList.Skip(start).Take(length);
@@ -71,7 +71,7 @@ namespace MonsterGame.Controller
                 if (role == (int)Role.MASTER) agencyList = agencyList.Where(m => m.ParentID == adminID).ToList();
                 else agencyList = agencyList.Where(m => (m.User1?.ParentID ?? 0) == adminID).ToList();
             }
-            if (!string.IsNullOrEmpty(searchVal)) agencyList = agencyList.Where(x => x.Name.Contains(searchVal)).ToList();
+            if (!string.IsNullOrEmpty(searchVal)) agencyList = agencyList.Where(x => x.Name.ToLower().Contains(searchVal.ToLower())).ToList();
 
             result.TotalCount = agencyList.Count();
             agencyList = agencyList.Skip(start).Take(length);
@@ -98,7 +98,7 @@ namespace MonsterGame.Controller
                 else if (role == (int)Role.MASTER) userList = userList.Where(m => (m.User1?.ParentID ?? 0) == adminID).ToList();
                 else userList = userList.Where(m => (m.User1?.User1?.ParentID ?? 0) == adminID).ToList();
             }
-            if (!string.IsNullOrEmpty(searchVal)) userList = userList.Where(x => x.Name.Contains(searchVal)).ToList();
+            if (!string.IsNullOrEmpty(searchVal)) userList = userList.Where(x => x.Name.ToLower().Contains(searchVal.ToLower())).ToList();
 
             result.TotalCount = userList.Count();
             userList = userList.Skip(start).Take(length);

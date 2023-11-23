@@ -177,8 +177,6 @@
                             <div class="modal-body modal--body">
                                 <asp:UpdatePanel runat="server" ID="UpdatePanel2" ClientIDMode="Static" class="row gy-3">
                                     <ContentTemplate>
-                                        <asp:ValidationSummary ID="ValSummary2" runat="server" CssClass="mt-lg mb-lg text-left bg-gradient" ClientIDMode="Static" />
-                                        <asp:RequiredFieldValidator ID="RequestMessage" runat="server" ErrorMessage="Inserire un Messaggio." CssClass="text-bg-danger" ControlToValidate="TxtMessage" Display="None"></asp:RequiredFieldValidator>
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label for="TxtBalanceNote" class="form-label">Messaggio</label>
@@ -393,8 +391,9 @@
             };
 
             $("#BtnSavePurchase").click(function () {
-                var amount = $("#TxtBalance").val();
-                if ($("#HfAgencyBalance").val() != "" && amount > $("#HfAgencyBalance").val()) {
+                var amount = parseFloat($("#TxtBalance").val());
+                var balance = parseFloat($("#HfAgencyBalance").val());
+                if ($("#HfAgencyBalance").val() != "" && amount > balance) {
                     alert("Disponibilità non sufficiente a completare il trasferimento.");
                     return false;
                 }

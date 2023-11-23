@@ -383,6 +383,29 @@
                         </div>
                     </div>
                 </div>
+                <div class=" modal custom--modal fade show" id="gameTeamsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-modal="true">
+                    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                        <div class="modal-content section-bg border-0">
+                            <div class="modal-header modal--header bg--base">
+                                <h4 class="modal-title text-dark">TEAMS</h4>
+                            </div>
+                            <div class="modal-body modal--body">
+                                <div class="d-flex">
+                                    <div class="col-md-4">
+                                        <h5 class="p-5 teamNames" style="white-space:nowrap;"><br></h5>
+                                    </div>
+                                    <div class="col-md-8 text-center d-flex justify-content-center" style="padding-right: 30px;">
+                                        <img src="Upload/Game/default.jpg" id="TeamImage" runat="server" clientidmode="Static" alt="service-image" class="m-3 mt-auto mb-auto img-thumbnail GameImage" style="max-width: 100%;" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="modal-footer modal--footer">
+                                <button type="button" class="btn btn--danger btn--md" data-bs-dismiss="modal">Chiudi</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </form>
         </div>
     </section>
@@ -790,6 +813,28 @@
                 }).click(function () {
                     $(this).remove();
                 }).appendTo('body');
+            });
+
+            $(".TeamShow").click(function () {
+                var img = $(this)[0].dataset.img;
+                var id = $(this)[0].dataset.id;
+                $.ajax({
+                    type: "GET",
+                    url: 'DataService.asmx/GetTeams',
+                    data: {
+                        gameID: id
+                    },
+                    success: function (res) {
+                        var dataArrayForTeams = res.data;
+                        $("#gameTeamsModal").modal('show');
+                        $(".teamNames").html(dataArrayForTeams.join('<br/>'));
+                        $("#TeamImage").attr('src', "Upload/Game/" + (img ? img : "default.jpg"));
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        // Handle the error response
+                        console.log('Error:', textStatus, errorThrown);
+                    }
+                });
             });
 
             // Real Time Notification

@@ -310,8 +310,9 @@
             };
 
             $("#BtnSavePurchase").click(function () {
-                var amount = $("#TxtBalance").val();
-                if ($("#HfAdminBalance").val() != "" && amount > $("#HfAdminBalance").val()) {
+                var amount = parseFloat($("#TxtBalance").val());
+                var balance = parseFloat($("#HfAdminBalance").val());
+                if ($("#HfAdminBalance").val() != "" && (amount) > (balance)) {
                     alert("Disponibilità non sufficiente a completare il trasferimento.");
                     return false;
                 }
