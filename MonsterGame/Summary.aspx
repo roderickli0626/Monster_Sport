@@ -93,6 +93,8 @@
                         </thead>
                         <tbody>
                         </tbody>
+                        <tfoot class="bg-dark text-white">
+                        </tfoot>
                     </table>
                 </div>
             </form>
@@ -171,6 +173,32 @@
 
                 "drawCallback": function () {
                     $(".pagination").children('li').addClass("page-item");
+                },
+
+                "footerCallback": function (row, data, start, end, display) {
+
+                    var amount = 0;
+                    var prize = 0;
+                    var players = 0;
+                    var tickets = 0;
+                    var utile = 0;
+
+                    for (var i = 0; i < data.length; i++) {
+                        amount += parseFloat(data[i].Amount);
+                        prize += parseFloat(data[i].Prize);
+                        players += parseFloat(data[i].Players);
+                        utile += parseFloat(data[i].Utile);
+                        tickets += parseFloat(data[i].Tickets);
+                    }
+
+                    // Add the new row to the footer
+                    var newRow = $('<tr><th></th><th>Total:</th><th>€ ' + amount + '</th><th>€ ' + prize + '</th><th>€ ' + utile + '</th><th>' + tickets + '</th><th>' + players + '</th></tr>');
+
+                    // Remove the existing footer row
+                    $(this).find('tfoot').empty();
+
+                    // Append the new row to the footer
+                    $(this).find('tfoot').append(newRow);
                 }
             });
 

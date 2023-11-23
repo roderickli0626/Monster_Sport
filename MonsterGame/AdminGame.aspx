@@ -602,10 +602,10 @@
                 }, {
                     "data": null,
                     "render": function (data, type, row, meta) {
-                            return '<div class="justify-content-center">' +
-                                '<button class="cmn--btn active btn--md radius-1 w-100 mt-1 btn--success btn-edit float-start">Edit</button >' + 
-                                '<button class="cmn--btn active btn--md radius-1 w-100 mt-1 btn--danger btn-delete float-end">Cancella</button>' +
-                                '<a class="cmn--btn active btn--md radius-1 w-100 mt-1" href="AdminGameDetail.aspx?gameId=' + row.Id + '">Dettaglio</a>' +
+                        return '<div class="justify-content-center">' +
+                            '<i class="fa fa-edit mt-1 btn-edit" style="font-size:20px; padding-right: 10px; color:greenyellow"></i>' +
+                            '<i class="fa fa-trash mt-1 btn-delete" style="font-size:20px; padding-right: 10px; color:red"></i>' +
+                            '<a class="mt-1" href="AdminGameDetail.aspx?gameId=' + row.Id + '"><i class="fa fa-info-circle" style="font-size:20px; padding-right: 10px;color:gold"></i></a>' +
                                 '</div > ';
                     }
                 }],
