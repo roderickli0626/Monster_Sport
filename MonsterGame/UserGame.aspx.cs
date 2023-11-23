@@ -9,6 +9,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using MonsterGame.Common;
 using MonsterGame.Util;
+using MonsterGame.DAO;
 
 namespace MonsterGame
 {
@@ -25,6 +26,7 @@ namespace MonsterGame
                 return;
             }
             HfUserID.Value = user.Id.ToString();
+            HfNewMsg.Value = new NotificationDAO().FindAll().Where(n => n.IsNew ?? false).Count().ToString();
             if (!IsPostBack)
             {
                 LoadGames();

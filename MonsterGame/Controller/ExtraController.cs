@@ -29,7 +29,7 @@ namespace MonsterGame.Controller
         public SearchResult SearchNews(int start, int length, string searchVal)
         {
             SearchResult result = new SearchResult();
-            IEnumerable<Notification> notificationList = notificationDAO.FindAll();
+            IEnumerable<Notification> notificationList = notificationDAO.FindAll().OrderByDescending(n => n.CreatedDate);
             if (!string.IsNullOrEmpty(searchVal)) notificationList = notificationList.Where(x => x.Title.ToLower().Contains(searchVal.ToLower())).ToList();
 
             result.TotalCount = notificationList.Count();
@@ -194,9 +194,20 @@ namespace MonsterGame.Controller
             GetSummary(status, from , to);
             if (ownerID == 0)
             {
-                result.TotalCount = adminSummary.Count();
-                adminSummary = adminSummary.Skip(start).Take(length).ToList();
-                result.ResultList = adminSummary;
+                List<int> directUserIDs = new UserDAO().FindAll().Where(u => u.User1 == null).Select(u => u.Id).ToList();
+                List<SummaryCheck> checks = new List<SummaryCheck>();
+                checks.AddRange(adminSummary.Where(a => directUserIDs.Contains(a.Id)));
+                checks.AddRange(masterSummary.Where(m => directUserIDs.Contains(m.Id)));
+                checks.AddRange(agencySummary.Where(r => directUserIDs.Contains(r.Id)));
+                checks.AddRange(userSummary.Where(u => directUserIDs.Contains(u.Id)));
+
+                result.TotalCount = checks.Count();
+                checks = checks.Skip(start).Take(length).ToList();
+                result.ResultList = checks;
+
+                //result.TotalCount = adminSummary.Count();
+                //adminSummary = adminSummary.Skip(start).Take(length).ToList();
+                //result.ResultList = adminSummary;
             }
             else if (user.Role == (int)Role.ADMIN)
             {
@@ -219,31 +230,6 @@ namespace MonsterGame.Controller
                 userSummary = userSummary.Skip(start).Take(length).ToList();
                 result.ResultList = userSummary;
             }
-
-            //IEnumerable<Movement> movementList = movementDAO.FindAll().OrderByDescending(m => m.MoveDate);
-            //movementList = movementList.Where(m => m.User.Name.Contains(receiver) && ((m.User1?.Name ?? "").Contains(sender)));
-
-            //if (from != null)
-            //    movementList = movementList.Where(u => u.MoveDate >= from.Value);
-
-            //if (to != null)
-            //    movementList = movementList.Where(u => u.MoveDate <= to.Value);
-
-            //result.TotalCount = movementList.Count();
-            //movementList = movementList.Skip(start).Take(length);
-
-            //List<object> checks = new List<object>();
-            //foreach (Movement movement in movementList)
-            //{
-            //    MovementCheck usercheck = new MovementCheck(movement);
-            //    if (string.IsNullOrEmpty(usercheck.Sender) && usercheck.Note.Contains("Deleted"))
-            //    {
-            //        usercheck.Sender = usercheck.Note.Split(' ')[1];
-            //    }
-            //    else if (string.IsNullOrEmpty(usercheck.Sender)) usercheck.Sender = "Super Admin";
-            //    checks.Add(usercheck);
-            //}
-            //result.ResultList = checks;
 
             return result;
         }

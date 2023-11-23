@@ -256,17 +256,17 @@
                         var manage = $("#HfManage").val();
                         if (manage == "1") {
                             return '<div class="justify-content-center">' +
-                                '<button class="cmn--btn active btn--md radius-1 btn--success w-100 mt-1 btn-edit float-start">Edit</button>' +
-                                '<button class="cmn--btn active btn--md radius-1 btn--danger w-100 mt-1 btn-delete float-end">Cancella</button>' +
-                                '<button class="cmn--btn active btn--md radius-1 btn-purchase w-100 mt-1">Agg. & Rim. Crediti</button>' +
-                                '<button class="cmn--btn active btn--md radius-1 btn-message w-100 mt-1">Invia Messaggio</button>' +
+                                '<i class="fa fa-edit mt-1 btn-edit" style="font-size:20px; padding-right: 10px; color:greenyellow"></i>' +
+                                '<i class="fa fa-trash mt-1 btn-delete" style="font-size:20px; padding-right: 10px; color:red"></i>' +
+                                '<i class="fa fa-money-check-alt btn-purchase mt-1" style="font-size:20px; padding-right: 10px;color:gold"></i>' +
+                                '<i class="fa fa-comments btn-message mt-1" style="font-size:20px;color:cyan"></i>' +
                                 '</div > ';
                         }
                         else if (manage == "2") {
                             return '<div class="justify-content-center">' +
-                                '<button class="cmn--btn active btn--md radius-1 btn--success w-100 mt-1 btn-edit float-start">Edit</button>' +
-                                '<button class="cmn--btn active btn--md radius-1 btn--danger w-100 mt-1 btn-delete float-end">Cancella</button>' +
-                                '<button class="cmn--btn active btn--md radius-1 btn-purchase w-100 mt-1">Agg. & Rim. Crediti</button>' +
+                                '<i class="fa fa-edit mt-1 btn-edit" style="font-size:20px; padding-right: 10px; color:greenyellow"></i>' +
+                                '<i class="fa fa-trash mt-1 btn-delete" style="font-size:20px; padding-right: 10px; color:red"></i>' +
+                                '<i class="fa fa-money-check-alt btn-purchase mt-1" style="font-size:20px; padding-right: 10px;color:gold"></i>' +
                                 '</div > ';
                         }
                         else {

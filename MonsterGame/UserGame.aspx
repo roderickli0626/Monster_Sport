@@ -177,6 +177,7 @@
         <div class="container">
             <form runat="server" id="form1" autocomplete="off">
                 <asp:HiddenField ID="HfUserID" runat="server" ClientIDMode="Static" />
+                <asp:HiddenField ID="HfNewMsg" runat="server" ClientIDMode="Static" />
                 <div class="row justify-content-center mb-5">
                     <div class="col-lg-5 col-xl-5 pt-1">
                         <asp:DropDownList runat="server" ID="ComboStatus" CssClass="form-select form--control" ClientIDMode="Static" OnSelectedIndexChanged="ComboStatus_SelectedIndexChanged" AutoPostBack="true"></asp:DropDownList>
@@ -321,6 +322,13 @@
         };
 
         $.connection.hub.start();
+    </script>
+    <script>
+        var unreadNews = parseInt($("#HfNewMsg").val());
+        if (unreadNews != 0)
+        {
+            toastr.info("Unread " + unreadNews + "News!");
+        }
     </script>
     <script>
         var datatable = $('#game-table').dataTable({
