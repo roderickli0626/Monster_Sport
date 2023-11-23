@@ -248,6 +248,8 @@ namespace MonsterGame.Controller
                 if (to != null) ticketList = ticketList.Where(u => u.GetDate <= to.Value).ToList();
                 if (status != 0) ticketList = ticketList.Where(x => x.Game.Status == status).ToList();
 
+                if (ticketList.Count() == 0) { continue; }
+
                 summaryCheck.Tickets = ticketList.Count();
                 summaryCheck.Players = 1;
                 summaryCheck.Amount = ticketList.Sum(t => t.Game.Fee ?? 0);
