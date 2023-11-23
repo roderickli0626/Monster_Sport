@@ -102,7 +102,7 @@
                         <thead>
                             <tr>
                                 <th>Nr.</th>
-                                <th>Content</th>
+                                <th>Descrizione</th>
                                 <th>Azione</th>
                             </tr>
                         </thead>
@@ -125,13 +125,13 @@
                                         <asp:CustomValidator ID="ServerValidator" runat="server" ErrorMessage="Questo indirizzo Email è già registrato." Display="None"></asp:CustomValidator>
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <label for="TxtTitle" class="form-label">Title</label>
+                                                <label for="TxtTitle" class="form-label">Titolo</label>
                                                 <asp:TextBox runat="server" ID="TxtTitle" ClientIDMode="Static" CssClass="form-control form--control style-two"></asp:TextBox>
                                             </div>
                                         </div>
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <label for="TxtDescription" class="form-label">Description</label>
+                                                <label for="TxtDescription" class="form-label">Descrizione</label>
                                                 <asp:TextBox runat="server" ID="TxtDescription" ClientIDMode="Static" TextMode="MultiLine" Rows="2" CssClass="form-control form--control style-two"></asp:TextBox>
                                             </div>
                                         </div>
@@ -152,13 +152,13 @@
                     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                         <div class="modal-content section-bg border-0">
                             <div class="modal-header modal--header bg--base">
-                                <h4 class="modal-title text-dark">MESSAGE FROM ADMIN</h4>
+                                <h4 class="modal-title text-dark">MESSAGGIO DALL' ADMIN</h4>
                             </div>
                             <div class="modal-body modal--body">
                                 <div class="row gy-3">
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <label for="TxtMessage" class="form-label">Message</label>
+                                            <label for="TxtMessage" class="form-label">Messaggio</label>
                                             <asp:TextBox runat="server" ID="TxtMessage" ClientIDMode="Static" CssClass="form-control form--control style-two" TextMode="MultiLine" Rows="2" ReadOnly="true"></asp:TextBox>
                                         </div>
                                     </div>

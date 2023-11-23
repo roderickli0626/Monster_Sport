@@ -42,9 +42,9 @@ namespace MonsterGame
         private void LoadStatus()
         {
             ComboStatus.Items.Clear();
-            ComboStatus.Items.Add(new ListItem("BOARD STATUS(TUTTI)", "0"));
-            ComboStatus.Items.Add(new ListItem("ENABLED", "1"));
-            ComboStatus.Items.Add(new ListItem("DISABLED", "2"));
+            ComboStatus.Items.Add(new ListItem("Tutte", "0"));
+            ComboStatus.Items.Add(new ListItem("ABILITATE", "1"));
+            ComboStatus.Items.Add(new ListItem("DISABILITATE", "2"));
         }
         protected void ComboStatus_SelectedIndexChanged(object sender, EventArgs e)
         {

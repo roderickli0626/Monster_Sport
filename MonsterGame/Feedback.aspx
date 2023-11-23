@@ -74,10 +74,10 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-7 col-xl-6 text-center">
-                    <h2 class="title text-white">Feedback</h2>
+                    <h2 class="title text-white">Recensioni</h2>
                     <ul class="breadcrumbs d-flex flex-wrap align-items-center justify-content-center">
                         <li><a href="Dashboard.aspx">Dashboard</a></li>
-                        <li>Feedback</li>
+                        <li>Recensioni</li>
                     </ul>
                 </div>
             </div>
@@ -96,7 +96,7 @@
                         <thead>
                             <tr>
                                 <th>Nr.</th>
-                                <th>Content</th>
+                                <th>Descrizione</th>
                                 <th>Azione</th>
                             </tr>
                         </thead>
@@ -108,25 +108,25 @@
                     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                         <div class="modal-content section-bg border-0">
                             <div class="modal-header modal--header bg--base">
-                                <h4 class="modal-title text-dark" id="modalTitle">Feedback</h4>
+                                <h4 class="modal-title text-dark" id="modalTitle">Recensioni</h4>
                             </div>
                             <div class="modal-body modal--body">
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="TxtTitle" class="form-label">Title</label>
+                                            <label for="TxtTitle" class="form-label">Titolo</label>
                                             <asp:TextBox runat="server" ID="TxtTitle" ClientIDMode="Static" CssClass="form-control form--control style-two" ReadOnly="true"></asp:TextBox>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="TxtTitle" class="form-label">Date & Creator</label>
+                                            <label for="TxtTitle" class="form-label">Data & Autore</label>
                                             <asp:TextBox runat="server" ID="TxtDateCreator" ClientIDMode="Static" CssClass="form-control form--control style-two" ReadOnly="true"></asp:TextBox>
                                         </div>
                                     </div>
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <label for="TxtDescription" class="form-label">Description</label>
+                                            <label for="TxtDescription" class="form-label">Descrizione</label>
                                             <asp:TextBox runat="server" ID="TxtDescription" ClientIDMode="Static" TextMode="MultiLine" Rows="2" CssClass="form-control form--control style-two" ReadOnly="true"></asp:TextBox>
                                         </div>
                                     </div>
@@ -216,7 +216,7 @@
                     success: function () {
                         onSuccess({ success: true });
                         $("#FeedbackModal").modal('show');
-                        $(".modal-title").text("VEDI FEEDBACK");
+                        $(".modal-title").text("VEDI RECENSIONE");
                         $("#TxtTitle").val(row.Title);
                         $("#TxtDateCreator").val(row.Creater + ", " + row.CreateDate);
                         $("#TxtDescription").val(row.Description);

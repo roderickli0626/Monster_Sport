@@ -95,7 +95,7 @@ namespace MonsterGame.Controller
                     {
                         check.Image = "gamemark1.jpg";
                         check.Mark = "<div class=\"ribbon blue\"><span>APERTO</span></div>";
-                        check.ButtonTitle = "Play Now";
+                        check.ButtonTitle = "Gioca Ora";
                     }
                     break;
                 case 2:

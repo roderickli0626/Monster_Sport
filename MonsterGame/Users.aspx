@@ -28,7 +28,7 @@
                         <button class="cmn--btn active radius-1 w-100 btn-add" runat="server" id="BtnAddAgency">AGG. NUOVO</button>
                     </div>
                     <div class="col-lg-4 col-xl-4 pt-1 ms-auto">
-                        <asp:TextBox runat="server" ID="TxtSearch" CssClass="form--control form-control" ClientIDMode="Static" placeholder="SEARCH"></asp:TextBox>
+                        <asp:TextBox runat="server" ID="TxtSearch" CssClass="form--control form-control" ClientIDMode="Static" placeholder="CERCA .."></asp:TextBox>
                     </div>
                 </div>
                 <div class="row gy-4 justify-content-center">
@@ -130,7 +130,7 @@
                     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                         <div class="modal-content section-bg border-0">
                             <div class="modal-header modal--header bg--base">
-                                <h4 class="modal-title text-dark" id="modalTitle1">Acquisto</h4>
+                                <h4 class="modal-title text-dark" id="modalTitle1">Trasferimento Crediti</h4>
                             </div>
                             <div class="modal-body modal--body">
                                 <asp:UpdatePanel runat="server" ID="UpdatePanel1" ClientIDMode="Static" class="row gy-3">
@@ -172,16 +172,16 @@
                     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                         <div class="modal-content section-bg border-0">
                             <div class="modal-header modal--header bg--base">
-                                <h4 class="modal-title text-dark" id="modalTitle2">MESSAGE</h4>
+                                <h4 class="modal-title text-dark" id="modalTitle2">MESSAGGIO</h4>
                             </div>
                             <div class="modal-body modal--body">
                                 <asp:UpdatePanel runat="server" ID="UpdatePanel2" ClientIDMode="Static" class="row gy-3">
                                     <ContentTemplate>
                                         <asp:ValidationSummary ID="ValSummary2" runat="server" CssClass="mt-lg mb-lg text-left bg-gradient" ClientIDMode="Static" />
-                                        <asp:RequiredFieldValidator ID="RequestMessage" runat="server" ErrorMessage="Inserire un indirizzo Message." CssClass="text-bg-danger" ControlToValidate="TxtMessage" Display="None"></asp:RequiredFieldValidator>
+                                        <asp:RequiredFieldValidator ID="RequestMessage" runat="server" ErrorMessage="Inserire un Messaggio." CssClass="text-bg-danger" ControlToValidate="TxtMessage" Display="None"></asp:RequiredFieldValidator>
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <label for="TxtBalanceNote" class="form-label">Message</label>
+                                                <label for="TxtBalanceNote" class="form-label">Messaggio</label>
                                                 <asp:TextBox runat="server" ID="TxtMessage" ClientIDMode="Static" CssClass="form-control form--control style-two" TextMode="MultiLine" Rows="2"></asp:TextBox>
                                             </div>
                                         </div>
@@ -192,7 +192,7 @@
                                 </asp:UpdatePanel>
                             </div>
                             <div class="modal-footer modal--footer">
-                                <asp:Button runat="server" ID="BtnMessage" ClientIDMode="Static" CssClass="btn btn--warning btn--md" Text="Send Message" CausesValidation="false" OnClick="BtnMessage_Click"/>
+                                <asp:Button runat="server" ID="BtnMessage" ClientIDMode="Static" CssClass="btn btn--warning btn--md" Text="Invia Messaggio" CausesValidation="false" OnClick="BtnMessage_Click"/>
                                 <button type="button" class="btn btn--danger btn--md" data-bs-dismiss="modal">Chiudi</button>
                             </div>
                         </div>
@@ -261,7 +261,7 @@
                                 '<button class="cmn--btn active btn--md radius-1 btn--success w-100 mt-1 btn-edit float-start">Edit</button>' +
                                 '<button class="cmn--btn active btn--md radius-1 btn--danger w-100 mt-1 btn-delete float-end">Cancella</button>' +
                                 '<button class="cmn--btn active btn--md radius-1 btn-purchase w-100 mt-1">Agg. & Rim. Crediti</button>' +
-                                '<button class="cmn--btn active btn--md radius-1 btn-message w-100 mt-1">Send Msg</button>' +
+                                '<button class="cmn--btn active btn--md radius-1 btn-message w-100 mt-1">Invia Messaggio</button>' +
                                 '</div > ';
                         }
                         else if (manage == "2") {
@@ -340,7 +340,7 @@
                 var row = datatable.fnGetData($(this).closest('tr'));
 
                 $("#PurchaseModal").modal('show');
-                $(".modal-title").text("ACQUISTO");
+                $(".modal-title").text("TRASFERIMENTO CREDITO");
                 $("#HfUserID").val(row.Id);
                 $("#TxtCurrentBalance").val("€ " + row.Balance);
                 $("#TxtBalance").val("");
@@ -354,7 +354,7 @@
                 var row = datatable.fnGetData($(this).closest('tr'));
 
                 $("#MessageModal").modal('show');
-                $(".modal-title").text("Message To " + row.Name);
+                $(".modal-title").text("Messaggia a " + row.Name);
                 $("#HfUserID").val(row.Id);
                 $("#TxtMessage").val("");
                 $("#ValSummary2").addClass("d-none");

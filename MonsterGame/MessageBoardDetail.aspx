@@ -74,11 +74,11 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-7 col-xl-6 text-center">
-                    <h2 class="title text-white">MessageBoard Detail</h2>
+                    <h2 class="title text-white">Bacheca Messaggi Dettaglio</h2>
                     <ul class="breadcrumbs d-flex flex-wrap align-items-center justify-content-center">
-                        <li runat="server" id="liUserBoard"><a href="MessageBoard.aspx">MessageBoard</a></li>
-                        <li runat="server" id="liAdminBoard"><a href="MessageBoards.aspx">MessageBoard</a></li>
-                        <li>MessageBoard Detail</li>
+                        <li runat="server" id="liUserBoard"><a href="MessageBoard.aspx">Bacheca Messaggi</a></li>
+                        <li runat="server" id="liAdminBoard"><a href="MessageBoards.aspx">Bacheca Messaggi</a></li>
+                        <li>Bacheca Messaggi Dettagli</li>
                     </ul>
                 </div>
             </div>
@@ -104,7 +104,7 @@
                         <thead>
                             <tr>
                                 <th>Nr.</th>
-                                <th>Content</th>
+                                <th>Descrizione</th>
                                 <th>Azione</th>
                             </tr>
                         </thead>
@@ -127,13 +127,13 @@
                                         <asp:CustomValidator ID="ServerValidator" runat="server" ErrorMessage="Questo indirizzo Email è già registrato." Display="None"></asp:CustomValidator>
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <label for="TxtTitle" class="form-label">Title</label>
+                                                <label for="TxtTitle" class="form-label">Titolo</label>
                                                 <asp:TextBox runat="server" ID="TxtTitle" ClientIDMode="Static" CssClass="form-control form--control style-two"></asp:TextBox>
                                             </div>
                                         </div>
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <label for="TxtDescription" class="form-label">Description</label>
+                                                <label for="TxtDescription" class="form-label">Descrizione</label>
                                                 <asp:TextBox runat="server" ID="TxtDescription" ClientIDMode="Static" TextMode="MultiLine" Rows="2" CssClass="form-control form--control style-two"></asp:TextBox>
                                             </div>
                                         </div>
@@ -154,13 +154,13 @@
                     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                         <div class="modal-content section-bg border-0">
                             <div class="modal-header modal--header bg--base">
-                                <h4 class="modal-title text-dark">MESSAGE FROM ADMIN</h4>
+                                <h4 class="modal-title text-dark">MESSAGGIO DALL' ADMIN</h4>
                             </div>
                             <div class="modal-body modal--body">
                                 <div class="row gy-3">
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <label for="TxtMessage" class="form-label">Message</label>
+                                            <label for="TxtMessage" class="form-label">Messaggio</label>
                                             <asp:TextBox runat="server" ID="TxtMessage" ClientIDMode="Static" CssClass="form-control form--control style-two" TextMode="MultiLine" Rows="2" ReadOnly="true"></asp:TextBox>
                                         </div>
                                     </div>
@@ -199,7 +199,7 @@
     <script>
         $(".btn-add").click(function () {
             $("#BoardModal").modal('show');
-            $(".modal-title").text("AGG. MESSAGE");
+            $(".modal-title").text("AGG. MESSAGGIO");
             $("#HfMessageBoardID").val("");
             $("#ValSummary").addClass("d-none");
             $("#BtnSave").removeClass("d-none");
@@ -251,7 +251,7 @@
                         }
                         else {
                             return '<div class="justify-content-center">' +
-                                '<button class="cmn--btn active btn--md radius-1 btn-view">Vedi</button></div>';
+                                '<button class="cmn--btn active btn--md radius-1 btn-view">Apri</button></div>';
                         }
                     }
                 }],
@@ -281,7 +281,7 @@
                 var row = datatable.fnGetData($(this).closest('tr'));
 
                 $("#BoardModal").modal('show');
-                $(".modal-title").text("AGGIORNA MESSAGE");
+                $(".modal-title").text("AGGIORNA MESSAGGIO");
                 $("#HfMessageBoardID").val(row.Id);
                 $("#ValSummary").addClass("d-none");
                 $("#BtnSave").removeClass("d-none");
@@ -303,7 +303,7 @@
                     success: function () {
                         onSuccess({ success: true });
                         $("#BoardModal").modal('show');
-                        $(".modal-title").text("VEDI MESSAGE");
+                        $(".modal-title").text("VEDI MESSAGGIO");
                         $("#HfMessageBoardID").val(row.Id);
                         $("#ValSummary").addClass("d-none");
                         $("#BtnSave").addClass("d-none");

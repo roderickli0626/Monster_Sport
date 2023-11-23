@@ -125,7 +125,7 @@
                     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                         <div class="modal-content section-bg border-0">
                             <div class="modal-header modal--header bg--base">
-                                <h4 class="modal-title text-dark" id="modalTitle1">Acquisti</h4>
+                                <h4 class="modal-title text-dark" id="modalTitle1">Trasferimento Crediti</h4>
                             </div>
                             <div class="modal-body modal--body">
                                 <asp:UpdatePanel runat="server" ID="UpdatePanel1" ClientIDMode="Static" class="row gy-3">
@@ -265,7 +265,7 @@
                 var row = datatable.fnGetData($(this).closest('tr'));
 
                 $("#PurchaseModal").modal('show');
-                $(".modal-title").text("CREDITI");
+                $(".modal-title").text("TRASFERIMENTO CREDITI");
                 $("#HfAdminID").val(row.Id);
                 $("#TxtCurrentBalance").val("€ " + row.Balance);
                 $("#TxtBalance").val("");

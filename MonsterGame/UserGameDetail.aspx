@@ -192,6 +192,22 @@
                             <div runat="server" id="DivMyTicket" class="content-item mb-0">
                                 <h3 class="title" id="myTickets" style="padding-top:120px;">I MIEI TICKETS</h3>
                                 <div class="row justify-content-center pt-5">
+
+
+                            <table>
+                            <thead>
+
+                                <tr><th><p style="padding-left:15px; font-size: 14px; color:orange;"><b><u>PER INIZIARE:</b></u></style></p></th></tr>
+                                <tr><th style="padding-left:15px; font-size: 14px; color:orange;">- Acquista un nuovo Ticket</style></th></tr>                                 
+                                <tr><th style="padding-left:15px; font-size: 14px; color:orange;">- Vai su <span class="fa fa-edit" style="font-size:18px; color:greenyellow;"> </span> e scegli la squadra</th></tr>
+                                <tr><th style="padding-left:15px; font-size: 14px; color:orange;">- Attendi l' esito dell' incontro</th></tr>
+                                
+                            </thead>                        
+                            </table>
+
+
+
+
                                     <div class="col-lg-4 col-xl-4 ms-auto">
                                          <asp:Button runat="server" ID="BtnTicket" ClientIDMode="Static" CssClass="cmn--btn active radius-1 w-100" Text="NUOVO TICKET"></asp:Button>
                                     </div>
@@ -209,7 +225,7 @@
                                 </div>
                             </div>
                             <div class="content-item mb-0">
-                                <h3 class="title" id="results" style="padding-top:120px;">RISULTATI</h3>
+                                <h3 class="title" id="results" style="padding-top:120px;">RISULTATI DI QUESTO TORNEO</h3>
                                 <div class="pt-3 justify-content-center">
                                     <table class="table text-center" id="result-table">
                                     </table>
@@ -221,7 +237,7 @@
                                     <div class="col-lg-8 col-xl-8 col-md-8 col-sm-8">
                                         <div class="dashboard__card" style="border: 2px solid #ffdd2d;">
                                             <div class="dashboard__card-content">
-                                                <h2 runat="server" id="Prize" class="price">$0</h2>
+                                                <h2 runat="server" id="Prize" class="price">€ 0</h2>
                                                 <p class="info">PREMIO</p>
                                             </div>
                                             <div class="dashboard__card-icon">
@@ -261,7 +277,7 @@
                                                             <p class="invest-info">Quota ingresso: <span class="invest-amount">€ <%# Eval("Fee") %></span></p>
                                                             <p class="invest-info">Player necessari: <span class="invest-amount"><%# Eval("MinPlayers") %></span></p>
                                                             <p class="invest-info">Player attuali: <span class="invest-amount"><%# Eval("RealPlayers") %></span></p>
-                                                            <p class="invest-info">Numero di squadre: <span class="invest-amount TeamShow" style="cursor: pointer;" data-id="<%# Eval("Id") %>" data-img="<%# Eval("Image2") %>"><%# Eval("NumberOfTeams") %></span></p>
+                                                            <p class="invest-info">Numero squadre: <span class="invest-amount TeamShow" style="cursor: pointer;" data-id="<%# Eval("Id") %>" data-img="<%# Eval("Image2") %>"><%# Eval("NumberOfTeams") %></span></p>
                                                             <p class="invest-info">Premio min.: <span class="invest-amount">€ <%# Eval("Prize") %></span></p>
                                                             <p class="invest-info">Vincenti: <span class="invest-amount"><%# Eval("Winners") %></span></p>
                                                             <a class="cmn--btn active btn--md radius-1" href="UserGameDetail.aspx?gameId=<%# Eval("Id") %>"><%# Eval("ButtonTitle") %></a>
@@ -349,13 +365,13 @@
                     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                         <div class="modal-content section-bg border-0">
                             <div class="modal-header modal--header bg--base">
-                                <h4 class="modal-title text-dark">MESSAGE FROM ADMIN</h4>
+                                <h4 class="modal-title text-dark">MESSAGGIO DALL'ADMIN</h4>
                             </div>
                             <div class="modal-body modal--body">
                                 <div class="row gy-3">
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <label for="TxtMessage" class="form-label">Message</label>
+                                            <label for="TxtMessage" class="form-label">Messaggio</label>
                                             <asp:TextBox runat="server" ID="TxtMessage" ClientIDMode="Static" CssClass="form-control form--control style-two" TextMode="MultiLine" Rows="2" ReadOnly="true"></asp:TextBox>
                                         </div>
                                     </div>
@@ -448,7 +464,8 @@
                         "width": "5%",
                         "render": function (data, type, row, meta) {
                             if (row.TicketResults.length == 0 || row.TicketResults[row.TicketResults.length - 1].RoundResult == null || row.TicketResults[row.TicketResults.length - 1].TeamID != 0) return "";
-                            else return '<a href="#" class="btn-edit mr-4"><i class="fa fa-edit" style="font-size:25px"></i></a>';
+                            else return '<a href="#" class="btn-edit mr-4"><i class="fa fa-edit" style="font-size:25px; color:greenyellow;"></i></a>';
+
                         }
                     });
 

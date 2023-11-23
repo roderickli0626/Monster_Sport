@@ -521,7 +521,7 @@
                         "width": "5%",
                         "render": function (data, type, row, meta) {
                             if (row.TicketResults.length == 0 || row.TicketResults[row.TicketResults.length - 1].RoundResult == null) return "";
-                            else return '<a href="#" class="btn-edit mr-4"><i class="fa fa-edit" style="font-size:25px"></i></a>';
+                            else return '<a href="#" class="btn-edit mr-4"><i class="fa fa-edit" style="font-size:25px; color:greenyellow;"></i></a>';
                         }
                     });
 
@@ -644,7 +644,7 @@
                         "class": inputResult,
                         "width": "5%",
                         "render": function (data, type, row, meta) {
-                            if (row.Results.length > 0) return '<a href="#" class="btn-edit mr-4"><i class="fa fa-edit" style="font-size:25px"></i></a>';
+                            if (row.Results.length > 0) return '<a href="#" class="btn-edit mr-4"><i class="fa fa-edit" style="font-size:25px; color:greenyellow;"></i></a>';
                             else return "";
                         }
                     });
@@ -730,7 +730,7 @@
                 }, {
                     "data": null,
                     "render": function (data, type, row, meta) {
-                        if (row.Prize == null || row.Prize == 0) return '<a href="#" class="btn-edit mr-4"><i class="fa fa-edit" style="font-size:25px"></i></a>';
+                        if (row.Prize == null || row.Prize == 0) return '<a href="#" class="btn-edit mr-4"><i class="fa fa-edit" style="font-size:25px; color:greenyellow;"></i></a>';
                         else return "";
                     }
                 }],

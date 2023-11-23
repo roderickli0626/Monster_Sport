@@ -170,14 +170,14 @@
                     <div class="col-md-9">
                         <div class="privacy-policy-content">
                             <div class="content-item mb-0">
-                                <h3 class="title" id="purchase" style="padding-top:120px;">ACQUISTI</h3>
+                                <h3 class="title" id="purchase" style="padding-top:120px;">ACQUISTO CREDITI</h3>
                                 <asp:ValidationSummary ID="ValSummary" runat="server" CssClass="mt-lg mb-lg text-left bg-gradient" ClientIDMode="Static" />
                                 <asp:CustomValidator ID="PaypalAmount" runat="server" ErrorMessage="Inserire un importo valido." Display="None"></asp:CustomValidator>
                                 <div class="pt-5">
                                     <div class="col-lg-12 col-xl-12 col-md-12 col-sm-10">
                                         <div class="dashboard__card" style="border: 2px solid #ffdd2d;">
                                             <div class="dashboard__card-content">
-                                                <h2 runat="server" id="Balance" class="price">€ 3750</h2>
+                                                <h2 runat="server" id="Balance" class="price">€ 0</h2>
                                                 <p class="info">SALDO</p>
                                             </div>
                                             <div class="dashboard__card-icon">
@@ -216,7 +216,7 @@
                                     <div class="col-lg-6 col-xl-6 col-md-6 col-sm-10">
                                         <div class="dashboard__card" style="border: 2px solid #ffdd2d;">
                                             <div class="dashboard__card-content">
-                                                <h2 runat="server" id="Deposit" class="price">$4550</h2>
+                                                <h2 runat="server" id="Deposit" class="price">€ 0</h2>
                                                 <p class="info">TOTALE ENTRATE</p>
                                             </div>
                                             <div class="dashboard__card-icon">
@@ -227,7 +227,7 @@
                                     <div class="col-lg-6 col-xl-6 col-md-6 col-sm-10">
                                         <div class="dashboard__card" style="border: 2px solid #ffdd2d;">
                                             <div class="dashboard__card-content">
-                                                <h2 runat="server" id="Withdraw" class="price">$2500</h2>
+                                                <h2 runat="server" id="Withdraw" class="price">€ 0</h2>
                                                 <p class="info">TOTALE USCITE</p>
                                             </div>
                                             <div class="dashboard__card-icon">
@@ -280,7 +280,7 @@
                                                             <p class="invest-info">Quota ingresso: <span class="invest-amount">€ <%# Eval("Fee") %></span></p>
                                                             <p class="invest-info">Player necessari: <span class="invest-amount"><%# Eval("MinPlayers") %></span></p>
                                                             <p class="invest-info">Player attuali: <span class="invest-amount"><%# Eval("RealPlayers") %></span></p>
-                                                            <p class="invest-info">Numero di squadre: <span class="invest-amount TeamShow" style="cursor: pointer;" data-id="<%# Eval("Id") %>" data-img="<%# Eval("Image2") %>"><%# Eval("NumberOfTeams") %></span></p>
+                                                            <p class="invest-info">Numero squadre: <span class="invest-amount TeamShow" style="cursor: pointer;" data-id="<%# Eval("Id") %>" data-img="<%# Eval("Image2") %>"><%# Eval("NumberOfTeams") %></span></p>
                                                             <p class="invest-info">Premio min.: <span class="invest-amount">€ <%# Eval("Prize") %></span></p>
                                                             <p class="invest-info">Vincenti: <span class="invest-amount"><%# Eval("Winners") %></span></p>
                                                             <a class="cmn--btn active btn--md radius-1" href="UserGameDetail.aspx?gameId=<%# Eval("Id") %>"><%# Eval("ButtonTitle") %></a>
@@ -306,13 +306,14 @@
                             <div class="modal-body modal--body">
                                 <div class="d-flex">
                                     <div class="col-md-4">
-                                        <h5 class="p-5 teamNames" style="white-space:nowrap;"><br /></h5>
+                                        <h5 class="p-5 teamNames" style="white-space:nowrap;"><br></h5>
                                     </div>
                                     <div class="col-md-8 text-center d-flex justify-content-center" style="padding-right: 30px;">
-                                        <img src="Upload/Game/default.jpg" id="TeamImage" runat="server" clientidmode="Static" alt="service-image" class="m-3 mt-auto mb-auto img-thumbnail" style="max-width: 100%;" />
+                                        <img src="Upload/Game/default.jpg" id="TeamImage" runat="server" clientidmode="Static" alt="service-image" class="m-3 mt-auto mb-auto img-thumbnail GameImage" style="max-width: 100%;" />
                                     </div>
                                 </div>
                             </div>
+
                             <div class="modal-footer modal--footer">
                                 <button type="button" class="btn btn--danger btn--md" data-bs-dismiss="modal">Chiudi</button>
                             </div>

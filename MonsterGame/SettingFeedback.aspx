@@ -7,10 +7,10 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-7 col-xl-6 text-center">
-                    <h2 class="title text-white">Settings</h2>
+                    <h2 class="title text-white">Impostazioni</h2>
                     <ul class="breadcrumbs d-flex flex-wrap align-items-center justify-content-center">
                         <li><a href="Dashboard.aspx">Dashboard</a></li>
-                        <li>Reset Password & Feedback</li>
+                        <li>Reset Password & Recensioni</li>
                     </ul>
                 </div>
             </div>
@@ -29,47 +29,47 @@
                         <asp:CustomValidator ID="ServerValidator" runat="server" ErrorMessage="La password attuale non è corretta" Display="None"></asp:CustomValidator>
                         <div class="col-lg-5">
                             <div class="contact-info-wrapper">
-                                <h3 class="title mb-3 mb-lg-4">FEEDBACK</h3>
+                                <h3 class="title mb-3 mb-lg-4">RECENSIONI</h3>
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <label for="TxtTitle" class="form-label">Title <span class="text--danger">*</span></label>
+                                        <label for="TxtTitle" class="form-label">Titolo <span class="text--danger">*</span></label>
                                         <asp:TextBox runat="server" ID="TxtTitle" CssClass="form-control form--control"></asp:TextBox>
                                     </div>
                                 </div>
                                 <div class="col-md-12 mb-3">
                                     <div class="form-group">
-                                        <label for="TxtDescription" class="form-label">Description <span class="text--danger">*</span></label>
+                                        <label for="TxtDescription" class="form-label">Descrizione <span class="text--danger">*</span></label>
                                         <asp:TextBox runat="server" ID="TxtDescription" CssClass="form-control form--control" TextMode="MultiLine" Rows="3"></asp:TextBox>
                                     </div>
                                 </div>
                                 <div class="text-center col-12">
-                                    <asp:Button runat="server" ID="BtnFeedback" CssClass="cmn--btn active w-100 btn--round" Text="Send Feedback" OnClick="BtnFeedback_Click" />
+                                    <asp:Button runat="server" ID="BtnFeedback" CssClass="cmn--btn active w-100 btn--round" Text="Invia Recensione" OnClick="BtnFeedback_Click" />
                                 </div>
                             </div>
                         </div>
                         <div class="col-lg-7">
-                            <h3 class="title mb-3">RESET PASSWORD</h3>
+                            <h3 class="title mb-3">PASSWORD RESET</h3>
                             <div class="row gy-3">
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <label for="TxtCurrent" class="form-label">Current Password <span class="text--danger">*</span></label>
+                                        <label for="TxtCurrent" class="form-label">Password Attuale<span class="text--danger">*</span></label>
                                         <asp:TextBox runat="server" ID="TxtCurrent" CssClass="form-control form--control" TextMode="Password"></asp:TextBox>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <label for="TxtPassword" class="form-label">New Password <span class="text--danger">*</span></label>
+                                        <label for="TxtPassword" class="form-label">Nuova Password <span class="text--danger">*</span></label>
                                         <asp:TextBox runat="server" ID="TxtPassword" CssClass="form-control form--control" TextMode="Password"></asp:TextBox>
                                     </div>
                                 </div>
                                 <div class="col-md-12 mb-3">
                                     <div class="form-group">
-                                        <label for="TxtConfirmPW" class="form-label">Confirm Password <span class="text--danger">*</span></label>
+                                        <label for="TxtConfirmPW" class="form-label">Conferma Password <span class="text--danger">*</span></label>
                                         <asp:TextBox runat="server" ID="TxtConfirmPW" CssClass="form-control form--control" TextMode="Password"></asp:TextBox>
                                     </div>
                                 </div>
                                 <div class="text-center col-12">
-                                    <asp:Button runat="server" ID="BtnReset" CssClass="cmn--btn active w-100 btn--round" CausesValidation="false" Text="Reset Password" OnClick="BtnReset_Click" />
+                                    <asp:Button runat="server" ID="BtnReset" CssClass="cmn--btn active w-100 btn--round" CausesValidation="false" Text="Conferma Reset" OnClick="BtnReset_Click" />
                                 </div>
                             </div>
                         </div>

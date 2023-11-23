@@ -159,10 +159,10 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-7 col-xl-6 text-center">
-                    <h2 class="title text-white">Message Boards</h2>
+                    <h2 class="title text-white">Bacheca Messaggi</h2>
                     <ul class="breadcrumbs d-flex flex-wrap align-items-center justify-content-center">
                         <li><a href="Dashboard.aspx">Dashboard</a></li>
-                        <li>Message Boards</li>
+                        <li>Bacheca Messaggi</li>
                     </ul>
                 </div>
             </div>
@@ -192,14 +192,14 @@
                                             <p class="invest-info">Quota ingresso: <span class="invest-amount">€ <%# Eval("Fee") %></span></p>
                                             <p class="invest-info">Player necessari: <span class="invest-amount"><%# Eval("MinPlayers") %></span></p>
                                             <p class="invest-info">Player attuali: <span class="invest-amount"><%# Eval("RealPlayers") %></span></p>
-                                            <p class="invest-info">Numero di squadre: <span class="invest-amount TeamShow" style="cursor: pointer;" data-id="<%# Eval("Id") %>" data-img="<%# Eval("Image2") %>"><%# Eval("NumberOfTeams") %></span></p>
+                                            <p class="invest-info">Numero squadre: <span class="invest-amount TeamShow" style="cursor: pointer;" data-id="<%# Eval("Id") %>" data-img="<%# Eval("Image2") %>"><%# Eval("NumberOfTeams") %></span></p>
                                             <p class="invest-info">Premio min.: <span class="invest-amount">€ <%# Eval("Prize") %></span></p>
                                             <p class="invest-info">Vincenti: <span class="invest-amount"><%# Eval("Winners") %></span></p>
                                             <div class="form-check form-switch mt-3" style="font-size: 22px;">
                                                 <%# ((bool)Eval("AllowedBoard") == true ? "<input class=\"form-check-input board-allow\" type=\"checkbox\" style=\"float:inherit\" checked>" : "<input class=\"form-check-input board-allow\" type=\"checkbox\" style=\"float:inherit\" >") %>
-                                                <label class="form-check-label" data-id="<%# Eval("Id") %>">Allow Board</label>
+                                                <label class="form-check-label" data-id="<%# Eval("Id") %>">Abilita </label>
                                             </div>
-                                            <a class="cmn--btn active btn--md radius-1 mt-1" href="MessageBoardDetail.aspx?gameId=<%# Eval("Id") %>">MessageBoard Game <%# Eval("Id") %></a>
+                                            <a class="cmn--btn active btn--md radius-1 mt-1" href="MessageBoardDetail.aspx?gameId=<%# Eval("Id") %>">Bacheca Torneo <%# Eval("Id") %></a>
                                         </div>
                                     </div>
                                 </div>

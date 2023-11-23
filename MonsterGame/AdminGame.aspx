@@ -645,7 +645,7 @@
                     success: function (res) {
                         var dataArrayForTeams = res.data;
                         $("#gameTeamsModal").modal('show');
-                        $(".teamNames").html(dataArrayForTeams.join('<br/>'));
+                        $(".teamNames").html(dataArrayForTeams.join('<br />'));
                         $("#TeamImage").attr('src', "Upload/Game/" + (row.Image2 ? row.Image2 : "default.jpg"));
                     },
                     error: function (jqXHR, textStatus, errorThrown) {
