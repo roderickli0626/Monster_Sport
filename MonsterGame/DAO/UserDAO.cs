@@ -28,6 +28,10 @@ namespace MonsterGame.DAO
         {
             return GetContext().Users.Where(g => g.Email == email).FirstOrDefault();
         }
+        public User FindByEmailOrName(string email)
+        {
+            return GetContext().Users.Where(g => g.Email == email || g.Name == email).FirstOrDefault();
+        }
         public bool Insert(User user)
         {
             GetContext().Users.InsertOnSubmit(user);

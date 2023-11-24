@@ -30,7 +30,8 @@
                         <div class="col-12">
                             <div class="form-group">
                                 <div for="TxtEmail" class="input-pre-icon"><i class="las la-user"></i></div>
-                                <asp:TextBox runat="server" ID="TxtEmail" CssClass="form--control form-control style--two" TextMode="Email" placeholder="Email"></asp:TextBox>
+                                <%--<asp:TextBox runat="server" ID="TxtEmail" CssClass="form--control form-control style--two" TextMode="Email" placeholder="Email"></asp:TextBox>--%>
+                                <asp:TextBox runat="server" ID="TxtEmail" CssClass="form--control form-control style--two" placeholder="Email"></asp:TextBox>
                             </div>
                         </div>
                         <div class="col-12">

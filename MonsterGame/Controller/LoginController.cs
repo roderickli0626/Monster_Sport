@@ -39,7 +39,8 @@ namespace MonsterGame.Controller
                 return LoginCode.Success;
             }
 
-            User user = userDao.FindByEmail(email);
+            //User user = userDao.FindByEmail(email);
+            User user = userDao.FindByEmailOrName(email);
             if (user == null) { return LoginCode.Failed; }
             string modelPW = new CryptoController().DecryptStringAES(user.Password);
             if (pass.UnEncrypted.CompareTo(modelPW) == 0)
