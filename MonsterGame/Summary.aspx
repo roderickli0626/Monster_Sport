@@ -50,10 +50,10 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-7 col-xl-6 text-center">
-                    <h2 class="title text-white">Summary</h2>
+                    <h2 class="title text-white">Report</h2>
                     <ul class="breadcrumbs d-flex flex-wrap align-items-center justify-content-center">
                         <li><a href="Dashboard.aspx">Dashboard</a></li>
-                        <li>Summary</li>
+                        <li>Report</li>
                     </ul>
                 </div>
             </div>
@@ -83,12 +83,12 @@
                         <thead>
                             <tr>
                                 <th>Nr.</th>
-                                <th>SKIN</th>
+                                <th>Ruolo</th>
                                 <th>Giocato</th>
                                 <th>Vinto</th>
                                 <th>Utile</th>
-                                <th>N.Ticket</th>
-                                <th>N.Player</th>
+                                <th>Ticket</th>
+                                <th>Player</th>
                             </tr>
                         </thead>
                         <tbody>

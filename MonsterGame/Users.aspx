@@ -120,7 +120,7 @@
                                 </asp:UpdatePanel>
                             </div>
                             <div class="modal-footer modal--footer">
-                                <asp:Button runat="server" ID="BtnSave" CssClass="btn btn--warning btn--md" Text="Salva" OnClick="BtnSave_Click"/>
+                                <asp:Button runat="server" ID="BtnSave" CssClass="btn btn--warning btn--md" Text="Conferma" OnClick="BtnSave_Click"/>
                                 <button type="button" class="btn btn--danger btn--md" data-bs-dismiss="modal">Chiudi</button>
                             </div>
                         </div>

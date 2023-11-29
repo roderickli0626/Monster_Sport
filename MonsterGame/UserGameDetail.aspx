@@ -318,7 +318,7 @@
                                 </asp:UpdatePanel>
                             </div>
                             <div class="modal-footer modal--footer">
-                                <asp:Button runat="server" ID="BtnChangeTeam" CssClass="btn btn--warning btn--md" Text="Save" CausesValidation="false" OnClick="BtnChangeTeam_Click"/>
+                                <asp:Button runat="server" ID="BtnChangeTeam" CssClass="btn btn--warning btn--md" Text="Conferma" CausesValidation="false" OnClick="BtnChangeTeam_Click"/>
                                 <button runat="server" id="btnClose" clientIDMode="static" class="btn btn--danger btn--md">Chiudi</button>
                             </div>
                         </div>
@@ -355,7 +355,7 @@
                                 </asp:UpdatePanel>
                             </div>
                             <div class="modal-footer modal--footer">
-                                <asp:Button runat="server" ID="BtnNewTicket" CssClass="btn btn--warning btn--md" Text="Save" CausesValidation="false" OnClick="BtnNewTicket_Click"/>
+                                <asp:Button runat="server" ID="BtnNewTicket" CssClass="btn btn--warning btn--md" Text="Conferma" CausesValidation="false" OnClick="BtnNewTicket_Click"/>
                                 <button type="button" class="btn btn--danger btn--md" data-bs-dismiss="modal">Chiudi</button>
                             </div>
                         </div>
@@ -600,10 +600,10 @@
                         "title": "Stato",
                         "width": "5%",
                         "render": function (data, type, row, meta) {
-                            if (row.TicketResults.length == 0) return "<p class='text-warning'>IN GIOCO</p>";
+                            if (row.TicketResults.length == 0) return "<p class='text-warning'>OK</p>";
                             else if (row.TicketResults[row.TicketResults.length - 1].RoundResult == null) return "<p class='text-danger'>PERSO</p>";
                             else if (gameStatus == "6") return "<p class='text-success'>VINTO</p>";
-                            else return "<p class='text-warning'>IN GIOCO</p>";
+                            else return "<p class='text-warning'>OK</p>";
                         }
                     });
 
@@ -682,15 +682,15 @@
                                 switch (result) {
                                     case 1: {
                                         bg = "bg-success";
-                                        content = "V";
+                                        content = "VINCE";
                                     } break;
                                     case 2: {
                                         bg = "bg-warning";
-                                        content = "N";
+                                        content = "PARI";
                                     } break;
                                     case 3: {
                                         bg = "bg-danger";
-                                        content = "P"
+                                        content = "PERDE"
                                     } break;
                                     default: {
                                         bg = "";
@@ -788,12 +788,12 @@
             $('#TxtNumOfTickets').on('input', function () {
                 var amount = $('#TxtNumOfTickets').val() * $('#HfFee').val();
                 if (amount > $("#HfBalance").val()){
-                    alert("Balance is not enough");
+                    alert("Saldo insufficiente");
                     $('#TxtNumOfTickets').val($('#TxtNumOfTickets').val() - 1);
                     return;
                 }
                 if ($('#TxtNumOfTickets').val() > 10) {
-                    alert("Too many tickets!");
+                    alert("Troppi Tickets!");
                     $('#TxtNumOfTickets').val($('#TxtNumOfTickets').val() - 1);
                     return;
                 }

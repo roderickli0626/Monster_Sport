@@ -28,7 +28,7 @@
                         <button class="cmn--btn active radius-1 w-100 btn-add" runat="server" id="BtnAddAgency">Agg. Nuova</button>
                     </div>
                     <div class="col-lg-4 col-xl-4 pt-1 ms-auto">
-                        <asp:TextBox runat="server" ID="TxtSearch" CssClass="form--control form-control" ClientIDMode="Static" placeholder="SEARCH"></asp:TextBox>
+                        <asp:TextBox runat="server" ID="TxtSearch" CssClass="form--control form-control" ClientIDMode="Static" placeholder="CERCA .."></asp:TextBox>
                     </div>
                 </div>
                 <div class="row gy-4 justify-content-center">
@@ -119,7 +119,7 @@
                                 </asp:UpdatePanel>
                             </div>
                             <div class="modal-footer modal--footer">
-                                <asp:Button runat="server" ID="BtnSave" CssClass="btn btn--warning btn--md" Text="Save" OnClick="BtnSave_Click"/>
+                                <asp:Button runat="server" ID="BtnSave" CssClass="btn btn--warning btn--md" Text="Conferma" OnClick="BtnSave_Click"/>
                                 <button type="button" class="btn btn--danger btn--md" data-bs-dismiss="modal">Chiudi</button>
                             </div>
                         </div>

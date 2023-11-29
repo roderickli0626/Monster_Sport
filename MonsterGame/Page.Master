@@ -34,13 +34,15 @@
     <div class="header">
         <div id="dvCookieMessage" style="display: none; position: fixed; bottom: 0; width: 100%;">
             <div class="d-flex" style="padding: 50px; background-color: rgba(0, 0, 0, 0.5)">
-                <p>Sito web utilizza i cookie per garantire la migliore esperienza di navigazione. Continuando la navigazione 
-                    acconsenti all'uso dei cookie. Per saperne di più, consulta la nostra Informativa sulla Privacy.</p>
+                <p>
+                    Sito web utilizza i cookie per garantire la migliore esperienza di navigazione. Continuando la navigazione 
+                    acconsenti all'uso dei cookie. Per saperne di più, consulta la nostra Informativa sulla Privacy.
+                </p>
                 <div class="d-flex w-25 flex-column justify-content-end">
                     <a id="lnkNo" class="btn bg--none text-white ms-auto me-2" style="width: fit-content; font-size: 14px;">IMPOSTAZIONI COOKIE</a>
                 </div>
                 <div class="d-flex w-25 flex-column justify-content-end">
-                    <a id="lnkOk" class="btn" style="width: fit-content;font-size: 14px;">ACCETTA TUTTII COOKIE</a>
+                    <a id="lnkOk" class="btn" style="width: fit-content; font-size: 14px;">ACCETTA TUTTII COOKIE</a>
                 </div>
             </div>
         </div>
@@ -117,6 +119,7 @@
                     <ul class="footer-links d-flex flex-wrap justify-content-center">
                         <%--<li><a href="Conditions.aspx">Terms & Conditions</a></li>
                         <li><a href="Policy.aspx">Privacy Policy</a></li>--%>
+                        <li><a href="#0" id="ComeSiGioca">Come si Gioca</a></li>
                         <li><a href="#0" id="TermsCondition">Termini & Condizioni</a></li>
                         <li><a href="#0" id="Policy">Privacy Policy</a></li>
                     </ul>
@@ -137,75 +140,254 @@
             <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                 <div class="modal-content section-bg border-0">
                     <div class="modal-header modal--header bg--base">
-                        <h4 class="modal-title text-dark">Termini & Condizioni</h4></div>
+                        <h4 class="modal-title text-dark">Termini & Condizioni</h4>
+                    </div>
 
-        <div class="modal-body modal--body">
-                     
-                    <h3 class="title mb-2 mt-3">Come si gioca: </h3>
-                    <p>I giocatori entro la fine della settimana sportiva dovranno scegliere una SQUADRA dall'elenco fornito dagli organizzatori. <br />
-                        Il Venerdi (generalmente entro le 18.00), il Torneo inizia e non sarà più possibile parteciparvi.<br />
-                        Ogni partecipante verrà abilitato o meno al successivo Turno in base ai risultati dell'incontro sportivo che si andrà a disputare.<br />
-                    <h3 class="title mb-2 mt-3">Informazioni e Regolamento: </h3>    
-                        1. I partecipanti devono predire quale squadra, tra quelle selezionate dal Torneo, è Vincente nella successiva giornata di campionato. <br />
-                        - In caso di sconfitta, si verrà eliminati dal Torneo<br />
-                        - In caso di pareggio scatterà un'ammonizione e, alla seconda ammonizione anche se non consecutiva, si procederà all'eliminazione dal Torneo.<br />
-                        - In caso di vittoria si passerà al Turno successivo con la scelta di una nuova squadra... e cosi via ..<br />
-                        - I risultati di riferimento sono quelli pubblicati sul sito Diretta/Livescore.it <br />
-                        <br />
-                        2. I partecipanti non possono utilizzare una squadra già selezionata nei propri turni precedenti. <br />
-                        <br />
-                        3. Se un evento in corso viene sospeso durante un Turno, i partecipanti che hanno selezionato le squadre coinvolte verranno automaticamente promossi al Turno successivo.<br />
-                        <br />                        
-                        4. Nel caso di rinvio di una singola partita e se il rinvio si verifica dopo l'orario limite per la scelta delle squadre, la selezione rimarrà valida. Se il rinvio avviene prima della scadenza per la consegna, non sarà possibile scegliere le squadre coinvolte nella partita posticipata.<br />
-                        <br />
-                        5. Il numero max di Turno è uguale al numero di Squadre previste dal Torneo. <br />
-                        <br />
-                        6. Quando sono esaurite le scelte disponibili da parte di due o più partecipanti (fine delle squadre), il torneo si conclude e il montepremi residuo viene diviso in parti uguali tra i partecipanti ancora in gara.<br />
-                        <br />
-                        7. In situazioni di sospensione del campionato durante l'evento, se la sospensione è prolungata, il montepremi verrà equamente diviso tra i partecipanti ancora in gioco.<br />
-                        <br />
-                        8. Se due o più contendenti stanno gareggiando per un premio e le squadre da loro scelte subiscono una sconfitta, il premio sarà assegnato al partecipante che non ha ancora ottenuto un pareggio durante il torneo. <br />
-                        <br />
-                        9. Nel caso in cui due o più partecipanti stiano competendo per un premio e non abbiano ricevuto alcuna ammonizione, o entrambi ne abbiano ricevuta una, in caso di sconfitta/pareggio delle squadre selezionate, i premi in disputa saranno equamente divisi.<br />
-                        <br />
-                        10. Se due o più partecipanti stanno gareggiando per un premio e vengono eliminati entrambi, uno per pareggio e l'altro per la sconfitta della squadra scelta, il premio superiore andrà al giocatore eliminato con doppia ammonizione. <br />
-                        <br />
-                        11. Le selezioni delle squadre dovranno essere effettuate entro 12h antecedenti la giornata di campionato (tale giornata verrà comunicata continuamente sul sito e anche in email).<br />
-                        <br />
-                        12. In caso di mancata comunicazione della scelta della squadra, verrà effettuata una scelta automatica, in ordine alfabetico, di una squadra tra quelle ancora disponibili.<br />
-                        <br />
-                        13. Durante il gioco, quando rimangono in gioco almeno quattro Ticket, è possibile stipulare un accordo per dividere il montepremi in qualsiasi modo si ritenga opportuno.
+                    <div class="modal-body modal--body">
+
+                        <h3 class="title mb-2 mt-3">Come si gioca: </h3>
+                        <p>
+                            I giocatori entro la fine della settimana sportiva dovranno scegliere una SQUADRA dall'elenco fornito dagli organizzatori.
+                            <br />
+                            Il Venerdi (generalmente entro le 18.00), il Torneo inizia e non sarà più possibile parteciparvi.<br />
+                            Ogni partecipante verrà abilitato o meno al successivo Turno in base ai risultati dell'incontro sportivo che si andrà a disputare.<br />
+                            <h3 class="title mb-2 mt-3">Informazioni e Regolamento: </h3>
+                            1. I partecipanti devono predire quale squadra, tra quelle selezionate dal Torneo, è Vincente nella successiva giornata di campionato.
+                            <br />
+                            - In caso di sconfitta, si verrà eliminati dal Torneo<br />
+                            - In caso di pareggio scatterà un'ammonizione e, alla seconda ammonizione anche se non consecutiva, si procederà all'eliminazione dal Torneo.<br />
+                            - In caso di vittoria si passerà al Turno successivo con la scelta di una nuova squadra... e cosi via ..<br />
+                            - I risultati di riferimento sono quelli pubblicati sul sito Diretta/Livescore.it
+                            <br />
+                            <br />
+                            2. I partecipanti non possono utilizzare una squadra già selezionata nei propri turni precedenti.
+                            <br />
+                            <br />
+                            3. Se un evento in corso viene sospeso durante un Turno, i partecipanti che hanno selezionato le squadre coinvolte verranno automaticamente promossi al Turno successivo.<br />
+                            <br />
+                            4. Nel caso di rinvio di una singola partita e se il rinvio si verifica dopo l'orario limite per la scelta delle squadre, la selezione rimarrà valida. Se il rinvio avviene prima della scadenza per la consegna, non sarà possibile scegliere le squadre coinvolte nella partita posticipata.<br />
+                            <br />
+                            5. Il numero max di Turno è uguale al numero di Squadre previste dal Torneo.
+                            <br />
+                            <br />
+                            6. Quando sono esaurite le scelte disponibili da parte di due o più partecipanti (fine delle squadre), il torneo si conclude e il montepremi residuo viene diviso in parti uguali tra i partecipanti ancora in gara.<br />
+                            <br />
+                            7. In situazioni di sospensione del campionato durante l'evento, se la sospensione è prolungata, il montepremi verrà equamente diviso tra i partecipanti ancora in gioco.<br />
+                            <br />
+                            8. Se due o più contendenti stanno gareggiando per un premio e le squadre da loro scelte subiscono una sconfitta, il premio sarà assegnato al partecipante che non ha ancora ottenuto un pareggio durante il torneo.
+                            <br />
+                            <br />
+                            9. Nel caso in cui due o più partecipanti stiano competendo per un premio e non abbiano ricevuto alcuna ammonizione, o entrambi ne abbiano ricevuta una, in caso di sconfitta/pareggio delle squadre selezionate, i premi in disputa saranno equamente divisi.<br />
+                            <br />
+                            10. Se due o più partecipanti stanno gareggiando per un premio e vengono eliminati entrambi, uno per pareggio e l'altro per la sconfitta della squadra scelta, il premio superiore andrà al giocatore eliminato con doppia ammonizione.
+                            <br />
+                            <br />
+                            11. Le selezioni delle squadre dovranno essere effettuate entro 12h antecedenti la giornata di campionato (tale giornata verrà comunicata continuamente sul sito e anche in email).<br />
+                            <br />
+                            12. In caso di mancata comunicazione della scelta della squadra, verrà effettuata una scelta automatica, in ordine alfabetico, di una squadra tra quelle ancora disponibili.<br />
+                            <br />
+                            13. Durante il gioco, quando rimangono in gioco almeno quattro Ticket, è possibile stipulare un accordo per dividere il montepremi in qualsiasi modo si ritenga opportuno.
                             La richiesta è da effettuarsi via chat e, per trasparenza, nel message board del sito.<br />
-                        <br />
-                        14. Se un partecipante raggiunge le fasi finali del torneo con più ticket, in caso di eliminazione dei ticket avversari, vincerà i premi corrispondenti ai piazzamenti dei suoi ticket.<br />
-                        <br />
-                        15. La quota di partecipazione è variabile in base alle opzioni del Torneo (Lega, numero di squadre, montepremi etc).<br />
-                        <br />
-                        16. L'iscrizione è valida solo se effettuata prima dell'inizio del primo Turno; non sono ammesse iscrizioni in corso. <br />
-                        <br />
-                        17. La tasse del Torneo è in proporzione alla quota di partecipazione.<br />
-                        <br />
-                        18. Alcuni Tornei sono free e pertanto alcun importo è richiesto per la partecipazione.<br />
-                        <br />
-                        19. Tutti i premi sono esigibili anche in Agenzia.<br />
-                        <br />
-                        20. Il Torneo termina in queste determinate condizioni:<br />
+                            <br />
+                            14. Se un partecipante raggiunge le fasi finali del torneo con più ticket, in caso di eliminazione dei ticket avversari, vincerà i premi corrispondenti ai piazzamenti dei suoi ticket.<br />
+                            <br />
+                            15. La quota di partecipazione è variabile in base alle opzioni del Torneo (Lega, numero di squadre, montepremi etc).<br />
+                            <br />
+                            16. L'iscrizione è valida solo se effettuata prima dell'inizio del primo Turno; non sono ammesse iscrizioni in corso.
+                            <br />
+                            <br />
+                            17. La tasse del Torneo è in proporzione alla quota di partecipazione.<br />
+                            <br />
+                            18. Alcuni Tornei sono free e pertanto alcun importo è richiesto per la partecipazione.<br />
+                            <br />
+                            19. Tutti i premi sono esigibili anche in Agenzia.<br />
+                            <br />
+                            20. Il Torneo termina in queste determinate condizioni:<br />
                             i. Sono rimasti in gioco il numero di Partecipanti definiti dal Torneo (Vincitori: Xx).<br />
                             ii. Per sopraggiunta sospensione/termine del campionato di riferimento.<br />
                             iii. Per esaurimento del numero di Squadre disponibili per avanzare nel successivo Turno.<br />
-                        <br />
-                    </p>
-																  
-            </div>
+                            <br />
+                        </p>
 
-                    
+                    </div>
 
                     <div class="modal-footer modal--footer">
-                        <button type="button" class="btn btn--danger btn--md" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn--danger btn--md" data-bs-dismiss="modal">Chiudi</button>
                     </div>
                 </div>
             </div>
         </div>
+
+        <div class="modal custom--modal fade show" id="ComeSiGiocaModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-modal="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                <div class="modal-content section-bg border-0">
+                    <div class="modal-header modal--header bg--base">
+                        <h4 class="modal-title text-dark">Come si gioca - Tutorial</h4>
+                    </div>
+
+                    <div class="modal-body modal--body text-center">
+
+                        <h3 class="title mb-2 mt-3">Come si gioca: </h3>
+                        <br />
+                        <div style="align-content: center">
+                            <img src="Content/Images/help/comesigioca.png" alt="logo" align="center"><br />
+                        </div>
+                        <br />
+
+                        <h3>Registrati</h3>
+                        <br />
+                        <div>
+                            <img src="Content/Images/help/registrati.png" alt="logo"><br />
+                        </div>
+                        <br />
+                        <br />
+
+                        <h3>Scegli il torneo:</h3>
+                        <br />
+                        <div>
+                            <img src="Content/Images/help/sceglitorneo.png" alt="logo"><br />
+                        </div>
+                        <br />
+                        <br />
+                        <h3>Entra:<br />
+                        </h3>
+                        <div>
+                            <img src="Content/Images/help/giocaora.png" alt="logo"><br />
+                        </div>
+                        <br />
+                        <br />
+                        <h3>Acquista i Tickets:<br />
+                        </h3>
+                        <div>
+                            <img src="Content/Images/help/imieitickets.png" alt="logo"><br />
+                        </div>
+                        <br />
+                        <br />
+                        <div>
+                            <h3>Inserisci il numero di Tickets:<br />
+                            </h3>
+
+                            <img src="Content/Images/help/numeroticket.png" alt="logo"><br />
+                        </div>
+                        <br />
+                        <div>
+                            <h3>Vai su 'Azioni' e scegli la squadra:<br />
+                            </h3>
+
+                            <img src="Content/Images/help/edit.png" alt="logo"><br />
+                        </div>
+                        <br />
+                        <br />
+                        <div>
+                            <h3>Si aprirà la pagina per la scelta della squadra:<br />
+                            </h3>
+
+                            <img src="Content/Images/help/Team.png" alt="logo"><br />
+                        </div>
+                        <br />
+                        <br />
+                        <div>
+                            <h3>ed il Torneo entra nello stato di 'Scelta Team'<br />
+                            </h3>
+
+                            <img src="Content/Images/help/scelta_team.png" alt="logo"><br />
+                        </div>
+                        <br />
+                        <br />
+
+                        <div>
+                            Al venerdi, o cmq prima degli incontri sportivi, il torneo si sospende e si attende l'esito delle squadre.<br />
+                            Lo staff provvederà ad inserire i risultati, verificabili sui siti di Livescore, ed a riaprire il torneo
+                            per i ticket ancora in gioco, e cosi via.:<br />
+                            <img src="Content/Images/help/Ticket_04.jpg" alt="logo"><br />
+                        </div>
+                        <br />
+                        <br />
+
+                        <div>
+                            <h3>quindi ci susseguiranno i vari Rount e avremo le seguenti situazioni :<br />
+                            </h3>
+
+                            <img src="Content/Images/help/ticket_06.jpg" alt="logo"><br />
+                        </div>
+                        <br />
+                        <br />
+
+                        <div>
+                            <h3>fino ad arrivare alla conclusione del Torneo con l'assegnazione dei Premi<br />
+                            </h3>
+
+                            <img src="Content/Images/help/risultati_06.jpg" alt="logo"><br />
+                        </div>
+                        <br />
+                        <br />
+
+                        <div>
+                            <h3>In gioco sono rimasti soltanto 2 ticket per cui il torneo si appresta a decretare i vincitori:<br />
+                            </h3>
+
+                            <img src="Content/Images/help/ticket_07_.jpg" alt="logo"><br />
+                        </div>
+                        <br />
+                        <br />
+
+                        <div>
+                            <h3>Vincitori<br />
+                            </h3>
+
+                            <img src="Content/Images/help/Vincenti_1.jpg" alt="logo"><br />
+                        </div>
+                        <br />
+                        <br />
+
+                        <div>
+                            <h3>Divisione del montepremi<br />
+                            </h3>
+
+                            <img src="Content/Images/help/Vincenti_2.jpg" alt="logo"><br />
+                        </div>
+                        <br />
+                        <br />
+
+                        <div>
+                            <h3>Torneo Terminato<br />
+                            </h3>
+
+                            <img src="Content/Images/help/Terminato.png" alt="logo"><br />
+                        </div>
+                        <br />
+                        <br />
+
+                        <div>
+                            <h3>I vincitori si ritroveranno l'accredito direttamente nella loro scheda personale
+                                <br />
+                                <br />
+                            </h3>
+
+                            <img src="Content/Images/help/Accredito.png" alt="logo"><br />
+                        </div>
+                        <br />
+                        <br />
+
+
+                        <div>
+                            Per trasparenza e garanzia, tutti gli utenti possono assistere a qualsiasi torneo 
+                        (sia esso concluso o in corso) anche non avendone mai fatto parte.<br />
+                            <br />
+                        </div>
+                        <div>
+                            Per qualsiasi esigenza, la chat è a vostra disposizione.<br />
+                            <br />
+                        </div>
+                    </div>
+
+                    <div class="modal-footer modal--footer">
+                        <button type="button" class="btn btn--danger btn--md" data-bs-dismiss="modal">Chiudi</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class=" modal custom--modal fade show" id="PolicyModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-modal="true">
             <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                 <div class="modal-content section-bg border-0">
@@ -259,6 +441,10 @@
                 $(this).removeClass("fa-eye");
                 $("#liName2").removeClass("d-none");
             }
+        });
+
+        $("#ComeSiGioca").click(function () {
+            $("#ComeSiGiocaModal").modal('show');
         });
 
         $("#TermsCondition").click(function () {

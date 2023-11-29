@@ -204,12 +204,12 @@
                                             </div>
                                             <div class="game-item__content">
                                                 <h4 class="title"><%# Eval("Title") %></h4>
-                                                <p class="invest-info">Quota ingresso: <span class="invest-amount">€ <%# Eval("Fee") %></span></p>
-                                                <p class="invest-info">Player necessari: <span class="invest-amount"><%# Eval("MinPlayers") %></span></p>
-                                                <p class="invest-info">Player attuali: <span class="invest-amount"><%# Eval("RealPlayers") %></span></p>
-                                                <p class="invest-info">Numero di squadre: <span class="invest-amount TeamShow" style="cursor: pointer;" data-id="<%# Eval("Id") %>" data-img="<%# Eval("Image2") %>"><%# Eval("NumberOfTeams") %></span></p>
-                                                <p class="invest-info">Premio min.: <span class="invest-amount">€ <%# Eval("Prize") %></span></p>
-                                                <p class="invest-info">Vincenti: <span class="invest-amount"><%# Eval("Winners") %></span></p>
+                                                <p class="invest-info" title="Quota di partecipazione">Quota ingresso: <span class="invest-amount">€ <%# Eval("Fee") %></span></p>
+                                                <p class="invest-info" title="Player necessari all'inizio del Torneo">Player necessari: <span class="invest-amount"><%# Eval("MinPlayers") %></span></p>
+                                                <p class="invest-info" title="Player già registrati al Torneo">Player attuali: <span class="invest-amount"><%# Eval("RealPlayers") %></span></p>                                                
+                                                <p class="invest-info" title="Numero di squadre da cui poter scegliere" style="color: orange;">Numero squadre: <span class="invest-amount TeamShow" style="cursor: pointer;" data-id="<%# Eval("Id") %>" data-img="<%# Eval("Image2") %>"><%# Eval("NumberOfTeams") %></span> *</p>
+                                                <p class="invest-info" title="Montepremi min. lo stesso viene adeguato in base ai ticket venduti">Premio min.: <span class="invest-amount">€ <%# Eval("Prize") %></span></p>
+                                                <p class="invest-info" title="Num. di Vincitori di questo Torneo">Vincenti: <span class="invest-amount"><%# Eval("Winners") %></span></p>
                                                 <a class="cmn--btn active btn--md radius-1" href="UserGameDetail.aspx?gameId=<%# Eval("Id") %>"><%# Eval("ButtonTitle") %></a>
                                             </div>
                                         </div>
@@ -276,13 +276,13 @@
                     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                         <div class="modal-content section-bg border-0">
                             <div class="modal-header modal--header bg--base">
-                                <h4 class="modal-title text-dark">MESSAGE FROM ADMIN</h4>
+                                <h4 class="modal-title text-dark">MESSAGGIO DALLO STAFF</h4>
                             </div>
                             <div class="modal-body modal--body">
                                 <div class="row gy-3">
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <label for="TxtMessage" class="form-label">Message</label>
+                                            <label for="TxtMessage" class="form-label">Messaggio</label>
                                             <asp:TextBox runat="server" ID="TxtMessage" ClientIDMode="Static" CssClass="form-control form--control style-two" TextMode="MultiLine" Rows="2" ReadOnly="true"></asp:TextBox>
                                         </div>
                                     </div>

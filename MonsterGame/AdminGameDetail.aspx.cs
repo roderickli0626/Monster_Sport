@@ -148,14 +148,14 @@ namespace MonsterGame
 
                 // Send Notification to All Users
                 var hubContext = GlobalHost.ConnectionManager.GetHubContext<NotificationHub>();
-                hubContext.Clients.All.receiveRoundNotification("Un nuovo Turno " + currentRound + " è appena iniziato!");
+                hubContext.Clients.All.receiveRoundNotification("Il nuovo Turno " + currentRound + " è appena iniziato: Scegli la nuova Squadra.");
 
                 Page.Response.Redirect(Page.Request.Url.ToString(), true);
             }
 
             // Send Notification to All Users
             var hubContext1 = GlobalHost.ConnectionManager.GetHubContext<NotificationHub>();
-            hubContext1.Clients.All.receiveRoundNotification("Un nuovo Turno " + currentRound + " è appena iniziato!");
+            hubContext1.Clients.All.receiveRoundNotification("Il nuovo Turno " + currentRound + " è appena iniziato: Scegli la nuova Squadra.");
         }
 
         private void SaveWinners()
@@ -197,7 +197,7 @@ namespace MonsterGame
 
             // Send Notification to All Users
             var hubContext = GlobalHost.ConnectionManager.GetHubContext<NotificationHub>();
-            hubContext.Clients.All.receivePrizeNotification("Premi assegnati!");
+            hubContext.Clients.All.receivePrizeNotification("Torneo concluso - Premi assegnati!");
 
             SetVisible();
         }

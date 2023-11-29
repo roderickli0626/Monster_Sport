@@ -143,7 +143,7 @@
                                 </asp:UpdatePanel>
                             </div>
                             <div class="modal-footer modal--footer">
-                                <asp:Button runat="server" ID="BtnChangeTeam" CssClass="btn btn--warning btn--md" Text="Save" CausesValidation="false" OnClick="BtnChangeTeam_Click"/>
+                                <asp:Button runat="server" ID="BtnChangeTeam" CssClass="btn btn--warning btn--md" Text="Conferma" CausesValidation="false" OnClick="BtnChangeTeam_Click"/>
                                 <button runat="server" id="btnClose" clientIDMode="static" class="btn btn--danger btn--md">Chiudi</button>
                             </div>
                         </div>
@@ -177,7 +177,7 @@
                                 </asp:UpdatePanel>
                             </div>
                             <div class="modal-footer modal--footer">
-                                <asp:Button runat="server" ID="BtnResult" CssClass="btn btn--warning btn--md" ClientIDMode="Static" Text="Save" CausesValidation="false" OnClick="BtnResult_Click"/>
+                                <asp:Button runat="server" ID="BtnResult" CssClass="btn btn--warning btn--md" ClientIDMode="Static" Text="Conferma" CausesValidation="false" OnClick="BtnResult_Click"/>
                                 <button type="button" class="btn btn--danger btn--md" data-bs-dismiss="modal">Chiudi</button>
                             </div>
                         </div>
@@ -206,7 +206,7 @@
                                 </asp:UpdatePanel>
                             </div>
                             <div class="modal-footer modal--footer">
-                                <asp:Button runat="server" ID="BtnPercent" CssClass="btn btn--warning btn--md" Text="Save" CausesValidation="false" OnClick="BtnPercent_Click"/>
+                                <asp:Button runat="server" ID="BtnPercent" CssClass="btn btn--warning btn--md" Text="Conferma" CausesValidation="false" OnClick="BtnPercent_Click"/>
                                 <button type="button" class="btn btn--danger btn--md" data-bs-dismiss="modal">Chiudi</button>
                             </div>
                         </div>
@@ -348,7 +348,7 @@
                                 </asp:UpdatePanel>
                             </div>
                             <div class="modal-footer modal--footer">
-                                <asp:Button runat="server" ID="BtnSave" CssClass="btn btn--warning btn--md" Text="Save" OnClick="BtnSave_Click"/>
+                                <asp:Button runat="server" ID="BtnSave" CssClass="btn btn--warning btn--md" Text="Conferma" OnClick="BtnSave_Click"/>
                                 <button type="button" class="btn btn--danger btn--md" data-bs-dismiss="modal">Chiudi</button>
                             </div>
                         </div>
@@ -509,8 +509,8 @@
                         "width": "5%",
                         "render": function (data, type, row, meta) {
                             if (row.TicketResults.length == 0) return "<p class='text-warning'>PLAYING</p>";
-                            else if (row.TicketResults[row.TicketResults.length - 1].RoundResult == null) return "<p class='text-danger'>P</p>";
-                            else if (gameStatus == "6") return "<p class='text-success'>V</p>";
+                            else if (row.TicketResults[row.TicketResults.length - 1].RoundResult == null) return "<p class='text-danger'>PERSO</p>";
+                            else if (gameStatus == "6") return "<p class='text-success'>VINCE</p>";
                             else return "<p class='text-warning'>PLAYING</p>";
                         }
                     });
@@ -619,15 +619,15 @@
                                 switch (result) {
                                     case 1: {
                                         bg = "bg-success";
-                                        content = "V";
+                                        content = "VINCE";
                                     } break;
                                     case 2: {
                                         bg = "bg-warning";
-                                        content = "N";
+                                        content = "PARI";
                                     } break;
                                     case 3: {
                                         bg = "bg-danger";
-                                        content = "P"
+                                        content = "PERDE"
                                     } break;
                                     default: {
                                         bg = "";
@@ -762,7 +762,7 @@
             });
 
             $("#BtnPrize").click(function () {
-                if (confirm("Divide il Montepremi tra i Vincitori?")) return true;
+                if (confirm("Dividere il Montepremi tra i Vincitori?")) return true;
                 else return false;
             });
 

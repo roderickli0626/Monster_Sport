@@ -308,7 +308,7 @@
             $("#BtnSave1").click(function () {
                 var amount = $("#TxtBalance").val();
                 if (amount < 0 && Math.abs(amount) > $("#TxtCurrentBalance").val().substring(2)) {
-                    alert("Negative Balance is not allowed");
+                    alert("Fido non consentito");
                     return false;
                 }
                 return true;
