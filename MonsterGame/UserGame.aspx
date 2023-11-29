@@ -23,9 +23,14 @@
             font-size: 15px;
             width: 90%;
         }
+        
         .font-complete-mark {
             color: greenyellow;
             text-align: center;
+        }
+
+        td .font-complete-mark {
+            color: green;
         }
 
         .game-table-item {

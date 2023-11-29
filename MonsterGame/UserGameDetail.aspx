@@ -648,6 +648,20 @@
 
                         "drawCallback": function () {
                             $(".pagination").children('li').addClass("page-item");
+                            var api = this.api();
+                            var rowsCount = api.rows().count();
+                            var columnsCount = api.columns().count();
+                            var footer = '<tfoot class="bg-dark text-white"><tr><th></th><th>Total:</th>';
+                            for (var i = 2; i < columnsCount; i++) {
+                                if (i == columnsCount - 1) {
+                                    footer += "<th>" + rowsCount + "</th>";
+                                }
+                                else {
+                                    footer += "<th></th>";
+                                }
+                            }
+                            footer += '</tr></tfoot>';
+                            $(this).append(footer);
                         }
                     });
 

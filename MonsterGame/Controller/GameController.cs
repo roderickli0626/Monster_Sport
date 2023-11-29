@@ -30,7 +30,7 @@ namespace MonsterGame.Controller
         public SearchResult Search(int start, int length, string searchVal, int status)
         {
             SearchResult result = new SearchResult();
-            IEnumerable<Game> gameList = gameDao.FindAll().OrderByDescending(g => g.RealPlayers).ThenBy(g => g.Id);
+            IEnumerable<Game> gameList = gameDao.FindAll().OrderByDescending(g => g.StartDate).ThenBy(g => g.Id);
             if (status != 0) gameList = gameList.Where(x => x.Status == status).ToList();
             if (!string.IsNullOrEmpty(searchVal)) gameList = gameList.Where(x => x.Title.ToLower().Contains(searchVal.ToLower())).ToList();
 
@@ -57,7 +57,7 @@ namespace MonsterGame.Controller
         public List<GameCheck> FindAll(int status, string search, int userID)
         {
             List<int> myGameIDs = new TicketDAO().FindByUser(userID).Select(t => t.GameID ?? 0).ToList();
-            List<Game> gameList = gameDao.FindAll();
+            List<Game> gameList = gameDao.FindAll().OrderByDescending(g => g.StartDate).ThenBy(g => g.Id).ToList();
             if (status != 0) gameList = gameList.Where(x => x.Status == status).ToList();
             if (!string.IsNullOrEmpty(search)) gameList = gameList.Where(x => x.Title.ToLower().Contains(search.ToLower())).ToList();
 
@@ -76,7 +76,7 @@ namespace MonsterGame.Controller
         public List<GameCheck> FindUserGames(int userID)
         {
             List<int> gameIDs = new TicketDAO().FindByUser(userID).Select(t => t.GameID ?? 0).ToList();
-            List<Game> gameList = gameDao.FindAll().Where(g => gameIDs.Contains(g.Id)).ToList();
+            List<Game> gameList = gameDao.FindAll().OrderByDescending(g => g.StartDate).ThenBy(g => g.Id).Where(g => gameIDs.Contains(g.Id)).ToList();
 
             List<GameCheck> result = new List<GameCheck>();
             foreach (Game game in gameList)

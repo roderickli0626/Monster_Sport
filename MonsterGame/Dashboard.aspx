@@ -26,7 +26,9 @@
             color: greenyellow;
             text-align: center;
         }
-
+        td .font-complete-mark {
+            color: green;
+        }
         .box {
             position: relative;
             background: #eeee;
