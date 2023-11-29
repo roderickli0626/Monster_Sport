@@ -13,6 +13,18 @@
             line-height: 30px;
             font-size: 15px;
         }
+        .id-complete-mark {
+            position: absolute;
+            color: darkgreen;
+            text-align: center;
+            line-height: 30px;
+            font-size: 15px;
+            width: 90%;
+        }
+        .font-complete-mark {
+            color: greenyellow;
+            text-align: center;
+        }
 
         .box {
             position: relative;
@@ -161,6 +173,7 @@
                 <asp:HiddenField ID="HfResultID" runat="server" ClientIDMode="Static" />
                 <asp:HiddenField ID="HfCurrentRound" runat="server" ClientIDMode="Static" />
                 <asp:HiddenField ID="HfWinnerID" runat="server" ClientIDMode="Static" />
+                <asp:HiddenField ID="HfHaveTicket" runat="server" ClientIDMode="Static" />
                 <div class="row">
                     <div class="col-12 col-md-3">
                         <ul class="privacy-policy-sidebar-menu" style="padding-top:120px;">
@@ -197,8 +210,8 @@
                             <table>
                             <thead>
 
-                                <tr><th><p style="padding-left:15px; font-size: 14px; color:orange;"><b><u>PER INIZIARE:</b></u></style></p></th></tr>
-                                <tr><th style="padding-left:15px; font-size: 14px; color:orange;">- Acquista un nuovo Ticket</style></th></tr>                                 
+                                <tr><th><p style="padding-left:15px; font-size: 14px; color:orange;"><b><u>PER INIZIARE:</u></b></p></th></tr>
+                                <tr><th style="padding-left:15px; font-size: 14px; color:orange;">- Acquista un nuovo Ticket</th></tr>                                 
                                 <tr><th style="padding-left:15px; font-size: 14px; color:orange;">- Vai su <span class="fa fa-edit" style="font-size:18px; color:greenyellow;"> </span> e scegli la squadra</th></tr>
                                 <tr><th style="padding-left:15px; font-size: 14px; color:orange;">- Attendi l' esito dell' incontro</th></tr>
                                 
@@ -240,6 +253,9 @@
                                                 <h2 runat="server" id="Prize" class="price">€ 0</h2>
                                                 <p class="info">PREMIO</p>
                                             </div>
+                                            <div class="dashboard__card-content">
+                                                <h2 runat="server" id="DividDate" class="price"></h2>
+                                            </div>
                                             <div class="dashboard__card-icon">
                                                 <i class="las la-wallet"></i>
                                             </div>
@@ -274,12 +290,17 @@
                                                         </div>
                                                         <div class="game-item__content">
                                                             <h4 class="title"><%# Eval("Title") %></h4>
-                                                            <p class="invest-info">Quota ingresso: <span class="invest-amount">€ <%# Eval("Fee") %></span></p>
-                                                            <p class="invest-info">Player necessari: <span class="invest-amount"><%# Eval("MinPlayers") %></span></p>
-                                                            <p class="invest-info">Player attuali: <span class="invest-amount"><%# Eval("RealPlayers") %></span></p>
-                                                            <p class="invest-info">Numero squadre: <span class="invest-amount TeamShow" style="cursor: pointer;" data-id="<%# Eval("Id") %>" data-img="<%# Eval("Image2") %>"><%# Eval("NumberOfTeams") %></span></p>
-                                                            <p class="invest-info">Premio min.: <span class="invest-amount">€ <%# Eval("Prize") %></span></p>
-                                                            <p class="invest-info">Vincenti: <span class="invest-amount"><%# Eval("Winners") %></span></p>
+                                                            <div class="<%# ((int)Eval("Status") == 5 || (int)Eval("Status") == 6) ? "d-none" : "" %>">
+                                                                <p class="invest-info" title="Quota di partecipazione">Quota ingresso: <span class="invest-amount">€ <%# Eval("Fee") %></span></p>
+                                                                <p class="invest-info" title="Player necessari all'inizio del Torneo">Player necessari: <span class="invest-amount"><%# Eval("MinPlayers") %></span></p>
+                                                                <p class="invest-info" title="Player già registrati al Torneo">Player attuali: <span class="invest-amount"><%# Eval("RealPlayers") %></span></p>                                                
+                                                                <p class="invest-info" title="Numero di squadre da cui poter scegliere" style="color: orange;">Numero squadre: <span class="invest-amount TeamShow" style="cursor: pointer;" data-id="<%# Eval("Id") %>" data-img="<%# Eval("Image2") %>"><%# Eval("NumberOfTeams") %></span> *</p>
+                                                                <p class="invest-info" title="Montepremi min. lo stesso viene adeguato in base ai ticket venduti">Premio min.: <span class="invest-amount">€ <%# Eval("Prize") %></span></p>
+                                                                <p class="invest-info" title="Num. di Vincitori di questo Torneo">Vincenti: <span class="invest-amount"><%# Eval("Winners") %></span></p>
+                                                            </div>
+                                                            <div style="height: 183.6px;" class="<%# ((int)Eval("Status") == 5 || (int)Eval("Status") == 6) ? "" : "d-none" %> d-flex align-items-center ps-2">
+                                                                <%# Eval("CompletedInfo") %>
+                                                            </div>
                                                             <a class="cmn--btn active btn--md radius-1" href="UserGameDetail.aspx?gameId=<%# Eval("Id") %>"><%# Eval("ButtonTitle") %></a>
                                                         </div>
                                                     </div>
@@ -860,7 +881,9 @@
             };
 
             proxy.client.receiveRoundNotification = function (message) {
-                alert(message);
+                if ($("#HfHaveTicket").val() == "true") {
+                    alert(message);
+                }
                 drawTableForMyTicket();
                 drawTable();
                 drawResultTable();

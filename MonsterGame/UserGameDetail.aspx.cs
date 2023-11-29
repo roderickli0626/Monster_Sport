@@ -64,11 +64,15 @@ namespace MonsterGame
             ControlUtil.DataBind(ComboTeams, teamList, "Id", "Description", "0", "");
 
             Prize.InnerText = "€ " + Math.Round(game.Prize ?? 0, 2);
+            DividDate.InnerText = new WinnerDAO().FindByGame(game.Id).FirstOrDefault()?.DivideDate?.ToString("dd/MM/yyyy HH.mm");
             TxtBalance.Text = "€ " + (double.IsNaN(Math.Round(user.Balance ?? 0, 2)) ? "0.00" : Math.Round(user.Balance ?? 0, 2).ToString());
             GameTitle.InnerText = "Torneo Nr " + game.Id + ": dettaglio";
 
             GameImage.Attributes["src"] = "~/Upload/Game/" + (string.IsNullOrEmpty(game.Image3) ? "default.jpg" : game.Image3);
             GameNote.InnerText = game.Note;
+
+            int hasTickets = new TicketDAO().FindByGameAndUser(game.Id, user.Id).Count();
+            HfHaveTicket.Value = hasTickets > 0 ? "true" : "false";
         }
 
         private void SetVisible()

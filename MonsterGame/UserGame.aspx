@@ -13,6 +13,19 @@
             text-align: center;
             line-height: 30px;
             font-size: 15px;
+            top: 10px;
+        }
+        .id-complete-mark {
+            position: absolute;
+            color: darkgreen;
+            text-align: center;
+            line-height: 30px;
+            font-size: 15px;
+            width: 90%;
+        }
+        .font-complete-mark {
+            color: greenyellow;
+            text-align: center;
         }
 
         .game-table-item {
@@ -204,12 +217,17 @@
                                             </div>
                                             <div class="game-item__content">
                                                 <h4 class="title"><%# Eval("Title") %></h4>
-                                                <p class="invest-info" title="Quota di partecipazione">Quota ingresso: <span class="invest-amount">€ <%# Eval("Fee") %></span></p>
-                                                <p class="invest-info" title="Player necessari all'inizio del Torneo">Player necessari: <span class="invest-amount"><%# Eval("MinPlayers") %></span></p>
-                                                <p class="invest-info" title="Player già registrati al Torneo">Player attuali: <span class="invest-amount"><%# Eval("RealPlayers") %></span></p>                                                
-                                                <p class="invest-info" title="Numero di squadre da cui poter scegliere" style="color: orange;">Numero squadre: <span class="invest-amount TeamShow" style="cursor: pointer;" data-id="<%# Eval("Id") %>" data-img="<%# Eval("Image2") %>"><%# Eval("NumberOfTeams") %></span> *</p>
-                                                <p class="invest-info" title="Montepremi min. lo stesso viene adeguato in base ai ticket venduti">Premio min.: <span class="invest-amount">€ <%# Eval("Prize") %></span></p>
-                                                <p class="invest-info" title="Num. di Vincitori di questo Torneo">Vincenti: <span class="invest-amount"><%# Eval("Winners") %></span></p>
+                                                <div class="<%# ((int)Eval("Status") == 5 || (int)Eval("Status") == 6) ? "d-none" : "" %>">
+                                                    <p class="invest-info" title="Quota di partecipazione">Quota ingresso: <span class="invest-amount">€ <%# Eval("Fee") %></span></p>
+                                                    <p class="invest-info" title="Player necessari all'inizio del Torneo">Player necessari: <span class="invest-amount"><%# Eval("MinPlayers") %></span></p>
+                                                    <p class="invest-info" title="Player già registrati al Torneo">Player attuali: <span class="invest-amount"><%# Eval("RealPlayers") %></span></p>                                                
+                                                    <p class="invest-info" title="Numero di squadre da cui poter scegliere" style="color: orange;">Numero squadre: <span class="invest-amount TeamShow" style="cursor: pointer;" data-id="<%# Eval("Id") %>" data-img="<%# Eval("Image2") %>"><%# Eval("NumberOfTeams") %></span> *</p>
+                                                    <p class="invest-info" title="Montepremi min. lo stesso viene adeguato in base ai ticket venduti">Premio min.: <span class="invest-amount">€ <%# Eval("Prize") %></span></p>
+                                                    <p class="invest-info" title="Num. di Vincitori di questo Torneo">Vincenti: <span class="invest-amount"><%# Eval("Winners") %></span></p>
+                                                </div>
+                                                <div style="height: 183.6px;" class="<%# ((int)Eval("Status") == 5 || (int)Eval("Status") == 6) ? "" : "d-none" %> d-flex align-items-center ps-2">
+                                                    <%# Eval("CompletedInfo") %>
+                                                </div>
                                                 <a class="cmn--btn active btn--md radius-1" href="UserGameDetail.aspx?gameId=<%# Eval("Id") %>"><%# Eval("ButtonTitle") %></a>
                                             </div>
                                         </div>
@@ -342,7 +360,11 @@
             "columns": [{
                 "class": "GameImage",
                 "render": function (data, type, row, meta) {
-                    return '<div class="game-table-item"><div class="game-item__thumb mb-0"><span class="id-mark">' + row.Id + '</span>' + row.Mark +
+                    if (row.Status == 5 || row.Status == 6) {
+                        return '<div class="game-table-item"><div class="game-item__thumb mb-0"><span class="id-mark">' + row.Id + '</span>' + row.CompletedInfo + row.Mark +
+                            '<img src="Upload/Game/' + ((row.Image1 == null || row.Image1 == "") ? "default.jpg" : row.Image1) + '" alt = "game"></div></div>';
+                    }
+                    else return '<div class="game-table-item"><div class="game-item__thumb mb-0"><span class="id-mark">' + row.Id + '</span>' + row.Mark +
                         '<img src="Upload/Game/' + ((row.Image1 == null || row.Image1 == "") ? "default.jpg" : row.Image1) + '" alt = "game"></div></div>';
                 }
             }, {

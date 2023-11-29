@@ -13,6 +13,7 @@ using MonsterGame.Common;
 using Microsoft.AspNet.SignalR;
 using MonsterGame.Model;
 using System.IO;
+using System.Security.Cryptography.Xml;
 
 namespace MonsterGame
 {
@@ -67,6 +68,7 @@ namespace MonsterGame
             ControlUtil.DataBind(ComboTeams, teamList, "Id", "Description", "0", "");
 
             Prize.InnerText = "€ " + Math.Round(game.Prize ?? 0, 2);
+            DividDate.InnerText = new WinnerDAO().FindByGame(game.Id).FirstOrDefault()?.DivideDate?.ToString("dd/MM/yyyy HH.mm");
             GameTitle.InnerText = "Torneo nr " + game.Id + ": Dettagli";
 
             GameImage.Attributes["src"] = "~/Upload/Game/" + (string.IsNullOrEmpty(game.Image3) ? "default.jpg" : game.Image3);
@@ -171,11 +173,18 @@ namespace MonsterGame
             MovementDAO movementDAO = new MovementDAO();
             List<Winner> winners = winnerDAO.FindByGame(game.Id);
             double prize = game.Prize ?? 0;
+            string winnerNames = "";
+            string priceList = "";
 
             foreach (Winner winner in winners)
             {
                 winner.Prize = prize * (winner.Rate / 100);
+                winner.DivideDate = DateTime.Now;
                 winnerDAO.Update(winner);
+
+                winnerNames += winner.User.Name + " ";
+                priceList += "€" + winner.Prize + " ";
+
                 User user = userDAO.FindByID(winner.UserID ?? 0);
                 if (user != null)
                 {
@@ -197,7 +206,7 @@ namespace MonsterGame
 
             // Send Notification to All Users
             var hubContext = GlobalHost.ConnectionManager.GetHubContext<NotificationHub>();
-            hubContext.Clients.All.receivePrizeNotification("Torneo concluso - Premi assegnati!");
+            hubContext.Clients.All.receivePrizeNotification("Torneo Terminato il " + DateTime.Now.ToString("dd/MM/yyyy HH.mm") + " – Ed i vincitori sono stati " + winnerNames + " Che si sono aggiunficati " + priceList);
 
             SetVisible();
         }

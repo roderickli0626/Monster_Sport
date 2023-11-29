@@ -315,6 +315,7 @@
     <Content Include="Site.Master" />
     <Content Include="Summary.aspx" />
     <Content Include="TaskRunner.aspx" />
+    <Content Include="Upload\Game\Complete_Cup.jpg" />
     <Content Include="UserGameDetail.aspx" />
     <Content Include="UserInfo.aspx" />
     <Content Include="Users.aspx" />
@@ -629,7 +630,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Upload\Game\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

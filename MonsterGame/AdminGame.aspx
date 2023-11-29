@@ -15,6 +15,19 @@
             text-align: center;
             line-height: 30px;
             font-size: 15px;
+            top: 10px;
+        }
+        .id-complete-mark {
+            position: absolute;
+            color: darkgreen;
+            text-align: center;
+            line-height: 30px;
+            font-size: 15px;
+            width: 90%;
+        }
+        .font-complete-mark {
+            color: greenyellow;
+            text-align: center;
         }
         .box {
             position: relative;
@@ -555,7 +568,11 @@
                 "columns": [{
                     "class": "GameImage",
                     "render": function (data, type, row, meta) {
-                        return '<div class="game-table-item"><div class="game-item__thumb mb-0"><span class="id-mark">' + row.Id + '</span>' + row.Mark +
+                        if (row.Status == 5 || row.Status == 6) {
+                            return '<div class="game-table-item"><div class="game-item__thumb mb-0"><span class="id-mark">' + row.Id + '</span>' + row.CompletedInfo + row.Mark +
+                                '<img src="Upload/Game/' + ((row.Image1 == null || row.Image1 == "") ? "default.jpg" : row.Image1) + '" alt = "game"></div></div>'; 
+                        }
+                        else return '<div class="game-table-item"><div class="game-item__thumb mb-0"><span class="id-mark">' + row.Id + '</span>' + row.Mark +
                             '<img src="Upload/Game/' + ((row.Image1 == null || row.Image1 == "") ? "default.jpg" : row.Image1) + '" alt = "game"></div></div>';
                     }
                 }, {

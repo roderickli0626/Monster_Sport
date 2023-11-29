@@ -89,6 +89,20 @@ namespace MonsterGame.Controller
         private GameCheck AddData(Game game)
         {
             GameCheck check = new GameCheck(game);
+
+            List<Winner> winners = new WinnerDAO().FindByGame(game.Id).ToList();
+            string divideDate = winners.FirstOrDefault()?.DivideDate?.ToString("dd/MM/yyyy HH.mm");
+            string completeInfo = "";
+            if (string.IsNullOrEmpty(divideDate)) completeInfo = "<h5 class=\"font-complete-mark\">" + winners.FirstOrDefault()?.WinDate?.ToString("dd/MM/yyyy HH.mm") + "</h5>";
+            else
+            {
+                completeInfo = "<h5 class=\"font-complete-mark\">" + divideDate + "</h5>";
+                foreach (Winner winner in winners)
+                {
+                    completeInfo += "<h6 class=\"font-complete-mark\">" + (winner.User.Name + ": €" + winner.Prize) + "</h6>";
+                }
+            }
+            
             switch (game.Status)
             {
                 case 1:
@@ -122,15 +136,19 @@ namespace MonsterGame.Controller
                 case 5:
                     {
                         check.Image = "gamemark5.jpg";
+                        check.Image1 = "Complete_Cup.jpg";
                         check.Mark = "<div class=\"ribbon red\"><span>CHIUSO</span></div>";
                         check.ButtonTitle = "Dettagli";
+                        check.CompletedInfo = "<div class=\"id-complete-mark\">" + completeInfo + "</div>";
                     }
                     break;
                 case 6:
                     {
                         check.Image = "gamemark6.jpg";
+                        check.Image1 = "Complete_Cup.jpg";
                         check.Mark = "<div class=\"ribbon\"><span>TERMINATO</span></div>";
                         check.ButtonTitle = "Dettagli";
+                        check.CompletedInfo = "<div class=\"id-complete-mark\">" + completeInfo + "</div>";
                     }
                     break;
             }

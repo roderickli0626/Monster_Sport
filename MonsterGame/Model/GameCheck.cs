@@ -136,6 +136,10 @@ namespace MonsterGame.Model
         {
             get; set;
         }
+        public string CompletedInfo
+        {
+            get; set;
+        }
         public List<int> TeamList
         {
             get; set;

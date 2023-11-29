@@ -91,6 +91,9 @@
                                                 <h2 runat="server" id="Prize" class="price">$0</h2>
                                                 <p class="info">Premio</p>
                                             </div>
+                                            <div class="dashboard__card-content">
+                                                <h2 runat="server" id="DividDate" class="price"></h2>
+                                            </div>
                                             <div class="dashboard__card-icon">
                                                 <i class="las la-wallet"></i>
                                             </div>

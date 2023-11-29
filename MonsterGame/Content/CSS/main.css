@@ -2969,6 +2969,8 @@ select.form--control option:hover {
     border-radius: 7px;
     background: #2e0327;
     padding: 10px;
+    display: flex;
+    align-items: center;
 }
 
 @media (max-width: 1399px) {
