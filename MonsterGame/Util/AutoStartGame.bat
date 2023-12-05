@@ -1,2 +1,2 @@
 @echo off
-curl "http://localhost:62401/TaskRunner.aspx"
+curl "https://www.fantagame365.it/TaskRunner.aspx"

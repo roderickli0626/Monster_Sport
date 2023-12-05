@@ -30,7 +30,7 @@
         }
 
         td .font-complete-mark {
-            color: green;
+            color: greenyellow;
         }
 
         .game-table-item {
@@ -350,7 +350,7 @@
         var unreadNews = parseInt($("#HfNewMsg").val());
         if (unreadNews != 0)
         {
-            toastr.info("Unread " + unreadNews + "News!");
+            toastr.info( "Hai " + unreadNews + " Messaggi da leggere!");
         }
     </script>
     <script>

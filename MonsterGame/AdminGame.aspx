@@ -30,7 +30,7 @@
             text-align: center;
         }
         td .font-complete-mark {
-            color: green;
+            color: greenyellow;
         }
         .box {
             position: relative;

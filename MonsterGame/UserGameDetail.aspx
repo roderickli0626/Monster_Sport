@@ -203,7 +203,7 @@
                     <div class="col-12 col-md-9">
                         <div class="privacy-policy-content">
                             <div runat="server" id="DivMyTicket" class="content-item mb-0">
-                                <h3 class="title" id="myTickets" style="padding-top:120px;">I MIEI TICKETS</h3>
+                                <h3 class="title" id="myTickets" style="padding-top:120px;">I MIEI TICKETS DI QUESTO TORNEO</h3>
                                 <div class="row justify-content-center pt-5">
 
 
@@ -245,7 +245,7 @@
                                 </div>
                             </div>
                             <div runat="server" id="DivWinners" class="content-item mb-0">
-                                <h3 class="title" id="winners" style="padding-top: 120px;">VINCENTI</h3>
+                                <h3 class="title" id="winners" style="padding-top: 120px;">VINCENTI DI QUESTO TORNEO</h3>
                                 <div class="row justify-content-center pb-3">
                                     <div class="col-lg-8 col-xl-8 col-md-8 col-sm-8">
                                         <div class="dashboard__card" style="border: 2px solid #ffdd2d;">
@@ -651,7 +651,7 @@
                             var api = this.api();
                             var rowsCount = api.rows().count();
                             var columnsCount = api.columns().count();
-                            var footer = '<tfoot class="bg-dark text-white"><tr><th></th><th>Total:</th>';
+                            var footer = '<tfoot class="bg-dark text-white"><tr><th></th><th>Nr. di Tickets :</th>';
                             for (var i = 2; i < columnsCount; i++) {
                                 if (i == columnsCount - 1) {
                                     footer += "<th>" + rowsCount + "</th>";

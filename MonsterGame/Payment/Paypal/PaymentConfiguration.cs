@@ -10,7 +10,7 @@ namespace MonsterGame.Payment.Paypal
     {
         static string ClientId;
         static string ClientSecret;
-        static bool IsTest = true;
+        static bool IsTest = false;
 
         // Static constructor for setting the readonly static members.
         static PaymentConfiguration()
@@ -24,8 +24,8 @@ namespace MonsterGame.Payment.Paypal
             else
             {
                 // live configuration
-                ClientId = "Your Client ID for Live configuration";
-                ClientSecret = "Your Client Secret  for Live configuration";
+                ClientId = "Ac2_eoMQZllz5O9N887uDQZvWwxyg-Px5RAkWPMEEAu2chQcNWxgk-gItSm2oNup4UBDza8VkZruYKwL";
+                ClientSecret = "EKktwhQPdq-oIKTXSzYyvP2kJ3s2G4R7qNblXMs64fUkY7vDpUewoNsngLMktBNW2_95PpyD-K3m8SeX";
             }
 
         }
