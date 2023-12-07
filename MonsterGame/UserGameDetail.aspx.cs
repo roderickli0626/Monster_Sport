@@ -169,7 +169,7 @@ namespace MonsterGame
             movement.Amount = (game.Fee * numOfTickets);
             movement.Type = (int)MovementType.WITHDRAWAL;
             movement.MoveDate = DateTime.Now;
-            movement.Note = "Acquisto " + numOfTickets + " Tickets";
+            movement.Note = "Acquisto " + numOfTickets + " Tickets In Tournament" + game.Id + " (" + game.Title + ")"; 
             new MovementDAO().Insert(movement);
 
             if (success)

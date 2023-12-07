@@ -716,6 +716,15 @@
             drawResultTable();
 
             $("#BtnRound").click(function () {
+                // Check if all results is inputed or not
+                var numberOfRows = datatableForResult.fnGetData().length;
+                for (var i = 0; i < numberOfRows; i++) {
+                    if (datatableForResult.fnGetData(i).Results[datatableForResult.fnGetData(i).Results.length - 1].RoundResult == 0) {
+                        alert("Please Input All Results.");
+                        return false;
+                    }
+                }
+                //
                 var currentRound = datatableForResult.fnGetData(0).Results.length + 1;
                 $("#HfCurrentRound").val(currentRound);
                 if (confirm("Creare un nuovo Turno ?")) return true;
