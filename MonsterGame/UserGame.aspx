@@ -55,6 +55,10 @@
         .my-card {
             background-color: greenyellow;
         }
+
+        .my-card-0 {
+            background-color: red;
+        }
     </style>
     <style>
         .box {
@@ -143,6 +147,20 @@
                 border-top-color: #1e5799;
             }
 
+        .orange span {
+            background: linear-gradient(#f2c307 0%, #FFA500 100%);
+        }
+
+            .orange span::before {
+                border-left-color: #FFA500;
+                border-top-color: #FFA500;
+            }
+
+            .orange span::after {
+                border-right-color: #FFA500;
+                border-top-color: #FFA500;
+            }
+
         .foo {
             clear: both;
         }
@@ -225,7 +243,7 @@
                                                 <div class="<%# ((int)Eval("Status") == 5 || (int)Eval("Status") == 6) ? "d-none" : "" %>">
                                                     <p class="invest-info" title="Quota di partecipazione">Quota ingresso: <span class="invest-amount">€ <%# Eval("Fee") %></span></p>
                                                     <p class="invest-info" title="Player necessari all'inizio del Torneo">Player necessari: <span class="invest-amount"><%# Eval("MinPlayers") %></span></p>
-                                                    <p class="invest-info" title="Player già registrati al Torneo">Player attuali: <span class="invest-amount"><%# Eval("RealPlayers") %></span></p>                                                
+                                                    <p class="invest-info" title="Player già registrati al Torneo">Player attuali: <span class="invest-amount"><%# Eval("RealPlayers") %> (<%# Eval("RemainedPlayers") %>)</span></p>                                                
                                                     <p class="invest-info" title="Numero di squadre da cui poter scegliere" style="color: orange;">Numero squadre: <span class="invest-amount TeamShow" style="cursor: pointer;" data-id="<%# Eval("Id") %>" data-img="<%# Eval("Image2") %>"><%# Eval("NumberOfTeams") %></span> *</p>
                                                     <p class="invest-info" title="Montepremi min. lo stesso viene adeguato in base ai ticket venduti">Premio min.: <span class="invest-amount">€ <%# Eval("Prize") %></span></p>
                                                     <p class="invest-info" title="Num. di Vincitori di questo Torneo">Vincenti: <span class="invest-amount"><%# Eval("Winners") %></span></p>
@@ -350,6 +368,12 @@
         var unreadNews = parseInt($("#HfNewMsg").val());
         if (unreadNews != 0)
         {
+            toastr.options = {
+                "onclick": function () {
+                    // Redirect to news page
+                    window.location.href = 'Notifications.aspx';
+                }
+            };
             toastr.info( "Hai " + unreadNews + " Messaggi da leggere!");
         }
     </script>

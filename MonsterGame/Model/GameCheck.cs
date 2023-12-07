@@ -52,6 +52,10 @@ namespace MonsterGame.Model
         {
             get; set;
         }
+        public int RemainedPlayers
+        {
+            get; set;
+        }
         public double Fee
         {
             get; set;

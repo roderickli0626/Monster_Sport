@@ -121,6 +121,20 @@
                 border-top-color: #1e5799;
             }
 
+        .orange span {
+            background: linear-gradient(#f2c307 0%, #FFA500 100%);
+        }
+
+            .orange span::before {
+                border-left-color: #FFA500;
+                border-top-color: #FFA500;
+            }
+
+            .orange span::after {
+                border-right-color: #FFA500;
+                border-top-color: #FFA500;
+            }
+
         .foo {
             clear: both;
         }

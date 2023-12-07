@@ -67,8 +67,11 @@ namespace MonsterGame.Controller
                 GameCheck check = AddData(game);
                 if (myGameIDs.Contains(game.Id))
                 {
-                    check.MyMark = "my-card";
+                    int myLiveTickets = new TicketDAO().FindByGameAndUser(game.Id, userID).Where(t => t.TicketResults.Last().RoundResult != null).Count();
+                    if (myLiveTickets > 0 || game.Status == (int)GameStatus.COMPLETED) check.MyMark = "my-card";
+                    else check.MyMark = "my-card-0";
                 }
+                check.RemainedPlayers = new TicketDAO().FindByGame(game.Id).Where(t => t.TicketResults.Last().RoundResult != null).Count();
                 result.Add(check);
             }
             return result;
@@ -82,6 +85,12 @@ namespace MonsterGame.Controller
             foreach (Game game in gameList)
             {
                 GameCheck check = AddData(game);
+
+                int myLiveTickets = new TicketDAO().FindByGameAndUser(game.Id, userID).Where(t => t.TicketResults.Last().RoundResult != null).Count();
+                if (myLiveTickets > 0 || game.Status == (int)GameStatus.COMPLETED) check.MyMark = "my-card";
+                else check.MyMark = "my-card-0";
+
+                check.RemainedPlayers = new TicketDAO().FindByGame(game.Id).Where(t => t.TicketResults.Last().RoundResult != null).Count();
                 result.Add(check);
             }
             return result;
@@ -115,14 +124,14 @@ namespace MonsterGame.Controller
                 case 2:
                     {
                         check.Image = "gamemark2.jpg";
-                        check.Mark = "<div class=\"ribbon red\"><span>INIZIATO</span></div>";
+                        check.Mark = "<div class=\"ribbon\"><span>INIZIATO</span></div>";
                         check.ButtonTitle = "Dettagli";
                     }
                     break;
                 case 3:
                     {
                         check.Image = "gamemark3.jpg";
-                        check.Mark = "<div class=\"ribbon red\"><span>SCELTA TEAM</span></div>";
+                        check.Mark = "<div class=\"ribbon orange\"><span>SCELTA TEAM</span></div>";
                         check.ButtonTitle = "Dettagli";
                     }
                     break;
@@ -146,7 +155,7 @@ namespace MonsterGame.Controller
                     {
                         check.Image = "gamemark6.jpg";
                         check.Image1 = "Complete_Cup.jpg";
-                        check.Mark = "<div class=\"ribbon\"><span>TERMINATO</span></div>";
+                        check.Mark = "<div class=\"ribbon red\"><span>TERMINATO</span></div>";
                         check.ButtonTitle = "Dettagli";
                         check.CompletedInfo = "<div class=\"id-complete-mark\">" + completeInfo + "</div>";
                     }
@@ -208,6 +217,7 @@ namespace MonsterGame.Controller
                         }
                         break;
                 }
+                check.RemainedPlayers = new TicketDAO().FindByGame(game.Id).Where(t => t.TicketResults.Last().RoundResult != null).Count();
                 result.Add(check);
             }
             return result;

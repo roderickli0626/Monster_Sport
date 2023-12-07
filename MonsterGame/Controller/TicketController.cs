@@ -40,6 +40,7 @@ namespace MonsterGame.Controller
                 ticketCheck.TicketResults = resutlCheckList;
                 result.Add(ticketCheck);
             }
+            result = result.OrderByDescending(t => t.TicketResults.Last().RoundResult).ThenBy(t => t.UserId).ToList();
             return result;
         }
 
@@ -60,6 +61,7 @@ namespace MonsterGame.Controller
                 ticketCheck.TicketResults = resutlCheckList;
                 result.Add(ticketCheck);
             }
+            result = result.OrderByDescending(t => t.TicketResults.Last().RoundResult).ToList();
             return result;
         }
 

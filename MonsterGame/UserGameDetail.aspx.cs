@@ -66,7 +66,8 @@ namespace MonsterGame
             Prize.InnerText = "€ " + Math.Round(game.Prize ?? 0, 2);
             DividDate.InnerText = new WinnerDAO().FindByGame(game.Id).FirstOrDefault()?.DivideDate?.ToString("dd/MM/yyyy HH.mm");
             TxtBalance.Text = "€ " + (double.IsNaN(Math.Round(user.Balance ?? 0, 2)) ? "0.00" : Math.Round(user.Balance ?? 0, 2).ToString());
-            GameTitle.InnerText = "Torneo Nr " + game.Id + ": dettaglio";
+            GameTitle.InnerText = "Torneo Nr " + game.Id + " (" + game.Title + "): dettaglio";
+            tickets.InnerText = "TUTTI I TICKETS DEL TORNEO (" + game.Title + ")";
 
             GameImage.Attributes["src"] = "~/Upload/Game/" + (string.IsNullOrEmpty(game.Image3) ? "default.jpg" : game.Image3);
             GameNote.InnerText = game.Note;

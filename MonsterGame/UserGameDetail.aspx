@@ -112,6 +112,20 @@
                 border-top-color: #1e5799;
             }
 
+        .orange span {
+            background: linear-gradient(#f2c307 0%, #FFA500 100%);
+        }
+
+            .orange span::before {
+                border-left-color: #FFA500;
+                border-top-color: #FFA500;
+            }
+
+            .orange span::after {
+                border-right-color: #FFA500;
+                border-top-color: #FFA500;
+            }
+
         .foo {
             clear: both;
         }
@@ -143,6 +157,14 @@
             position: absolute;
             top: 100px;
             left: 1000px;
+        }
+
+        .my-card {
+            background-color: greenyellow;
+        }
+
+        .my-card-0 {
+            background-color: red;
         }
     </style>
 </asp:Content>
@@ -231,7 +253,7 @@
                                 </div>
                             </div>
                             <div class="content-item mb-0">
-                                <h3 class="title" id="tickets" style="padding-top:120px;">TUTTI I TICKETS DEL TORNEO</h3>
+                                <h3 class="title" runat="server" id="tickets" clientIDMode="static" style="padding-top:120px;">TUTTI I TICKETS DEL TORNEO</h3>
                                 <div class="pt-3 justify-content-center">
                                     <table class="table text-center" id="ticket-table">
                                     </table>
@@ -293,7 +315,7 @@
                                                             <div class="<%# ((int)Eval("Status") == 5 || (int)Eval("Status") == 6) ? "d-none" : "" %>">
                                                                 <p class="invest-info" title="Quota di partecipazione">Quota ingresso: <span class="invest-amount">€ <%# Eval("Fee") %></span></p>
                                                                 <p class="invest-info" title="Player necessari all'inizio del Torneo">Player necessari: <span class="invest-amount"><%# Eval("MinPlayers") %></span></p>
-                                                                <p class="invest-info" title="Player già registrati al Torneo">Player attuali: <span class="invest-amount"><%# Eval("RealPlayers") %></span></p>                                                
+                                                                <p class="invest-info" title="Player già registrati al Torneo">Player attuali: <span class="invest-amount"><%# Eval("RealPlayers") %> (<%# Eval("RemainedPlayers") %>)</span></p>                                                
                                                                 <p class="invest-info" title="Numero di squadre da cui poter scegliere" style="color: orange;">Numero squadre: <span class="invest-amount TeamShow" style="cursor: pointer;" data-id="<%# Eval("Id") %>" data-img="<%# Eval("Image2") %>"><%# Eval("NumberOfTeams") %></span> *</p>
                                                                 <p class="invest-info" title="Montepremi min. lo stesso viene adeguato in base ai ticket venduti">Premio min.: <span class="invest-amount">€ <%# Eval("Prize") %></span></p>
                                                                 <p class="invest-info" title="Num. di Vincitori di questo Torneo">Vincenti: <span class="invest-amount"><%# Eval("Winners") %></span></p>
@@ -304,7 +326,7 @@
                                                             <a class="cmn--btn active btn--md radius-1" href="UserGameDetail.aspx?gameId=<%# Eval("Id") %>"><%# Eval("ButtonTitle") %></a>
                                                         </div>
                                                     </div>
-                                                    <div class="ball"></div>
+                                                    <div class="ball <%# Eval("MyMark") %>"></div>
                                                 </div>
                                                 <span class="id-mark top-0 mt-2 start-0 ms-4" style="z-index:2;"><%# Eval("Id") %></span>
                                             </div>
