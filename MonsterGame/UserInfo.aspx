@@ -408,6 +408,12 @@
         $.connection.hub.start();
     </script>
     <script>
+        $("#BtnPurchase").click(function () {
+            alert("Please check if popups are enabled.");
+            return true;
+        });
+    </script>
+    <script>
         $(function () {
             var datatable = $('#payment-table').dataTable({
                 "serverSide": true,
