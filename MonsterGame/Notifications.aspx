@@ -67,6 +67,31 @@
             border-right-color: #8f0808;
             border-top-color: #8f0808;
         }
+
+        .hidden-input {
+            position: absolute;
+            width: 0px;
+            height: 0px;
+            overflow: hidden;
+        }
+
+        .game-table-item {
+            text-align: center;
+            padding: 0px;
+            border-radius: 10px;
+            background: #350b2d;
+            position: relative;
+            transition: all ease .3s;
+            z-index: 1;
+        }
+        .game-table-item::before {
+            position: absolute;
+            content: "";
+            width: 100%;
+            height: 100%;
+            left: 0;
+            top: 0;
+        }
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder" runat="server">
@@ -89,6 +114,7 @@
                 <asp:HiddenField ID="HfUserID" runat="server" ClientIDMode="Static" />
                 <asp:HiddenField ID="HfNotificationID" runat="server" ClientIDMode="Static" />
                 <asp:HiddenField ID="HfManage" runat="server" ClientIDMode="Static" />
+                <asp:HiddenField ID="HfNewsImage" runat="server" ClientIDMode="Static" />
                 <div class="row justify-content-center mb-5">
                     <div class="col-lg-4 col-xl-4 me-auto">
                         <button class="cmn--btn active radius-1 w-100 btn-add" runat="server" id="BtnAddNews">Aggiungi</button>
@@ -101,7 +127,7 @@
                     <table class="table text-center" id="news-table">
                         <thead>
                             <tr>
-                                <th>Nr.</th>
+                                <th>Fase</th>
                                 <th>Descrizione</th>
                                 <th>Azione</th>
                             </tr>
@@ -129,7 +155,14 @@
                                                 <asp:TextBox runat="server" ID="TxtTitle" ClientIDMode="Static" CssClass="form-control form--control style-two"></asp:TextBox>
                                             </div>
                                         </div>
-                                        <div class="col-md-12">
+                                        <div class="col-lg-4 col-md-4">
+                                            <div class="form-group">
+                                                <label for="TxtNote" class="form-label">Photo</label>
+                                                <img src="Content/Images/news.jpg" id="NewsImage" runat="server" clientidmode="Static" alt="service-image" class="img-thumbnail" style="height: 150px; width: 100%;" />
+                                                <asp:FileUpload runat="server" ID="ImageFile" ClientIDMode="Static" CssClass="hidden-input" />
+                                            </div> 
+                                        </div>
+                                        <div class="col-md-8">
                                             <div class="form-group">
                                                 <label for="TxtDescription" class="form-label">Descrizione</label>
                                                 <asp:TextBox runat="server" ID="TxtDescription" ClientIDMode="Static" TextMode="MultiLine" Rows="2" CssClass="form-control form--control style-two"></asp:TextBox>
@@ -202,8 +235,50 @@
             $("#ValSummary").addClass("d-none");
             $("#TxtTitle").val("");
             $("#TxtDescription").val("");
+            $("#NewsImage").attr('src', "Upload/News/news.jpg");
             return false;
         });
+    </script>
+    <script>
+        Sys.WebForms.PageRequestManager.getInstance().add_pageLoaded(pageLoadedHandler);
+
+        function pageLoadedHandler(sender, args) {
+            // This function will be called after each UpdatePanel postback
+            var updatedPanels = args.get_panelsUpdated();
+
+            for (var i = 0; i < updatedPanels.length; i++) {
+                var updatePanelID = updatedPanels[i].id;
+
+                if (updatePanelID === "UpdatePanel") {
+                    ImageSetting();
+                }
+            }
+        };
+
+        ImageSetting();
+        function ImageSetting() {
+            $("#ImageFile").change(function () {
+                readURL(this, '#NewsImage', "#HfNewsImage");
+            });
+
+            $("#NewsImage").click(function () {
+                $("#ImageFile").click();
+            });
+        }
+
+        function readURL(input, target, source) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $(target).attr('src', e.target.result);
+                    var base64string = e.target.result;
+                    $(source).val(base64string);
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        };
     </script>
     <script>
         $(function () {
@@ -216,8 +291,10 @@
                 "processing": true,
                 "ordering": false,
                 "columns": [{
+                    "class": "NewsImage",
                     "render": function (data, type, row, meta) {
-                        return meta.row + meta.settings._iDisplayStart + 1;
+                        return '<div class="game-table-item"><div class="game-item__thumb mb-0">' + 
+                            '<img src="Upload/News/' + ((row.Image == null || row.Image == "") ? "news.jpg" : row.Image) + '" alt = "news"></div></div>';
                     }
                 }, {
                     "class": "position-relative",
@@ -280,6 +357,7 @@
                 $("#ValSummary").addClass("d-none");
                 $("#TxtTitle").val(row.Title);
                 $("#TxtDescription").val(row.Description);
+                $("#NewsImage").attr('src', "Upload/News/" + (row.Image ? row.Image : "news.jpg"));
             });
 
             datatable.on('click', '.btn-view', function (e) {
@@ -301,6 +379,7 @@
                         $("#ValSummary").addClass("d-none");
                         $("#TxtTitle").val(row.Title);
                         $("#TxtDescription").val(row.Description);
+                        $("#NewsImage").attr('src', "Upload/News/" + (row.Image ? row.Image : "news.jpg"));
                     }
                 }).error(function () {
                     onSuccess({ success: false });
@@ -327,6 +406,21 @@
                 }).error(function () {
                     onSuccess({ success: false });
                 });
+            });
+
+            datatable.on('click', '.NewsImage', function (e) {
+                var src = $($(this).find('img')).attr('src');
+                $('<div>').css({
+                    background: 'RGBA(0,0,0,.5) url(' + src + ') no-repeat center',
+                    backgroundSize: 'contain',
+                    width: '100%', height: '100%',
+                    position: 'fixed',
+                    zIndex: '10000',
+                    top: '0', left: '0',
+                    cursor: 'zoom-out'
+                }).click(function () {
+                    $(this).remove();
+                }).appendTo('body');
             });
 
             var onSuccess = function (data) {

@@ -173,6 +173,7 @@
     <Content Include="Content\Images\gamemark2.jpg" />
     <Content Include="Content\Images\left-icon-selected.png" />
     <Content Include="Content\Images\left-icon.png" />
+    <Content Include="Content\Images\news.jpg" />
     <Content Include="Content\Images\registerbg.jpg" />
     <Content Include="Content\Images\loginbg.jpg" />
     <Content Include="Content\Images\playbg.png" />
@@ -316,6 +317,7 @@
     <Content Include="Summary.aspx" />
     <Content Include="TaskRunner.aspx" />
     <Content Include="Upload\Game\Complete_Cup.jpg" />
+    <Content Include="Upload\News\news.jpg" />
     <Content Include="UserGameDetail.aspx" />
     <Content Include="UserInfo.aspx" />
     <Content Include="Users.aspx" />

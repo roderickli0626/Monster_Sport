@@ -19,6 +19,7 @@ namespace MonsterGame.Model
             Description = notification.Description;
             CreateDate = notification.CreatedDate?.ToString("dd/MM/yyyy HH.mm");
             IsNew = notification.IsNew ?? false;
+            Image = notification.Image;
         }
         public int Id
         {
@@ -37,6 +38,10 @@ namespace MonsterGame.Model
             get; set;
         }
         public bool IsNew
+        {
+            get; set;
+        }
+        public string Image
         {
             get; set;
         }

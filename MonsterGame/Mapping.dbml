@@ -104,15 +104,6 @@
       <Association Name="TeamsForGame_Result" Member="TeamsForGame" ThisKey="TeamForGameID" OtherKey="Id" Type="TeamsForGame" IsForeignKey="true" DeleteRule="CASCADE" />
     </Type>
   </Table>
-  <Table Name="dbo.Notifications" Member="Notifications">
-    <Type Name="Notification">
-      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="Title" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
-      <Column Name="Description" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
-      <Column Name="CreatedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="IsNew" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-    </Type>
-  </Table>
   <Table Name="dbo.GameBoard" Member="GameBoards">
     <Type Name="GameBoard">
       <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -179,6 +170,16 @@
       <Association Name="Game_Ticket" Member="Tickets" ThisKey="Id" OtherKey="GameID" Type="Ticket" />
       <Association Name="Game_GameBoard" Member="GameBoards" ThisKey="Id" OtherKey="GameID" Type="GameBoard" />
       <Association Name="Game_Winner" Member="Winners" ThisKey="Id" OtherKey="GameID" Type="Winner" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Notifications" Member="Notifications">
+    <Type Name="Notification">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Title" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="Description" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="CreatedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="IsNew" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Image" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
     </Type>
   </Table>
 </Database>

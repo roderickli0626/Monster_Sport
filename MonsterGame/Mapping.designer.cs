@@ -54,9 +54,6 @@ namespace MonsterGame
     partial void InsertResult(Result instance);
     partial void UpdateResult(Result instance);
     partial void DeleteResult(Result instance);
-    partial void InsertNotification(Notification instance);
-    partial void UpdateNotification(Notification instance);
-    partial void DeleteNotification(Notification instance);
     partial void InsertGameBoard(GameBoard instance);
     partial void UpdateGameBoard(GameBoard instance);
     partial void DeleteGameBoard(GameBoard instance);
@@ -69,6 +66,9 @@ namespace MonsterGame
     partial void InsertGame(Game instance);
     partial void UpdateGame(Game instance);
     partial void DeleteGame(Game instance);
+    partial void InsertNotification(Notification instance);
+    partial void UpdateNotification(Notification instance);
+    partial void DeleteNotification(Notification instance);
     #endregion
 		
 		public MappingDataContext(string connection) : 
@@ -159,14 +159,6 @@ namespace MonsterGame
 			}
 		}
 		
-		public System.Data.Linq.Table<Notification> Notifications
-		{
-			get
-			{
-				return this.GetTable<Notification>();
-			}
-		}
-		
 		public System.Data.Linq.Table<GameBoard> GameBoards
 		{
 			get
@@ -196,6 +188,14 @@ namespace MonsterGame
 			get
 			{
 				return this.GetTable<Game>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Notification> Notifications
+		{
+			get
+			{
+				return this.GetTable<Notification>();
 			}
 		}
 	}
@@ -2491,164 +2491,6 @@ namespace MonsterGame
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Notifications")]
-	public partial class Notification : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _Id;
-		
-		private string _Title;
-		
-		private string _Description;
-		
-		private System.Nullable<System.DateTime> _CreatedDate;
-		
-		private System.Nullable<bool> _IsNew;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIdChanging(int value);
-    partial void OnIdChanged();
-    partial void OnTitleChanging(string value);
-    partial void OnTitleChanged();
-    partial void OnDescriptionChanging(string value);
-    partial void OnDescriptionChanged();
-    partial void OnCreatedDateChanging(System.Nullable<System.DateTime> value);
-    partial void OnCreatedDateChanged();
-    partial void OnIsNewChanging(System.Nullable<bool> value);
-    partial void OnIsNewChanged();
-    #endregion
-		
-		public Notification()
-		{
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int Id
-		{
-			get
-			{
-				return this._Id;
-			}
-			set
-			{
-				if ((this._Id != value))
-				{
-					this.OnIdChanging(value);
-					this.SendPropertyChanging();
-					this._Id = value;
-					this.SendPropertyChanged("Id");
-					this.OnIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Title", DbType="VarChar(MAX)")]
-		public string Title
-		{
-			get
-			{
-				return this._Title;
-			}
-			set
-			{
-				if ((this._Title != value))
-				{
-					this.OnTitleChanging(value);
-					this.SendPropertyChanging();
-					this._Title = value;
-					this.SendPropertyChanged("Title");
-					this.OnTitleChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Description", DbType="VarChar(MAX)")]
-		public string Description
-		{
-			get
-			{
-				return this._Description;
-			}
-			set
-			{
-				if ((this._Description != value))
-				{
-					this.OnDescriptionChanging(value);
-					this.SendPropertyChanging();
-					this._Description = value;
-					this.SendPropertyChanged("Description");
-					this.OnDescriptionChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreatedDate", DbType="DateTime")]
-		public System.Nullable<System.DateTime> CreatedDate
-		{
-			get
-			{
-				return this._CreatedDate;
-			}
-			set
-			{
-				if ((this._CreatedDate != value))
-				{
-					this.OnCreatedDateChanging(value);
-					this.SendPropertyChanging();
-					this._CreatedDate = value;
-					this.SendPropertyChanged("CreatedDate");
-					this.OnCreatedDateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsNew", DbType="Bit")]
-		public System.Nullable<bool> IsNew
-		{
-			get
-			{
-				return this._IsNew;
-			}
-			set
-			{
-				if ((this._IsNew != value))
-				{
-					this.OnIsNewChanging(value);
-					this.SendPropertyChanging();
-					this._IsNew = value;
-					this.SendPropertyChanged("IsNew");
-					this.OnIsNewChanged();
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.GameBoard")]
 	public partial class GameBoard : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -4147,6 +3989,188 @@ namespace MonsterGame
 		{
 			this.SendPropertyChanging();
 			entity.Game = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Notifications")]
+	public partial class Notification : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id;
+		
+		private string _Title;
+		
+		private string _Description;
+		
+		private System.Nullable<System.DateTime> _CreatedDate;
+		
+		private System.Nullable<bool> _IsNew;
+		
+		private string _Image;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void OnTitleChanging(string value);
+    partial void OnTitleChanged();
+    partial void OnDescriptionChanging(string value);
+    partial void OnDescriptionChanged();
+    partial void OnCreatedDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnCreatedDateChanged();
+    partial void OnIsNewChanging(System.Nullable<bool> value);
+    partial void OnIsNewChanged();
+    partial void OnImageChanging(string value);
+    partial void OnImageChanged();
+    #endregion
+		
+		public Notification()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Title", DbType="VarChar(MAX)")]
+		public string Title
+		{
+			get
+			{
+				return this._Title;
+			}
+			set
+			{
+				if ((this._Title != value))
+				{
+					this.OnTitleChanging(value);
+					this.SendPropertyChanging();
+					this._Title = value;
+					this.SendPropertyChanged("Title");
+					this.OnTitleChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Description", DbType="VarChar(MAX)")]
+		public string Description
+		{
+			get
+			{
+				return this._Description;
+			}
+			set
+			{
+				if ((this._Description != value))
+				{
+					this.OnDescriptionChanging(value);
+					this.SendPropertyChanging();
+					this._Description = value;
+					this.SendPropertyChanged("Description");
+					this.OnDescriptionChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreatedDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> CreatedDate
+		{
+			get
+			{
+				return this._CreatedDate;
+			}
+			set
+			{
+				if ((this._CreatedDate != value))
+				{
+					this.OnCreatedDateChanging(value);
+					this.SendPropertyChanging();
+					this._CreatedDate = value;
+					this.SendPropertyChanged("CreatedDate");
+					this.OnCreatedDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsNew", DbType="Bit")]
+		public System.Nullable<bool> IsNew
+		{
+			get
+			{
+				return this._IsNew;
+			}
+			set
+			{
+				if ((this._IsNew != value))
+				{
+					this.OnIsNewChanging(value);
+					this.SendPropertyChanging();
+					this._IsNew = value;
+					this.SendPropertyChanged("IsNew");
+					this.OnIsNewChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Image", DbType="VarChar(MAX)")]
+		public string Image
+		{
+			get
+			{
+				return this._Image;
+			}
+			set
+			{
+				if ((this._Image != value))
+				{
+					this.OnImageChanging(value);
+					this.SendPropertyChanging();
+					this._Image = value;
+					this.SendPropertyChanged("Image");
+					this.OnImageChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
 		}
 	}
 }

@@ -46,7 +46,7 @@ namespace MonsterGame.Controller
             return result;
         }
 
-        public bool SaveNews(int? notificationID, string title, string description)
+        public bool SaveNews(int? notificationID, string title, string description, string ImageTitle)
         {
             Notification notification = notificationDAO.FindByID(notificationID ?? 0);
             if (notification == null)
@@ -56,6 +56,7 @@ namespace MonsterGame.Controller
                 newNotification.Description = description;
                 newNotification.CreatedDate = DateTime.Now;
                 newNotification.IsNew = true;
+                newNotification.Image = ImageTitle;
                 return notificationDAO.Insert(newNotification);
             }
             else 
@@ -64,6 +65,7 @@ namespace MonsterGame.Controller
                 notification.Description = description;
                 notification.IsNew = true;
                 notification.CreatedDate = DateTime.Now;
+                if (!string.IsNullOrEmpty(ImageTitle)) notification.Image = ImageTitle;
                 return notificationDAO.Update(notification);
             }
         }
