@@ -116,6 +116,10 @@ namespace MonsterGame.Model
         {
             get; set;
         }
+        public string TeamChoiceMark
+        {
+            get; set;
+        }
         public string Image
         {
             get; set;

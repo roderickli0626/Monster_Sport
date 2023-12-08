@@ -70,6 +70,17 @@ namespace MonsterGame.Controller
                     int myLiveTickets = new TicketDAO().FindByGameAndUser(game.Id, userID).Where(t => t.TicketResults.Last().RoundResult != null).Count();
                     if (myLiveTickets > 0 || game.Status == (int)GameStatus.COMPLETED) check.MyMark = "my-card";
                     else check.MyMark = "my-card-0";
+
+                    if (game.Status == (int)GameStatus.TEAMCHOICE && myLiveTickets > 0)
+                    {
+                        int teamChoiceTickets = new TicketDAO().FindByGameAndUser(game.Id, userID).Where(t => t.TicketResults.Last().RoundResult != null && t.TicketResults.Last().TeamID == null).Count();
+                        if (teamChoiceTickets > 0) check.TeamChoiceMark = "team-choice";
+                        else check.TeamChoiceMark = "team-nochoice";
+                    } 
+                    else
+                    {
+                        check.TeamChoiceMark = "";
+                    }
                 }
                 check.RemainedPlayers = new TicketDAO().FindByGame(game.Id).Where(t => t.TicketResults.Last().RoundResult != null).Count();
                 result.Add(check);
@@ -89,6 +100,17 @@ namespace MonsterGame.Controller
                 int myLiveTickets = new TicketDAO().FindByGameAndUser(game.Id, userID).Where(t => t.TicketResults.Last().RoundResult != null).Count();
                 if (myLiveTickets > 0 || game.Status == (int)GameStatus.COMPLETED) check.MyMark = "my-card";
                 else check.MyMark = "my-card-0";
+
+                if (game.Status == (int)GameStatus.TEAMCHOICE && myLiveTickets > 0)
+                {
+                    int teamChoiceTickets = new TicketDAO().FindByGameAndUser(game.Id, userID).Where(t => t.TicketResults.Last().RoundResult != null && t.TicketResults.Last().TeamID == null).Count();
+                    if (teamChoiceTickets > 0) check.TeamChoiceMark = "team-choice";
+                    else check.TeamChoiceMark = "team-nochoice";
+                }
+                else
+                {
+                    check.TeamChoiceMark = "";
+                }
 
                 check.RemainedPlayers = new TicketDAO().FindByGame(game.Id).Where(t => t.TicketResults.Last().RoundResult != null).Count();
                 result.Add(check);

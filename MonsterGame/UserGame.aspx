@@ -59,6 +59,14 @@
         .my-card-0 {
             background-color: red;
         }
+
+        .team-choice {
+            box-shadow: -3px -3px 6px 6px rgba(35, 19, 225, 0.4), 5px 5px 8px 8px rgba(33, 27, 221, 0.2);
+        }
+
+        .team-nochoice {
+            box-shadow: -3px -3px 6px 6px rgba(225, 19, 19, 0.4), 5px 5px 8px 8px rgba(225, 14, 24, 0.2);
+        }
     </style>
     <style>
         .box {
@@ -231,7 +239,7 @@
                         <asp:Repeater runat="server" ID="RepeaterGame">
                             <ItemTemplate>
                                 <div class="col-lg-4 col-xl-3 col-md-6 col-sm-6 position-relative">
-                                    <div class="game-item">
+                                    <div class="game-item <%# Eval("TeamChoiceMark") %>">
                                         <div class="game-inner">
                                             <div class="game-item__thumb">
                                                 <%# Eval("Mark") %>
