@@ -19,6 +19,12 @@ namespace MonsterGame
             List<Game> games = gameDao.FindAll();
             foreach (Game game in games)
             {
+                if (game.Status == (int)GameStatus.OPEN)
+                {
+                    List<Ticket> ticketList = new TicketDAO().FindByGame(game.Id);
+                    if (ticketList.Count() < game.MinPlayers) continue;
+                }
+
                 if (game.Status == (int)GameStatus.OPEN || game.Status == (int)GameStatus.TEAMCHOICE)
                 {
                     game.Status = (int)GameStatus.STARTED;
