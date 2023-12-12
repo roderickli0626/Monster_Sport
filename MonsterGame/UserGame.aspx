@@ -156,17 +156,17 @@
             }
 
         .orange span {
-            background: linear-gradient(#f2c307 0%, #FFA500 100%);
+            background: linear-gradient(#a02fa9 0%, #a02fa9 100%);
         }
 
             .orange span::before {
-                border-left-color: #FFA500;
-                border-top-color: #FFA500;
+                border-left-color: #a02fa9;
+                border-top-color: #a02fa9;
             }
 
             .orange span::after {
-                border-right-color: #FFA500;
-                border-top-color: #FFA500;
+                border-right-color: #a02fa9;
+                border-top-color: #a02fa9;
             }
 
         .foo {

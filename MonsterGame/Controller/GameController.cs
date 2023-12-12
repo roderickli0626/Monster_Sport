@@ -124,10 +124,10 @@ namespace MonsterGame.Controller
             List<Winner> winners = new WinnerDAO().FindByGame(game.Id).ToList();
             string divideDate = winners.FirstOrDefault()?.DivideDate?.ToString("dd/MM/yyyy HH.mm");
             string completeInfo = "";
-            if (string.IsNullOrEmpty(divideDate)) completeInfo = "<h5 class=\"font-complete-mark\">" + winners.FirstOrDefault()?.WinDate?.ToString("dd/MM/yyyy HH.mm") + "</h5>";
+            if (string.IsNullOrEmpty(divideDate)) completeInfo = "<h5 class=\"font-complete-mark\">" + "VINCITORI: </br>" + winners.FirstOrDefault()?.WinDate?.ToString("dd/MM/yyyy HH.mm") + "</h5>";
             else
             {
-                completeInfo = "<h5 class=\"font-complete-mark\">" + divideDate + "</h5>";
+                completeInfo = "<h5 class=\"font-complete-mark\">" + "VINCITORI: </br>" + divideDate + "</h5>";
                 foreach (Winner winner in winners)
                 {
                     completeInfo += "<h6 class=\"font-complete-mark\">" + (winner.User.Name + ": €" + winner.Prize) + "</h6>";

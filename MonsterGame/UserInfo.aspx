@@ -417,7 +417,7 @@
     </script>
     <script>
         $("#BtnPurchase").click(function () {
-            alert("Please check if popups are enabled.");
+            alert("Se non appare la finestra di Paypal, Verifica che i popup siano abilitati.");
             return true;
         });
     </script>

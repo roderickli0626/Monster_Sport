@@ -197,7 +197,7 @@ namespace MonsterGame
                     Movement movement = new Movement();
                     movement.UserID = user.Id;
                     movement.Amount = winner.Prize;
-                    movement.Note = "Ticket " + winner.Note + " VINCENTE TORNEO " + game.Id + " '" + game.Title + "'";
+                    movement.Note = "Ticket " + winner.Note + " Vincente (Torneo: " + game.Id + " '" + game.Title + "')";
                     movement.Type = (int)MovementType.DEPOSIT;
                     movement.MoveDate = DateTime.Now;
                     movementDAO.Insert(movement);
