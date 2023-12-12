@@ -336,6 +336,19 @@ namespace MonsterGame
 
         [WebMethod(EnableSession = true)]
         [ScriptMethod(UseHttpGet = true, ResponseFormat = ResponseFormat.Json)]
+        public void SaveInputResult(int resultId, int result)
+        {
+            //Is Logged in?
+            if (!loginSystem.IsSuperAdminLoggedIn()) return;
+
+            GameController gameController = new GameController();
+            bool success = gameController.SaveInputResult(resultId, result);
+
+            ResponseProc(success, "");
+        }
+
+        [WebMethod(EnableSession = true)]
+        [ScriptMethod(UseHttpGet = true, ResponseFormat = ResponseFormat.Json)]
         public void FindWinners(int draw, int start, int length, int gameID)
         {
             User user = loginSystem.GetCurrentUserAccount();

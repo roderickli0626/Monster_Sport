@@ -246,44 +246,44 @@ namespace MonsterGame
             }
         }
 
-        protected void BtnResult_Click(object sender, EventArgs e)
-        {
-            //int roundResult = ControlUtil.GetSelectedValue(ComboResults) ?? 0;
-            int roundResult = ParseUtil.TryParseInt(ResultOptions.SelectedValue) ?? 0;
-            int resultID = ParseUtil.TryParseInt(HfResultID.Value) ?? 0;
-            bool success = false;
-            if (resultID != 0) {
-                ResultDAO resultDAO = new ResultDAO();
-                Result result = resultDAO.FindByID(resultID);
-                if (result != null)
-                {
-                    result.RoundResult = roundResult;
-                    success = resultDAO.Update(result);
+        //protected void BtnResult_Click(object sender, EventArgs e)
+        //{
+        //    //int roundResult = ControlUtil.GetSelectedValue(ComboResults) ?? 0;
+        //    int roundResult = ParseUtil.TryParseInt(ResultOptions.SelectedValue) ?? 0;
+        //    int resultID = ParseUtil.TryParseInt(HfResultID.Value) ?? 0;
+        //    bool success = false;
+        //    if (resultID != 0) {
+        //        ResultDAO resultDAO = new ResultDAO();
+        //        Result result = resultDAO.FindByID(resultID);
+        //        if (result != null)
+        //        {
+        //            result.RoundResult = roundResult;
+        //            success = resultDAO.Update(result);
 
-                    TicketResultDAO ticketResultDAO = new TicketResultDAO();
-                    List<TicketResult> ticketResults = ticketResultDAO.FindByGameAndTeamAndRound(result.TeamsForGame.GameID ?? 0, result.TeamsForGame.TeamID ?? 0, result.RoundNo ?? 0);
-                    foreach(TicketResult ticketResult in ticketResults)
-                    {
-                        ticketResult.RoundResult = roundResult;
-                        ticketResultDAO.Update(ticketResult);
-                    }
-                }
-            }
+        //            TicketResultDAO ticketResultDAO = new TicketResultDAO();
+        //            List<TicketResult> ticketResults = ticketResultDAO.FindByGameAndTeamAndRound(result.TeamsForGame.GameID ?? 0, result.TeamsForGame.TeamID ?? 0, result.RoundNo ?? 0);
+        //            foreach(TicketResult ticketResult in ticketResults)
+        //            {
+        //                ticketResult.RoundResult = roundResult;
+        //                ticketResultDAO.Update(ticketResult);
+        //            }
+        //        }
+        //    }
 
-            if (success)
-            {
-                // Send Notification to All Users
-                var hubContext = GlobalHost.ConnectionManager.GetHubContext<NotificationHub>();
-                hubContext.Clients.All.receiveResultNotification("Risultato Aggiunto!");
+        //    if (success)
+        //    {
+        //        // Send Notification to All Users
+        //        var hubContext = GlobalHost.ConnectionManager.GetHubContext<NotificationHub>();
+        //        hubContext.Clients.All.receiveResultNotification("Risultato Aggiunto!");
 
-                Page.Response.Redirect(Page.Request.Url.ToString(), true);
-            }
-            else
-            {
-                ServerValidator1.IsValid = false;
-                return;
-            }
-        }
+        //        Page.Response.Redirect(Page.Request.Url.ToString(), true);
+        //    }
+        //    else
+        //    {
+        //        ServerValidator1.IsValid = false;
+        //        return;
+        //    }
+        //}
 
         protected void BtnPercent_Click(object sender, EventArgs e)
         {

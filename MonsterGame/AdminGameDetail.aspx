@@ -152,7 +152,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="modal custom--modal fade show" id="ResultChangeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" data-bs-backdrop="static" aria-modal="true">
+                <%--<div class="modal custom--modal fade show" id="ResultChangeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" data-bs-backdrop="static" aria-modal="true">
                     <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
                         <div class="modal-content section-bg border-0">
                             <div class="modal-header modal--header bg--base">
@@ -170,7 +170,6 @@
                                                     <asp:ListItem Text=" PAREGGIO " Value="2"></asp:ListItem>
                                                     <asp:ListItem Text=" PERDENTE " Value="3"></asp:ListItem>
                                                 </asp:RadioButtonList>
-                                                <%--<asp:DropDownList runat="server" ID="ComboResults" CssClass="form-select form--control style-two" ClientIDMode="Static"></asp:DropDownList>--%>
                                             </div>
                                         </div>
                                     </ContentTemplate>
@@ -185,7 +184,30 @@
                             </div>
                         </div>
                     </div>
+                </div>--%>
+
+
+                <div class="modal custom--modal fade show" id="ResultChangeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" data-bs-backdrop="static" aria-modal="true">
+                    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                        <div class="modal-content section-bg border-0">
+                            <div class="modal-header modal--header bg--base">
+                                <h4 class="modal-title text-dark" id="modalTitle1">Cambia Squadre</h4>
+                            </div>
+                            <div class="modal-body modal--body">
+                                <div class="pt-3 justify-content-center">
+                                    <table class="table text-center" id="result-input-table">
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="modal-footer modal--footer">
+                                <asp:Button runat="server" ID="BtnResult" CssClass="btn btn--warning btn--md" ClientIDMode="Static" Text="Conferma" CausesValidation="false"/>
+                                <button type="button" class="btn btn--danger btn--md" data-bs-dismiss="modal">Chiudi</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+
+
                 <div class="modal custom--modal fade show" id="PercentModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" data-bs-backdrop="static" aria-modal="true">
                     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                         <div class="modal-content section-bg border-0">
@@ -460,6 +482,7 @@
             var columnsForResult = [];
             var datatable;
             var datatableForResult;
+            var datatableForInputResult;
             var drawTable = () => $.ajax({
                 type: "GET",
                 url: 'DataService.asmx/FindTickets',
@@ -695,17 +718,86 @@
                     datatableForResult.fnDraw();
                     /*onSuccess({ success: true });*/
 
+                    //datatableForResult.on('click', '.btn-edit', function (e) {
+                    //    e.preventDefault();
+
+                    //    var row = datatableForResult.fnGetData($(this).closest('tr'));
+
+                    //    $("#ResultChangeModal").modal('show');
+                    //    var modalTitle = "Esiti del Turno " + row.Results.length;
+                    //    var roundResult = row.Results[row.Results.length - 1].RoundResult;
+                    //    $("#HfResultID").val(row.Results[row.Results.length - 1].Id);
+                    //    $(".modal-title").text(modalTitle);
+                    //    $("#ValSummary1").addClass("d-none");
+                    //});
+
+                    //////////////////////////
+                    // Result Input Table
+                    datatableForInputResult = $('#result-input-table').dataTable({
+                        "serverSide": false,
+                        "dom": '<"table-responsive"t>pr',
+                        "autoWidth": false,
+                        "pageLength": 100,
+                        "processing": true,
+                        "ordering": false,
+                        "scrollX": true,
+                        "columns": [{
+                            "title": "Nr.",
+                            "render": function (data, type, row, meta) {
+                                return meta.row + meta.settings._iDisplayStart + 1;
+                            }
+                        }, {
+                            "title": "Squadra",
+                            "class": "text-nowrap",
+                            "render": function (data, type, row, meta) {
+                                return row.TeamName;
+                            }
+                        }, {
+                            "title": "W",
+                            "render": function (data, type, row, meta) {
+                                var lastResult = row.Results[row.Results.length - 1].RoundResult;
+                                if (lastResult == 1) return '<input class="form-check-input bg-success" style="font-size:24px;" type="radio" name="' + row.Id + '" value="1" checked>';
+                                else return '<input class="form-check-input bg-success" style="font-size:24px;" type="radio" name="' + row.Id + '" value="1">';
+                            }
+                        }, {
+                            "title": "P",
+                            "render": function (data, type, row, meta) {
+                                var lastResult = row.Results[row.Results.length - 1].RoundResult;
+                                if (lastResult == 2) return '<input class="form-check-input bg-warning" style="font-size:24px;" type="radio" name="' + row.Id + '" value="2" checked>';
+                                else return '<input class="form-check-input bg-warning" style="font-size:24px;" type="radio" name="' + row.Id + '" value="2">';
+                            }
+                        }, {
+                            "title": "L",
+                            "render": function (data, type, row, meta) {
+                                var lastResult = row.Results[row.Results.length - 1].RoundResult;
+                                if (lastResult == 3) return '<input class="form-check-input bg-danger" style="font-size:24px;" type="radio" name="' + row.Id + '" value="3" checked>';
+                                else return '<input class="form-check-input bg-danger" style="font-size:24px;" type="radio" name="' + row.Id + '" value="3">';
+                            }
+                        }],
+
+                        "drawCallback": function () {
+                            $(".pagination").children('li').addClass("page-item");
+                            $(".dataTable").css('width', '100%');
+                            $(".dataTables_scrollHeadInner").css('width', '100%');
+                        }
+                    });
+
+                    for (var i = 0; i < dataArrayForResult.length; i++) {
+                        datatableForInputResult.fnAddData(dataArrayForResult[i]);
+                    }
+
+                    datatableForInputResult.fnDraw();
+                    /////////////////////////
+
                     datatableForResult.on('click', '.btn-edit', function (e) {
                         e.preventDefault();
-
                         var row = datatableForResult.fnGetData($(this).closest('tr'));
 
                         $("#ResultChangeModal").modal('show');
                         var modalTitle = "Esiti del Turno " + row.Results.length;
-                        var roundResult = row.Results[row.Results.length - 1].RoundResult;
-                        $("#HfResultID").val(row.Results[row.Results.length - 1].Id);
+                        //var roundResult = row.Results[row.Results.length - 1].RoundResult;
+                        //$("#HfResultID").val(row.Results[row.Results.length - 1].Id);
                         $(".modal-title").text(modalTitle);
-                        $("#ValSummary1").addClass("d-none");
                     });
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
@@ -714,6 +806,35 @@
                 }
             });
             drawResultTable();
+
+            // Save Inputed Result
+            $("#BtnResult").click(function () {
+                var numberOfRows = datatableForInputResult.fnGetData().length;
+                for (var i = 0; i < numberOfRows; i++) {
+                    var res = 0;
+                    var resultID = datatableForInputResult.fnGetData(i).Results[datatableForInputResult.fnGetData(i).Results.length - 1].Id;
+                    var selectedOption = $('input[name="' + datatableForInputResult.fnGetData(i).Id + '"]:checked');
+                    if (selectedOption) {
+                        res = selectedOption.val();
+                    }
+                    $.ajax({
+                        type: "POST",
+                        url: 'DataService.asmx/SaveInputResult',
+                        async: false,
+                        data: {
+                            resultId: resultID,
+                            result: res,
+                        },
+                        success: function () {
+                            console.log("Success");
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            // Handle the error response
+                            console.log('Error:', textStatus, errorThrown);
+                        }
+                    });
+                };
+            });
 
             $("#BtnRound").click(function () {
                 // Check if all results is inputed or not

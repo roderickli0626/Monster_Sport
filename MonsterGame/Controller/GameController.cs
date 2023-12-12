@@ -11,6 +11,7 @@ using System.Linq;
 using System.Security.Policy;
 using System.Web;
 using System.Collections;
+using Microsoft.AspNet.SignalR;
 
 namespace MonsterGame.Controller
 {
@@ -251,6 +252,45 @@ namespace MonsterGame.Controller
             if (item == null) return false;
 
             return gameDao.Delete(id);
+        }
+
+        public bool SaveInputResult(int resultId, int res)
+        {
+            bool success = false;
+            Result result = resultDao.FindByID(resultId);
+            if (result == null) return success;
+
+            result.RoundResult = res;
+            success = resultDao.Update(result);
+
+            TicketResultDAO ticketResultDAO = new TicketResultDAO();
+            List<TicketResult> ticketResults = ticketResultDAO.FindByGameAndTeamAndRound(result.TeamsForGame.GameID ?? 0, result.TeamsForGame.TeamID ?? 0, result.RoundNo ?? 0);
+            foreach (TicketResult ticketResult in ticketResults)
+            {
+                ticketResult.RoundResult = res;
+                ticketResultDAO.Update(ticketResult);
+            }
+
+            // Same Result for Same teams of different Games (Started Status)
+            List<Result> resultList = resultDao.FindAll().Where(r => r.TeamsForGame.TeamID == result.TeamsForGame.TeamID && r.TeamsForGame.Game.Status == (int)GameStatus.STARTED && r.RoundResult == (int)RoundResult.N).ToList();
+            foreach(Result rr in resultList)
+            {
+                rr.RoundResult = res;
+                resultDao.Update(rr);
+
+                List<TicketResult> ticketResults1 = ticketResultDAO.FindByGameAndTeamAndRound(rr.TeamsForGame.GameID ?? 0, rr.TeamsForGame.TeamID ?? 0, rr.RoundNo ?? 0);
+                foreach (TicketResult ticketResult1 in ticketResults1)
+                {
+                    ticketResult1.RoundResult = res;
+                    ticketResultDAO.Update(ticketResult1);
+                }
+            }
+
+            // Send Notification to All Users
+            var hubContext = GlobalHost.ConnectionManager.GetHubContext<NotificationHub>();
+            hubContext.Clients.All.receiveResultNotification("Risultato Aggiunto!");
+
+            return success;
         }
 
         public bool SaveGame(int? gameID, string title, DateTime? sdate, DateTime? edate, double fee, double tax, 
