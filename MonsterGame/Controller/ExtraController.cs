@@ -2,9 +2,11 @@
 using MonsterGame.DAO;
 using MonsterGame.Model;
 using MonsterGame.Models;
+using RestSharp;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 
 namespace MonsterGame.Controller
@@ -57,7 +59,16 @@ namespace MonsterGame.Controller
                 newNotification.CreatedDate = DateTime.Now;
                 newNotification.IsNew = true;
                 newNotification.Image = ImageTitle;
-                return notificationDAO.Insert(newNotification);
+                bool result = notificationDAO.Insert(newNotification);
+
+                // Send WhatsApp message to All users
+                List<User> userList = new UserDAO().FindAll();
+                foreach (User user in userList)
+                {
+                    SendWhatsAppMsg(user.Mobile, "News added.");
+                }
+
+                return result;
             }
             else 
             {
@@ -68,6 +79,21 @@ namespace MonsterGame.Controller
                 if (!string.IsNullOrEmpty(ImageTitle)) notification.Image = ImageTitle;
                 return notificationDAO.Update(notification);
             }
+        }
+        private async Task SendWhatsAppMsg(string toPhoneNum, string message)
+        {
+            var url = "https://api.ultramsg.com/instance71748/messages/chat";
+            var client = new RestClient(url);
+
+            var request = new RestRequest(url, Method.Post);
+            request.AddHeader("content-type", "application/x-www-form-urlencoded");
+            request.AddParameter("token", "cq5s6q6y8hp7478g");
+            request.AddParameter("to", toPhoneNum);
+            request.AddParameter("body", message);
+
+            RestResponse response = await client.ExecuteAsync(request);
+            var output = response.Content;
+            Console.WriteLine(output);
         }
 
         public bool DeleteNews(int id)

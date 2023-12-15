@@ -14,6 +14,9 @@ using Microsoft.AspNet.SignalR;
 using MonsterGame.Model;
 using System.IO;
 using System.Security.Cryptography.Xml;
+using System.Web.Hosting;
+using RestSharp;
+using System.Threading.Tasks;
 
 namespace MonsterGame
 {
@@ -152,12 +155,68 @@ namespace MonsterGame
                 var hubContext = GlobalHost.ConnectionManager.GetHubContext<NotificationHub>();
                 hubContext.Clients.All.receiveRoundNotification("Il nuovo Turno " + currentRound + " è appena iniziato: Scegli la nuova Squadra.");
 
+                // Send WhatsApp message with 3 Images of Game to All users of this game
+                List<Ticket> ticketList = new TicketDAO().FindByGame(game.Id);
+                List<User> userList = ticketList.Select(t => t.User).Distinct().ToList();
+                foreach (User user in userList)
+                {
+                    string imageUrl1 = "~/Upload/Game/" + (string.IsNullOrEmpty(game.Image1) ? "default.jpg" : game.Image1);
+                    string imageUrl2 = "~/Upload/Game/" + (string.IsNullOrEmpty(game.Image2) ? "default.jpg" : game.Image2);
+                    string imageUrl3 = "~/Upload/Game/" + (string.IsNullOrEmpty(game.Image3) ? "default.jpg" : game.Image3);
+                    string path1 = HostingEnvironment.MapPath(imageUrl1);
+                    string path2 = HostingEnvironment.MapPath(imageUrl2);
+                    string path3 = HostingEnvironment.MapPath(imageUrl3);
+                    byte[] AsBytes1 = File.ReadAllBytes(path1);
+                    byte[] AsBytes2 = File.ReadAllBytes(path2);
+                    byte[] AsBytes3 = File.ReadAllBytes(path3);
+                    string AsBase64String1 = Convert.ToBase64String(AsBytes1);
+                    string AsBase64String2 = Convert.ToBase64String(AsBytes2);
+                    string AsBase64String3 = Convert.ToBase64String(AsBytes3);
+
+                    SendWhatsAppMsg(user.Mobile, "Results entered - Check your progress.");
+
+                    SendWhatsAppImg(user.Mobile, AsBase64String1);
+                    SendWhatsAppImg(user.Mobile, AsBase64String2);
+                    SendWhatsAppImg(user.Mobile, AsBase64String3);
+                }
+
                 Page.Response.Redirect(Page.Request.Url.ToString(), true);
             }
 
             // Send Notification to All Users
             var hubContext1 = GlobalHost.ConnectionManager.GetHubContext<NotificationHub>();
             hubContext1.Clients.All.receiveRoundNotification("Il nuovo Turno " + currentRound + " è appena iniziato: Scegli la nuova Squadra.");
+        }
+
+        private async Task SendWhatsAppMsg(string toPhoneNum, string message)
+        {
+            var url = "https://api.ultramsg.com/instance71748/messages/chat";
+            var client = new RestClient(url);
+
+            var request = new RestRequest(url, Method.Post);
+            request.AddHeader("content-type", "application/x-www-form-urlencoded");
+            request.AddParameter("token", "cq5s6q6y8hp7478g");
+            request.AddParameter("to", toPhoneNum);
+            request.AddParameter("body", message);
+
+            RestResponse response = await client.ExecuteAsync(request);
+            var output = response.Content;
+            Console.WriteLine(output);
+        }
+        private async Task SendWhatsAppImg(string toPhoneNum, string imageBase64)
+        {
+            var url = "https://api.ultramsg.com/instance71748/messages/image";
+            var client = new RestClient(url);
+
+            var request = new RestRequest(url, Method.Post);
+            request.AddHeader("content-type", "application/x-www-form-urlencoded");
+            request.AddParameter("token", "cq5s6q6y8hp7478g");
+            request.AddParameter("to", toPhoneNum);
+            request.AddParameter("image", imageBase64);
+
+            RestResponse response = await client.ExecuteAsync(request);
+            var output = response.Content;
+            Console.WriteLine(output);
         }
 
         private void SaveWinners()
