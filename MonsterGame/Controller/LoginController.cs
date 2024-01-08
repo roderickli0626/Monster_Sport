@@ -107,7 +107,8 @@ namespace MonsterGame.Controller
 
         public bool RegisterUser(string name, string surname, string nickname, string email, EncryptedPass pass, string mobile, string note)
         {
-            User user = userDao.FindByEmail(email);
+            //User user = userDao.FindByEmail(email);
+            User user = userDao.FindByEmailAndNickName(email, nickname);
             if (user != null)
             {
                 return false;

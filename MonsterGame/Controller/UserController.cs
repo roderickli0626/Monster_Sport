@@ -216,7 +216,8 @@ namespace MonsterGame.Controller
             User admin = userDao.FindByID(adminID ?? 0);
             if (admin == null)
             {
-                User existAdmin = userDao.FindByEmail(email);
+                //User existAdmin = userDao.FindByEmail(email);
+                User existAdmin = userDao.FindByEmailAndNickName(email, nickname);
                 if (existAdmin != null) return false;
                 admin = new User();
                 admin.Name = name;
@@ -250,7 +251,8 @@ namespace MonsterGame.Controller
             User master = userDao.FindByID(masterID ?? 0);
             if (master == null)
             {
-                User existMaster = userDao.FindByEmail(email);
+                //User existMaster = userDao.FindByEmail(email);
+                User existMaster = userDao.FindByEmailAndNickName(email, nickname);
                 if (existMaster != null) return false;
                 master = new User();
                 master.Name = name;
@@ -285,7 +287,8 @@ namespace MonsterGame.Controller
             User agency = userDao.FindByID(agencyID ?? 0);
             if (agency == null)
             {
-                User existAgency = userDao.FindByEmail(email);
+                //User existAgency = userDao.FindByEmail(email);
+                User existAgency = userDao.FindByEmailAndNickName(email, nickname);
                 if (existAgency != null) return false;
                 agency = new User();
                 agency.Name = name;
@@ -320,7 +323,8 @@ namespace MonsterGame.Controller
             User user = userDao.FindByID(userID ?? 0);
             if (user == null)
             {
-                User existUser = userDao.FindByEmail(email);
+                //User existUser = userDao.FindByEmail(email);
+                User existUser = userDao.FindByEmailAndNickName(email, nickname);
                 if (existUser != null) return false;
                 user = new User();
                 user.Name = name;
