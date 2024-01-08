@@ -12,10 +12,6 @@ using System.Security.Policy;
 using System.Web;
 using System.Collections;
 using Microsoft.AspNet.SignalR;
-using System.Threading.Tasks;
-using RestSharp;
-using System.IO;
-using System.Web.Hosting;
 
 namespace MonsterGame.Controller
 {
@@ -337,30 +333,6 @@ namespace MonsterGame.Controller
                 // Create First Round for New Game
                 AddNewRound(savedGameID, 1);
 
-                // Send WhatsApp message with 3 Images of Game to All users
-                List<User> userList = new UserDAO().FindAll();
-                foreach (User user in userList)
-                {
-                    string imageUrl1 = "~/Upload/Game/" + (string.IsNullOrEmpty(game.Image1) ? "default.jpg" : game.Image1);
-                    string imageUrl2 = "~/Upload/Game/" + (string.IsNullOrEmpty(game.Image2) ? "default.jpg" : game.Image2);
-                    string imageUrl3 = "~/Upload/Game/" + (string.IsNullOrEmpty(game.Image3) ? "default.jpg" : game.Image3);
-                    string path1 = HostingEnvironment.MapPath(imageUrl1);
-                    string path2 = HostingEnvironment.MapPath(imageUrl2);
-                    string path3 = HostingEnvironment.MapPath(imageUrl3);
-                    byte[] AsBytes1 = File.ReadAllBytes(path1);
-                    byte[] AsBytes2 = File.ReadAllBytes(path2);
-                    byte[] AsBytes3 = File.ReadAllBytes(path3);
-                    string AsBase64String1 = Convert.ToBase64String(AsBytes1);
-                    string AsBase64String2 = Convert.ToBase64String(AsBytes2);
-                    string AsBase64String3 = Convert.ToBase64String(AsBytes3);
-
-                    SendWhatsAppMsg(user.Mobile, "A new Tournament is just created.");
-
-                    SendWhatsAppImg(user.Mobile, AsBase64String1);
-                    SendWhatsAppImg(user.Mobile, AsBase64String2);
-                    SendWhatsAppImg(user.Mobile, AsBase64String3);
-                }
-
                 return true;
             }
             else
@@ -436,55 +408,10 @@ namespace MonsterGame.Controller
                             ticketResultDAO.Update(lastticketResult);
                         }
                     }
-
-                    // Send WhatsApp message with First Image of Game to All users of this game
-                    List<User> userList = ticketList.Select(t => t.User).Distinct().ToList();
-                    foreach(User user in userList)
-                    {
-                        string imageUrl = "~/Upload/Game/" + (string.IsNullOrEmpty(game.Image1) ? "default.jpg" : game.Image1);
-                        string path = HostingEnvironment.MapPath(imageUrl);
-                        byte[] AsBytes = File.ReadAllBytes(path);
-                        string AsBase64String = Convert.ToBase64String(AsBytes);
-
-                        SendWhatsAppMsg(user.Mobile, "Waiting for results.");
-
-                        SendWhatsAppImg(user.Mobile, AsBase64String);
-                    }
                 }
                 ///////////////////////
                 return success;
             }
-        }
-
-        private async Task SendWhatsAppMsg(string toPhoneNum, string message)
-        {
-            var url = "https://api.ultramsg.com/instance71748/messages/chat";
-            var client = new RestClient(url);
-
-            var request = new RestRequest(url, Method.Post);
-            request.AddHeader("content-type", "application/x-www-form-urlencoded");
-            request.AddParameter("token", "cq5s6q6y8hp7478g");
-            request.AddParameter("to", toPhoneNum);
-            request.AddParameter("body", message);
-
-            RestResponse response = await client.ExecuteAsync(request);
-            var output = response.Content;
-            Console.WriteLine(output);
-        }
-        private async Task SendWhatsAppImg(string toPhoneNum, string imageBase64)
-        {
-            var url = "https://api.ultramsg.com/instance71748/messages/image";
-            var client = new RestClient(url);
-
-            var request = new RestRequest(url, Method.Post);
-            request.AddHeader("content-type", "application/x-www-form-urlencoded");
-            request.AddParameter("token", "cq5s6q6y8hp7478g");
-            request.AddParameter("to", toPhoneNum);
-            request.AddParameter("image", imageBase64);
-
-            RestResponse response = await client.ExecuteAsync(request);
-            var output = response.Content;
-            Console.WriteLine(output);
         }
 
         public List<TeamsForGameCheck> FindResults(int gameID)

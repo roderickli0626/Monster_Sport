@@ -14,10 +14,6 @@ using System.Web.Services;
 using System.Web.UI;
 using System.Globalization;
 using MonsterGame.Common;
-using System.Web.Hosting;
-using System.IO;
-using RestSharp;
-using System.Threading.Tasks;
 
 namespace MonsterGame
 {
@@ -618,34 +614,7 @@ namespace MonsterGame
             game.AllowedBoard = allowed == 1 ? true : false;
             bool success = gameDao.Update(game);
 
-            // Send WhatsApp message to All users of this game if game message board is allowed
-            if (allowed == 1)
-            {
-                List<Ticket> ticketList = new TicketDAO().FindByGame(game.Id);
-                List<User> userList = ticketList.Select(t => t.User).Distinct().ToList();
-                foreach (User user in userList)
-                {
-                    SendWhatsAppMsg(user.Mobile, "Message Board is opened in Game " + game.Title);
-                }
-            }
-
             ResponseProc(success, "");
-        }
-
-        private async Task SendWhatsAppMsg(string toPhoneNum, string message)
-        {
-            var url = "https://api.ultramsg.com/instance71748/messages/chat";
-            var client = new RestClient(url);
-
-            var request = new RestRequest(url, Method.Post);
-            request.AddHeader("content-type", "application/x-www-form-urlencoded");
-            request.AddParameter("token", "cq5s6q6y8hp7478g");
-            request.AddParameter("to", toPhoneNum);
-            request.AddParameter("body", message);
-
-            RestResponse response = await client.ExecuteAsync(request);
-            var output = response.Content;
-            Console.WriteLine(output);
         }
 
         [WebMethod(EnableSession = true)]

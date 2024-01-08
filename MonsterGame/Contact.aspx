@@ -24,8 +24,8 @@
                         <div class="contact-info-wrapper">
                             <h3 class="title mb-3 mb-lg-4">Contatti</h3>
                             <ul class="contact-info-list m-0">
-                                <li><a href="#"></a> <i class="las la-map-marker-alt"></i> <span>Piazza Municipio, 134 - 80121 Napoli (NA)</span></li>
-                                <li><a href="#"> <i class="las la-phone-volume"></i> <span>(+39)-081554114523</span></a></li>
+                                <li><a href="#"></a> <i class="las la-map-marker-alt"></i> <span>CDN - Via G. Porzio, 6/A - 80121 Napoli (NA)</span></li>
+                                <li><a href="#"> <i class="las la-phone-volume"></i> <span>(+39)-0815541943</span></a></li>
                                 <li><a href="#"> <i class="las la-phone-volume"></i> <span>(+39)-3386958521</span></a></li>
                                 <li><a href="#"> <i class="las la-envelope"></i> <span>info@FantaGame365.it</span></a></li>
                                 <li><a href="#"> <i class="las la-envelope"></i> <span>support@FantaGame365.it</span></a></li>

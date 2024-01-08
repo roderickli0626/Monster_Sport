@@ -260,6 +260,7 @@
                         <div class="section-header text-center">
                             <h2 class="section-header__title">TORNEI IN CORSO</h2>
                             <p>Scegli i Tornei a cui partecipare e vincere!</p>
+                            <h3>Il montepremi cresce con il numero di giocatori!</h3>
                         </div>
                     </div>
                 </div>
@@ -281,7 +282,7 @@
                                                 <p class="invest-info" title="Player necessari all'inizio del Torneo">Player necessari: <span class="invest-amount"><%# Eval("MinPlayers") %></span></p>
                                                 <p class="invest-info" title="Player già registrati al Torneo">Player attuali: <span class="invest-amount"><%# Eval("RealPlayers") %> (<%# Eval("RemainedPlayers") %>)</span></p>                                                
                                                 <p class="invest-info" title="Numero di squadre da cui poter scegliere" style="color: orange;">Numero squadre: <span class="invest-amount TeamShow" style="cursor: pointer;" data-id="<%# Eval("Id") %>" data-img="<%# Eval("Image2") %>"><%# Eval("NumberOfTeams") %></span> *</p>
-                                                <p class="invest-info" title="Montepremi min. lo stesso viene adeguato in base ai ticket venduti">Premio min.: <span class="invest-amount">€ <%# Eval("Prize") %></span></p>
+                                                <p class="invest-info" title="Montepremi min. lo stesso viene adeguato in base ai ticket venduti" style="color: orange; background: purple;">Premio min.: <span class="invest-amount">€ <%# Eval("Prize") %></span></p>
                                                 <p class="invest-info" title="Num. di Vincitori di questo Torneo">Vincenti: <span class="invest-amount"><%# Eval("Winners") %></span></p>
                                             </div>
                                             <div style="height: 183.6px;" class="<%# ((int)Eval("Status") == 5 || (int)Eval("Status") == 6) ? "" : "d-none" %> d-flex align-items-center ps-2">
@@ -401,6 +402,8 @@
                     </div>
                 </div>
             </div>
+            <h2 class="section-header__title"><br />Il premio aumenta in base al numero di partecipanti</h2>
+
         </div>
     </section>
     <!-- How Section Ends Here -->
