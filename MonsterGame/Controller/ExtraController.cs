@@ -255,11 +255,14 @@ namespace MonsterGame.Controller
                 summaryCheck.Tickets = ticketList.Count();
                 summaryCheck.Players = 1;
                 summaryCheck.Amount = ticketList.Sum(t => t.Game.Fee ?? 0);
+                summaryCheck.Amount = Math.Round(summaryCheck.Amount, 2);
 
                 List<int> gameList = ticketList.Select(t => t.Game.Id).ToList();
                 List<Winner> winnerList = new WinnerDAO().FindAll().Where(w => w.UserID == user.Id).ToList();
                 summaryCheck.Prize = winnerList.Where(x => gameList.Contains(x.GameID ?? 0)).Sum(w => w.Prize) ?? 0;
+                summaryCheck.Prize = Math.Round(summaryCheck.Prize, 2);
                 summaryCheck.Utile = summaryCheck.Amount - summaryCheck.Prize;
+                summaryCheck.Utile = Math.Round(summaryCheck.Utile, 2);
 
                 userSummary.Add(summaryCheck);
             }

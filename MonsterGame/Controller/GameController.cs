@@ -131,7 +131,7 @@ namespace MonsterGame.Controller
                 completeInfo = "<h5 class=\"font-complete-mark\">" + "VINCITORI: </br>" + divideDate + "</h5>";
                 foreach (Winner winner in winners)
                 {
-                    completeInfo += "<h6 class=\"font-complete-mark\">" + (winner.User.Name + ": €" + winner.Prize) + "</h6>";
+                    completeInfo += "<h6 class=\"font-complete-mark\">" + (winner.User.Name + ": €" + Math.Round(winner.Prize ?? 0, 2)) + "</h6>";
                 }
             }
             

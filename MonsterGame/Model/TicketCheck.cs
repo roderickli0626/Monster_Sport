@@ -18,6 +18,7 @@ namespace MonsterGame.Model
             Id = ticket.Id;
             UserId = ticket.UserID ?? 0;
             UserName = ticket.User.Name;
+            NickName = ticket.User.NickName;
             GameId = ticket.GameID ?? 0;
             GameTitle = ticket.Game.Title;
             GetDate = ticket.GetDate?.ToString("dd/MM/yyyy HH.mm");
@@ -32,6 +33,10 @@ namespace MonsterGame.Model
             get; set;
         }
         public string UserName
+        {
+            get; set;
+        }
+        public string NickName
         {
             get; set;
         }

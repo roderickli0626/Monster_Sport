@@ -621,10 +621,11 @@
                         }
                     });
                     columns.push({
-                        "title": "Player",
+                        "title": "NickName",
                         "width": "15%",
                         "render": function (data, type, row, meta) {
-                            return row.UserName;
+                            //return row.UserName;
+                            return row.NickName;
                         }
                     });
                     var numColumns = (dataArray.length > 0) ? dataArray[0].TicketResults.length : 0;
